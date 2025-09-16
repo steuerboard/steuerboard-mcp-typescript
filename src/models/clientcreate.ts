@@ -5,13 +5,15 @@
 import * as z from "zod";
 
 /**
- * The type of the client
+ * The type of the client. 'natural_person' for individuals, 'individual_enterprise' for companies like UG, GmbH, AG, Ltd., Inc., etc. and 'legal_person' for sole proprietorships.
  */
 export const ClientCreateType$zodSchema = z.enum([
   "natural_person",
   "individual_enterprise",
   "legal_person",
-]).describe("The type of the client");
+]).describe(
+  "The type of the client. 'natural_person' for individuals, 'individual_enterprise' for companies like UG, GmbH, AG, Ltd., Inc., etc. and 'legal_person' for sole proprietorships.",
+);
 
 export type ClientCreateType = z.infer<typeof ClientCreateType$zodSchema>;
 

@@ -17,13 +17,15 @@ export const Archived$zodSchema = z.enum([
 export type Archived = z.infer<typeof Archived$zodSchema>;
 
 /**
- * The type of the client
+ * The type of the client. 'natural_person' for individuals, 'individual_enterprise' for companies like UG, GmbH, AG, Ltd., Inc., etc. and 'legal_person' for sole proprietorships.
  */
 export const ListClientsType$zodSchema = z.enum([
   "natural_person",
   "individual_enterprise",
   "legal_person",
-]).describe("The type of the client");
+]).describe(
+  "The type of the client. 'natural_person' for individuals, 'individual_enterprise' for companies like UG, GmbH, AG, Ltd., Inc., etc. and 'legal_person' for sole proprietorships.",
+);
 
 export type ListClientsType = z.infer<typeof ListClientsType$zodSchema>;
 
