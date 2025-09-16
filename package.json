@@ -1,13 +1,13 @@
 {
-  "name": "@steuerboard/mcp",
-  "version": "0.0.1",
-  "license": "MIT",
-  "author": {
-		"name": "steuerboard",
-		"email": "support@steuerboard.net"
-	},
+  "name": "steuerboard",
+  "version": "0.0.2",
+  "author": "Speakeasy",
   "type": "module",
   "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/steuerboard/steuerboard-mcp-typescript.git"
+  },
   "bin": {
     "steuerboard": "bin/mcp-server.js",
     "mcp": "bin/mcp-server.js"

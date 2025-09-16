@@ -71,7 +71,7 @@ export default {
 
     // Landing page
     if (url.pathname === "/") {
-      return landingPage(request);
+      return landingPage();
     }
 
     // Fallback to serving static assets

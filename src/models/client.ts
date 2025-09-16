@@ -7,19 +7,19 @@ import * as z from "zod";
 /**
  * The type of the client
  */
-export const Type$zodSchema = z.enum([
+export const ClientType$zodSchema = z.enum([
   "natural_person",
   "individual_enterprise",
   "legal_person",
 ]).describe("The type of the client");
 
-export type Type = z.infer<typeof Type$zodSchema>;
+export type ClientType = z.infer<typeof ClientType$zodSchema>;
 
 export type Client = {
   id: string;
   name: string;
   slug: string;
-  type: Type;
+  type: ClientType;
   customId: string | null;
   legalName: string | null;
   archivedAt: string | null;
@@ -38,6 +38,6 @@ export const Client$zodSchema: z.ZodType<Client, z.ZodTypeDef, unknown> = z
     legalName: z.string().nullable(),
     name: z.string(),
     slug: z.string(),
-    type: Type$zodSchema,
+    type: ClientType$zodSchema,
     updatedAt: z.string(),
   });

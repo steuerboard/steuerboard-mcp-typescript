@@ -33,8 +33,7 @@ For more information about the API: [Find out more about Steuerboard API](https:
 <!-- Start Installation [installation] -->
 ## Installation
 
-> [!TIP]
-> To finish publishing your MCP Server to npm and others you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
+Deployed at https://steuerboard-mcp-server.matyas5009.workers.dev
 <details>
 <summary>DXT (Desktop Extension)</summary>
 
@@ -52,7 +51,7 @@ The DXT package includes the MCP server and all necessary configuration. Once in
 <details>
 <summary>Cursor</summary>
 
-[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=Steuerboard&config=eyJtY3BTZXJ2ZXJzIjp7IlN0ZXVlcmJvYXJkIjp7InR5cGUiOiJtY3AiLCJ1cmwiOiJodHRwczovL2V4YW1wbGUtY2xvdWRmbGFyZS13b3JrZXIuY29tL21jcCIsImhlYWRlcnMiOnsiYXV0aG9yaXphdGlvbiI6IiR7U1RFVUVSQk9BUkRfQkVBUkVSX0FVVEh9In19fX0=)
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=Steuerboard&config=eyJtY3BTZXJ2ZXJzIjp7IlN0ZXVlcmJvYXJkIjp7InR5cGUiOiJtY3AiLCJ1cmwiOiJodHRwczovL3N0ZXVlcmJvYXJkLW1jcC1zZXJ2ZXIubWF0eWFzNTAwOS53b3JrZXJzLmRldi9tY3AiLCJoZWFkZXJzIjp7ImF1dGhvcml6YXRpb24iOiIke1NURVVFUkJPQVJEX0JFQVJFUl9BVVRIfSJ9fX19)
 
 Or manually:
 
@@ -66,7 +65,7 @@ Or manually:
   "mcpServers": {
     "Steuerboard": {
       "type": "mcp",
-      "url": "https://example-cloudflare-worker.com/mcp",
+      "url": "https://steuerboard-mcp-server.matyas5009.workers.dev/mcp",
       "headers": {
         "authorization": "${STEUERBOARD_BEARER_AUTH}"
       }
@@ -81,7 +80,7 @@ Or manually:
 <summary>Claude Code CLI</summary>
 
 ```bash
-claude mcp add --transport sse Steuerboard undefined/sse --header "authorization: ..."
+claude mcp add --transport sse Steuerboard https://steuerboard-mcp-server.matyas5009.workers.dev/sse --header "authorization: ..."
 ```
 
 </details>
@@ -99,13 +98,11 @@ Refer to [Official Windsurf documentation](https://docs.windsurf.com/windsurf/ca
 {
   "mcpServers": {
     "Steuerboard": {
-      "command": "npx",
-      "args": [
-        "steuerboard",
-        "start",
-        "--bearer-auth",
-        "..."
-      ]
+      "type": "mcp",
+      "url": "https://steuerboard-mcp-server.matyas5009.workers.dev/mcp",
+      "headers": {
+        "authorization": "${STEUERBOARD_BEARER_AUTH}"
+      }
     }
   }
 }
@@ -121,15 +118,13 @@ Refer to [Official VS Code documentation](https://code.visualstudio.com/api/exte
 2. If the configuration file is empty paste the full json
 ```
 {
-  "mcpServers": {
+  "servers": {
     "Steuerboard": {
-      "command": "npx",
-      "args": [
-        "steuerboard",
-        "start",
-        "--bearer-auth",
-        "..."
-      ]
+      "type": "mcp",
+      "url": "https://steuerboard-mcp-server.matyas5009.workers.dev/mcp",
+      "headers": {
+        "authorization": "${env:STEUERBOARD_BEARER_AUTH}"
+      }
     }
   }
 }

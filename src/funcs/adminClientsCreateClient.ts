@@ -3,13 +3,21 @@
  */
 
 import { SteuerboardCore } from "../core.js";
-import { encodeFormQuery } from "../lib/encodings.js";
+import { encodeJSON } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import {
+  ClientCreate,
+  ClientCreate$zodSchema,
+} from "../models/clientcreate.js";
+import {
+  CreateClientResponse,
+  CreateClientResponse$zodSchema,
+} from "../models/createclientop.js";
 import { APIError } from "../models/errors/apierror.js";
 import {
   ConnectionError,
@@ -19,28 +27,22 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import {
-  ListTasksRequest,
-  ListTasksRequest$zodSchema,
-  ListTasksResponse,
-  ListTasksResponse$zodSchema,
-} from "../models/listtasksop.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List tasks
+ * Create a client
  *
  * @remarks
- * Returns a paginated list of tasks. Optionally you can filter by client or workspace.
+ * Creates a new client for the accountant and returns the created client object.
  */
-export function tasksListTasks(
+export function adminClientsCreateClient(
   client$: SteuerboardCore,
-  request?: ListTasksRequest | undefined,
+  request?: ClientCreate | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    ListTasksResponse,
+    CreateClientResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -59,12 +61,12 @@ export function tasksListTasks(
 
 async function $do(
   client$: SteuerboardCore,
-  request?: ListTasksRequest | undefined,
+  request?: ClientCreate | undefined,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      ListTasksResponse,
+      CreateClientResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,23 +80,20 @@ async function $do(
 > {
   const parsed$ = safeParse(
     request,
-    (value$) => ListTasksRequest$zodSchema.optional().parse(value$),
+    (value$) => ClientCreate$zodSchema.optional().parse(value$),
     "Input validation failed",
   );
   if (!parsed$.ok) {
     return [parsed$, { status: "invalid" }];
   }
   const payload$ = parsed$.value;
-  const body$ = null;
-  const path$ = pathToFunc("/v1/tasks")();
-  const query$ = encodeFormQuery({
-    "clientId": payload$?.clientId,
-    "cursor": payload$?.cursor,
-    "limit": payload$?.limit,
-    "workspaceId": payload$?.workspaceId,
-  });
+  const body$ = payload$ === undefined
+    ? null
+    : encodeJSON("body", payload$, { explode: true });
+  const path$ = pathToFunc("/v1/admin/clients")();
 
   const headers$ = new Headers(compactMap({
+    "Content-Type": "application/json",
     Accept: "application/json",
   }));
   const securityInput = await extractSecurity(client$._options.security);
@@ -103,7 +102,7 @@ async function $do(
   const context = {
     options: client$._options,
     baseURL: options?.serverURL ?? client$._baseURL ?? "",
-    operationID: "listTasks",
+    operationID: "createClient",
     oAuth2Scopes: [],
     resolvedSecurity: requestSecurity,
     securitySource: client$._options.security,
@@ -121,11 +120,10 @@ async function $do(
 
   const requestRes = client$._createRequest(context, {
     security: requestSecurity,
-    method: "GET",
+    method: "POST",
     baseURL: options?.serverURL,
     path: path$,
     headers: headers$,
-    query: query$,
     body: body$,
     userAgent: client$._options.userAgent,
     timeoutMs: options?.timeoutMs || client$._options.timeoutMs
@@ -151,7 +149,7 @@ async function $do(
   };
 
   const [result$] = await M.match<
-    ListTasksResponse,
+    CreateClientResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -160,11 +158,12 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, ListTasksResponse$zodSchema, {
-      key: "200_application/json_object",
-    }),
-    M.json(422, ListTasksResponse$zodSchema, {
+    M.json(201, CreateClientResponse$zodSchema, { key: "Client" }),
+    M.json(422, CreateClientResponse$zodSchema, {
       key: "422_application/json_object",
+    }),
+    M.json(429, CreateClientResponse$zodSchema, {
+      key: "429_application/json_object",
     }),
   )(response, req$, { extraFields: responseFields$ });
 

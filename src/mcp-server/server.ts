@@ -13,6 +13,7 @@ import {
 } from "./resources.js";
 import { MCPScope } from "./scopes.js";
 import { createRegisterTool } from "./tools.js";
+import { tool$adminClientsCreateClient } from "./tools/adminClientsCreateClient.js";
 import { tool$adminClientsGetClient } from "./tools/adminClientsGetClient.js";
 import { tool$adminClientsListClients } from "./tools/adminClientsListClients.js";
 import { tool$authGetV1Me } from "./tools/authGetV1Me.js";
@@ -42,7 +43,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Steuerboard",
-    version: "0.0.1",
+    version: "0.0.2",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -89,6 +90,7 @@ export function createMCPServer(deps: {
   tool(tool$healthCheckGetV1Ping);
   tool(tool$authGetV1Me);
   tool(tool$adminClientsListClients);
+  tool(tool$adminClientsCreateClient);
   tool(tool$adminClientsGetClient);
   tool(tool$workspacesListWorkspaces);
   tool(tool$workspacesGetWorkspace);

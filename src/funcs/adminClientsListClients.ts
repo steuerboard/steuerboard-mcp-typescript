@@ -12,18 +12,18 @@ import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import { APIError } from "../models/errors/apierror.js";
 import {
-	ConnectionError,
-	InvalidRequestError,
-	RequestAbortedError,
-	RequestTimeoutError,
-	UnexpectedClientError,
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-	ListClientsRequest,
-	ListClientsRequest$zodSchema,
-	ListClientsResponse,
-	ListClientsResponse$zodSchema,
+  ListClientsRequest,
+  ListClientsRequest$zodSchema,
+  ListClientsResponse,
+  ListClientsResponse$zodSchema,
 } from "../models/listclientsop.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
@@ -35,139 +35,145 @@ import { Result } from "../types/fp.js";
  * Returns a list of clients.
  */
 export function adminClientsListClients(
-	client$: SteuerboardCore,
-	request?: ListClientsRequest | undefined,
-	options?: RequestOptions,
+  client$: SteuerboardCore,
+  request?: ListClientsRequest | undefined,
+  options?: RequestOptions,
 ): APIPromise<
-	Result<
-		ListClientsResponse,
-		| APIError
-		| SDKValidationError
-		| UnexpectedClientError
-		| InvalidRequestError
-		| RequestAbortedError
-		| RequestTimeoutError
-		| ConnectionError
-	>
+  Result<
+    ListClientsResponse,
+    | APIError
+    | SDKValidationError
+    | UnexpectedClientError
+    | InvalidRequestError
+    | RequestAbortedError
+    | RequestTimeoutError
+    | ConnectionError
+  >
 > {
-	return new APIPromise($do(client$, request, options));
+  return new APIPromise($do(
+    client$,
+    request,
+    options,
+  ));
 }
 
 async function $do(
-	client$: SteuerboardCore,
-	request?: ListClientsRequest | undefined,
-	options?: RequestOptions,
+  client$: SteuerboardCore,
+  request?: ListClientsRequest | undefined,
+  options?: RequestOptions,
 ): Promise<
-	[
-		Result<
-			ListClientsResponse,
-			| APIError
-			| SDKValidationError
-			| UnexpectedClientError
-			| InvalidRequestError
-			| RequestAbortedError
-			| RequestTimeoutError
-			| ConnectionError
-		>,
-		APICall,
-	]
+  [
+    Result<
+      ListClientsResponse,
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
 > {
-	const parsed$ = safeParse(
-		request,
-		(value$) => ListClientsRequest$zodSchema.optional().parse(value$),
-		"Input validation failed",
-	);
-	if (!parsed$.ok) {
-		return [parsed$, { status: "invalid" }];
-	}
-	const payload$ = parsed$.value;
-	const body$ = null;
-	const path$ = pathToFunc("/v1/admin/clients")();
-	const query$ = encodeFormQuery({
-		archived: payload$?.archived,
-		cursor: payload$?.cursor,
-		customId: payload$?.customId,
-		limit: payload$?.limit,
-		order: payload$?.order,
-		slug: payload$?.slug,
-		sort: payload$?.sort,
-		type: payload$?.type,
-	});
+  const parsed$ = safeParse(
+    request,
+    (value$) => ListClientsRequest$zodSchema.optional().parse(value$),
+    "Input validation failed",
+  );
+  if (!parsed$.ok) {
+    return [parsed$, { status: "invalid" }];
+  }
+  const payload$ = parsed$.value;
+  const body$ = null;
+  const path$ = pathToFunc("/v1/admin/clients")();
+  const query$ = encodeFormQuery({
+    "archived": payload$?.archived,
+    "cursor": payload$?.cursor,
+    "customId": payload$?.customId,
+    "limit": payload$?.limit,
+    "order": payload$?.order,
+    "slug": payload$?.slug,
+    "sort": payload$?.sort,
+    "type": payload$?.type,
+  });
 
-	const headers$ = new Headers(
-		compactMap({
-			Accept: "application/json",
-		}),
-	);
-	const securityInput = await extractSecurity(client$._options.security);
-	const requestSecurity = resolveGlobalSecurity(securityInput);
+  const headers$ = new Headers(compactMap({
+    Accept: "application/json",
+  }));
+  const securityInput = await extractSecurity(client$._options.security);
+  const requestSecurity = resolveGlobalSecurity(securityInput);
 
-	const context = {
-		options: client$._options,
-		baseURL: options?.serverURL ?? client$._baseURL ?? "",
-		operationID: "listClients",
-		oAuth2Scopes: [],
-		resolvedSecurity: requestSecurity,
-		securitySource: client$._options.security,
-		retryConfig: options?.retries ||
-			client$._options.retryConfig || { strategy: "none" },
-		retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
-	};
+  const context = {
+    options: client$._options,
+    baseURL: options?.serverURL ?? client$._baseURL ?? "",
+    operationID: "listClients",
+    oAuth2Scopes: [],
+    resolvedSecurity: requestSecurity,
+    securitySource: client$._options.security,
+    retryConfig: options?.retries
+      || client$._options.retryConfig
+      || { strategy: "none" },
+    retryCodes: options?.retryCodes || [
+      "429",
+      "500",
+      "502",
+      "503",
+      "504",
+    ],
+  };
 
-	const requestRes = client$._createRequest(
-		context,
-		{
-			security: requestSecurity,
-			method: "GET",
-			baseURL: options?.serverURL,
-			path: path$,
-			headers: headers$,
-			query: query$,
-			body: body$,
-			userAgent: client$._options.userAgent,
-			timeoutMs: options?.timeoutMs || client$._options.timeoutMs || -1,
-		},
-		options,
-	);
-	if (!requestRes.ok) {
-		return [requestRes, { status: "invalid" }];
-	}
-	const req$ = requestRes.value;
+  const requestRes = client$._createRequest(context, {
+    security: requestSecurity,
+    method: "GET",
+    baseURL: options?.serverURL,
+    path: path$,
+    headers: headers$,
+    query: query$,
+    body: body$,
+    userAgent: client$._options.userAgent,
+    timeoutMs: options?.timeoutMs || client$._options.timeoutMs
+      || -1,
+  }, options);
+  if (!requestRes.ok) {
+    return [requestRes, { status: "invalid" }];
+  }
+  const req$ = requestRes.value;
 
-	const doResult = await client$._do(req$, {
-		context,
-		errorCodes: [],
-		retryConfig: context.retryConfig,
-		retryCodes: context.retryCodes,
-	});
-	if (!doResult.ok) {
-		return [doResult, { status: "request-error", request: req$ }];
-	}
-	const response = doResult.value;
-	const responseFields$ = {
-		HttpMeta: { Response: response, Request: req$ },
-	};
+  const doResult = await client$._do(req$, {
+    context,
+    errorCodes: [],
+    retryConfig: context.retryConfig,
+    retryCodes: context.retryCodes,
+  });
+  if (!doResult.ok) {
+    return [doResult, { status: "request-error", request: req$ }];
+  }
+  const response = doResult.value;
+  const responseFields$ = {
+    HttpMeta: { Response: response, Request: req$ },
+  };
 
-	const [result$] = await M.match<
-		ListClientsResponse,
-		| APIError
-		| SDKValidationError
-		| UnexpectedClientError
-		| InvalidRequestError
-		| RequestAbortedError
-		| RequestTimeoutError
-		| ConnectionError
-	>(
-		M.json(200, ListClientsResponse$zodSchema, {
-			key: "twoHundredApplicationJsonObject",
-		}),
-		M.json(422, ListClientsResponse$zodSchema, {
-			key: "fourHundredAndTwentyTwoApplicationJsonObject",
-		}),
-		M.json(429, ListClientsResponse$zodSchema, {
-			key: "fourHundredAndTwentyNineApplicationJsonObject",
-		}),
-	)(response, req$, { extraFields: responseFields$ });
+  const [result$] = await M.match<
+    ListClientsResponse,
+    | APIError
+    | SDKValidationError
+    | UnexpectedClientError
+    | InvalidRequestError
+    | RequestAbortedError
+    | RequestTimeoutError
+    | ConnectionError
+  >(
+    M.json(200, ListClientsResponse$zodSchema, {
+      key: "200_application/json_object",
+    }),
+    M.json(422, ListClientsResponse$zodSchema, {
+      key: "422_application/json_object",
+    }),
+    M.json(429, ListClientsResponse$zodSchema, {
+      key: "429_application/json_object",
+    }),
+  )(response, req$, { extraFields: responseFields$ });
 
-	return [result$, { status: "complete", request: req$, response }];
+  return [result$, { status: "complete", request: req$, response }];
 }

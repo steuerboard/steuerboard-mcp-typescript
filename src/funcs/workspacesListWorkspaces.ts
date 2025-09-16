@@ -12,18 +12,18 @@ import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import { APIError } from "../models/errors/apierror.js";
 import {
-	ConnectionError,
-	InvalidRequestError,
-	RequestAbortedError,
-	RequestTimeoutError,
-	UnexpectedClientError,
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-	ListWorkspacesRequest,
-	ListWorkspacesRequest$zodSchema,
-	ListWorkspacesResponse,
-	ListWorkspacesResponse$zodSchema,
+  ListWorkspacesRequest,
+  ListWorkspacesRequest$zodSchema,
+  ListWorkspacesResponse,
+  ListWorkspacesResponse$zodSchema,
 } from "../models/listworkspacesop.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
@@ -35,137 +35,143 @@ import { Result } from "../types/fp.js";
  * Returns a paginated list of workspaces.
  */
 export function workspacesListWorkspaces(
-	client$: SteuerboardCore,
-	request: ListWorkspacesRequest,
-	options?: RequestOptions,
+  client$: SteuerboardCore,
+  request: ListWorkspacesRequest,
+  options?: RequestOptions,
 ): APIPromise<
-	Result<
-		ListWorkspacesResponse,
-		| APIError
-		| SDKValidationError
-		| UnexpectedClientError
-		| InvalidRequestError
-		| RequestAbortedError
-		| RequestTimeoutError
-		| ConnectionError
-	>
+  Result<
+    ListWorkspacesResponse,
+    | APIError
+    | SDKValidationError
+    | UnexpectedClientError
+    | InvalidRequestError
+    | RequestAbortedError
+    | RequestTimeoutError
+    | ConnectionError
+  >
 > {
-	return new APIPromise($do(client$, request, options));
+  return new APIPromise($do(
+    client$,
+    request,
+    options,
+  ));
 }
 
 async function $do(
-	client$: SteuerboardCore,
-	request: ListWorkspacesRequest,
-	options?: RequestOptions,
+  client$: SteuerboardCore,
+  request: ListWorkspacesRequest,
+  options?: RequestOptions,
 ): Promise<
-	[
-		Result<
-			ListWorkspacesResponse,
-			| APIError
-			| SDKValidationError
-			| UnexpectedClientError
-			| InvalidRequestError
-			| RequestAbortedError
-			| RequestTimeoutError
-			| ConnectionError
-		>,
-		APICall,
-	]
+  [
+    Result<
+      ListWorkspacesResponse,
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
 > {
-	const parsed$ = safeParse(
-		request,
-		(value$) => ListWorkspacesRequest$zodSchema.parse(value$),
-		"Input validation failed",
-	);
-	if (!parsed$.ok) {
-		return [parsed$, { status: "invalid" }];
-	}
-	const payload$ = parsed$.value;
-	const body$ = null;
-	const path$ = pathToFunc("/v1/workspaces")();
-	const query$ = encodeFormQuery({
-		cursor: payload$.cursor,
-		limit: payload$.limit,
-	});
+  const parsed$ = safeParse(
+    request,
+    (value$) => ListWorkspacesRequest$zodSchema.parse(value$),
+    "Input validation failed",
+  );
+  if (!parsed$.ok) {
+    return [parsed$, { status: "invalid" }];
+  }
+  const payload$ = parsed$.value;
+  const body$ = null;
+  const path$ = pathToFunc("/v1/workspaces")();
+  const query$ = encodeFormQuery({
+    "cursor": payload$.cursor,
+    "limit": payload$.limit,
+  });
 
-	const headers$ = new Headers(
-		compactMap({
-			Accept: "application/json",
-			"x-client-id": encodeSimple("x-client-id", payload$.xClientId, {
-				explode: false,
-				charEncoding: "none",
-			}),
-		}),
-	);
-	const securityInput = await extractSecurity(client$._options.security);
-	const requestSecurity = resolveGlobalSecurity(securityInput);
+  const headers$ = new Headers(compactMap({
+    Accept: "application/json",
+    "x-client-id": encodeSimple("x-client-id", payload$.xClientId, {
+      explode: false,
+      charEncoding: "none",
+    }),
+  }));
+  const securityInput = await extractSecurity(client$._options.security);
+  const requestSecurity = resolveGlobalSecurity(securityInput);
 
-	const context = {
-		options: client$._options,
-		baseURL: options?.serverURL ?? client$._baseURL ?? "",
-		operationID: "listWorkspaces",
-		oAuth2Scopes: [],
-		resolvedSecurity: requestSecurity,
-		securitySource: client$._options.security,
-		retryConfig: options?.retries ||
-			client$._options.retryConfig || { strategy: "none" },
-		retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
-	};
+  const context = {
+    options: client$._options,
+    baseURL: options?.serverURL ?? client$._baseURL ?? "",
+    operationID: "listWorkspaces",
+    oAuth2Scopes: [],
+    resolvedSecurity: requestSecurity,
+    securitySource: client$._options.security,
+    retryConfig: options?.retries
+      || client$._options.retryConfig
+      || { strategy: "none" },
+    retryCodes: options?.retryCodes || [
+      "429",
+      "500",
+      "502",
+      "503",
+      "504",
+    ],
+  };
 
-	const requestRes = client$._createRequest(
-		context,
-		{
-			security: requestSecurity,
-			method: "GET",
-			baseURL: options?.serverURL,
-			path: path$,
-			headers: headers$,
-			query: query$,
-			body: body$,
-			userAgent: client$._options.userAgent,
-			timeoutMs: options?.timeoutMs || client$._options.timeoutMs || -1,
-		},
-		options,
-	);
-	if (!requestRes.ok) {
-		return [requestRes, { status: "invalid" }];
-	}
-	const req$ = requestRes.value;
+  const requestRes = client$._createRequest(context, {
+    security: requestSecurity,
+    method: "GET",
+    baseURL: options?.serverURL,
+    path: path$,
+    headers: headers$,
+    query: query$,
+    body: body$,
+    userAgent: client$._options.userAgent,
+    timeoutMs: options?.timeoutMs || client$._options.timeoutMs
+      || -1,
+  }, options);
+  if (!requestRes.ok) {
+    return [requestRes, { status: "invalid" }];
+  }
+  const req$ = requestRes.value;
 
-	const doResult = await client$._do(req$, {
-		context,
-		errorCodes: [],
-		retryConfig: context.retryConfig,
-		retryCodes: context.retryCodes,
-	});
-	if (!doResult.ok) {
-		return [doResult, { status: "request-error", request: req$ }];
-	}
-	const response = doResult.value;
-	const responseFields$ = {
-		HttpMeta: { Response: response, Request: req$ },
-	};
+  const doResult = await client$._do(req$, {
+    context,
+    errorCodes: [],
+    retryConfig: context.retryConfig,
+    retryCodes: context.retryCodes,
+  });
+  if (!doResult.ok) {
+    return [doResult, { status: "request-error", request: req$ }];
+  }
+  const response = doResult.value;
+  const responseFields$ = {
+    HttpMeta: { Response: response, Request: req$ },
+  };
 
-	const [result$] = await M.match<
-		ListWorkspacesResponse,
-		| APIError
-		| SDKValidationError
-		| UnexpectedClientError
-		| InvalidRequestError
-		| RequestAbortedError
-		| RequestTimeoutError
-		| ConnectionError
-	>(
-		M.json(200, ListWorkspacesResponse$zodSchema, {
-			key: "twoHundredApplicationJsonObject",
-		}),
-		M.json(422, ListWorkspacesResponse$zodSchema, {
-			key: "fourHundredAndTwentyTwoApplicationJsonObject",
-		}),
-		M.json(429, ListWorkspacesResponse$zodSchema, {
-			key: "fourHundredAndTwentyNineApplicationJsonObject",
-		}),
-	)(response, req$, { extraFields: responseFields$ });
+  const [result$] = await M.match<
+    ListWorkspacesResponse,
+    | APIError
+    | SDKValidationError
+    | UnexpectedClientError
+    | InvalidRequestError
+    | RequestAbortedError
+    | RequestTimeoutError
+    | ConnectionError
+  >(
+    M.json(200, ListWorkspacesResponse$zodSchema, {
+      key: "200_application/json_object",
+    }),
+    M.json(422, ListWorkspacesResponse$zodSchema, {
+      key: "422_application/json_object",
+    }),
+    M.json(429, ListWorkspacesResponse$zodSchema, {
+      key: "429_application/json_object",
+    }),
+  )(response, req$, { extraFields: responseFields$ });
 
-	return [result$, { status: "complete", request: req$, response }];
+  return [result$, { status: "complete", request: req$, response }];
 }

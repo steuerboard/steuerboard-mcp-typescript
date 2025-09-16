@@ -1,7 +1,7 @@
 {
   "dxt_version": "0.1",
   "name": "steuerboard",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "long_description": "",
   "author": {
@@ -37,6 +37,10 @@
     {
       "name": "admin-clients-list-clients",
       "description": "List clients\n\nReturns a list of clients."
+    },
+    {
+      "name": "admin-clients-create-client",
+      "description": "Create a client\n\nCreates a new client for the accountant and returns the created client object."
     },
     {
       "name": "admin-clients-get-client",
