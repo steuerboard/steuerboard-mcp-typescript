@@ -37,5 +37,4 @@ mcp-typescript:
   inputModelSuffix: input
   outputModelSuffix: output
   packageName: steuerboard
-  cloudflareEnabled: true
   cloudflareURL: https://steuerboard-mcp-server.matyas5009.workers.dev
