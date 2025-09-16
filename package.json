@@ -1,6 +1,7 @@
 {
   "name": "@steuerboard/mcp",
   "version": "0.0.1",
+  "license": "MIT",
   "author": {
 		"name": "steuerboard",
 		"email": "support@steuerboard.net"
