@@ -1,18 +1,19 @@
-speakeasyVersion: 1.615.2
+speakeasyVersion: 1.617.1
 sources:
     Steuerboard API:
         sourceNamespace: steuerboard-api
-        sourceRevisionDigest: sha256:5157f3efb24d50a193c8d655b78fc66352426f395e7811a4aaee7c5da1e3d085
-        sourceBlobDigest: sha256:795db6d8131ef61578f08f24ded3df80589983f2ed5943bbcbf1575517954181
+        sourceRevisionDigest: sha256:739fa96d56750b55e074941227a6dbec8e441b00ec80317c16ff3624101410d7
+        sourceBlobDigest: sha256:49000bd323d6b42efc1247de999a1d0d6326c2addbb3d0f6bb28dbf9ce384cd8
         tags:
             - latest
+            - speakeasy-sdk-regen-1758041009
             - 0.1.0
 targets:
     steuerboard:
         source: Steuerboard API
         sourceNamespace: steuerboard-api
-        sourceRevisionDigest: sha256:5157f3efb24d50a193c8d655b78fc66352426f395e7811a4aaee7c5da1e3d085
-        sourceBlobDigest: sha256:795db6d8131ef61578f08f24ded3df80589983f2ed5943bbcbf1575517954181
+        sourceRevisionDigest: sha256:739fa96d56750b55e074941227a6dbec8e441b00ec80317c16ff3624101410d7
+        sourceBlobDigest: sha256:49000bd323d6b42efc1247de999a1d0d6326c2addbb3d0f6bb28dbf9ce384cd8
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -27,3 +28,6 @@ workflow:
         steuerboard:
             target: mcp-typescript
             source: Steuerboard API
+            publish:
+                npm:
+                    token: $npm_token

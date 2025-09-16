@@ -14,16 +14,13 @@ class_name = "SteuerboardMCP"
 # Durable Object migration
 [[migrations]]
 tag = "v1"
-new_sqlite_classes = ["SteuerboardMCP"]
+new_classes = ["SteuerboardMCP"]
 
 # Static assets configuration
 [assets]
 directory = "./static"
 binding = "ASSETS"
 run_worker_first = true
-
-[observability.logs]
-enabled = true
 
 # Development configuration
 [dev]
