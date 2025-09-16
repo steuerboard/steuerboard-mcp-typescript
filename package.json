@@ -1,7 +1,10 @@
 {
   "name": "@steuerboard/mcp",
   "version": "0.0.1",
-  "author": "Speakeasy",
+  "author": {
+		"name": "steuerboard",
+		"email": "support@steuerboard.net"
+	},
   "type": "module",
   "sideEffects": false,
   "bin": {
