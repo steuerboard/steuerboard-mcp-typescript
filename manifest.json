@@ -1,0 +1,107 @@
+{
+  "dxt_version": "0.1",
+  "name": "steuerboard",
+  "version": "0.0.1",
+  "description": "",
+  "long_description": "",
+  "author": {
+    "name": "Speakeasy"
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "./bin/mcp-server.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/bin/mcp-server.js",
+        "start",
+        "--bearer-auth",
+        "${user_config.bearer_auth}"
+      ]
+    }
+  },
+  "display_name": "Steuerboard",
+  "tools": [
+    {
+      "name": "health-check-get-v1",
+      "description": "Index"
+    },
+    {
+      "name": "health-check-get-v1-ping",
+      "description": "Ping"
+    },
+    {
+      "name": "auth-get-v1-me",
+      "description": "Me"
+    },
+    {
+      "name": "admin-clients-list-clients",
+      "description": "List clients\n\nReturns a list of clients."
+    },
+    {
+      "name": "admin-clients-get-client",
+      "description": "Get a client\n\nReturns a single client object by ID."
+    },
+    {
+      "name": "workspaces-list-workspaces",
+      "description": "List workspaces\n\nReturns a paginated list of workspaces."
+    },
+    {
+      "name": "workspaces-get-workspace",
+      "description": "Get a workspace\n\nReturns a single workspace object by ID."
+    },
+    {
+      "name": "files-list-files",
+      "description": "List files\n\nReturns a paginated list of files. Optionally you can filter by workspace."
+    },
+    {
+      "name": "files-create-file",
+      "description": "Upload a file\n\nUploads a new file. Maximum file size is 500MB."
+    },
+    {
+      "name": "files-get-file",
+      "description": "Get a file\n\nReturns a single file object by ID."
+    },
+    {
+      "name": "files-update-file",
+      "description": "Update a file\n\nUpdates a file object."
+    },
+    {
+      "name": "files-delete-file",
+      "description": "Delete a file\n\nDeletes a file by ID."
+    },
+    {
+      "name": "tasks-list-tasks",
+      "description": "List tasks\n\nReturns a paginated list of tasks. Optionally you can filter by client or workspace."
+    },
+    {
+      "name": "tasks-create-task",
+      "description": "Create a task\n\nCreates a new task and returns the created task object."
+    },
+    {
+      "name": "tasks-get-task",
+      "description": "Get a task\n\nReturns a single task object by ID."
+    },
+    {
+      "name": "tasks-update-task",
+      "description": "Update a task\n\nUpdates an existing task object."
+    },
+    {
+      "name": "tasks-delete-task",
+      "description": "Delete a task\n\nDeletes a task by ID."
+    }
+  ],
+  "prompts": [],
+  "keywords": [
+      "steuerboard"
+    ],
+  "user_config": {
+      "bearer_auth": {
+        "type": "string",
+        "title": "bearerAuth",
+        "description": "The bearerAuth to use for the request",
+        "required": false,
+        "sensitive": true
+      }
+    }
+}

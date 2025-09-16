@@ -1,0 +1,13 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    Steuerboard API:
+        inputs:
+            - location: https://api.steuerboard.com/v1/openapi
+        output: .speakeasy/out.openapi.yaml
+        registry:
+            location: registry.speakeasyapi.dev/steuerboard-4kc/mcp/steuerboard-api
+targets:
+    steuerboard:
+        target: mcp-typescript
+        source: Steuerboard API
