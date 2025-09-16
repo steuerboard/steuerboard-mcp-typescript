@@ -6,7 +6,6 @@ sources:
         sourceBlobDigest: sha256:49000bd323d6b42efc1247de999a1d0d6326c2addbb3d0f6bb28dbf9ce384cd8
         tags:
             - latest
-            - speakeasy-sdk-regen-1758041009
             - 0.1.0
 targets:
     steuerboard:

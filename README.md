@@ -33,7 +33,7 @@ For more information about the API: [Find out more about Steuerboard API](https:
 <!-- Start Installation [installation] -->
 ## Installation
 
-Deployed at https://steuerboard-mcp-server.matyas5009.workers.dev
+Deployed at https://mcp.steuerboard.com
 <details>
 <summary>DXT (Desktop Extension)</summary>
 
@@ -51,7 +51,7 @@ The DXT package includes the MCP server and all necessary configuration. Once in
 <details>
 <summary>Cursor</summary>
 
-[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=Steuerboard&config=eyJtY3BTZXJ2ZXJzIjp7IlN0ZXVlcmJvYXJkIjp7InR5cGUiOiJtY3AiLCJ1cmwiOiJodHRwczovL3N0ZXVlcmJvYXJkLW1jcC1zZXJ2ZXIubWF0eWFzNTAwOS53b3JrZXJzLmRldi9tY3AiLCJoZWFkZXJzIjp7ImF1dGhvcml6YXRpb24iOiIke1NURVVFUkJPQVJEX0JFQVJFUl9BVVRIfSJ9fX19)
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=Steuerboard&config=eyJtY3BTZXJ2ZXJzIjp7IlN0ZXVlcmJvYXJkIjp7InR5cGUiOiJtY3AiLCJ1cmwiOiJodHRwczovL21jcC5zdGV1ZXJib2FyZC5jb20vbWNwIiwiaGVhZGVycyI6eyJhdXRob3JpemF0aW9uIjoiJHtTVEVVRVJCT0FSRF9CRUFSRVJfQVVUSH0ifX19fQ==)
 
 Or manually:
 
@@ -65,7 +65,7 @@ Or manually:
   "mcpServers": {
     "Steuerboard": {
       "type": "mcp",
-      "url": "https://steuerboard-mcp-server.matyas5009.workers.dev/mcp",
+      "url": "https://mcp.steuerboard.com/mcp",
       "headers": {
         "authorization": "${STEUERBOARD_BEARER_AUTH}"
       }
@@ -80,7 +80,7 @@ Or manually:
 <summary>Claude Code CLI</summary>
 
 ```bash
-claude mcp add --transport sse Steuerboard https://steuerboard-mcp-server.matyas5009.workers.dev/sse --header "authorization: ..."
+claude mcp add --transport sse Steuerboard https://mcp.steuerboard.com/sse --header "authorization: ..."
 ```
 
 </details>
@@ -99,7 +99,7 @@ Refer to [Official Windsurf documentation](https://docs.windsurf.com/windsurf/ca
   "mcpServers": {
     "Steuerboard": {
       "type": "mcp",
-      "url": "https://steuerboard-mcp-server.matyas5009.workers.dev/mcp",
+      "url": "https://mcp.steuerboard.com/mcp",
       "headers": {
         "authorization": "${STEUERBOARD_BEARER_AUTH}"
       }
@@ -121,7 +121,7 @@ Refer to [Official VS Code documentation](https://code.visualstudio.com/api/exte
   "servers": {
     "Steuerboard": {
       "type": "mcp",
-      "url": "https://steuerboard-mcp-server.matyas5009.workers.dev/mcp",
+      "url": "https://mcp.steuerboard.com/mcp",
       "headers": {
         "authorization": "${env:STEUERBOARD_BEARER_AUTH}"
       }

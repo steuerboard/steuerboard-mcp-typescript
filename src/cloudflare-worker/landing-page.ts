@@ -3,7 +3,7 @@
  */
 
 export function landingPage() {
-  const o = "https://steuerboard-mcp-server.matyas5009.workers.dev".trim();
+  const o = "https://mcp.steuerboard.com".trim();
 
   const mcpConfig = {
     "mcpServers": {
@@ -247,7 +247,7 @@ export function landingPage() {
             </div>
             <div class="method-content" id="cursor-content">
                 <div class="method-description">One-click installation for Cursor users</div>
-                <a href="https://cursor.com/install-mcp?name=Steuerboard&config=eyJtY3BTZXJ2ZXJzIjp7IlN0ZXVlcmJvYXJkIjp7InR5cGUiOiJtY3AiLCJ1cmwiOiJodHRwczovL3N0ZXVlcmJvYXJkLW1jcC1zZXJ2ZXIubWF0eWFzNTAwOS53b3JrZXJzLmRldi9tY3AiLCJoZWFkZXJzIjp7ImF1dGhvcml6YXRpb24iOiIke1NURVVFUkJPQVJEX0JFQVJFUl9BVVRIfSJ9fX19">
+                <a href="https://cursor.com/install-mcp?name=Steuerboard&config=eyJtY3BTZXJ2ZXJzIjp7IlN0ZXVlcmJvYXJkIjp7InR5cGUiOiJtY3AiLCJ1cmwiOiJodHRwczovL21jcC5zdGV1ZXJib2FyZC5jb20vbWNwIiwiaGVhZGVycyI6eyJhdXRob3JpemF0aW9uIjoiJHtTVEVVRVJCT0FSRF9CRUFSRVJfQVVUSH0ifX19fQ==">
     <img
         src="https://cursor.com/deeplink/mcp-install-dark.svg"
         alt="Add Steuerboard MCP server to Cursor"

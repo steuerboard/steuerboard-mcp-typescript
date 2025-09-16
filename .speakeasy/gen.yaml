@@ -24,15 +24,15 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 mcp-typescript:
-  version: 0.0.2
+  version: 0.0.4
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
     peerDependencies: {}
-  author: Speakeasy
+  author: Steuerboard
   baseErrorName: SteuerboardError
   cloudflareEnabled: true
-  cloudflareURL: https://steuerboard-mcp-server.matyas5009.workers.dev
+  cloudflareURL: https://mcp.steuerboard.com
   defaultErrorName: SteuerboardDefaultError
   envVarPrefix: STEUERBOARD
   inputModelSuffix: input

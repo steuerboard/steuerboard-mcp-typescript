@@ -1,11 +1,11 @@
 {
   "dxt_version": "0.1",
   "name": "steuerboard",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "",
   "long_description": "",
   "author": {
-    "name": "Speakeasy"
+    "name": "Steuerboard"
   },
   "server": {
     "type": "node",

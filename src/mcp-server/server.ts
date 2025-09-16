@@ -43,7 +43,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Steuerboard",
-    version: "0.0.2",
+    version: "0.0.4",
   });
 
   const getClient = deps.getSDK || (() =>
