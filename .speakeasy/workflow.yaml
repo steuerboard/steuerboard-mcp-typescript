@@ -11,3 +11,6 @@ targets:
     steuerboard:
         target: mcp-typescript
         source: Steuerboard API
+        publish:
+            npm:
+                token: $npm_token
