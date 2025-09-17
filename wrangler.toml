@@ -1,5 +1,5 @@
 
-name = "steuerboard-mcp-server"
+name = "@steuerboard/mcp-mcp-server"
 main = "src/cloudflare-worker/cloudflare-worker.ts"
 compatibility_date = "2025-07-15"
 
@@ -8,13 +8,13 @@ compatibility_flags = ["nodejs_compat"]
 
 # Durable Object binding for MCP Agent
 [[durable_objects.bindings]]
-name = "STEUERBOARD_MCP"
-class_name = "SteuerboardMCP"
+name = "@STEUERBOARD/MCP_MCP"
+class_name = "AtSteuerboardMcpMCP"
 
 # Durable Object migration
 [[migrations]]
 tag = "v1"
-new_classes = ["SteuerboardMCP"]
+new_classes = ["AtSteuerboardMcpMCP"]
 
 # Static assets configuration
 [assets]

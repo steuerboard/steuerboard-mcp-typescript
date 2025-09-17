@@ -14,7 +14,7 @@ interface State {}
 
 type Props = Record<string, string>;
 
-export class SteuerboardMCP extends McpAgent<Env, State, Props> {
+export class AtSteuerboardMcpMCP extends McpAgent<Env, State, Props> {
   server!: McpServer;
 
   async init() {
@@ -53,16 +53,19 @@ export default {
     ctx.props = headers;
 
     if (url.pathname === "/sse" || url.pathname.startsWith("/sse/")) {
-      return SteuerboardMCP.serveSSE("/sse", { binding: "STEUERBOARD_MCP" })
-        .fetch(
-          request,
-          env,
-          ctx,
-        );
+      return AtSteuerboardMcpMCP.serveSSE("/sse", {
+        binding: "@STEUERBOARD/MCP_MCP",
+      }).fetch(
+        request,
+        env,
+        ctx,
+      );
     }
 
     if (url.pathname === "/mcp") {
-      return SteuerboardMCP.serve("/mcp", { binding: "STEUERBOARD_MCP" }).fetch(
+      return AtSteuerboardMcpMCP.serve("/mcp", {
+        binding: "@STEUERBOARD/MCP_MCP",
+      }).fetch(
         request,
         env,
         ctx,

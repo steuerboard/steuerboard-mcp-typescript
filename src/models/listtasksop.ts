@@ -9,7 +9,6 @@ import { Task, Task$zodSchema } from "./task.js";
 export type ListTasksRequest = {
   limit?: number | undefined;
   cursor?: string | undefined;
-  clientId?: string | undefined;
   workspaceId?: string | undefined;
 };
 
@@ -18,7 +17,6 @@ export const ListTasksRequest$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  clientId: z.string().optional(),
   cursor: z.string().optional(),
   limit: z.number().default(20),
   workspaceId: z.string().optional(),

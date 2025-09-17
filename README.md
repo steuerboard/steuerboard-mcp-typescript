@@ -51,7 +51,7 @@ The DXT package includes the MCP server and all necessary configuration. Once in
 <details>
 <summary>Cursor</summary>
 
-[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=Steuerboard&config=eyJtY3BTZXJ2ZXJzIjp7IlN0ZXVlcmJvYXJkIjp7InR5cGUiOiJtY3AiLCJ1cmwiOiJodHRwczovL21jcC5zdGV1ZXJib2FyZC5jb20vbWNwIiwiaGVhZGVycyI6eyJhdXRob3JpemF0aW9uIjoiJHtTVEVVRVJCT0FSRF9CRUFSRVJfQVVUSH0ifX19fQ==)
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=Steuerboard&config=eyJtY3BTZXJ2ZXJzIjp7IlN0ZXVlcmJvYXJkIjp7InR5cGUiOiJtY3AiLCJ1cmwiOiJodHRwczovL21jcC5zdGV1ZXJib2FyZC5jb20vbWNwIiwiaGVhZGVycyI6eyJhdXRob3JpemF0aW9uIjoiJHtAU1RFVUVSQk9BUkQvTUNQX0JFQVJFUl9BVVRIfSJ9fX19)
 
 Or manually:
 
@@ -67,7 +67,7 @@ Or manually:
       "type": "mcp",
       "url": "https://mcp.steuerboard.com/mcp",
       "headers": {
-        "authorization": "${STEUERBOARD_BEARER_AUTH}"
+        "authorization": "${@STEUERBOARD/MCP_BEARER_AUTH}"
       }
     }
   }
@@ -101,7 +101,7 @@ Refer to [Official Windsurf documentation](https://docs.windsurf.com/windsurf/ca
       "type": "mcp",
       "url": "https://mcp.steuerboard.com/mcp",
       "headers": {
-        "authorization": "${STEUERBOARD_BEARER_AUTH}"
+        "authorization": "${@STEUERBOARD/MCP_BEARER_AUTH}"
       }
     }
   }
@@ -123,7 +123,7 @@ Refer to [Official VS Code documentation](https://code.visualstudio.com/api/exte
       "type": "mcp",
       "url": "https://mcp.steuerboard.com/mcp",
       "headers": {
-        "authorization": "${env:STEUERBOARD_BEARER_AUTH}"
+        "authorization": "${env:@STEUERBOARD/MCP_BEARER_AUTH}"
       }
     }
   }
@@ -138,13 +138,13 @@ Refer to [Official VS Code documentation](https://code.visualstudio.com/api/exte
 To start the MCP server, run:
 
 ```bash
-npx steuerboard start --bearer-auth ...
+npx @steuerboard/mcp start --bearer-auth ...
 ```
 
 For a full list of server arguments, run:
 
 ```
-npx steuerboard --help
+npx @steuerboard/mcp --help
 ```
 
 </details>

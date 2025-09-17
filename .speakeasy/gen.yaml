@@ -24,7 +24,7 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 mcp-typescript:
-  version: 0.0.6
+  version: 0.0.7
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -37,4 +37,4 @@ mcp-typescript:
   envVarPrefix: STEUERBOARD
   inputModelSuffix: input
   outputModelSuffix: output
-  packageName: steuerboard
+  packageName: '@steuerboard/mcp'

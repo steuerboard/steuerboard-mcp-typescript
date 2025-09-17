@@ -1,6 +1,6 @@
 {
-  "name": "steuerboard",
-  "version": "0.0.6",
+  "name": "@steuerboard/mcp",
+  "version": "0.0.7",
   "author": "Steuerboard",
   "type": "module",
   "sideEffects": false,
@@ -9,7 +9,7 @@
     "url": "https://github.com/steuerboard/steuerboard-mcp-typescript.git"
   },
   "bin": {
-    "steuerboard": "bin/mcp-server.js",
+    "@steuerboard/mcp": "bin/mcp-server.js",
     "mcp": "bin/mcp-server.js"
   },
   "scripts": {

@@ -88,7 +88,6 @@ async function $do(
   const body$ = null;
   const path$ = pathToFunc("/v1/tasks")();
   const query$ = encodeFormQuery({
-    "clientId": payload$?.clientId,
     "cursor": payload$?.cursor,
     "limit": payload$?.limit,
     "workspaceId": payload$?.workspaceId,

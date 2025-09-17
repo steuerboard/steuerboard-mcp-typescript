@@ -10,10 +10,11 @@ import * as z from "zod";
 export type GetV1MeResponseBody = {
   type: string;
   accountantId: string;
-  clientId?: string | undefined;
+  clientId: string | null;
   apiKeyId: string;
   rateLimitMax: number;
   rateLimitTimeWindow: number;
+  permissions: Array<string>;
 };
 
 export const GetV1MeResponseBody$zodSchema: z.ZodType<
@@ -23,7 +24,8 @@ export const GetV1MeResponseBody$zodSchema: z.ZodType<
 > = z.object({
   accountantId: z.string(),
   apiKeyId: z.string(),
-  clientId: z.string().optional(),
+  clientId: z.string().nullable(),
+  permissions: z.array(z.string()),
   rateLimitMax: z.number(),
   rateLimitTimeWindow: z.number(),
   type: z.string(),

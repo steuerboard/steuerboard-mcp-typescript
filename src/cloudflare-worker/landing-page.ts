@@ -11,7 +11,7 @@ export function landingPage() {
         "type": "mcp",
         "url": `${o}/mcp`,
         "headers": {
-          "authorization": "$" + "{" + "STEUERBOARD_BEARER_AUTH" + "}",
+          "authorization": "$" + "{" + "@STEUERBOARD/MCP_BEARER_AUTH" + "}",
         },
       },
     },
@@ -23,7 +23,7 @@ export function landingPage() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>steuerboard MCP</title>
+    <title>@steuerboard/mcp MCP</title>
     <style>
         body { 
             font-family: 'Inter', Arial, sans-serif; 
@@ -200,9 +200,9 @@ export function landingPage() {
 </head>
 <body>
     <main>
-        <h1>steuerboard MCP</h1>
+        <h1>@steuerboard/mcp MCP</h1>
         <div class="desc">
-            Welcome! This is the MCP server for interacting with the steuerboard API. Use it with Claude, Cursor, or any other tool that supports MCP.
+            Welcome! This is the MCP server for interacting with the @steuerboard/mcp API. Use it with Claude, Cursor, or any other tool that supports MCP.
         </div>
         <h2 style="margin-top: 48px; font-size: 1.5rem; font-weight: 700; margin-bottom: 0;">Getting Started</h2>
         <hr />
@@ -247,7 +247,7 @@ export function landingPage() {
             </div>
             <div class="method-content" id="cursor-content">
                 <div class="method-description">One-click installation for Cursor users</div>
-                <a href="https://cursor.com/install-mcp?name=Steuerboard&config=eyJtY3BTZXJ2ZXJzIjp7IlN0ZXVlcmJvYXJkIjp7InR5cGUiOiJtY3AiLCJ1cmwiOiJodHRwczovL21jcC5zdGV1ZXJib2FyZC5jb20vbWNwIiwiaGVhZGVycyI6eyJhdXRob3JpemF0aW9uIjoiJHtTVEVVRVJCT0FSRF9CRUFSRVJfQVVUSH0ifX19fQ==">
+                <a href="https://cursor.com/install-mcp?name=Steuerboard&config=eyJtY3BTZXJ2ZXJzIjp7IlN0ZXVlcmJvYXJkIjp7InR5cGUiOiJtY3AiLCJ1cmwiOiJodHRwczovL21jcC5zdGV1ZXJib2FyZC5jb20vbWNwIiwiaGVhZGVycyI6eyJhdXRob3JpemF0aW9uIjoiJHtAU1RFVUVSQk9BUkQvTUNQX0JFQVJFUl9BVVRIfSJ9fX19">
     <img
         src="https://cursor.com/deeplink/mcp-install-dark.svg"
         alt="Add Steuerboard MCP server to Cursor"
@@ -287,12 +287,12 @@ export function landingPage() {
                 <div class="method-description">Start the MCP server manually using npx:</div>
                 <div class="code-container">
                     <button class="copy-button" onclick="copyToClipboard('manual-install', this)">Copy</button>
-                    <pre id="manual-install">npx steuerboard start --bearer-auth ...</pre>
+                    <pre id="manual-install">npx @steuerboard/mcp start --bearer-auth ...</pre>
                 </div>
                 <div class="method-description" style="margin-top: 12px;">For a full list of server arguments:</div>
                 <div class="code-container">
                     <button class="copy-button" onclick="copyToClipboard('manual-help', this)">Copy</button>
-                    <pre id="manual-help">npx steuerboard --help</pre>
+                    <pre id="manual-help">npx @steuerboard/mcp --help</pre>
                 </div>
             </div>
         </div>

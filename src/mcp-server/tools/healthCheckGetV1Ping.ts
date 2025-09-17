@@ -7,7 +7,7 @@ import { formatResult, ToolDefinition } from "../tools.js";
 
 export const tool$healthCheckGetV1Ping: ToolDefinition = {
   name: "health-check-get-v1-ping",
-  description: `Ping`,
+  description: `Ping Pong`,
   tool: async (client, ctx) => {
     const [result, apiCall] = await healthCheckGetV1Ping(
       client,

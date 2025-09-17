@@ -1,7 +1,7 @@
 {
   "dxt_version": "0.1",
-  "name": "steuerboard",
-  "version": "0.0.6",
+  "name": "@steuerboard/mcp",
+  "version": "0.0.7",
   "description": "",
   "long_description": "",
   "author": {
@@ -20,7 +20,7 @@
       ]
     }
   },
-  "display_name": "Steuerboard",
+  "display_name": "@steuerboard/mcp",
   "tools": [
     {
       "name": "health-check-get-v1",
@@ -28,7 +28,7 @@
     },
     {
       "name": "health-check-get-v1-ping",
-      "description": "Ping"
+      "description": "Ping Pong"
     },
     {
       "name": "auth-get-v1-me",
@@ -97,7 +97,7 @@
   ],
   "prompts": [],
   "keywords": [
-      "steuerboard"
+      "@steuerboard/mcp"
     ],
   "user_config": {
       "bearer_auth": {
