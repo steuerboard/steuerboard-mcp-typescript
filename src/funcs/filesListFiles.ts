@@ -163,15 +163,17 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, ListFilesResponse$zodSchema, {
-      key: "200_application/json_object",
+    M.json(200, ListFilesResponse$zodSchema, { key: "PaginatedFiles" }),
+    M.json(400, ListFilesResponse$zodSchema, { key: "bad_request" }),
+    M.json(401, ListFilesResponse$zodSchema, { key: "auth_error" }),
+    M.json(403, ListFilesResponse$zodSchema, {
+      key: "403_application/json_object",
     }),
     M.json(422, ListFilesResponse$zodSchema, {
       key: "422_application/json_object",
     }),
-    M.json(429, ListFilesResponse$zodSchema, {
-      key: "429_application/json_object",
-    }),
+    M.json(429, ListFilesResponse$zodSchema, { key: "rate_limit" }),
+    M.nil(500, ListFilesResponse$zodSchema),
   )(response, req$, { extraFields: responseFields$ });
 
   return [result$, { status: "complete", request: req$, response }];

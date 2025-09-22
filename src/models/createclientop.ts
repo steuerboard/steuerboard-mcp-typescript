@@ -3,22 +3,9 @@
  */
 
 import * as z from "zod";
+import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { Client, Client$zodSchema } from "./client.js";
-
-/**
- * Rate limit exceeded. Slow down requests or retry after the time specified in the rate limit response headers
- */
-export type CreateClientTooManyRequestsResponseBody = { message: string };
-
-export const CreateClientTooManyRequestsResponseBody$zodSchema: z.ZodType<
-  CreateClientTooManyRequestsResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  message: z.string(),
-}).describe(
-  "Rate limit exceeded. Slow down requests or retry after the time specified in the rate limit response headers",
-);
+import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
 export type CreateClientPath = string | number;
 
@@ -81,17 +68,52 @@ export const CreateClientUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("The validation error(s)");
 
+export const CreateClientType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export type CreateClientType = z.infer<typeof CreateClientType$zodSchema>;
+
+export const CreateClientCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export type CreateClientCode = z.infer<typeof CreateClientCode$zodSchema>;
+
+/**
+ * Missing scope
+ */
+export type CreateClientForbiddenResponseBody = {
+  status_code: number;
+  type: CreateClientType;
+  code: CreateClientCode;
+  message: string;
+};
+
+export const CreateClientForbiddenResponseBody$zodSchema: z.ZodType<
+  CreateClientForbiddenResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  code: CreateClientCode$zodSchema,
+  message: z.string(),
+  status_code: z.number(),
+  type: CreateClientType$zodSchema,
+}).describe("Missing scope");
+
 export type CreateClientResponse = {
   ContentType: string;
   StatusCode: number;
   RawResponse: Response;
   Client?: Client | undefined;
+  auth_error?: AuthError | undefined;
+  fourHundredAndThreeApplicationJsonObject?:
+    | CreateClientForbiddenResponseBody
+    | undefined;
   fourHundredAndTwentyTwoApplicationJsonObject?:
     | CreateClientUnprocessableEntityResponseBody
     | undefined;
-  fourHundredAndTwentyNineApplicationJsonObject?:
-    | CreateClientTooManyRequestsResponseBody
-    | undefined;
+  rate_limit?: RateLimit | undefined;
 };
 
 export const CreateClientResponse$zodSchema: z.ZodType<
@@ -103,10 +125,12 @@ export const CreateClientResponse$zodSchema: z.ZodType<
   ContentType: z.string(),
   RawResponse: z.instanceof(Response),
   StatusCode: z.number().int(),
-  fourHundredAndTwentyNineApplicationJsonObject: z.lazy(() =>
-    CreateClientTooManyRequestsResponseBody$zodSchema
+  auth_error: AuthError$zodSchema.optional(),
+  fourHundredAndThreeApplicationJsonObject: z.lazy(() =>
+    CreateClientForbiddenResponseBody$zodSchema
   ).optional(),
   fourHundredAndTwentyTwoApplicationJsonObject: z.lazy(() =>
     CreateClientUnprocessableEntityResponseBody$zodSchema
   ).optional(),
+  rate_limit: RateLimit$zodSchema.optional(),
 });

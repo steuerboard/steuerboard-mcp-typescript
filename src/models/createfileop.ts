@@ -3,37 +3,22 @@
  */
 
 import * as z from "zod";
+import { AuthError, AuthError$zodSchema } from "./autherror.js";
+import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
 import { FileT, FileT$zodSchema } from "./file.js";
 import { FileCreate, FileCreate$zodSchema } from "./filecreate.js";
+import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
-export type CreateFileRequest = {
-  xClientId: string;
-  FileCreate?: FileCreate | undefined;
-};
+export type CreateFileRequest = { xClientId: string; FileCreate: FileCreate };
 
 export const CreateFileRequest$zodSchema: z.ZodType<
   CreateFileRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  FileCreate: FileCreate$zodSchema.optional(),
+  FileCreate: FileCreate$zodSchema,
   xClientId: z.string(),
 });
-
-/**
- * Rate limit exceeded. Slow down requests or retry after the time specified in the rate limit response headers
- */
-export type CreateFileTooManyRequestsResponseBody = { message: string };
-
-export const CreateFileTooManyRequestsResponseBody$zodSchema: z.ZodType<
-  CreateFileTooManyRequestsResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  message: z.string(),
-}).describe(
-  "Rate limit exceeded. Slow down requests or retry after the time specified in the rate limit response headers",
-);
 
 export type CreateFilePath = string | number;
 
@@ -93,33 +78,97 @@ export const CreateFileUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("The validation error(s)");
 
+export const RequestEntityTooLargeType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export type RequestEntityTooLargeType = z.infer<
+  typeof RequestEntityTooLargeType$zodSchema
+>;
+
+export const RequestEntityTooLargeCode$zodSchema = z.enum([
+  "payload_too_large",
+]);
+
+export type RequestEntityTooLargeCode = z.infer<
+  typeof RequestEntityTooLargeCode$zodSchema
+>;
+
 /**
  * Payload too large
  */
-export type CreateFileRequestEntityTooLargeResponseBody = { message: string };
+export type CreateFileRequestEntityTooLargeResponseBody = {
+  status_code: number;
+  type: RequestEntityTooLargeType;
+  code: RequestEntityTooLargeCode;
+  message: string;
+};
 
 export const CreateFileRequestEntityTooLargeResponseBody$zodSchema: z.ZodType<
   CreateFileRequestEntityTooLargeResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
+  code: RequestEntityTooLargeCode$zodSchema,
   message: z.string(),
+  status_code: z.number(),
+  type: RequestEntityTooLargeType$zodSchema,
 }).describe("Payload too large");
+
+export const CreateFileForbiddenType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export type CreateFileForbiddenType = z.infer<
+  typeof CreateFileForbiddenType$zodSchema
+>;
+
+export const CreateFileForbiddenCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export type CreateFileForbiddenCode = z.infer<
+  typeof CreateFileForbiddenCode$zodSchema
+>;
+
+/**
+ * Missing scope
+ */
+export type CreateFileForbiddenResponseBody = {
+  status_code: number;
+  type: CreateFileForbiddenType;
+  code: CreateFileForbiddenCode;
+  message: string;
+};
+
+export const CreateFileForbiddenResponseBody$zodSchema: z.ZodType<
+  CreateFileForbiddenResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  code: CreateFileForbiddenCode$zodSchema,
+  message: z.string(),
+  status_code: z.number(),
+  type: CreateFileForbiddenType$zodSchema,
+}).describe("Missing scope");
 
 export type CreateFileResponse = {
   ContentType: string;
   StatusCode: number;
   RawResponse: Response;
   FileT?: FileT | undefined;
+  bad_request?: BadRequest | undefined;
+  auth_error?: AuthError | undefined;
+  fourHundredAndThreeApplicationJsonObject?:
+    | CreateFileForbiddenResponseBody
+    | undefined;
   fourHundredAndThirteenApplicationJsonObject?:
     | CreateFileRequestEntityTooLargeResponseBody
     | undefined;
   fourHundredAndTwentyTwoApplicationJsonObject?:
     | CreateFileUnprocessableEntityResponseBody
     | undefined;
-  fourHundredAndTwentyNineApplicationJsonObject?:
-    | CreateFileTooManyRequestsResponseBody
-    | undefined;
+  rate_limit?: RateLimit | undefined;
 };
 
 export const CreateFileResponse$zodSchema: z.ZodType<
@@ -131,13 +180,16 @@ export const CreateFileResponse$zodSchema: z.ZodType<
   FileT: FileT$zodSchema.optional(),
   RawResponse: z.instanceof(Response),
   StatusCode: z.number().int(),
+  auth_error: AuthError$zodSchema.optional(),
+  bad_request: BadRequest$zodSchema.optional(),
   fourHundredAndThirteenApplicationJsonObject: z.lazy(() =>
     CreateFileRequestEntityTooLargeResponseBody$zodSchema
   ).optional(),
-  fourHundredAndTwentyNineApplicationJsonObject: z.lazy(() =>
-    CreateFileTooManyRequestsResponseBody$zodSchema
+  fourHundredAndThreeApplicationJsonObject: z.lazy(() =>
+    CreateFileForbiddenResponseBody$zodSchema
   ).optional(),
   fourHundredAndTwentyTwoApplicationJsonObject: z.lazy(() =>
     CreateFileUnprocessableEntityResponseBody$zodSchema
   ).optional(),
+  rate_limit: RateLimit$zodSchema.optional(),
 });

@@ -99,6 +99,10 @@ async function $do(
 
   const headers$ = new Headers(compactMap({
     Accept: "application/json",
+    "x-client-id": encodeSimple("x-client-id", payload$.xClientId, {
+      explode: false,
+      charEncoding: "none",
+    }),
   }));
   const securityInput = await extractSecurity(client$._options.security);
   const requestSecurity = resolveGlobalSecurity(securityInput);
@@ -163,12 +167,17 @@ async function $do(
     | ConnectionError
   >(
     M.json(200, DeleteTaskResponse$zodSchema, { key: "Task" }),
-    M.json(404, DeleteTaskResponse$zodSchema, {
-      key: "404_application/json_object",
+    M.json(400, DeleteTaskResponse$zodSchema, { key: "bad_request" }),
+    M.json(401, DeleteTaskResponse$zodSchema, { key: "auth_error" }),
+    M.json(403, DeleteTaskResponse$zodSchema, {
+      key: "403_application/json_object",
     }),
+    M.json(404, DeleteTaskResponse$zodSchema, { key: "not_found" }),
     M.json(422, DeleteTaskResponse$zodSchema, {
       key: "422_application/json_object",
     }),
+    M.json(429, DeleteTaskResponse$zodSchema, { key: "rate_limit" }),
+    M.nil(500, DeleteTaskResponse$zodSchema),
   )(response, req$, { extraFields: responseFields$ });
 
   return [result$, { status: "complete", request: req$, response }];

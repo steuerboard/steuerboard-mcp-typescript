@@ -3,9 +3,13 @@
  */
 
 import * as z from "zod";
+import { AuthError, AuthError$zodSchema } from "./autherror.js";
+import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
+import { NotFound, NotFound$zodSchema } from "./notfound.js";
+import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 import { Task, Task$zodSchema } from "./task.js";
 
-export type DeleteTaskRequest = { id: string };
+export type DeleteTaskRequest = { id: string; xClientId: string };
 
 export const DeleteTaskRequest$zodSchema: z.ZodType<
   DeleteTaskRequest,
@@ -13,6 +17,7 @@ export const DeleteTaskRequest$zodSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
+  xClientId: z.string(),
 });
 
 export type DeleteTaskPath = string | number;
@@ -73,30 +78,54 @@ export const DeleteTaskUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("Invalid id error");
 
-/**
- * Task not found
- */
-export type DeleteTaskNotFoundResponseBody = { message: string };
+export const DeleteTaskType$zodSchema = z.enum([
+  "auth_error",
+]);
 
-export const DeleteTaskNotFoundResponseBody$zodSchema: z.ZodType<
-  DeleteTaskNotFoundResponseBody,
+export type DeleteTaskType = z.infer<typeof DeleteTaskType$zodSchema>;
+
+export const DeleteTaskCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export type DeleteTaskCode = z.infer<typeof DeleteTaskCode$zodSchema>;
+
+/**
+ * Missing scope
+ */
+export type DeleteTaskForbiddenResponseBody = {
+  status_code: number;
+  type: DeleteTaskType;
+  code: DeleteTaskCode;
+  message: string;
+};
+
+export const DeleteTaskForbiddenResponseBody$zodSchema: z.ZodType<
+  DeleteTaskForbiddenResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
+  code: DeleteTaskCode$zodSchema,
   message: z.string(),
-}).describe("Task not found");
+  status_code: z.number(),
+  type: DeleteTaskType$zodSchema,
+}).describe("Missing scope");
 
 export type DeleteTaskResponse = {
   ContentType: string;
   StatusCode: number;
   RawResponse: Response;
   Task?: Task | undefined;
-  fourHundredAndFourApplicationJsonObject?:
-    | DeleteTaskNotFoundResponseBody
+  bad_request?: BadRequest | undefined;
+  auth_error?: AuthError | undefined;
+  fourHundredAndThreeApplicationJsonObject?:
+    | DeleteTaskForbiddenResponseBody
     | undefined;
+  not_found?: NotFound | undefined;
   fourHundredAndTwentyTwoApplicationJsonObject?:
     | DeleteTaskUnprocessableEntityResponseBody
     | undefined;
+  rate_limit?: RateLimit | undefined;
 };
 
 export const DeleteTaskResponse$zodSchema: z.ZodType<
@@ -108,10 +137,14 @@ export const DeleteTaskResponse$zodSchema: z.ZodType<
   RawResponse: z.instanceof(Response),
   StatusCode: z.number().int(),
   Task: Task$zodSchema.optional(),
-  fourHundredAndFourApplicationJsonObject: z.lazy(() =>
-    DeleteTaskNotFoundResponseBody$zodSchema
+  auth_error: AuthError$zodSchema.optional(),
+  bad_request: BadRequest$zodSchema.optional(),
+  fourHundredAndThreeApplicationJsonObject: z.lazy(() =>
+    DeleteTaskForbiddenResponseBody$zodSchema
   ).optional(),
   fourHundredAndTwentyTwoApplicationJsonObject: z.lazy(() =>
     DeleteTaskUnprocessableEntityResponseBody$zodSchema
   ).optional(),
+  not_found: NotFound$zodSchema.optional(),
+  rate_limit: RateLimit$zodSchema.optional(),
 });

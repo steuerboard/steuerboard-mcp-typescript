@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 188da4b7-9881-4ae0-a213-c32e68b13c57
 management:
-  docChecksum: aca60bac21eb5bbfb23d527d1108f1e5
+  docChecksum: 54b7ce9006f95c93d0499a137416ba67
   docVersion: 0.1.0
-  speakeasyVersion: 1.617.1
-  generationVersion: 2.701.8
-  releaseVersion: 0.0.7
-  configChecksum: 117d8c06f11f45d8256c287e6fff8738
+  speakeasyVersion: 1.622.1
+  generationVersion: 2.709.0
+  releaseVersion: 0.1.0
+  configChecksum: 6ba65ba1db2f1ba3e340d5c26ec30fbc
   repoURL: https://github.com/steuerboard/steuerboard-mcp-typescript.git
   published: true
 features:
   mcp-typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.0
-    core: 0.3.4
+    core: 0.4.0
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     globalSecurity: 0.1.1
@@ -38,19 +38,20 @@ generatedFiles:
   - src/funcs/adminClientsCreateClient.ts
   - src/funcs/adminClientsGetClient.ts
   - src/funcs/adminClientsListClients.ts
-  - src/funcs/authGetV1Me.ts
+  - src/funcs/authMe.ts
   - src/funcs/filesCreateFile.ts
   - src/funcs/filesDeleteFile.ts
   - src/funcs/filesGetFile.ts
   - src/funcs/filesListFiles.ts
   - src/funcs/filesUpdateFile.ts
-  - src/funcs/healthCheckGetV1.ts
-  - src/funcs/healthCheckGetV1Ping.ts
+  - src/funcs/healthIndex.ts
+  - src/funcs/healthPing.ts
   - src/funcs/tasksCreateTask.ts
   - src/funcs/tasksDeleteTask.ts
   - src/funcs/tasksGetTask.ts
   - src/funcs/tasksListTasks.ts
   - src/funcs/tasksUpdateTask.ts
+  - src/funcs/workspacesCreateWorkspace.ts
   - src/funcs/workspacesGetWorkspace.ts
   - src/funcs/workspacesListWorkspaces.ts
   - src/hooks/hooks.ts
@@ -88,26 +89,30 @@ generatedFiles:
   - src/mcp-server/tools/adminClientsCreateClient.ts
   - src/mcp-server/tools/adminClientsGetClient.ts
   - src/mcp-server/tools/adminClientsListClients.ts
-  - src/mcp-server/tools/authGetV1Me.ts
+  - src/mcp-server/tools/authMe.ts
   - src/mcp-server/tools/filesCreateFile.ts
   - src/mcp-server/tools/filesDeleteFile.ts
   - src/mcp-server/tools/filesGetFile.ts
   - src/mcp-server/tools/filesListFiles.ts
   - src/mcp-server/tools/filesUpdateFile.ts
-  - src/mcp-server/tools/healthCheckGetV1.ts
-  - src/mcp-server/tools/healthCheckGetV1Ping.ts
+  - src/mcp-server/tools/healthIndex.ts
+  - src/mcp-server/tools/healthPing.ts
   - src/mcp-server/tools/tasksCreateTask.ts
   - src/mcp-server/tools/tasksDeleteTask.ts
   - src/mcp-server/tools/tasksGetTask.ts
   - src/mcp-server/tools/tasksListTasks.ts
   - src/mcp-server/tools/tasksUpdateTask.ts
+  - src/mcp-server/tools/workspacesCreateWorkspace.ts
   - src/mcp-server/tools/workspacesGetWorkspace.ts
   - src/mcp-server/tools/workspacesListWorkspaces.ts
+  - src/models/autherror.ts
+  - src/models/badrequest.ts
   - src/models/client.ts
   - src/models/clientcreate.ts
   - src/models/createclientop.ts
   - src/models/createfileop.ts
   - src/models/createtaskop.ts
+  - src/models/createworkspaceop.ts
   - src/models/deletefileop.ts
   - src/models/deleteresponse.ts
   - src/models/deletetaskop.ts
@@ -120,15 +125,21 @@ generatedFiles:
   - src/models/getclientop.ts
   - src/models/getfileop.ts
   - src/models/gettaskop.ts
-  - src/models/getv1meop.ts
-  - src/models/getv1op.ts
-  - src/models/getv1pingop.ts
   - src/models/getworkspaceop.ts
+  - src/models/indexop.ts
   - src/models/listclientsop.ts
   - src/models/listfilesop.ts
   - src/models/listtasksop.ts
   - src/models/listworkspacesop.ts
+  - src/models/meop.ts
+  - src/models/notfound.ts
+  - src/models/paginatedclients.ts
+  - src/models/paginatedfiles.ts
+  - src/models/paginatedtasks.ts
+  - src/models/paginatedworkspaces.ts
   - src/models/pagination.ts
+  - src/models/pingop.ts
+  - src/models/ratelimit.ts
   - src/models/security.ts
   - src/models/task.ts
   - src/models/taskcreate.ts
@@ -142,6 +153,7 @@ generatedFiles:
   - src/models/webhookstaskcommentcreatedop.ts
   - src/models/webhooksworkspacechangesop.ts
   - src/models/workspace.ts
+  - src/models/workspacecreate.ts
   - src/types/async.ts
   - src/types/blobs.ts
   - src/types/enums.ts

@@ -3,7 +3,10 @@
  */
 
 import * as z from "zod";
+import { AuthError, AuthError$zodSchema } from "./autherror.js";
+import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
 import { FileT, FileT$zodSchema } from "./file.js";
+import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
 export type GetFileRequest = { id: string; xClientId: string };
 
@@ -15,21 +18,6 @@ export const GetFileRequest$zodSchema: z.ZodType<
   id: z.string(),
   xClientId: z.string(),
 });
-
-/**
- * Rate limit exceeded. Slow down requests or retry after the time specified in the rate limit response headers
- */
-export type GetFileTooManyRequestsResponseBody = { message: string };
-
-export const GetFileTooManyRequestsResponseBody$zodSchema: z.ZodType<
-  GetFileTooManyRequestsResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  message: z.string(),
-}).describe(
-  "Rate limit exceeded. Slow down requests or retry after the time specified in the rate limit response headers",
-);
 
 export type GetFilePath = string | number;
 
@@ -102,20 +90,56 @@ export const GetFileNotFoundResponseBody$zodSchema: z.ZodType<
   message: z.string(),
 }).describe("File not found");
 
+export const GetFileType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export type GetFileType = z.infer<typeof GetFileType$zodSchema>;
+
+export const GetFileCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export type GetFileCode = z.infer<typeof GetFileCode$zodSchema>;
+
+/**
+ * Missing scope
+ */
+export type GetFileForbiddenResponseBody = {
+  status_code: number;
+  type: GetFileType;
+  code: GetFileCode;
+  message: string;
+};
+
+export const GetFileForbiddenResponseBody$zodSchema: z.ZodType<
+  GetFileForbiddenResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  code: GetFileCode$zodSchema,
+  message: z.string(),
+  status_code: z.number(),
+  type: GetFileType$zodSchema,
+}).describe("Missing scope");
+
 export type GetFileResponse = {
   ContentType: string;
   StatusCode: number;
   RawResponse: Response;
   FileT?: FileT | undefined;
+  bad_request?: BadRequest | undefined;
+  auth_error?: AuthError | undefined;
+  fourHundredAndThreeApplicationJsonObject?:
+    | GetFileForbiddenResponseBody
+    | undefined;
   fourHundredAndFourApplicationJsonObject?:
     | GetFileNotFoundResponseBody
     | undefined;
   fourHundredAndTwentyTwoApplicationJsonObject?:
     | GetFileUnprocessableEntityResponseBody
     | undefined;
-  fourHundredAndTwentyNineApplicationJsonObject?:
-    | GetFileTooManyRequestsResponseBody
-    | undefined;
+  rate_limit?: RateLimit | undefined;
 };
 
 export const GetFileResponse$zodSchema: z.ZodType<
@@ -127,13 +151,16 @@ export const GetFileResponse$zodSchema: z.ZodType<
   FileT: FileT$zodSchema.optional(),
   RawResponse: z.instanceof(Response),
   StatusCode: z.number().int(),
+  auth_error: AuthError$zodSchema.optional(),
+  bad_request: BadRequest$zodSchema.optional(),
   fourHundredAndFourApplicationJsonObject: z.lazy(() =>
     GetFileNotFoundResponseBody$zodSchema
   ).optional(),
-  fourHundredAndTwentyNineApplicationJsonObject: z.lazy(() =>
-    GetFileTooManyRequestsResponseBody$zodSchema
+  fourHundredAndThreeApplicationJsonObject: z.lazy(() =>
+    GetFileForbiddenResponseBody$zodSchema
   ).optional(),
   fourHundredAndTwentyTwoApplicationJsonObject: z.lazy(() =>
     GetFileUnprocessableEntityResponseBody$zodSchema
   ).optional(),
+  rate_limit: RateLimit$zodSchema.optional(),
 });

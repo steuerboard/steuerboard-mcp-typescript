@@ -3,6 +3,10 @@
  */
 
 import * as z from "zod";
+import { AuthError, AuthError$zodSchema } from "./autherror.js";
+import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
+import { NotFound, NotFound$zodSchema } from "./notfound.js";
+import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 import { Workspace, Workspace$zodSchema } from "./workspace.js";
 
 export type GetWorkspaceRequest = { id: string; xClientId: string };
@@ -15,21 +19,6 @@ export const GetWorkspaceRequest$zodSchema: z.ZodType<
   id: z.string(),
   xClientId: z.string(),
 });
-
-/**
- * Rate limit exceeded. Slow down requests or retry after the time specified in the rate limit response headers
- */
-export type GetWorkspaceTooManyRequestsResponseBody = { message: string };
-
-export const GetWorkspaceTooManyRequestsResponseBody$zodSchema: z.ZodType<
-  GetWorkspaceTooManyRequestsResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  message: z.string(),
-}).describe(
-  "Rate limit exceeded. Slow down requests or retry after the time specified in the rate limit response headers",
-);
 
 export type GetWorkspacePath = string | number;
 
@@ -92,33 +81,54 @@ export const GetWorkspaceUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("Invalid id error");
 
-/**
- * Workspace not found
- */
-export type GetWorkspaceNotFoundResponseBody = { message: string };
+export const GetWorkspaceType$zodSchema = z.enum([
+  "auth_error",
+]);
 
-export const GetWorkspaceNotFoundResponseBody$zodSchema: z.ZodType<
-  GetWorkspaceNotFoundResponseBody,
+export type GetWorkspaceType = z.infer<typeof GetWorkspaceType$zodSchema>;
+
+export const GetWorkspaceCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export type GetWorkspaceCode = z.infer<typeof GetWorkspaceCode$zodSchema>;
+
+/**
+ * Missing scope
+ */
+export type GetWorkspaceForbiddenResponseBody = {
+  status_code: number;
+  type: GetWorkspaceType;
+  code: GetWorkspaceCode;
+  message: string;
+};
+
+export const GetWorkspaceForbiddenResponseBody$zodSchema: z.ZodType<
+  GetWorkspaceForbiddenResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
+  code: GetWorkspaceCode$zodSchema,
   message: z.string(),
-}).describe("Workspace not found");
+  status_code: z.number(),
+  type: GetWorkspaceType$zodSchema,
+}).describe("Missing scope");
 
 export type GetWorkspaceResponse = {
   ContentType: string;
   StatusCode: number;
   RawResponse: Response;
   Workspace?: Workspace | undefined;
-  fourHundredAndFourApplicationJsonObject?:
-    | GetWorkspaceNotFoundResponseBody
+  bad_request?: BadRequest | undefined;
+  auth_error?: AuthError | undefined;
+  fourHundredAndThreeApplicationJsonObject?:
+    | GetWorkspaceForbiddenResponseBody
     | undefined;
+  not_found?: NotFound | undefined;
   fourHundredAndTwentyTwoApplicationJsonObject?:
     | GetWorkspaceUnprocessableEntityResponseBody
     | undefined;
-  fourHundredAndTwentyNineApplicationJsonObject?:
-    | GetWorkspaceTooManyRequestsResponseBody
-    | undefined;
+  rate_limit?: RateLimit | undefined;
 };
 
 export const GetWorkspaceResponse$zodSchema: z.ZodType<
@@ -130,13 +140,14 @@ export const GetWorkspaceResponse$zodSchema: z.ZodType<
   RawResponse: z.instanceof(Response),
   StatusCode: z.number().int(),
   Workspace: Workspace$zodSchema.optional(),
-  fourHundredAndFourApplicationJsonObject: z.lazy(() =>
-    GetWorkspaceNotFoundResponseBody$zodSchema
-  ).optional(),
-  fourHundredAndTwentyNineApplicationJsonObject: z.lazy(() =>
-    GetWorkspaceTooManyRequestsResponseBody$zodSchema
+  auth_error: AuthError$zodSchema.optional(),
+  bad_request: BadRequest$zodSchema.optional(),
+  fourHundredAndThreeApplicationJsonObject: z.lazy(() =>
+    GetWorkspaceForbiddenResponseBody$zodSchema
   ).optional(),
   fourHundredAndTwentyTwoApplicationJsonObject: z.lazy(() =>
     GetWorkspaceUnprocessableEntityResponseBody$zodSchema
   ).optional(),
+  not_found: NotFound$zodSchema.optional(),
+  rate_limit: RateLimit$zodSchema.optional(),
 });

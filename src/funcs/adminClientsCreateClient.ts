@@ -38,7 +38,7 @@ import { Result } from "../types/fp.js";
  */
 export function adminClientsCreateClient(
   client$: SteuerboardCore,
-  request?: ClientCreate | undefined,
+  request: ClientCreate,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -61,7 +61,7 @@ export function adminClientsCreateClient(
 
 async function $do(
   client$: SteuerboardCore,
-  request?: ClientCreate | undefined,
+  request: ClientCreate,
   options?: RequestOptions,
 ): Promise<
   [
@@ -80,16 +80,14 @@ async function $do(
 > {
   const parsed$ = safeParse(
     request,
-    (value$) => ClientCreate$zodSchema.optional().parse(value$),
+    (value$) => ClientCreate$zodSchema.parse(value$),
     "Input validation failed",
   );
   if (!parsed$.ok) {
     return [parsed$, { status: "invalid" }];
   }
   const payload$ = parsed$.value;
-  const body$ = payload$ === undefined
-    ? null
-    : encodeJSON("body", payload$, { explode: true });
+  const body$ = encodeJSON("body", payload$, { explode: true });
   const path$ = pathToFunc("/v1/admin/clients")();
 
   const headers$ = new Headers(compactMap({
@@ -159,12 +157,15 @@ async function $do(
     | ConnectionError
   >(
     M.json(201, CreateClientResponse$zodSchema, { key: "Client" }),
+    M.json(401, CreateClientResponse$zodSchema, { key: "auth_error" }),
+    M.json(403, CreateClientResponse$zodSchema, {
+      key: "403_application/json_object",
+    }),
     M.json(422, CreateClientResponse$zodSchema, {
       key: "422_application/json_object",
     }),
-    M.json(429, CreateClientResponse$zodSchema, {
-      key: "429_application/json_object",
-    }),
+    M.json(429, CreateClientResponse$zodSchema, { key: "rate_limit" }),
+    M.nil(500, CreateClientResponse$zodSchema),
   )(response, req$, { extraFields: responseFields$ });
 
   return [result$, { status: "complete", request: req$, response }];

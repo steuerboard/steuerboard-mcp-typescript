@@ -3,8 +3,12 @@
  */
 
 import * as z from "zod";
-import { Client, Client$zodSchema } from "./client.js";
-import { Pagination, Pagination$zodSchema } from "./pagination.js";
+import { AuthError, AuthError$zodSchema } from "./autherror.js";
+import {
+  PaginatedClients,
+  PaginatedClients$zodSchema,
+} from "./paginatedclients.js";
+import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
 /**
  * Include archived clients
@@ -19,7 +23,7 @@ export type Archived = z.infer<typeof Archived$zodSchema>;
 /**
  * The type of the client. 'natural_person' for individuals, 'legal_person' for companies like UG, GmbH, AG, Ltd., Inc., etc. and 'individual_enterprise' for sole proprietorships.
  */
-export const ListClientsType$zodSchema = z.enum([
+export const ListClientsClientType$zodSchema = z.enum([
   "natural_person",
   "individual_enterprise",
   "legal_person",
@@ -27,12 +31,14 @@ export const ListClientsType$zodSchema = z.enum([
   "The type of the client. 'natural_person' for individuals, 'legal_person' for companies like UG, GmbH, AG, Ltd., Inc., etc. and 'individual_enterprise' for sole proprietorships.",
 );
 
-export type ListClientsType = z.infer<typeof ListClientsType$zodSchema>;
+export type ListClientsClientType = z.infer<
+  typeof ListClientsClientType$zodSchema
+>;
 
 /**
  * The sort field of the results
  */
-export const Sort$zodSchema = z.enum([
+export const ListClientsSort$zodSchema = z.enum([
   "createdAt",
   "updatedAt",
   "archivedAt",
@@ -40,17 +46,17 @@ export const Sort$zodSchema = z.enum([
   "customId",
 ]).describe("The sort field of the results");
 
-export type Sort = z.infer<typeof Sort$zodSchema>;
+export type ListClientsSort = z.infer<typeof ListClientsSort$zodSchema>;
 
 /**
  * The order of the results based on the sort field
  */
-export const Order$zodSchema = z.enum([
+export const ListClientsOrder$zodSchema = z.enum([
   "asc",
   "desc",
 ]).describe("The order of the results based on the sort field");
 
-export type Order = z.infer<typeof Order$zodSchema>;
+export type ListClientsOrder = z.infer<typeof ListClientsOrder$zodSchema>;
 
 export type ListClientsRequest = {
   limit?: number | undefined;
@@ -58,9 +64,9 @@ export type ListClientsRequest = {
   customId?: string | undefined;
   slug?: string | undefined;
   archived?: Archived | undefined;
-  type?: ListClientsType | undefined;
-  sort?: Sort | undefined;
-  order?: Order | undefined;
+  type?: ListClientsClientType | undefined;
+  sort?: ListClientsSort | undefined;
+  order?: ListClientsOrder | undefined;
 };
 
 export const ListClientsRequest$zodSchema: z.ZodType<
@@ -72,26 +78,11 @@ export const ListClientsRequest$zodSchema: z.ZodType<
   cursor: z.string().optional(),
   customId: z.string().optional(),
   limit: z.number().default(20),
-  order: Order$zodSchema.default("desc"),
+  order: ListClientsOrder$zodSchema.default("desc"),
   slug: z.string().optional(),
-  sort: Sort$zodSchema.default("createdAt"),
-  type: ListClientsType$zodSchema.optional(),
+  sort: ListClientsSort$zodSchema.default("createdAt"),
+  type: ListClientsClientType$zodSchema.optional(),
 });
-
-/**
- * Rate limit exceeded. Slow down requests or retry after the time specified in the rate limit response headers
- */
-export type ListClientsTooManyRequestsResponseBody = { message: string };
-
-export const ListClientsTooManyRequestsResponseBody$zodSchema: z.ZodType<
-  ListClientsTooManyRequestsResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  message: z.string(),
-}).describe(
-  "Rate limit exceeded. Slow down requests or retry after the time specified in the rate limit response headers",
-);
 
 export type ListClientsPath = string | number;
 
@@ -154,34 +145,52 @@ export const ListClientsUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("The validation error(s)");
 
+export const ListClientsType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export type ListClientsType = z.infer<typeof ListClientsType$zodSchema>;
+
+export const ListClientsCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export type ListClientsCode = z.infer<typeof ListClientsCode$zodSchema>;
+
 /**
- * Clients
+ * Missing scope
  */
-export type ListClientsResponseBody = {
-  data: Array<Client>;
-  pagination: Pagination;
+export type ListClientsForbiddenResponseBody = {
+  status_code: number;
+  type: ListClientsType;
+  code: ListClientsCode;
+  message: string;
 };
 
-export const ListClientsResponseBody$zodSchema: z.ZodType<
-  ListClientsResponseBody,
+export const ListClientsForbiddenResponseBody$zodSchema: z.ZodType<
+  ListClientsForbiddenResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  data: z.array(Client$zodSchema),
-  pagination: Pagination$zodSchema,
-}).describe("Clients");
+  code: ListClientsCode$zodSchema,
+  message: z.string(),
+  status_code: z.number(),
+  type: ListClientsType$zodSchema,
+}).describe("Missing scope");
 
 export type ListClientsResponse = {
   ContentType: string;
   StatusCode: number;
   RawResponse: Response;
-  twoHundredApplicationJsonObject?: ListClientsResponseBody | undefined;
+  PaginatedClients?: PaginatedClients | undefined;
+  auth_error?: AuthError | undefined;
+  fourHundredAndThreeApplicationJsonObject?:
+    | ListClientsForbiddenResponseBody
+    | undefined;
   fourHundredAndTwentyTwoApplicationJsonObject?:
     | ListClientsUnprocessableEntityResponseBody
     | undefined;
-  fourHundredAndTwentyNineApplicationJsonObject?:
-    | ListClientsTooManyRequestsResponseBody
-    | undefined;
+  rate_limit?: RateLimit | undefined;
 };
 
 export const ListClientsResponse$zodSchema: z.ZodType<
@@ -190,15 +199,15 @@ export const ListClientsResponse$zodSchema: z.ZodType<
   unknown
 > = z.object({
   ContentType: z.string(),
+  PaginatedClients: PaginatedClients$zodSchema.optional(),
   RawResponse: z.instanceof(Response),
   StatusCode: z.number().int(),
-  fourHundredAndTwentyNineApplicationJsonObject: z.lazy(() =>
-    ListClientsTooManyRequestsResponseBody$zodSchema
+  auth_error: AuthError$zodSchema.optional(),
+  fourHundredAndThreeApplicationJsonObject: z.lazy(() =>
+    ListClientsForbiddenResponseBody$zodSchema
   ).optional(),
   fourHundredAndTwentyTwoApplicationJsonObject: z.lazy(() =>
     ListClientsUnprocessableEntityResponseBody$zodSchema
   ).optional(),
-  twoHundredApplicationJsonObject: z.lazy(() =>
-    ListClientsResponseBody$zodSchema
-  ).optional(),
+  rate_limit: RateLimit$zodSchema.optional(),
 });

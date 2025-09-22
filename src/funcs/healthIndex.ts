@@ -16,19 +16,19 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1Response, GetV1Response$zodSchema } from "../models/getv1op.js";
+import { IndexResponse, IndexResponse$zodSchema } from "../models/indexop.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
  * Index
  */
-export function healthCheckGetV1(
+export function healthIndex(
   client$: SteuerboardCore,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    GetV1Response,
+    IndexResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -50,7 +50,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      GetV1Response,
+      IndexResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -71,7 +71,7 @@ async function $do(
   const context = {
     options: client$._options,
     baseURL: options?.serverURL ?? client$._baseURL ?? "",
-    operationID: "get_/v1",
+    operationID: "index",
     oAuth2Scopes: [],
     resolvedSecurity: null,
     securitySource: null,
@@ -116,7 +116,7 @@ async function $do(
   };
 
   const [result$] = await M.match<
-    GetV1Response,
+    IndexResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -125,7 +125,9 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, GetV1Response$zodSchema, { key: "object" }),
+    M.json(200, IndexResponse$zodSchema, { key: "object" }),
+    M.json(429, IndexResponse$zodSchema, { key: "rate_limit" }),
+    M.nil(500, IndexResponse$zodSchema),
   )(response, req$, { extraFields: responseFields$ });
 
   return [result$, { status: "complete", request: req$, response }];

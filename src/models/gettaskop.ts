@@ -3,9 +3,13 @@
  */
 
 import * as z from "zod";
+import { AuthError, AuthError$zodSchema } from "./autherror.js";
+import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
+import { NotFound, NotFound$zodSchema } from "./notfound.js";
+import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 import { Task, Task$zodSchema } from "./task.js";
 
-export type GetTaskRequest = { id: string };
+export type GetTaskRequest = { id: string; xClientId: string };
 
 export const GetTaskRequest$zodSchema: z.ZodType<
   GetTaskRequest,
@@ -13,6 +17,7 @@ export const GetTaskRequest$zodSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
+  xClientId: z.string(),
 });
 
 export type GetTaskPath = string | number;
@@ -73,30 +78,54 @@ export const GetTaskUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("Invalid id error");
 
-/**
- * Task not found
- */
-export type GetTaskNotFoundResponseBody = { message: string };
+export const GetTaskType$zodSchema = z.enum([
+  "auth_error",
+]);
 
-export const GetTaskNotFoundResponseBody$zodSchema: z.ZodType<
-  GetTaskNotFoundResponseBody,
+export type GetTaskType = z.infer<typeof GetTaskType$zodSchema>;
+
+export const GetTaskCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export type GetTaskCode = z.infer<typeof GetTaskCode$zodSchema>;
+
+/**
+ * Missing scope
+ */
+export type GetTaskForbiddenResponseBody = {
+  status_code: number;
+  type: GetTaskType;
+  code: GetTaskCode;
+  message: string;
+};
+
+export const GetTaskForbiddenResponseBody$zodSchema: z.ZodType<
+  GetTaskForbiddenResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
+  code: GetTaskCode$zodSchema,
   message: z.string(),
-}).describe("Task not found");
+  status_code: z.number(),
+  type: GetTaskType$zodSchema,
+}).describe("Missing scope");
 
 export type GetTaskResponse = {
   ContentType: string;
   StatusCode: number;
   RawResponse: Response;
   Task?: Task | undefined;
-  fourHundredAndFourApplicationJsonObject?:
-    | GetTaskNotFoundResponseBody
+  bad_request?: BadRequest | undefined;
+  auth_error?: AuthError | undefined;
+  fourHundredAndThreeApplicationJsonObject?:
+    | GetTaskForbiddenResponseBody
     | undefined;
+  not_found?: NotFound | undefined;
   fourHundredAndTwentyTwoApplicationJsonObject?:
     | GetTaskUnprocessableEntityResponseBody
     | undefined;
+  rate_limit?: RateLimit | undefined;
 };
 
 export const GetTaskResponse$zodSchema: z.ZodType<
@@ -108,10 +137,14 @@ export const GetTaskResponse$zodSchema: z.ZodType<
   RawResponse: z.instanceof(Response),
   StatusCode: z.number().int(),
   Task: Task$zodSchema.optional(),
-  fourHundredAndFourApplicationJsonObject: z.lazy(() =>
-    GetTaskNotFoundResponseBody$zodSchema
+  auth_error: AuthError$zodSchema.optional(),
+  bad_request: BadRequest$zodSchema.optional(),
+  fourHundredAndThreeApplicationJsonObject: z.lazy(() =>
+    GetTaskForbiddenResponseBody$zodSchema
   ).optional(),
   fourHundredAndTwentyTwoApplicationJsonObject: z.lazy(() =>
     GetTaskUnprocessableEntityResponseBody$zodSchema
   ).optional(),
+  not_found: NotFound$zodSchema.optional(),
+  rate_limit: RateLimit$zodSchema.optional(),
 });

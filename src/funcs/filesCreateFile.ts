@@ -92,42 +92,40 @@ async function $do(
   }
   const payload$ = parsed$.value;
   const body$ = new FormData();
-  if (payload$.FileCreate != null) {
-    if (isBlobLike(payload$.FileCreate.file)) {
-      appendForm(body$, "file", payload$.FileCreate.file);
-    } else if (isReadableStream(payload$.FileCreate.file.content)) {
-      const buffer = await readableStreamToArrayBuffer(
-        payload$.FileCreate.file.content,
-      );
-      const contentType =
-        getContentTypeFromFileName(payload$.FileCreate.file.fileName)
-        || "application/octet-stream";
-      const blob = new Blob([buffer], { type: contentType });
-      appendForm(body$, "file", blob, payload$.FileCreate.file.fileName);
-    } else {
-      const contentType =
-        getContentTypeFromFileName(payload$.FileCreate.file.fileName)
-        || "application/octet-stream";
-      appendForm(
-        body$,
-        "file",
-        new Blob([payload$.FileCreate.file.content], { type: contentType }),
-        payload$.FileCreate.file.fileName,
-      );
-    }
-    appendForm(body$, "workspaceId", payload$.FileCreate.workspaceId);
-    if (payload$.FileCreate.folderId !== undefined) {
-      appendForm(body$, "folderId", payload$.FileCreate.folderId);
-    }
-    if (payload$.FileCreate.labelIds !== undefined) {
-      appendForm(body$, "labelIds", payload$.FileCreate.labelIds);
-    }
-    if (payload$.FileCreate.name !== undefined) {
-      appendForm(body$, "name", payload$.FileCreate.name);
-    }
-    if (payload$.FileCreate.taskId !== undefined) {
-      appendForm(body$, "taskId", payload$.FileCreate.taskId);
-    }
+  if (isBlobLike(payload$.FileCreate.file)) {
+    appendForm(body$, "file", payload$.FileCreate.file);
+  } else if (isReadableStream(payload$.FileCreate.file.content)) {
+    const buffer = await readableStreamToArrayBuffer(
+      payload$.FileCreate.file.content,
+    );
+    const contentType =
+      getContentTypeFromFileName(payload$.FileCreate.file.fileName)
+      || "application/octet-stream";
+    const blob = new Blob([buffer], { type: contentType });
+    appendForm(body$, "file", blob, payload$.FileCreate.file.fileName);
+  } else {
+    const contentType =
+      getContentTypeFromFileName(payload$.FileCreate.file.fileName)
+      || "application/octet-stream";
+    appendForm(
+      body$,
+      "file",
+      new Blob([payload$.FileCreate.file.content], { type: contentType }),
+      payload$.FileCreate.file.fileName,
+    );
+  }
+  appendForm(body$, "workspaceId", payload$.FileCreate.workspaceId);
+  if (payload$.FileCreate.folderId !== undefined) {
+    appendForm(body$, "folderId", payload$.FileCreate.folderId);
+  }
+  if (payload$.FileCreate.labelIds !== undefined) {
+    appendForm(body$, "labelIds", payload$.FileCreate.labelIds);
+  }
+  if (payload$.FileCreate.name !== undefined) {
+    appendForm(body$, "name", payload$.FileCreate.name);
+  }
+  if (payload$.FileCreate.taskId !== undefined) {
+    appendForm(body$, "taskId", payload$.FileCreate.taskId);
   }
   const path$ = pathToFunc("/v1/files")();
 
@@ -201,15 +199,19 @@ async function $do(
     | ConnectionError
   >(
     M.json(201, CreateFileResponse$zodSchema, { key: "File" }),
+    M.json(400, CreateFileResponse$zodSchema, { key: "bad_request" }),
+    M.json(401, CreateFileResponse$zodSchema, { key: "auth_error" }),
+    M.json(403, CreateFileResponse$zodSchema, {
+      key: "403_application/json_object",
+    }),
     M.json(413, CreateFileResponse$zodSchema, {
       key: "413_application/json_object",
     }),
     M.json(422, CreateFileResponse$zodSchema, {
       key: "422_application/json_object",
     }),
-    M.json(429, CreateFileResponse$zodSchema, {
-      key: "429_application/json_object",
-    }),
+    M.json(429, CreateFileResponse$zodSchema, { key: "rate_limit" }),
+    M.nil(500, CreateFileResponse$zodSchema),
   )(response, req$, { extraFields: responseFields$ });
 
   return [result$, { status: "complete", request: req$, response }];

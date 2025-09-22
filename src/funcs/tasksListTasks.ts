@@ -3,7 +3,7 @@
  */
 
 import { SteuerboardCore } from "../core.js";
-import { encodeFormQuery } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -36,7 +36,7 @@ import { Result } from "../types/fp.js";
  */
 export function tasksListTasks(
   client$: SteuerboardCore,
-  request?: ListTasksRequest | undefined,
+  request: ListTasksRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -59,7 +59,7 @@ export function tasksListTasks(
 
 async function $do(
   client$: SteuerboardCore,
-  request?: ListTasksRequest | undefined,
+  request: ListTasksRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -78,7 +78,7 @@ async function $do(
 > {
   const parsed$ = safeParse(
     request,
-    (value$) => ListTasksRequest$zodSchema.optional().parse(value$),
+    (value$) => ListTasksRequest$zodSchema.parse(value$),
     "Input validation failed",
   );
   if (!parsed$.ok) {
@@ -88,13 +88,19 @@ async function $do(
   const body$ = null;
   const path$ = pathToFunc("/v1/tasks")();
   const query$ = encodeFormQuery({
-    "cursor": payload$?.cursor,
-    "limit": payload$?.limit,
-    "workspaceId": payload$?.workspaceId,
+    "cursor": payload$.cursor,
+    "limit": payload$.limit,
+    "order": payload$.order,
+    "sort": payload$.sort,
+    "workspaceId": payload$.workspaceId,
   });
 
   const headers$ = new Headers(compactMap({
     Accept: "application/json",
+    "x-client-id": encodeSimple("x-client-id", payload$.xClientId, {
+      explode: false,
+      charEncoding: "none",
+    }),
   }));
   const securityInput = await extractSecurity(client$._options.security);
   const requestSecurity = resolveGlobalSecurity(securityInput);
@@ -159,12 +165,17 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, ListTasksResponse$zodSchema, {
-      key: "200_application/json_object",
+    M.json(200, ListTasksResponse$zodSchema, { key: "PaginatedTasks" }),
+    M.json(400, ListTasksResponse$zodSchema, { key: "bad_request" }),
+    M.json(401, ListTasksResponse$zodSchema, { key: "auth_error" }),
+    M.json(403, ListTasksResponse$zodSchema, {
+      key: "403_application/json_object",
     }),
     M.json(422, ListTasksResponse$zodSchema, {
       key: "422_application/json_object",
     }),
+    M.json(429, ListTasksResponse$zodSchema, { key: "rate_limit" }),
+    M.nil(500, ListTasksResponse$zodSchema),
   )(response, req$, { extraFields: responseFields$ });
 
   return [result$, { status: "complete", request: req$, response }];

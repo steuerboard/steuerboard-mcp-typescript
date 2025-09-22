@@ -1,6 +1,6 @@
-# steuerboard
+# Steuerboard TypeScript MCP Server
 
-Model Context Protocol (MCP) Server for the *steuerboard* API.
+Model Context Protocol (MCP) Server for the **Steuerboard API**.
 
 <div align="left">
     <a href="https://www.speakeasy.com/?utm_source=steuerboard&utm_campaign=mcp-typescript"><img src="https://www.speakeasy.com/assets/badges/built-by-speakeasy.svg" /></a>
@@ -9,10 +9,7 @@ Model Context Protocol (MCP) Server for the *steuerboard* API.
     </a>
 </div>
 
-
 <br /><br />
-> [!IMPORTANT]
-> This MCP Server is not yet ready for production use. To complete setup please follow the steps outlined in your [workspace](https://app.speakeasy.com/org/steuerboard-4kc/mcp). Delete this notice before publishing to a package manager.
 
 <!-- Start Summary [summary] -->
 ## Summary
@@ -23,7 +20,7 @@ For more information about the API: [Find out more about Steuerboard API](https:
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-* [steuerboard](#steuerboard)
+* [Steuerboard TypeScript MCP Server](#steuerboard-typescript-mcp-server)
   * [Installation](#installation)
   * [Development](#development)
   * [Contributions](#contributions)
@@ -155,48 +152,43 @@ npx @steuerboard/mcp --help
 ## Development
 
 Run locally without a published npm package:
+
 1. Clone this repository
 2. Run `npm install`
 3. Run `npm run build`
 4. Run `node ./bin/mcp-server.js start --bearer-auth ...`
-To use this local version with Cursor, Claude or other MCP Clients, you'll need to add the following config:
+   To use this local version with Cursor, Claude or other MCP Clients, you'll need to add the following config:
 
 ```json
 {
   "mcpServers": {
     "Steuerboard": {
       "command": "node",
-      "args": [
-        "./bin/mcp-server.js",
-        "start",
-        "--bearer-auth",
-        "..."
-      ]
+      "args": ["./bin/mcp-server.js", "start", "--bearer-auth", "..."]
     }
   }
 }
 ```
 
-Or to debug the MCP server locally, use the official MCP Inspector: 
+Or to debug the MCP server locally, use the official MCP Inspector:
 
 ```bash
 npx @modelcontextprotocol/inspector node ./bin/mcp-server.js start --bearer-auth ...
 ```
-
 
 ### Cloudflare Deployment
 
 To deploy to Cloudflare Workers:
 
 ```bash
-npm install 
+npm install
 npm run deploy
 ```
 
 To run the cloudflare deployment locally:
 
 ```bash
-npm install 
+npm install
 npm run dev
 ```
 
@@ -208,13 +200,9 @@ Then install with Claude Code CLI:
 claude mcp add --transport sse Steuerboard http://localhost:8787/sse --header "authorization: ..."
 ```
 
-
-
-
-
 ## Contributions
 
-While we value contributions to this MCP Server, the code is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation. 
-We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release. 
+While we value contributions to this MCP Server, the code is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation.
+We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release.
 
 ### MCP Server Created by [Speakeasy](https://www.speakeasy.com/?utm_source=steuerboard&utm_campaign=mcp-typescript)

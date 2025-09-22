@@ -3,13 +3,41 @@
  */
 
 import * as z from "zod";
-import { Pagination, Pagination$zodSchema } from "./pagination.js";
-import { Task, Task$zodSchema } from "./task.js";
+import { AuthError, AuthError$zodSchema } from "./autherror.js";
+import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
+import { PaginatedTasks, PaginatedTasks$zodSchema } from "./paginatedtasks.js";
+import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
+
+/**
+ * The sort field of the results
+ */
+export const ListTasksSort$zodSchema = z.enum([
+  "createdAt",
+  "updatedAt",
+  "dueDate",
+  "status",
+  "title",
+]).describe("The sort field of the results");
+
+export type ListTasksSort = z.infer<typeof ListTasksSort$zodSchema>;
+
+/**
+ * The order of the results based on the sort field
+ */
+export const ListTasksOrder$zodSchema = z.enum([
+  "asc",
+  "desc",
+]).describe("The order of the results based on the sort field");
+
+export type ListTasksOrder = z.infer<typeof ListTasksOrder$zodSchema>;
 
 export type ListTasksRequest = {
   limit?: number | undefined;
   cursor?: string | undefined;
   workspaceId?: string | undefined;
+  sort?: ListTasksSort | undefined;
+  order?: ListTasksOrder | undefined;
+  xClientId: string;
 };
 
 export const ListTasksRequest$zodSchema: z.ZodType<
@@ -19,7 +47,10 @@ export const ListTasksRequest$zodSchema: z.ZodType<
 > = z.object({
   cursor: z.string().optional(),
   limit: z.number().default(20),
+  order: ListTasksOrder$zodSchema.default("desc"),
+  sort: ListTasksSort$zodSchema.default("createdAt"),
   workspaceId: z.string().optional(),
+  xClientId: z.string(),
 });
 
 export type ListTasksPath = string | number;
@@ -80,31 +111,53 @@ export const ListTasksUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("The validation error(s)");
 
+export const ListTasksType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export type ListTasksType = z.infer<typeof ListTasksType$zodSchema>;
+
+export const ListTasksCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export type ListTasksCode = z.infer<typeof ListTasksCode$zodSchema>;
+
 /**
- * Tasks
+ * Missing scope
  */
-export type ListTasksResponseBody = {
-  data: Array<Task>;
-  pagination: Pagination;
+export type ListTasksForbiddenResponseBody = {
+  status_code: number;
+  type: ListTasksType;
+  code: ListTasksCode;
+  message: string;
 };
 
-export const ListTasksResponseBody$zodSchema: z.ZodType<
-  ListTasksResponseBody,
+export const ListTasksForbiddenResponseBody$zodSchema: z.ZodType<
+  ListTasksForbiddenResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  data: z.array(Task$zodSchema),
-  pagination: Pagination$zodSchema,
-}).describe("Tasks");
+  code: ListTasksCode$zodSchema,
+  message: z.string(),
+  status_code: z.number(),
+  type: ListTasksType$zodSchema,
+}).describe("Missing scope");
 
 export type ListTasksResponse = {
   ContentType: string;
   StatusCode: number;
   RawResponse: Response;
-  twoHundredApplicationJsonObject?: ListTasksResponseBody | undefined;
+  PaginatedTasks?: PaginatedTasks | undefined;
+  bad_request?: BadRequest | undefined;
+  auth_error?: AuthError | undefined;
+  fourHundredAndThreeApplicationJsonObject?:
+    | ListTasksForbiddenResponseBody
+    | undefined;
   fourHundredAndTwentyTwoApplicationJsonObject?:
     | ListTasksUnprocessableEntityResponseBody
     | undefined;
+  rate_limit?: RateLimit | undefined;
 };
 
 export const ListTasksResponse$zodSchema: z.ZodType<
@@ -113,11 +166,16 @@ export const ListTasksResponse$zodSchema: z.ZodType<
   unknown
 > = z.object({
   ContentType: z.string(),
+  PaginatedTasks: PaginatedTasks$zodSchema.optional(),
   RawResponse: z.instanceof(Response),
   StatusCode: z.number().int(),
+  auth_error: AuthError$zodSchema.optional(),
+  bad_request: BadRequest$zodSchema.optional(),
+  fourHundredAndThreeApplicationJsonObject: z.lazy(() =>
+    ListTasksForbiddenResponseBody$zodSchema
+  ).optional(),
   fourHundredAndTwentyTwoApplicationJsonObject: z.lazy(() =>
     ListTasksUnprocessableEntityResponseBody$zodSchema
   ).optional(),
-  twoHundredApplicationJsonObject: z.lazy(() => ListTasksResponseBody$zodSchema)
-    .optional(),
+  rate_limit: RateLimit$zodSchema.optional(),
 });

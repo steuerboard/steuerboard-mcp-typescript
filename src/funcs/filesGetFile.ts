@@ -167,15 +167,19 @@ async function $do(
     | ConnectionError
   >(
     M.json(200, GetFileResponse$zodSchema, { key: "File" }),
+    M.json(400, GetFileResponse$zodSchema, { key: "bad_request" }),
+    M.json(401, GetFileResponse$zodSchema, { key: "auth_error" }),
+    M.json(403, GetFileResponse$zodSchema, {
+      key: "403_application/json_object",
+    }),
     M.json(404, GetFileResponse$zodSchema, {
       key: "404_application/json_object",
     }),
     M.json(422, GetFileResponse$zodSchema, {
       key: "422_application/json_object",
     }),
-    M.json(429, GetFileResponse$zodSchema, {
-      key: "429_application/json_object",
-    }),
+    M.json(429, GetFileResponse$zodSchema, { key: "rate_limit" }),
+    M.nil(500, GetFileResponse$zodSchema),
   )(response, req$, { extraFields: responseFields$ });
 
   return [result$, { status: "complete", request: req$, response }];

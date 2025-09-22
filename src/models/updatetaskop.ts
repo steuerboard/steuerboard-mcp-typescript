@@ -3,11 +3,16 @@
  */
 
 import * as z from "zod";
+import { AuthError, AuthError$zodSchema } from "./autherror.js";
+import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
+import { NotFound, NotFound$zodSchema } from "./notfound.js";
+import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 import { Task, Task$zodSchema } from "./task.js";
 import { TaskUpdate, TaskUpdate$zodSchema } from "./taskupdate.js";
 
 export type UpdateTaskRequest = {
   id: string;
+  xClientId: string;
   TaskUpdate?: TaskUpdate | undefined;
 };
 
@@ -18,6 +23,7 @@ export const UpdateTaskRequest$zodSchema: z.ZodType<
 > = z.object({
   TaskUpdate: TaskUpdate$zodSchema.optional(),
   id: z.string(),
+  xClientId: z.string(),
 });
 
 export type UpdateTaskPath2 = string | number;
@@ -152,26 +158,50 @@ export const UpdateTaskResponseBody$zodSchema: z.ZodType<
   z.lazy(() => UpdateTaskResponseBody2$zodSchema),
 ]).describe("The validation error(s)");
 
-/**
- * Task not found
- */
-export type UpdateTaskNotFoundResponseBody = { message: string };
+export const UpdateTaskType$zodSchema = z.enum([
+  "auth_error",
+]);
 
-export const UpdateTaskNotFoundResponseBody$zodSchema: z.ZodType<
-  UpdateTaskNotFoundResponseBody,
+export type UpdateTaskType = z.infer<typeof UpdateTaskType$zodSchema>;
+
+export const UpdateTaskCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export type UpdateTaskCode = z.infer<typeof UpdateTaskCode$zodSchema>;
+
+/**
+ * Missing scope
+ */
+export type UpdateTaskForbiddenResponseBody = {
+  status_code: number;
+  type: UpdateTaskType;
+  code: UpdateTaskCode;
+  message: string;
+};
+
+export const UpdateTaskForbiddenResponseBody$zodSchema: z.ZodType<
+  UpdateTaskForbiddenResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
+  code: UpdateTaskCode$zodSchema,
   message: z.string(),
-}).describe("Task not found");
+  status_code: z.number(),
+  type: UpdateTaskType$zodSchema,
+}).describe("Missing scope");
 
 export type UpdateTaskResponse = {
   ContentType: string;
   StatusCode: number;
   RawResponse: Response;
   Task?: Task | undefined;
-  object?: UpdateTaskNotFoundResponseBody | undefined;
+  bad_request?: BadRequest | undefined;
+  auth_error?: AuthError | undefined;
+  object?: UpdateTaskForbiddenResponseBody | undefined;
+  not_found?: NotFound | undefined;
   oneOf?: UpdateTaskResponseBody1 | UpdateTaskResponseBody2 | undefined;
+  rate_limit?: RateLimit | undefined;
 };
 
 export const UpdateTaskResponse$zodSchema: z.ZodType<
@@ -183,9 +213,13 @@ export const UpdateTaskResponse$zodSchema: z.ZodType<
   RawResponse: z.instanceof(Response),
   StatusCode: z.number().int(),
   Task: Task$zodSchema.optional(),
-  object: z.lazy(() => UpdateTaskNotFoundResponseBody$zodSchema).optional(),
+  auth_error: AuthError$zodSchema.optional(),
+  bad_request: BadRequest$zodSchema.optional(),
+  not_found: NotFound$zodSchema.optional(),
+  object: z.lazy(() => UpdateTaskForbiddenResponseBody$zodSchema).optional(),
   oneOf: z.union([
     z.lazy(() => UpdateTaskResponseBody1$zodSchema),
     z.lazy(() => UpdateTaskResponseBody2$zodSchema),
   ]).optional(),
+  rate_limit: RateLimit$zodSchema.optional(),
 });

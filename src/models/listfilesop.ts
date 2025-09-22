@@ -3,8 +3,10 @@
  */
 
 import * as z from "zod";
-import { FileT, FileT$zodSchema } from "./file.js";
-import { Pagination, Pagination$zodSchema } from "./pagination.js";
+import { AuthError, AuthError$zodSchema } from "./autherror.js";
+import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
+import { PaginatedFiles, PaginatedFiles$zodSchema } from "./paginatedfiles.js";
+import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
 export type ListFilesRequest = {
   limit?: number | undefined;
@@ -23,21 +25,6 @@ export const ListFilesRequest$zodSchema: z.ZodType<
   workspaceId: z.string().optional(),
   xClientId: z.string(),
 });
-
-/**
- * Rate limit exceeded. Slow down requests or retry after the time specified in the rate limit response headers
- */
-export type ListFilesTooManyRequestsResponseBody = { message: string };
-
-export const ListFilesTooManyRequestsResponseBody$zodSchema: z.ZodType<
-  ListFilesTooManyRequestsResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  message: z.string(),
-}).describe(
-  "Rate limit exceeded. Slow down requests or retry after the time specified in the rate limit response headers",
-);
 
 export type ListFilesPath = string | number;
 
@@ -97,34 +84,53 @@ export const ListFilesUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("The validation error(s)");
 
+export const ListFilesType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export type ListFilesType = z.infer<typeof ListFilesType$zodSchema>;
+
+export const ListFilesCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export type ListFilesCode = z.infer<typeof ListFilesCode$zodSchema>;
+
 /**
- * Paginated files
+ * Missing scope
  */
-export type ListFilesResponseBody = {
-  data: Array<FileT>;
-  pagination: Pagination;
+export type ListFilesForbiddenResponseBody = {
+  status_code: number;
+  type: ListFilesType;
+  code: ListFilesCode;
+  message: string;
 };
 
-export const ListFilesResponseBody$zodSchema: z.ZodType<
-  ListFilesResponseBody,
+export const ListFilesForbiddenResponseBody$zodSchema: z.ZodType<
+  ListFilesForbiddenResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  data: z.array(FileT$zodSchema),
-  pagination: Pagination$zodSchema,
-}).describe("Paginated files");
+  code: ListFilesCode$zodSchema,
+  message: z.string(),
+  status_code: z.number(),
+  type: ListFilesType$zodSchema,
+}).describe("Missing scope");
 
 export type ListFilesResponse = {
   ContentType: string;
   StatusCode: number;
   RawResponse: Response;
-  twoHundredApplicationJsonObject?: ListFilesResponseBody | undefined;
+  PaginatedFiles?: PaginatedFiles | undefined;
+  bad_request?: BadRequest | undefined;
+  auth_error?: AuthError | undefined;
+  fourHundredAndThreeApplicationJsonObject?:
+    | ListFilesForbiddenResponseBody
+    | undefined;
   fourHundredAndTwentyTwoApplicationJsonObject?:
     | ListFilesUnprocessableEntityResponseBody
     | undefined;
-  fourHundredAndTwentyNineApplicationJsonObject?:
-    | ListFilesTooManyRequestsResponseBody
-    | undefined;
+  rate_limit?: RateLimit | undefined;
 };
 
 export const ListFilesResponse$zodSchema: z.ZodType<
@@ -133,14 +139,16 @@ export const ListFilesResponse$zodSchema: z.ZodType<
   unknown
 > = z.object({
   ContentType: z.string(),
+  PaginatedFiles: PaginatedFiles$zodSchema.optional(),
   RawResponse: z.instanceof(Response),
   StatusCode: z.number().int(),
-  fourHundredAndTwentyNineApplicationJsonObject: z.lazy(() =>
-    ListFilesTooManyRequestsResponseBody$zodSchema
+  auth_error: AuthError$zodSchema.optional(),
+  bad_request: BadRequest$zodSchema.optional(),
+  fourHundredAndThreeApplicationJsonObject: z.lazy(() =>
+    ListFilesForbiddenResponseBody$zodSchema
   ).optional(),
   fourHundredAndTwentyTwoApplicationJsonObject: z.lazy(() =>
     ListFilesUnprocessableEntityResponseBody$zodSchema
   ).optional(),
-  twoHundredApplicationJsonObject: z.lazy(() => ListFilesResponseBody$zodSchema)
-    .optional(),
+  rate_limit: RateLimit$zodSchema.optional(),
 });

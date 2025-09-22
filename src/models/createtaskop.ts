@@ -3,20 +3,20 @@
  */
 
 import * as z from "zod";
+import { AuthError, AuthError$zodSchema } from "./autherror.js";
+import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
+import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 import { Task, Task$zodSchema } from "./task.js";
 import { TaskCreate, TaskCreate$zodSchema } from "./taskcreate.js";
 
-export type CreateTaskRequest = {
-  xClientId: string;
-  TaskCreate?: TaskCreate | undefined;
-};
+export type CreateTaskRequest = { xClientId: string; TaskCreate: TaskCreate };
 
 export const CreateTaskRequest$zodSchema: z.ZodType<
   CreateTaskRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  TaskCreate: TaskCreate$zodSchema.optional(),
+  TaskCreate: TaskCreate$zodSchema,
   xClientId: z.string(),
 });
 
@@ -64,13 +64,13 @@ export const CreateTaskError$zodSchema: z.ZodType<
 /**
  * The validation error(s)
  */
-export type CreateTaskResponseBody = {
+export type CreateTaskUnprocessableEntityResponseBody = {
   success: boolean;
   error: CreateTaskError;
 };
 
-export const CreateTaskResponseBody$zodSchema: z.ZodType<
-  CreateTaskResponseBody,
+export const CreateTaskUnprocessableEntityResponseBody$zodSchema: z.ZodType<
+  CreateTaskUnprocessableEntityResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -78,12 +78,53 @@ export const CreateTaskResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("The validation error(s)");
 
+export const CreateTaskType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export type CreateTaskType = z.infer<typeof CreateTaskType$zodSchema>;
+
+export const CreateTaskCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export type CreateTaskCode = z.infer<typeof CreateTaskCode$zodSchema>;
+
+/**
+ * Missing scope
+ */
+export type CreateTaskForbiddenResponseBody = {
+  status_code: number;
+  type: CreateTaskType;
+  code: CreateTaskCode;
+  message: string;
+};
+
+export const CreateTaskForbiddenResponseBody$zodSchema: z.ZodType<
+  CreateTaskForbiddenResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  code: CreateTaskCode$zodSchema,
+  message: z.string(),
+  status_code: z.number(),
+  type: CreateTaskType$zodSchema,
+}).describe("Missing scope");
+
 export type CreateTaskResponse = {
   ContentType: string;
   StatusCode: number;
   RawResponse: Response;
   Task?: Task | undefined;
-  object?: CreateTaskResponseBody | undefined;
+  bad_request?: BadRequest | undefined;
+  auth_error?: AuthError | undefined;
+  fourHundredAndThreeApplicationJsonObject?:
+    | CreateTaskForbiddenResponseBody
+    | undefined;
+  fourHundredAndTwentyTwoApplicationJsonObject?:
+    | CreateTaskUnprocessableEntityResponseBody
+    | undefined;
+  rate_limit?: RateLimit | undefined;
 };
 
 export const CreateTaskResponse$zodSchema: z.ZodType<
@@ -95,5 +136,13 @@ export const CreateTaskResponse$zodSchema: z.ZodType<
   RawResponse: z.instanceof(Response),
   StatusCode: z.number().int(),
   Task: Task$zodSchema.optional(),
-  object: z.lazy(() => CreateTaskResponseBody$zodSchema).optional(),
+  auth_error: AuthError$zodSchema.optional(),
+  bad_request: BadRequest$zodSchema.optional(),
+  fourHundredAndThreeApplicationJsonObject: z.lazy(() =>
+    CreateTaskForbiddenResponseBody$zodSchema
+  ).optional(),
+  fourHundredAndTwentyTwoApplicationJsonObject: z.lazy(() =>
+    CreateTaskUnprocessableEntityResponseBody$zodSchema
+  ).optional(),
+  rate_limit: RateLimit$zodSchema.optional(),
 });

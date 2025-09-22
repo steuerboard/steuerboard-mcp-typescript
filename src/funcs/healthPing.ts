@@ -6,7 +6,6 @@ import { SteuerboardCore } from "../core.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import { APIError } from "../models/errors/apierror.js";
 import {
@@ -17,22 +16,19 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import {
-  GetV1MeResponse,
-  GetV1MeResponse$zodSchema,
-} from "../models/getv1meop.js";
+import { PingResponse, PingResponse$zodSchema } from "../models/pingop.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Me
+ * Ping Pong
  */
-export function authGetV1Me(
+export function healthPing(
   client$: SteuerboardCore,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    GetV1MeResponse,
+    PingResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -54,7 +50,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      GetV1MeResponse,
+      PingResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -66,21 +62,19 @@ async function $do(
     APICall,
   ]
 > {
-  const path$ = pathToFunc("/v1/me")();
+  const path$ = pathToFunc("/v1/ping")();
 
   const headers$ = new Headers(compactMap({
     Accept: "application/json",
   }));
-  const securityInput = await extractSecurity(client$._options.security);
-  const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
     options: client$._options,
     baseURL: options?.serverURL ?? client$._baseURL ?? "",
-    operationID: "get_/v1/me",
+    operationID: "ping",
     oAuth2Scopes: [],
-    resolvedSecurity: requestSecurity,
-    securitySource: client$._options.security,
+    resolvedSecurity: null,
+    securitySource: null,
     retryConfig: options?.retries
       || client$._options.retryConfig
       || { strategy: "none" },
@@ -94,7 +88,6 @@ async function $do(
   };
 
   const requestRes = client$._createRequest(context, {
-    security: requestSecurity,
     method: "GET",
     baseURL: options?.serverURL,
     path: path$,
@@ -123,7 +116,7 @@ async function $do(
   };
 
   const [result$] = await M.match<
-    GetV1MeResponse,
+    PingResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -132,7 +125,9 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, GetV1MeResponse$zodSchema, { key: "object" }),
+    M.json(200, PingResponse$zodSchema, { key: "object" }),
+    M.json(429, PingResponse$zodSchema, { key: "rate_limit" }),
+    M.nil(500, PingResponse$zodSchema),
   )(response, req$, { extraFields: responseFields$ });
 
   return [result$, { status: "complete", request: req$, response }];

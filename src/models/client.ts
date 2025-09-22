@@ -7,7 +7,7 @@ import * as z from "zod";
 /**
  * The type of the client. 'natural_person' for individuals, 'legal_person' for companies like UG, GmbH, AG, Ltd., Inc., etc. and 'individual_enterprise' for sole proprietorships.
  */
-export const ClientType$zodSchema = z.enum([
+export const ClientClientType$zodSchema = z.enum([
   "natural_person",
   "individual_enterprise",
   "legal_person",
@@ -15,13 +15,13 @@ export const ClientType$zodSchema = z.enum([
   "The type of the client. 'natural_person' for individuals, 'legal_person' for companies like UG, GmbH, AG, Ltd., Inc., etc. and 'individual_enterprise' for sole proprietorships.",
 );
 
-export type ClientType = z.infer<typeof ClientType$zodSchema>;
+export type ClientClientType = z.infer<typeof ClientClientType$zodSchema>;
 
 export type Client = {
   id: string;
   name: string;
   slug: string;
-  type: ClientType;
+  type: ClientClientType;
   customId: string | null;
   legalName: string | null;
   archivedAt: string | null;
@@ -40,6 +40,6 @@ export const Client$zodSchema: z.ZodType<Client, z.ZodTypeDef, unknown> = z
     legalName: z.string().nullable(),
     name: z.string(),
     slug: z.string(),
-    type: ClientType$zodSchema,
+    type: ClientClientType$zodSchema,
     updatedAt: z.string(),
   });

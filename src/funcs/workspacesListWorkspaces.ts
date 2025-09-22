@@ -163,14 +163,18 @@ async function $do(
     | ConnectionError
   >(
     M.json(200, ListWorkspacesResponse$zodSchema, {
-      key: "200_application/json_object",
+      key: "PaginatedWorkspaces",
+    }),
+    M.json(400, ListWorkspacesResponse$zodSchema, { key: "bad_request" }),
+    M.json(401, ListWorkspacesResponse$zodSchema, { key: "auth_error" }),
+    M.json(403, ListWorkspacesResponse$zodSchema, {
+      key: "403_application/json_object",
     }),
     M.json(422, ListWorkspacesResponse$zodSchema, {
       key: "422_application/json_object",
     }),
-    M.json(429, ListWorkspacesResponse$zodSchema, {
-      key: "429_application/json_object",
-    }),
+    M.json(429, ListWorkspacesResponse$zodSchema, { key: "rate_limit" }),
+    M.nil(500, ListWorkspacesResponse$zodSchema),
   )(response, req$, { extraFields: responseFields$ });
 
   return [result$, { status: "complete", request: req$, response }];

@@ -3,7 +3,10 @@
  */
 
 import * as z from "zod";
+import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { Client, Client$zodSchema } from "./client.js";
+import { NotFound, NotFound$zodSchema } from "./notfound.js";
+import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
 export type GetClientRequest = { id: string };
 
@@ -14,21 +17,6 @@ export const GetClientRequest$zodSchema: z.ZodType<
 > = z.object({
   id: z.string(),
 });
-
-/**
- * Rate limit exceeded. Slow down requests or retry after the time specified in the rate limit response headers
- */
-export type GetClientTooManyRequestsResponseBody = { message: string };
-
-export const GetClientTooManyRequestsResponseBody$zodSchema: z.ZodType<
-  GetClientTooManyRequestsResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  message: z.string(),
-}).describe(
-  "Rate limit exceeded. Slow down requests or retry after the time specified in the rate limit response headers",
-);
 
 export type GetClientPath = string | number;
 
@@ -88,33 +76,53 @@ export const GetClientUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("Invalid id error");
 
-/**
- * Client not found
- */
-export type GetClientNotFoundResponseBody = { message: string };
+export const GetClientType$zodSchema = z.enum([
+  "auth_error",
+]);
 
-export const GetClientNotFoundResponseBody$zodSchema: z.ZodType<
-  GetClientNotFoundResponseBody,
+export type GetClientType = z.infer<typeof GetClientType$zodSchema>;
+
+export const GetClientCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export type GetClientCode = z.infer<typeof GetClientCode$zodSchema>;
+
+/**
+ * Missing scope
+ */
+export type GetClientForbiddenResponseBody = {
+  status_code: number;
+  type: GetClientType;
+  code: GetClientCode;
+  message: string;
+};
+
+export const GetClientForbiddenResponseBody$zodSchema: z.ZodType<
+  GetClientForbiddenResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
+  code: GetClientCode$zodSchema,
   message: z.string(),
-}).describe("Client not found");
+  status_code: z.number(),
+  type: GetClientType$zodSchema,
+}).describe("Missing scope");
 
 export type GetClientResponse = {
   ContentType: string;
   StatusCode: number;
   RawResponse: Response;
   Client?: Client | undefined;
-  fourHundredAndFourApplicationJsonObject?:
-    | GetClientNotFoundResponseBody
+  auth_error?: AuthError | undefined;
+  fourHundredAndThreeApplicationJsonObject?:
+    | GetClientForbiddenResponseBody
     | undefined;
+  not_found?: NotFound | undefined;
   fourHundredAndTwentyTwoApplicationJsonObject?:
     | GetClientUnprocessableEntityResponseBody
     | undefined;
-  fourHundredAndTwentyNineApplicationJsonObject?:
-    | GetClientTooManyRequestsResponseBody
-    | undefined;
+  rate_limit?: RateLimit | undefined;
 };
 
 export const GetClientResponse$zodSchema: z.ZodType<
@@ -126,13 +134,13 @@ export const GetClientResponse$zodSchema: z.ZodType<
   ContentType: z.string(),
   RawResponse: z.instanceof(Response),
   StatusCode: z.number().int(),
-  fourHundredAndFourApplicationJsonObject: z.lazy(() =>
-    GetClientNotFoundResponseBody$zodSchema
-  ).optional(),
-  fourHundredAndTwentyNineApplicationJsonObject: z.lazy(() =>
-    GetClientTooManyRequestsResponseBody$zodSchema
+  auth_error: AuthError$zodSchema.optional(),
+  fourHundredAndThreeApplicationJsonObject: z.lazy(() =>
+    GetClientForbiddenResponseBody$zodSchema
   ).optional(),
   fourHundredAndTwentyTwoApplicationJsonObject: z.lazy(() =>
     GetClientUnprocessableEntityResponseBody$zodSchema
   ).optional(),
+  not_found: NotFound$zodSchema.optional(),
+  rate_limit: RateLimit$zodSchema.optional(),
 });

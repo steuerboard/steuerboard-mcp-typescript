@@ -3,8 +3,13 @@
  */
 
 import * as z from "zod";
-import { Pagination, Pagination$zodSchema } from "./pagination.js";
-import { Workspace, Workspace$zodSchema } from "./workspace.js";
+import { AuthError, AuthError$zodSchema } from "./autherror.js";
+import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
+import {
+  PaginatedWorkspaces,
+  PaginatedWorkspaces$zodSchema,
+} from "./paginatedworkspaces.js";
+import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
 export type ListWorkspacesRequest = {
   limit?: number | undefined;
@@ -21,21 +26,6 @@ export const ListWorkspacesRequest$zodSchema: z.ZodType<
   limit: z.number().default(20),
   xClientId: z.string(),
 });
-
-/**
- * Rate limit exceeded. Slow down requests or retry after the time specified in the rate limit response headers
- */
-export type ListWorkspacesTooManyRequestsResponseBody = { message: string };
-
-export const ListWorkspacesTooManyRequestsResponseBody$zodSchema: z.ZodType<
-  ListWorkspacesTooManyRequestsResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  message: z.string(),
-}).describe(
-  "Rate limit exceeded. Slow down requests or retry after the time specified in the rate limit response headers",
-);
 
 export type ListWorkspacesPath = string | number;
 
@@ -98,34 +88,53 @@ export const ListWorkspacesUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("The validation error(s)");
 
+export const ListWorkspacesType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export type ListWorkspacesType = z.infer<typeof ListWorkspacesType$zodSchema>;
+
+export const ListWorkspacesCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export type ListWorkspacesCode = z.infer<typeof ListWorkspacesCode$zodSchema>;
+
 /**
- * Workspaces
+ * Missing scope
  */
-export type ListWorkspacesResponseBody = {
-  data: Array<Workspace>;
-  pagination: Pagination;
+export type ListWorkspacesForbiddenResponseBody = {
+  status_code: number;
+  type: ListWorkspacesType;
+  code: ListWorkspacesCode;
+  message: string;
 };
 
-export const ListWorkspacesResponseBody$zodSchema: z.ZodType<
-  ListWorkspacesResponseBody,
+export const ListWorkspacesForbiddenResponseBody$zodSchema: z.ZodType<
+  ListWorkspacesForbiddenResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  data: z.array(Workspace$zodSchema),
-  pagination: Pagination$zodSchema,
-}).describe("Workspaces");
+  code: ListWorkspacesCode$zodSchema,
+  message: z.string(),
+  status_code: z.number(),
+  type: ListWorkspacesType$zodSchema,
+}).describe("Missing scope");
 
 export type ListWorkspacesResponse = {
   ContentType: string;
   StatusCode: number;
   RawResponse: Response;
-  twoHundredApplicationJsonObject?: ListWorkspacesResponseBody | undefined;
+  PaginatedWorkspaces?: PaginatedWorkspaces | undefined;
+  bad_request?: BadRequest | undefined;
+  auth_error?: AuthError | undefined;
+  fourHundredAndThreeApplicationJsonObject?:
+    | ListWorkspacesForbiddenResponseBody
+    | undefined;
   fourHundredAndTwentyTwoApplicationJsonObject?:
     | ListWorkspacesUnprocessableEntityResponseBody
     | undefined;
-  fourHundredAndTwentyNineApplicationJsonObject?:
-    | ListWorkspacesTooManyRequestsResponseBody
-    | undefined;
+  rate_limit?: RateLimit | undefined;
 };
 
 export const ListWorkspacesResponse$zodSchema: z.ZodType<
@@ -134,15 +143,16 @@ export const ListWorkspacesResponse$zodSchema: z.ZodType<
   unknown
 > = z.object({
   ContentType: z.string(),
+  PaginatedWorkspaces: PaginatedWorkspaces$zodSchema.optional(),
   RawResponse: z.instanceof(Response),
   StatusCode: z.number().int(),
-  fourHundredAndTwentyNineApplicationJsonObject: z.lazy(() =>
-    ListWorkspacesTooManyRequestsResponseBody$zodSchema
+  auth_error: AuthError$zodSchema.optional(),
+  bad_request: BadRequest$zodSchema.optional(),
+  fourHundredAndThreeApplicationJsonObject: z.lazy(() =>
+    ListWorkspacesForbiddenResponseBody$zodSchema
   ).optional(),
   fourHundredAndTwentyTwoApplicationJsonObject: z.lazy(() =>
     ListWorkspacesUnprocessableEntityResponseBody$zodSchema
   ).optional(),
-  twoHundredApplicationJsonObject: z.lazy(() =>
-    ListWorkspacesResponseBody$zodSchema
-  ).optional(),
+  rate_limit: RateLimit$zodSchema.optional(),
 });

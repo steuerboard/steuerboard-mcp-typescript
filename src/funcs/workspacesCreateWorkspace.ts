@@ -3,10 +3,19 @@
  */
 
 import { SteuerboardCore } from "../core.js";
+import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
+import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import {
+  CreateWorkspaceRequest,
+  CreateWorkspaceRequest$zodSchema,
+  CreateWorkspaceResponse,
+  CreateWorkspaceResponse$zodSchema,
+} from "../models/createworkspaceop.js";
 import { APIError } from "../models/errors/apierror.js";
 import {
   ConnectionError,
@@ -16,22 +25,22 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import {
-  GetV1PingResponse,
-  GetV1PingResponse$zodSchema,
-} from "../models/getv1pingop.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Ping Pong
+ * Create a workspace
+ *
+ * @remarks
+ * Creates a new workspace and returns the created workspace object.
  */
-export function healthCheckGetV1Ping(
+export function workspacesCreateWorkspace(
   client$: SteuerboardCore,
+  request: CreateWorkspaceRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    GetV1PingResponse,
+    CreateWorkspaceResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -43,17 +52,19 @@ export function healthCheckGetV1Ping(
 > {
   return new APIPromise($do(
     client$,
+    request,
     options,
   ));
 }
 
 async function $do(
   client$: SteuerboardCore,
+  request: CreateWorkspaceRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      GetV1PingResponse,
+      CreateWorkspaceResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -65,19 +76,36 @@ async function $do(
     APICall,
   ]
 > {
-  const path$ = pathToFunc("/v1/ping")();
+  const parsed$ = safeParse(
+    request,
+    (value$) => CreateWorkspaceRequest$zodSchema.parse(value$),
+    "Input validation failed",
+  );
+  if (!parsed$.ok) {
+    return [parsed$, { status: "invalid" }];
+  }
+  const payload$ = parsed$.value;
+  const body$ = encodeJSON("body", payload$.WorkspaceCreate, { explode: true });
+  const path$ = pathToFunc("/v1/workspaces")();
 
   const headers$ = new Headers(compactMap({
+    "Content-Type": "application/json",
     Accept: "application/json",
+    "x-client-id": encodeSimple("x-client-id", payload$.xClientId, {
+      explode: false,
+      charEncoding: "none",
+    }),
   }));
+  const securityInput = await extractSecurity(client$._options.security);
+  const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
     options: client$._options,
     baseURL: options?.serverURL ?? client$._baseURL ?? "",
-    operationID: "get_/v1/ping",
+    operationID: "createWorkspace",
     oAuth2Scopes: [],
-    resolvedSecurity: null,
-    securitySource: null,
+    resolvedSecurity: requestSecurity,
+    securitySource: client$._options.security,
     retryConfig: options?.retries
       || client$._options.retryConfig
       || { strategy: "none" },
@@ -91,10 +119,12 @@ async function $do(
   };
 
   const requestRes = client$._createRequest(context, {
-    method: "GET",
+    security: requestSecurity,
+    method: "POST",
     baseURL: options?.serverURL,
     path: path$,
     headers: headers$,
+    body: body$,
     userAgent: client$._options.userAgent,
     timeoutMs: options?.timeoutMs || client$._options.timeoutMs
       || -1,
@@ -119,7 +149,7 @@ async function $do(
   };
 
   const [result$] = await M.match<
-    GetV1PingResponse,
+    CreateWorkspaceResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -128,7 +158,17 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, GetV1PingResponse$zodSchema, { key: "object" }),
+    M.json(201, CreateWorkspaceResponse$zodSchema, { key: "Workspace" }),
+    M.json(400, CreateWorkspaceResponse$zodSchema, { key: "bad_request" }),
+    M.json(401, CreateWorkspaceResponse$zodSchema, { key: "auth_error" }),
+    M.json(403, CreateWorkspaceResponse$zodSchema, {
+      key: "403_application/json_object",
+    }),
+    M.json(422, CreateWorkspaceResponse$zodSchema, {
+      key: "422_application/json_object",
+    }),
+    M.json(429, CreateWorkspaceResponse$zodSchema, { key: "rate_limit" }),
+    M.nil(500, CreateWorkspaceResponse$zodSchema),
   )(response, req$, { extraFields: responseFields$ });
 
   return [result$, { status: "complete", request: req$, response }];

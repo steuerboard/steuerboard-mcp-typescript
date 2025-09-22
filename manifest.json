@@ -1,7 +1,7 @@
 {
   "dxt_version": "0.1",
   "name": "@steuerboard/mcp",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "",
   "long_description": "",
   "author": {
@@ -23,15 +23,15 @@
   "display_name": "@steuerboard/mcp",
   "tools": [
     {
-      "name": "health-check-get-v1",
+      "name": "health-index",
       "description": "Index"
     },
     {
-      "name": "health-check-get-v1-ping",
+      "name": "health-ping",
       "description": "Ping Pong"
     },
     {
-      "name": "auth-get-v1-me",
+      "name": "auth-me",
       "description": "Me"
     },
     {
@@ -49,6 +49,10 @@
     {
       "name": "workspaces-list-workspaces",
       "description": "List workspaces\n\nReturns a paginated list of workspaces."
+    },
+    {
+      "name": "workspaces-create-workspace",
+      "description": "Create a workspace\n\nCreates a new workspace and returns the created workspace object."
     },
     {
       "name": "workspaces-get-workspace",

@@ -3,10 +3,8 @@
  */
 
 import { SteuerboardCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
@@ -19,28 +17,19 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import {
-  GetWorkspaceRequest,
-  GetWorkspaceRequest$zodSchema,
-  GetWorkspaceResponse,
-  GetWorkspaceResponse$zodSchema,
-} from "../models/getworkspaceop.js";
+import { MeResponse, MeResponse$zodSchema } from "../models/meop.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get a workspace
- *
- * @remarks
- * Returns a single workspace object by ID.
+ * Me
  */
-export function workspacesGetWorkspace(
+export function authMe(
   client$: SteuerboardCore,
-  request: GetWorkspaceRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    GetWorkspaceResponse,
+    MeResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -52,19 +41,17 @@ export function workspacesGetWorkspace(
 > {
   return new APIPromise($do(
     client$,
-    request,
     options,
   ));
 }
 
 async function $do(
   client$: SteuerboardCore,
-  request: GetWorkspaceRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      GetWorkspaceResponse,
+      MeResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -76,33 +63,10 @@ async function $do(
     APICall,
   ]
 > {
-  const parsed$ = safeParse(
-    request,
-    (value$) => GetWorkspaceRequest$zodSchema.parse(value$),
-    "Input validation failed",
-  );
-  if (!parsed$.ok) {
-    return [parsed$, { status: "invalid" }];
-  }
-  const payload$ = parsed$.value;
-  const body$ = null;
-
-  const pathParams$ = {
-    id: encodeSimple("id", payload$.id, {
-      explode: false,
-      charEncoding: "percent",
-    }),
-  };
-  const path$ = pathToFunc("/v1/workspaces/{id}")(
-    pathParams$,
-  );
+  const path$ = pathToFunc("/v1/me")();
 
   const headers$ = new Headers(compactMap({
     Accept: "application/json",
-    "x-client-id": encodeSimple("x-client-id", payload$.xClientId, {
-      explode: false,
-      charEncoding: "none",
-    }),
   }));
   const securityInput = await extractSecurity(client$._options.security);
   const requestSecurity = resolveGlobalSecurity(securityInput);
@@ -110,7 +74,7 @@ async function $do(
   const context = {
     options: client$._options,
     baseURL: options?.serverURL ?? client$._baseURL ?? "",
-    operationID: "getWorkspace",
+    operationID: "me",
     oAuth2Scopes: [],
     resolvedSecurity: requestSecurity,
     securitySource: client$._options.security,
@@ -132,7 +96,6 @@ async function $do(
     baseURL: options?.serverURL,
     path: path$,
     headers: headers$,
-    body: body$,
     userAgent: client$._options.userAgent,
     timeoutMs: options?.timeoutMs || client$._options.timeoutMs
       || -1,
@@ -157,7 +120,7 @@ async function $do(
   };
 
   const [result$] = await M.match<
-    GetWorkspaceResponse,
+    MeResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -166,18 +129,11 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, GetWorkspaceResponse$zodSchema, { key: "Workspace" }),
-    M.json(400, GetWorkspaceResponse$zodSchema, { key: "bad_request" }),
-    M.json(401, GetWorkspaceResponse$zodSchema, { key: "auth_error" }),
-    M.json(403, GetWorkspaceResponse$zodSchema, {
-      key: "403_application/json_object",
-    }),
-    M.json(404, GetWorkspaceResponse$zodSchema, { key: "not_found" }),
-    M.json(422, GetWorkspaceResponse$zodSchema, {
-      key: "422_application/json_object",
-    }),
-    M.json(429, GetWorkspaceResponse$zodSchema, { key: "rate_limit" }),
-    M.nil(500, GetWorkspaceResponse$zodSchema),
+    M.json(200, MeResponse$zodSchema, { key: "200_application/json_object" }),
+    M.json(401, MeResponse$zodSchema, { key: "auth_error" }),
+    M.json(403, MeResponse$zodSchema, { key: "403_application/json_object" }),
+    M.json(429, MeResponse$zodSchema, { key: "rate_limit" }),
+    M.nil(500, MeResponse$zodSchema),
   )(response, req$, { extraFields: responseFields$ });
 
   return [result$, { status: "complete", request: req$, response }];

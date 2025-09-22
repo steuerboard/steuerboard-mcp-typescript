@@ -159,7 +159,16 @@ async function $do(
     | ConnectionError
   >(
     M.json(201, CreateTaskResponse$zodSchema, { key: "Task" }),
-    M.json(422, CreateTaskResponse$zodSchema, { key: "object" }),
+    M.json(400, CreateTaskResponse$zodSchema, { key: "bad_request" }),
+    M.json(401, CreateTaskResponse$zodSchema, { key: "auth_error" }),
+    M.json(403, CreateTaskResponse$zodSchema, {
+      key: "403_application/json_object",
+    }),
+    M.json(422, CreateTaskResponse$zodSchema, {
+      key: "422_application/json_object",
+    }),
+    M.json(429, CreateTaskResponse$zodSchema, { key: "rate_limit" }),
+    M.nil(500, CreateTaskResponse$zodSchema),
   )(response, req$, { extraFields: responseFields$ });
 
   return [result$, { status: "complete", request: req$, response }];

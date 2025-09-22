@@ -7,7 +7,7 @@ import { ListTasksRequest$zodSchema } from "../../models/listtasksop.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
-  request: ListTasksRequest$zodSchema.optional(),
+  request: ListTasksRequest$zodSchema,
 };
 
 export const tool$tasksListTasks: ToolDefinition<typeof args> = {
