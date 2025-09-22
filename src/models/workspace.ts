@@ -15,10 +15,10 @@ export type Workspace = {
 
 export const Workspace$zodSchema: z.ZodType<Workspace, z.ZodTypeDef, unknown> =
   z.object({
-    archivedAt: z.string().nullable(),
+    archivedAt: z.string().datetime({ offset: true }).nullable(),
     clientId: z.string(),
-    createdAt: z.string(),
+    createdAt: z.string().datetime({ offset: true }),
     id: z.string(),
     name: z.string(),
-    updatedAt: z.string(),
+    updatedAt: z.string().datetime({ offset: true }),
   });

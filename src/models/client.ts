@@ -32,8 +32,8 @@ export type Client = {
 
 export const Client$zodSchema: z.ZodType<Client, z.ZodTypeDef, unknown> = z
   .object({
-    archivedAt: z.string().nullable(),
-    createdAt: z.string(),
+    archivedAt: z.string().datetime({ offset: true }).nullable(),
+    createdAt: z.string().datetime({ offset: true }),
     customId: z.string().nullable(),
     datevClientId: z.string().nullable(),
     id: z.string(),
@@ -41,5 +41,5 @@ export const Client$zodSchema: z.ZodType<Client, z.ZodTypeDef, unknown> = z
     name: z.string(),
     slug: z.string(),
     type: ClientClientType$zodSchema,
-    updatedAt: z.string(),
+    updatedAt: z.string().datetime({ offset: true }),
   });

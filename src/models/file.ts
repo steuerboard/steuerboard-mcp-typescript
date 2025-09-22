@@ -21,9 +21,9 @@ export type FileT = {
 
 export const FileT$zodSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
   .object({
-    createdAt: z.string(),
+    createdAt: z.string().datetime({ offset: true }),
     createdById: z.string().nullable(),
-    documentDate: z.string().nullable(),
+    documentDate: z.string().datetime({ offset: true }).nullable(),
     folderId: z.string().nullable(),
     id: z.string(),
     labelIds: z.array(z.string()).nullable(),
@@ -31,6 +31,6 @@ export const FileT$zodSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
     name: z.string(),
     size: z.number(),
     taskId: z.string().nullable(),
-    updatedAt: z.string(),
+    updatedAt: z.string().datetime({ offset: true }),
     workspaceId: z.string(),
   });

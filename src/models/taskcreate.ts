@@ -16,7 +16,7 @@ export const TaskCreate$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  dueDate: z.string().optional(),
+  dueDate: z.string().datetime({ offset: true }).optional(),
   text: z.string().optional(),
   title: z.string(),
   workspaceId: z.string(),

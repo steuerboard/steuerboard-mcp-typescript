@@ -15,7 +15,7 @@ export const FileUpdate$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  documentDate: z.string().optional(),
+  documentDate: z.string().datetime({ offset: true }).optional(),
   folderId: z.string().optional(),
   name: z.string().optional(),
 });

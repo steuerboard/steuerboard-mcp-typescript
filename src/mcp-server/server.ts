@@ -8,8 +8,8 @@ import { SDKOptions } from "../lib/config.js";
 import type { ConsoleLogger } from "./console-logger.js";
 import { createRegisterPrompt } from "./prompts.js";
 import {
-	createRegisterResource,
-	createRegisterResourceTemplate,
+  createRegisterResource,
+  createRegisterResourceTemplate,
 } from "./resources.js";
 import { MCPScope } from "./scopes.js";
 import { createRegisterTool } from "./tools.js";
@@ -34,81 +34,78 @@ import { tool$workspacesGetWorkspace } from "./tools/workspacesGetWorkspace.js";
 import { tool$workspacesListWorkspaces } from "./tools/workspacesListWorkspaces.js";
 
 export function createMCPServer(deps: {
-	logger: ConsoleLogger;
-	allowedTools?: string[] | undefined;
-	scopes?: MCPScope[] | undefined;
-	getSDK?: () => SteuerboardCore;
-	serverURL?: string | undefined;
-	security?: SDKOptions["security"] | undefined;
-	serverIdx?: SDKOptions["serverIdx"] | undefined;
+  logger: ConsoleLogger;
+  allowedTools?: string[] | undefined;
+  scopes?: MCPScope[] | undefined;
+  getSDK?: () => SteuerboardCore;
+  serverURL?: string | undefined;
+  security?: SDKOptions["security"] | undefined;
+  serverIdx?: SDKOptions["serverIdx"] | undefined;
 }) {
-	const server = new McpServer({
-		name: "Steuerboard",
-		version: "0.1.0",
-	});
+  const server = new McpServer({
+    name: "Steuerboard",
+    version: "0.1.1",
+  });
 
-	const getClient =
-		deps.getSDK ||
-		(() =>
-			new SteuerboardCore({
-				security: deps.security,
-				serverURL: deps.serverURL,
-				serverIdx: deps.serverIdx,
-				debugLogger:
-					deps.logger.level === "debug"
-						? {
-								log: (...args) => console.log(...args),
-								group: (...args) => console.group(...args),
-								groupEnd: (...args) => console.groupEnd(...args),
-							}
-						: undefined,
-			}));
+  const getClient = deps.getSDK || (() =>
+    new SteuerboardCore({
+      security: deps.security,
+      serverURL: deps.serverURL,
+      serverIdx: deps.serverIdx,
+      debugLogger: deps.logger.level === "debug"
+        ? {
+          log: (...args) => console.log(...args),
+          group: (...args) => console.group(...args),
+          groupEnd: (...args) => console.groupEnd(...args),
+        }
+        : undefined,
+    }));
 
-	const scopes = new Set(deps.scopes);
+  const scopes = new Set(deps.scopes);
 
-	const allowedTools = deps.allowedTools && new Set(deps.allowedTools);
-	const tool = createRegisterTool(
-		deps.logger,
-		server,
-		getClient,
-		scopes,
-		allowedTools,
-	);
-	const resource = createRegisterResource(
-		deps.logger,
-		server,
-		getClient,
-		scopes,
-	);
-	const resourceTemplate = createRegisterResourceTemplate(
-		deps.logger,
-		server,
-		getClient,
-		scopes,
-	);
-	const prompt = createRegisterPrompt(deps.logger, server, getClient, scopes);
-	const register = { tool, resource, resourceTemplate, prompt };
-	void register; // suppress unused warnings
+  const allowedTools = deps.allowedTools && new Set(deps.allowedTools);
+  const tool = createRegisterTool(
+    deps.logger,
+    server,
+    getClient,
+    scopes,
+    allowedTools,
+  );
+  const resource = createRegisterResource(
+    deps.logger,
+    server,
+    getClient,
+    scopes,
+  );
+  const resourceTemplate = createRegisterResourceTemplate(
+    deps.logger,
+    server,
+    getClient,
+    scopes,
+  );
+  const prompt = createRegisterPrompt(deps.logger, server, getClient, scopes);
+  const register = { tool, resource, resourceTemplate, prompt };
+  void register; // suppress unused warnings
 
-	tool(tool$healthIndex);
-	tool(tool$healthPing);
-	tool(tool$authMe);
-	tool(tool$adminClientsListClients);
-	tool(tool$adminClientsCreateClient);
-	tool(tool$adminClientsGetClient);
-	tool(tool$workspacesListWorkspaces);
-	tool(tool$workspacesCreateWorkspace);
-	tool(tool$workspacesGetWorkspace);
-	tool(tool$filesListFiles);
-	tool(tool$filesCreateFile);
-	tool(tool$filesGetFile);
-	tool(tool$filesUpdateFile);
-	tool(tool$filesDeleteFile);
-	tool(tool$tasksListTasks);
-	tool(tool$tasksCreateTask);
-	tool(tool$tasksGetTask);
-	tool(tool$tasksUpdateTask);
-	tool(tool$tasksDeleteTask);
+  tool(tool$healthIndex);
+  tool(tool$healthPing);
+  tool(tool$authMe);
+  tool(tool$adminClientsListClients);
+  tool(tool$adminClientsCreateClient);
+  tool(tool$adminClientsGetClient);
+  tool(tool$workspacesListWorkspaces);
+  tool(tool$workspacesCreateWorkspace);
+  tool(tool$workspacesGetWorkspace);
+  tool(tool$filesListFiles);
+  tool(tool$filesCreateFile);
+  tool(tool$filesGetFile);
+  tool(tool$filesUpdateFile);
+  tool(tool$filesDeleteFile);
+  tool(tool$tasksListTasks);
+  tool(tool$tasksCreateTask);
+  tool(tool$tasksGetTask);
+  tool(tool$tasksUpdateTask);
+  tool(tool$tasksDeleteTask);
 
-	return server;
+  return server;
 }
