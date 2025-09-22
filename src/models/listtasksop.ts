@@ -6,10 +6,35 @@ import * as z from "zod";
 import { Pagination, Pagination$zodSchema } from "./pagination.js";
 import { Task, Task$zodSchema } from "./task.js";
 
+/**
+ * The sort field of the results
+ */
+export const ListTasksSort$zodSchema = z.enum([
+  "createdAt",
+  "updatedAt",
+  "dueDate",
+  "status",
+  "title",
+]).describe("The sort field of the results");
+
+export type ListTasksSort = z.infer<typeof ListTasksSort$zodSchema>;
+
+/**
+ * The order of the results based on the sort field
+ */
+export const ListTasksOrder$zodSchema = z.enum([
+  "asc",
+  "desc",
+]).describe("The order of the results based on the sort field");
+
+export type ListTasksOrder = z.infer<typeof ListTasksOrder$zodSchema>;
+
 export type ListTasksRequest = {
   limit?: number | undefined;
   cursor?: string | undefined;
   workspaceId?: string | undefined;
+  sort?: ListTasksSort | undefined;
+  order?: ListTasksOrder | undefined;
 };
 
 export const ListTasksRequest$zodSchema: z.ZodType<
@@ -19,6 +44,8 @@ export const ListTasksRequest$zodSchema: z.ZodType<
 > = z.object({
   cursor: z.string().optional(),
   limit: z.number().default(20),
+  order: ListTasksOrder$zodSchema.default("desc"),
+  sort: ListTasksSort$zodSchema.default("createdAt"),
   workspaceId: z.string().optional(),
 });
 

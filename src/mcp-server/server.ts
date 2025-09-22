@@ -29,6 +29,7 @@ import { tool$tasksDeleteTask } from "./tools/tasksDeleteTask.js";
 import { tool$tasksGetTask } from "./tools/tasksGetTask.js";
 import { tool$tasksListTasks } from "./tools/tasksListTasks.js";
 import { tool$tasksUpdateTask } from "./tools/tasksUpdateTask.js";
+import { tool$workspacesCreateWorkspace } from "./tools/workspacesCreateWorkspace.js";
 import { tool$workspacesGetWorkspace } from "./tools/workspacesGetWorkspace.js";
 import { tool$workspacesListWorkspaces } from "./tools/workspacesListWorkspaces.js";
 
@@ -43,7 +44,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Steuerboard",
-    version: "0.0.7",
+    version: "0.1.0",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -93,6 +94,7 @@ export function createMCPServer(deps: {
   tool(tool$adminClientsCreateClient);
   tool(tool$adminClientsGetClient);
   tool(tool$workspacesListWorkspaces);
+  tool(tool$workspacesCreateWorkspace);
   tool(tool$workspacesGetWorkspace);
   tool(tool$filesListFiles);
   tool(tool$filesCreateFile);

@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 188da4b7-9881-4ae0-a213-c32e68b13c57
 management:
-  docChecksum: aca60bac21eb5bbfb23d527d1108f1e5
+  docChecksum: 70e3f58fdb8d81124db47e5101812c57
   docVersion: 0.1.0
-  speakeasyVersion: 1.617.1
-  generationVersion: 2.701.8
-  releaseVersion: 0.0.7
-  configChecksum: 117d8c06f11f45d8256c287e6fff8738
+  speakeasyVersion: 1.622.1
+  generationVersion: 2.709.0
+  releaseVersion: 0.1.0
+  configChecksum: 2bde59c41159647cd732ef23f7c6cce2
   repoURL: https://github.com/steuerboard/steuerboard-mcp-typescript.git
   published: true
 features:
   mcp-typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.0
-    core: 0.3.4
+    core: 0.4.0
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     globalSecurity: 0.1.1
@@ -51,6 +51,7 @@ generatedFiles:
   - src/funcs/tasksGetTask.ts
   - src/funcs/tasksListTasks.ts
   - src/funcs/tasksUpdateTask.ts
+  - src/funcs/workspacesCreateWorkspace.ts
   - src/funcs/workspacesGetWorkspace.ts
   - src/funcs/workspacesListWorkspaces.ts
   - src/hooks/hooks.ts
@@ -101,6 +102,7 @@ generatedFiles:
   - src/mcp-server/tools/tasksGetTask.ts
   - src/mcp-server/tools/tasksListTasks.ts
   - src/mcp-server/tools/tasksUpdateTask.ts
+  - src/mcp-server/tools/workspacesCreateWorkspace.ts
   - src/mcp-server/tools/workspacesGetWorkspace.ts
   - src/mcp-server/tools/workspacesListWorkspaces.ts
   - src/models/client.ts
@@ -108,6 +110,7 @@ generatedFiles:
   - src/models/createclientop.ts
   - src/models/createfileop.ts
   - src/models/createtaskop.ts
+  - src/models/createworkspaceop.ts
   - src/models/deletefileop.ts
   - src/models/deleteresponse.ts
   - src/models/deletetaskop.ts
@@ -142,6 +145,7 @@ generatedFiles:
   - src/models/webhookstaskcommentcreatedop.ts
   - src/models/webhooksworkspacechangesop.ts
   - src/models/workspace.ts
+  - src/models/workspacecreate.ts
   - src/types/async.ts
   - src/types/blobs.ts
   - src/types/enums.ts
@@ -153,3 +157,7 @@ generatedFiles:
   - worker-configuration.ts
   - wrangler.toml
 examplesVersion: 1.0.2
+releaseNotes: |
+  ## Mcp-typescript SDK Changes Detected:
+  * `Steuerboard.Workspaces.createWorkspace()`: **Added**
+  * `Steuerboard.Tasks.listTasks()`:  `request` **Changed**

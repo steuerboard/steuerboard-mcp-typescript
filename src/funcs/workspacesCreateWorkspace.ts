@@ -3,13 +3,19 @@
  */
 
 import { SteuerboardCore } from "../core.js";
-import { encodeFormQuery } from "../lib/encodings.js";
+import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import {
+  CreateWorkspaceRequest,
+  CreateWorkspaceRequest$zodSchema,
+  CreateWorkspaceResponse,
+  CreateWorkspaceResponse$zodSchema,
+} from "../models/createworkspaceop.js";
 import { APIError } from "../models/errors/apierror.js";
 import {
   ConnectionError,
@@ -19,28 +25,22 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import {
-  ListTasksRequest,
-  ListTasksRequest$zodSchema,
-  ListTasksResponse,
-  ListTasksResponse$zodSchema,
-} from "../models/listtasksop.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List tasks
+ * Create a workspace
  *
  * @remarks
- * Returns a paginated list of tasks. Optionally you can filter by client or workspace.
+ * Creates a new workspace and returns the created workspace object.
  */
-export function tasksListTasks(
+export function workspacesCreateWorkspace(
   client$: SteuerboardCore,
-  request?: ListTasksRequest | undefined,
+  request: CreateWorkspaceRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    ListTasksResponse,
+    CreateWorkspaceResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -59,12 +59,12 @@ export function tasksListTasks(
 
 async function $do(
   client$: SteuerboardCore,
-  request?: ListTasksRequest | undefined,
+  request: CreateWorkspaceRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      ListTasksResponse,
+      CreateWorkspaceResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,25 +78,23 @@ async function $do(
 > {
   const parsed$ = safeParse(
     request,
-    (value$) => ListTasksRequest$zodSchema.optional().parse(value$),
+    (value$) => CreateWorkspaceRequest$zodSchema.parse(value$),
     "Input validation failed",
   );
   if (!parsed$.ok) {
     return [parsed$, { status: "invalid" }];
   }
   const payload$ = parsed$.value;
-  const body$ = null;
-  const path$ = pathToFunc("/v1/tasks")();
-  const query$ = encodeFormQuery({
-    "cursor": payload$?.cursor,
-    "limit": payload$?.limit,
-    "order": payload$?.order,
-    "sort": payload$?.sort,
-    "workspaceId": payload$?.workspaceId,
-  });
+  const body$ = encodeJSON("body", payload$.WorkspaceCreate, { explode: true });
+  const path$ = pathToFunc("/v1/workspaces")();
 
   const headers$ = new Headers(compactMap({
+    "Content-Type": "application/json",
     Accept: "application/json",
+    "x-client-id": encodeSimple("x-client-id", payload$.xClientId, {
+      explode: false,
+      charEncoding: "none",
+    }),
   }));
   const securityInput = await extractSecurity(client$._options.security);
   const requestSecurity = resolveGlobalSecurity(securityInput);
@@ -104,7 +102,7 @@ async function $do(
   const context = {
     options: client$._options,
     baseURL: options?.serverURL ?? client$._baseURL ?? "",
-    operationID: "listTasks",
+    operationID: "createWorkspace",
     oAuth2Scopes: [],
     resolvedSecurity: requestSecurity,
     securitySource: client$._options.security,
@@ -122,11 +120,10 @@ async function $do(
 
   const requestRes = client$._createRequest(context, {
     security: requestSecurity,
-    method: "GET",
+    method: "POST",
     baseURL: options?.serverURL,
     path: path$,
     headers: headers$,
-    query: query$,
     body: body$,
     userAgent: client$._options.userAgent,
     timeoutMs: options?.timeoutMs || client$._options.timeoutMs
@@ -152,7 +149,7 @@ async function $do(
   };
 
   const [result$] = await M.match<
-    ListTasksResponse,
+    CreateWorkspaceResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -161,11 +158,12 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, ListTasksResponse$zodSchema, {
-      key: "200_application/json_object",
-    }),
-    M.json(422, ListTasksResponse$zodSchema, {
+    M.json(201, CreateWorkspaceResponse$zodSchema, { key: "Workspace" }),
+    M.json(422, CreateWorkspaceResponse$zodSchema, {
       key: "422_application/json_object",
+    }),
+    M.json(429, CreateWorkspaceResponse$zodSchema, {
+      key: "429_application/json_object",
     }),
   )(response, req$, { extraFields: responseFields$ });
 

@@ -1,18 +1,19 @@
-speakeasyVersion: 1.617.1
+speakeasyVersion: 1.622.1
 sources:
     Steuerboard API:
         sourceNamespace: steuerboard-api
-        sourceRevisionDigest: sha256:52ba99db184dddd2df80e27ea1d678c2dddfb57e0ee9b696f6b9c8d00de7e59a
-        sourceBlobDigest: sha256:01caa0e4f5a548632a29b07438fcfbf937399ad7c3633928fb043adccc1672d4
+        sourceRevisionDigest: sha256:db6f075c2d21ce362613dbff748fcf0ab37703d3417471d58be37636ae930b24
+        sourceBlobDigest: sha256:57d16c2285acec48f79cbb4a947dcb453b2d4311fa4f83cbecdd78e2add1ce57
         tags:
             - latest
+            - speakeasy-sdk-regen-1758240680
             - 0.1.0
 targets:
     steuerboard:
         source: Steuerboard API
         sourceNamespace: steuerboard-api
-        sourceRevisionDigest: sha256:52ba99db184dddd2df80e27ea1d678c2dddfb57e0ee9b696f6b9c8d00de7e59a
-        sourceBlobDigest: sha256:01caa0e4f5a548632a29b07438fcfbf937399ad7c3633928fb043adccc1672d4
+        sourceRevisionDigest: sha256:db6f075c2d21ce362613dbff748fcf0ab37703d3417471d58be37636ae930b24
+        sourceBlobDigest: sha256:57d16c2285acec48f79cbb4a947dcb453b2d4311fa4f83cbecdd78e2add1ce57
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

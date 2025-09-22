@@ -32,7 +32,7 @@ export type ListClientsType = z.infer<typeof ListClientsType$zodSchema>;
 /**
  * The sort field of the results
  */
-export const Sort$zodSchema = z.enum([
+export const ListClientsSort$zodSchema = z.enum([
   "createdAt",
   "updatedAt",
   "archivedAt",
@@ -40,17 +40,17 @@ export const Sort$zodSchema = z.enum([
   "customId",
 ]).describe("The sort field of the results");
 
-export type Sort = z.infer<typeof Sort$zodSchema>;
+export type ListClientsSort = z.infer<typeof ListClientsSort$zodSchema>;
 
 /**
  * The order of the results based on the sort field
  */
-export const Order$zodSchema = z.enum([
+export const ListClientsOrder$zodSchema = z.enum([
   "asc",
   "desc",
 ]).describe("The order of the results based on the sort field");
 
-export type Order = z.infer<typeof Order$zodSchema>;
+export type ListClientsOrder = z.infer<typeof ListClientsOrder$zodSchema>;
 
 export type ListClientsRequest = {
   limit?: number | undefined;
@@ -59,8 +59,8 @@ export type ListClientsRequest = {
   slug?: string | undefined;
   archived?: Archived | undefined;
   type?: ListClientsType | undefined;
-  sort?: Sort | undefined;
-  order?: Order | undefined;
+  sort?: ListClientsSort | undefined;
+  order?: ListClientsOrder | undefined;
 };
 
 export const ListClientsRequest$zodSchema: z.ZodType<
@@ -72,9 +72,9 @@ export const ListClientsRequest$zodSchema: z.ZodType<
   cursor: z.string().optional(),
   customId: z.string().optional(),
   limit: z.number().default(20),
-  order: Order$zodSchema.default("desc"),
+  order: ListClientsOrder$zodSchema.default("desc"),
   slug: z.string().optional(),
-  sort: Sort$zodSchema.default("createdAt"),
+  sort: ListClientsSort$zodSchema.default("createdAt"),
   type: ListClientsType$zodSchema.optional(),
 });
 
