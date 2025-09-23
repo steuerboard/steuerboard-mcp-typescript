@@ -86,7 +86,7 @@ async function $do(
   }
   const payload$ = parsed$.value;
   const body$ = encodeJSON("body", payload$.WorkspaceCreate, { explode: true });
-  const path$ = pathToFunc("/v1/workspaces")();
+  const path$ = pathToFunc("/workspaces")();
 
   const headers$ = new Headers(compactMap({
     "Content-Type": "application/json",

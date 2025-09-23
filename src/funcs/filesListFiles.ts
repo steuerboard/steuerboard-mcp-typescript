@@ -86,7 +86,7 @@ async function $do(
   }
   const payload$ = parsed$.value;
   const body$ = null;
-  const path$ = pathToFunc("/v1/files")();
+  const path$ = pathToFunc("/files")();
   const query$ = encodeFormQuery({
     "cursor": payload$.cursor,
     "limit": payload$.limit,

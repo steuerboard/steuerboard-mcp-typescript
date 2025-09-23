@@ -12,7 +12,7 @@ import { Params, pathToFunc } from "./url.js";
  * Contains the list of servers available to the SDK
  */
 export const ServerList = [
-  "https://api.steuerboard.com",
+  "https://api.steuerboard.com/v1",
 ] as const;
 
 export type SDKOptions = {
@@ -62,8 +62,8 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
 export const SDK_METADATA = {
   language: "typescript",
   openapiDocVersion: "0.1.0",
-  sdkVersion: "0.1.1",
+  sdkVersion: "0.1.2",
   genVersion: "2.709.0",
   userAgent:
-    "speakeasy-sdk/mcp-typescript 0.1.1 2.709.0 0.1.0 @steuerboard/mcp",
+    "speakeasy-sdk/mcp-typescript 0.1.2 2.709.0 0.1.0 @steuerboard/mcp",
 } as const;

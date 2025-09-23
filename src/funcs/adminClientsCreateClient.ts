@@ -88,7 +88,7 @@ async function $do(
   }
   const payload$ = parsed$.value;
   const body$ = encodeJSON("body", payload$, { explode: true });
-  const path$ = pathToFunc("/v1/admin/clients")();
+  const path$ = pathToFunc("/admin/clients")();
 
   const headers$ = new Headers(compactMap({
     "Content-Type": "application/json",

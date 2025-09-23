@@ -86,7 +86,7 @@ async function $do(
   }
   const payload$ = parsed$.value;
   const body$ = null;
-  const path$ = pathToFunc("/v1/workspaces")();
+  const path$ = pathToFunc("/workspaces")();
   const query$ = encodeFormQuery({
     "cursor": payload$.cursor,
     "limit": payload$.limit,

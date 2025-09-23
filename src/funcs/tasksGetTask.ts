@@ -93,7 +93,7 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path$ = pathToFunc("/v1/tasks/{id}")(
+  const path$ = pathToFunc("/tasks/{id}")(
     pathParams$,
   );
 

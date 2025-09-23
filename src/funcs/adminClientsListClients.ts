@@ -86,7 +86,7 @@ async function $do(
   }
   const payload$ = parsed$.value;
   const body$ = null;
-  const path$ = pathToFunc("/v1/admin/clients")();
+  const path$ = pathToFunc("/admin/clients")();
   const query$ = encodeFormQuery({
     "archived": payload$?.archived,
     "cursor": payload$?.cursor,

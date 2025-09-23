@@ -127,7 +127,7 @@ async function $do(
   if (payload$.FileCreate.taskId !== undefined) {
     appendForm(body$, "taskId", payload$.FileCreate.taskId);
   }
-  const path$ = pathToFunc("/v1/files")();
+  const path$ = pathToFunc("/files")();
 
   const headers$ = new Headers(compactMap({
     Accept: "application/json",

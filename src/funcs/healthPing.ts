@@ -62,7 +62,7 @@ async function $do(
     APICall,
   ]
 > {
-  const path$ = pathToFunc("/v1/ping")();
+  const path$ = pathToFunc("/ping")();
 
   const headers$ = new Headers(compactMap({
     Accept: "application/json",
