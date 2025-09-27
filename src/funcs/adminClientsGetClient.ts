@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Get a client
  *
  * @remarks
- * Returns a single client object by ID.
+ * Returns a single client by ID.
  */
 export function adminClientsGetClient(
   client$: SteuerboardCore,
@@ -165,11 +165,11 @@ async function $do(
     M.json(200, GetClientResponse$zodSchema, { key: "Client" }),
     M.json(401, GetClientResponse$zodSchema, { key: "auth_error" }),
     M.json(403, GetClientResponse$zodSchema, {
-      key: "403_application/json_object",
+      key: "fourHundredAndThreeApplicationJsonObject",
     }),
     M.json(404, GetClientResponse$zodSchema, { key: "not_found" }),
     M.json(422, GetClientResponse$zodSchema, {
-      key: "422_application/json_object",
+      key: "fourHundredAndTwentyTwoApplicationJsonObject",
     }),
     M.json(429, GetClientResponse$zodSchema, { key: "rate_limit" }),
     M.nil(500, GetClientResponse$zodSchema),

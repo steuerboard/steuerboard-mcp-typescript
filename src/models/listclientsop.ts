@@ -145,6 +145,12 @@ export const ListClientsUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("The validation error(s)");
 
+export const ListClientsStatusCode$zodSchema = z.literal(403);
+
+export type ListClientsStatusCode = z.infer<
+  typeof ListClientsStatusCode$zodSchema
+>;
+
 export const ListClientsType$zodSchema = z.enum([
   "auth_error",
 ]);
@@ -161,7 +167,7 @@ export type ListClientsCode = z.infer<typeof ListClientsCode$zodSchema>;
  * Missing scope
  */
 export type ListClientsForbiddenResponseBody = {
-  status_code: number;
+  status_code: ListClientsStatusCode;
   type: ListClientsType;
   code: ListClientsCode;
   message: string;
@@ -174,7 +180,7 @@ export const ListClientsForbiddenResponseBody$zodSchema: z.ZodType<
 > = z.object({
   code: ListClientsCode$zodSchema,
   message: z.string(),
-  status_code: z.number(),
+  status_code: ListClientsStatusCode$zodSchema,
   type: ListClientsType$zodSchema,
 }).describe("Missing scope");
 

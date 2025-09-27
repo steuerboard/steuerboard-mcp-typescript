@@ -4,6 +4,10 @@
 
 import * as z from "zod";
 
+export const NotFoundStatusCode$zodSchema = z.literal(404);
+
+export type NotFoundStatusCode = z.infer<typeof NotFoundStatusCode$zodSchema>;
+
 export const NotFoundType$zodSchema = z.enum([
   "not_found",
 ]);
@@ -17,7 +21,7 @@ export const NotFoundCode$zodSchema = z.enum([
 export type NotFoundCode = z.infer<typeof NotFoundCode$zodSchema>;
 
 export type NotFound = {
-  status_code: number;
+  status_code: NotFoundStatusCode;
   type: NotFoundType;
   code: NotFoundCode;
   message: string;
@@ -27,6 +31,6 @@ export const NotFound$zodSchema: z.ZodType<NotFound, z.ZodTypeDef, unknown> = z
   .object({
     code: NotFoundCode$zodSchema,
     message: z.string(),
-    status_code: z.number(),
+    status_code: NotFoundStatusCode$zodSchema,
     type: NotFoundType$zodSchema,
   });

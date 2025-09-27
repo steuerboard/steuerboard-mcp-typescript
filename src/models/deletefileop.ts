@@ -78,6 +78,12 @@ export const DeleteFileUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("Invalid id error");
 
+export const DeleteFileStatusCode$zodSchema = z.literal(403);
+
+export type DeleteFileStatusCode = z.infer<
+  typeof DeleteFileStatusCode$zodSchema
+>;
+
 export const DeleteFileType$zodSchema = z.enum([
   "auth_error",
 ]);
@@ -94,7 +100,7 @@ export type DeleteFileCode = z.infer<typeof DeleteFileCode$zodSchema>;
  * Missing scope
  */
 export type DeleteFileForbiddenResponseBody = {
-  status_code: number;
+  status_code: DeleteFileStatusCode;
   type: DeleteFileType;
   code: DeleteFileCode;
   message: string;
@@ -107,7 +113,7 @@ export const DeleteFileForbiddenResponseBody$zodSchema: z.ZodType<
 > = z.object({
   code: DeleteFileCode$zodSchema,
   message: z.string(),
-  status_code: z.number(),
+  status_code: DeleteFileStatusCode$zodSchema,
   type: DeleteFileType$zodSchema,
 }).describe("Missing scope");
 

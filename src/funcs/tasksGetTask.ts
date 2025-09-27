@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Get a task
  *
  * @remarks
- * Returns a single task object by ID.
+ * Returns a single task by ID.
  */
 export function tasksGetTask(
   client$: SteuerboardCore,
@@ -170,11 +170,11 @@ async function $do(
     M.json(400, GetTaskResponse$zodSchema, { key: "bad_request" }),
     M.json(401, GetTaskResponse$zodSchema, { key: "auth_error" }),
     M.json(403, GetTaskResponse$zodSchema, {
-      key: "403_application/json_object",
+      key: "fourHundredAndThreeApplicationJsonObject",
     }),
     M.json(404, GetTaskResponse$zodSchema, { key: "not_found" }),
     M.json(422, GetTaskResponse$zodSchema, {
-      key: "422_application/json_object",
+      key: "fourHundredAndTwentyTwoApplicationJsonObject",
     }),
     M.json(429, GetTaskResponse$zodSchema, { key: "rate_limit" }),
     M.nil(500, GetTaskResponse$zodSchema),

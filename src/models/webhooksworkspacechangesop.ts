@@ -158,16 +158,16 @@ export const WebhooksWorkspaceChangesWorkspace1$zodSchema: z.ZodType<
  * Workspace Webhook (create|update)
  */
 export type WebhooksWorkspaceChangesRequest =
-  | WebhooksWorkspaceChangesWorkspace1
-  | WebhooksWorkspaceChangesWorkspace2;
+  | WebhooksWorkspaceChangesWorkspace2
+  | WebhooksWorkspaceChangesWorkspace1;
 
 export const WebhooksWorkspaceChangesRequest$zodSchema: z.ZodType<
   WebhooksWorkspaceChangesRequest,
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => WebhooksWorkspaceChangesWorkspace1$zodSchema),
   z.lazy(() => WebhooksWorkspaceChangesWorkspace2$zodSchema),
+  z.lazy(() => WebhooksWorkspaceChangesWorkspace1$zodSchema),
 ]).describe("Workspace Webhook (create|update)");
 
 export type WebhooksWorkspaceChangesResponse = {

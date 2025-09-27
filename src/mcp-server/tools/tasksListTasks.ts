@@ -14,7 +14,7 @@ export const tool$tasksListTasks: ToolDefinition<typeof args> = {
   name: "tasks-list-tasks",
   description: `List tasks
 
-Returns a paginated list of tasks. Optionally you can filter by client or workspace.`,
+Returns a paginated list of tasks with optional client and workspace filters.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await tasksListTasks(

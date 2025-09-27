@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * List clients
  *
  * @remarks
- * Returns a list of clients.
+ * Returns a paginated list of clients.
  */
 export function adminClientsListClients(
   client$: SteuerboardCore,
@@ -167,10 +167,10 @@ async function $do(
     M.json(200, ListClientsResponse$zodSchema, { key: "PaginatedClients" }),
     M.json(401, ListClientsResponse$zodSchema, { key: "auth_error" }),
     M.json(403, ListClientsResponse$zodSchema, {
-      key: "403_application/json_object",
+      key: "fourHundredAndThreeApplicationJsonObject",
     }),
     M.json(422, ListClientsResponse$zodSchema, {
-      key: "422_application/json_object",
+      key: "fourHundredAndTwentyTwoApplicationJsonObject",
     }),
     M.json(429, ListClientsResponse$zodSchema, { key: "rate_limit" }),
     M.nil(500, ListClientsResponse$zodSchema),
