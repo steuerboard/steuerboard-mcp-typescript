@@ -14,7 +14,7 @@ export const tool$adminClientsListClients: ToolDefinition<typeof args> = {
   name: "admin-clients-list-clients",
   description: `List clients
 
-Returns a list of clients.`,
+Returns a paginated list of clients.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await adminClientsListClients(

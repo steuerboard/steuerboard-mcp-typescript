@@ -14,7 +14,7 @@ export const tool$filesUpdateFile: ToolDefinition<typeof args> = {
   name: "files-update-file",
   description: `Update a file
 
-Updates a file object.`,
+Updates a file by ID.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await filesUpdateFile(

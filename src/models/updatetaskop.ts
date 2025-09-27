@@ -13,7 +13,7 @@ import { TaskUpdate, TaskUpdate$zodSchema } from "./taskupdate.js";
 export type UpdateTaskRequest = {
   id: string;
   xClientId: string;
-  TaskUpdate?: TaskUpdate | undefined;
+  TaskUpdate: TaskUpdate;
 };
 
 export const UpdateTaskRequest$zodSchema: z.ZodType<
@@ -21,7 +21,7 @@ export const UpdateTaskRequest$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  TaskUpdate: TaskUpdate$zodSchema.optional(),
+  TaskUpdate: TaskUpdate$zodSchema,
   id: z.string(),
   xClientId: z.string(),
 });
@@ -158,6 +158,12 @@ export const UpdateTaskResponseBody$zodSchema: z.ZodType<
   z.lazy(() => UpdateTaskResponseBody2$zodSchema),
 ]).describe("The validation error(s)");
 
+export const UpdateTaskStatusCode$zodSchema = z.literal(403);
+
+export type UpdateTaskStatusCode = z.infer<
+  typeof UpdateTaskStatusCode$zodSchema
+>;
+
 export const UpdateTaskType$zodSchema = z.enum([
   "auth_error",
 ]);
@@ -174,7 +180,7 @@ export type UpdateTaskCode = z.infer<typeof UpdateTaskCode$zodSchema>;
  * Missing scope
  */
 export type UpdateTaskForbiddenResponseBody = {
-  status_code: number;
+  status_code: UpdateTaskStatusCode;
   type: UpdateTaskType;
   code: UpdateTaskCode;
   message: string;
@@ -187,7 +193,7 @@ export const UpdateTaskForbiddenResponseBody$zodSchema: z.ZodType<
 > = z.object({
   code: UpdateTaskCode$zodSchema,
   message: z.string(),
-  status_code: z.number(),
+  status_code: UpdateTaskStatusCode$zodSchema,
   type: UpdateTaskType$zodSchema,
 }).describe("Missing scope");
 

@@ -22,7 +22,7 @@ export type ClientCreateClientType = z.infer<
 /**
  * The address of the client
  */
-export type Address = {
+export type ClientCreateAddress = {
   line1: string;
   line2?: string | undefined;
   city: string;
@@ -30,20 +30,23 @@ export type Address = {
   countryCode?: string | undefined;
 };
 
-export const Address$zodSchema: z.ZodType<Address, z.ZodTypeDef, unknown> = z
-  .object({
-    city: z.string(),
-    countryCode: z.string().default("DE"),
-    line1: z.string(),
-    line2: z.string().optional(),
-    postalCode: z.string(),
-  }).describe("The address of the client");
+export const ClientCreateAddress$zodSchema: z.ZodType<
+  ClientCreateAddress,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  city: z.string(),
+  countryCode: z.string().default("DE"),
+  line1: z.string(),
+  line2: z.string().optional(),
+  postalCode: z.string(),
+}).describe("The address of the client");
 
 export type ClientCreate = {
   name: string;
   type: ClientCreateClientType;
   customId?: string | undefined;
-  address?: Address | undefined;
+  address?: ClientCreateAddress | undefined;
 };
 
 export const ClientCreate$zodSchema: z.ZodType<
@@ -51,7 +54,7 @@ export const ClientCreate$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  address: z.lazy(() => Address$zodSchema).optional(),
+  address: z.lazy(() => ClientCreateAddress$zodSchema).optional(),
   customId: z.string().optional(),
   name: z.string(),
   type: ClientCreateClientType$zodSchema,

@@ -4,6 +4,12 @@
 
 import * as z from "zod";
 
+export const BadRequestStatusCode$zodSchema = z.literal(400);
+
+export type BadRequestStatusCode = z.infer<
+  typeof BadRequestStatusCode$zodSchema
+>;
+
 export const BadRequestType$zodSchema = z.enum([
   "bad_request",
 ]);
@@ -17,7 +23,7 @@ export const BadRequestCode$zodSchema = z.enum([
 export type BadRequestCode = z.infer<typeof BadRequestCode$zodSchema>;
 
 export type BadRequest = {
-  status_code: number;
+  status_code: BadRequestStatusCode;
   type: BadRequestType;
   code: BadRequestCode;
   message: string;
@@ -30,6 +36,6 @@ export const BadRequest$zodSchema: z.ZodType<
 > = z.object({
   code: BadRequestCode$zodSchema,
   message: z.string(),
-  status_code: z.number(),
+  status_code: BadRequestStatusCode$zodSchema,
   type: BadRequestType$zodSchema,
 });

@@ -14,7 +14,7 @@ export const tool$filesGetFile: ToolDefinition<typeof args> = {
   name: "files-get-file",
   description: `Get a file
 
-Returns a single file object by ID.`,
+Returns a single file by ID.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await filesGetFile(

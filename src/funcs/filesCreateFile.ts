@@ -198,17 +198,17 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(201, CreateFileResponse$zodSchema, { key: "File" }),
+    M.json(201, CreateFileResponse$zodSchema, { key: "FileT" }),
     M.json(400, CreateFileResponse$zodSchema, { key: "bad_request" }),
     M.json(401, CreateFileResponse$zodSchema, { key: "auth_error" }),
     M.json(403, CreateFileResponse$zodSchema, {
-      key: "403_application/json_object",
+      key: "fourHundredAndThreeApplicationJsonObject",
     }),
     M.json(413, CreateFileResponse$zodSchema, {
-      key: "413_application/json_object",
+      key: "fourHundredAndThirteenApplicationJsonObject",
     }),
     M.json(422, CreateFileResponse$zodSchema, {
-      key: "422_application/json_object",
+      key: "fourHundredAndTwentyTwoApplicationJsonObject",
     }),
     M.json(429, CreateFileResponse$zodSchema, { key: "rate_limit" }),
     M.nil(500, CreateFileResponse$zodSchema),

@@ -206,16 +206,16 @@ export const WebhooksClientChangesClient1$zodSchema: z.ZodType<
  * Client Webhook (create|update)
  */
 export type WebhooksClientChangesRequest =
-  | WebhooksClientChangesClient1
-  | WebhooksClientChangesClient2;
+  | WebhooksClientChangesClient2
+  | WebhooksClientChangesClient1;
 
 export const WebhooksClientChangesRequest$zodSchema: z.ZodType<
   WebhooksClientChangesRequest,
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => WebhooksClientChangesClient1$zodSchema),
   z.lazy(() => WebhooksClientChangesClient2$zodSchema),
+  z.lazy(() => WebhooksClientChangesClient1$zodSchema),
 ]).describe("Client Webhook (create|update)");
 
 export type WebhooksClientChangesResponse = {

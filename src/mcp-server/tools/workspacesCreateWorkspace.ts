@@ -14,7 +14,7 @@ export const tool$workspacesCreateWorkspace: ToolDefinition<typeof args> = {
   name: "workspaces-create-workspace",
   description: `Create a workspace
 
-Creates a new workspace and returns the created workspace object.`,
+Creates a new workspace and returns the created workspace.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await workspacesCreateWorkspace(

@@ -188,16 +188,16 @@ export const WebhooksTaskChangesTask1$zodSchema: z.ZodType<
  * Task Webhook (create|update)
  */
 export type WebhooksTaskChangesRequest =
-  | WebhooksTaskChangesTask1
-  | WebhooksTaskChangesTask2;
+  | WebhooksTaskChangesTask2
+  | WebhooksTaskChangesTask1;
 
 export const WebhooksTaskChangesRequest$zodSchema: z.ZodType<
   WebhooksTaskChangesRequest,
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => WebhooksTaskChangesTask1$zodSchema),
   z.lazy(() => WebhooksTaskChangesTask2$zodSchema),
+  z.lazy(() => WebhooksTaskChangesTask1$zodSchema),
 ]).describe("Task Webhook (create|update)");
 
 export type WebhooksTaskChangesResponse = {

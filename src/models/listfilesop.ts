@@ -84,6 +84,10 @@ export const ListFilesUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("The validation error(s)");
 
+export const ListFilesStatusCode$zodSchema = z.literal(403);
+
+export type ListFilesStatusCode = z.infer<typeof ListFilesStatusCode$zodSchema>;
+
 export const ListFilesType$zodSchema = z.enum([
   "auth_error",
 ]);
@@ -100,7 +104,7 @@ export type ListFilesCode = z.infer<typeof ListFilesCode$zodSchema>;
  * Missing scope
  */
 export type ListFilesForbiddenResponseBody = {
-  status_code: number;
+  status_code: ListFilesStatusCode;
   type: ListFilesType;
   code: ListFilesCode;
   message: string;
@@ -113,7 +117,7 @@ export const ListFilesForbiddenResponseBody$zodSchema: z.ZodType<
 > = z.object({
   code: ListFilesCode$zodSchema,
   message: z.string(),
-  status_code: z.number(),
+  status_code: ListFilesStatusCode$zodSchema,
   type: ListFilesType$zodSchema,
 }).describe("Missing scope");
 

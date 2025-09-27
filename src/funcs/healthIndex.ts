@@ -21,7 +21,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Index
+ * Get API index
+ *
+ * @remarks
+ * Returns API information.
  */
 export function healthIndex(
   client$: SteuerboardCore,

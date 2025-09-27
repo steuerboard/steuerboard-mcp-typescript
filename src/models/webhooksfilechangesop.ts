@@ -176,16 +176,16 @@ export const WebhooksFileChangesFile1$zodSchema: z.ZodType<
  * File Webhook (create|update)
  */
 export type WebhooksFileChangesRequest =
-  | WebhooksFileChangesFile1
-  | WebhooksFileChangesFile2;
+  | WebhooksFileChangesFile2
+  | WebhooksFileChangesFile1;
 
 export const WebhooksFileChangesRequest$zodSchema: z.ZodType<
   WebhooksFileChangesRequest,
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => WebhooksFileChangesFile1$zodSchema),
   z.lazy(() => WebhooksFileChangesFile2$zodSchema),
+  z.lazy(() => WebhooksFileChangesFile1$zodSchema),
 ]).describe("File Webhook (create|update)");
 
 export type WebhooksFileChangesResponse = {

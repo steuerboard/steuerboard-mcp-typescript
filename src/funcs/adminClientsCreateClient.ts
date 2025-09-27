@@ -34,7 +34,7 @@ import { Result } from "../types/fp.js";
  * Create a client
  *
  * @remarks
- * Creates a new client for the accountant and returns the created client object.
+ * Creates a new client for the accountant and returns the created client.
  */
 export function adminClientsCreateClient(
   client$: SteuerboardCore,
@@ -159,10 +159,10 @@ async function $do(
     M.json(201, CreateClientResponse$zodSchema, { key: "Client" }),
     M.json(401, CreateClientResponse$zodSchema, { key: "auth_error" }),
     M.json(403, CreateClientResponse$zodSchema, {
-      key: "403_application/json_object",
+      key: "fourHundredAndThreeApplicationJsonObject",
     }),
     M.json(422, CreateClientResponse$zodSchema, {
-      key: "422_application/json_object",
+      key: "fourHundredAndTwentyTwoApplicationJsonObject",
     }),
     M.json(429, CreateClientResponse$zodSchema, { key: "rate_limit" }),
     M.nil(500, CreateClientResponse$zodSchema),

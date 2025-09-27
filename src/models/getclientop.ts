@@ -76,6 +76,10 @@ export const GetClientUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("Invalid id error");
 
+export const GetClientStatusCode$zodSchema = z.literal(403);
+
+export type GetClientStatusCode = z.infer<typeof GetClientStatusCode$zodSchema>;
+
 export const GetClientType$zodSchema = z.enum([
   "auth_error",
 ]);
@@ -92,7 +96,7 @@ export type GetClientCode = z.infer<typeof GetClientCode$zodSchema>;
  * Missing scope
  */
 export type GetClientForbiddenResponseBody = {
-  status_code: number;
+  status_code: GetClientStatusCode;
   type: GetClientType;
   code: GetClientCode;
   message: string;
@@ -105,7 +109,7 @@ export const GetClientForbiddenResponseBody$zodSchema: z.ZodType<
 > = z.object({
   code: GetClientCode$zodSchema,
   message: z.string(),
-  status_code: z.number(),
+  status_code: GetClientStatusCode$zodSchema,
   type: GetClientType$zodSchema,
 }).describe("Missing scope");
 

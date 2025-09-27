@@ -4,6 +4,10 @@
 
 import * as z from "zod";
 
+export const AuthErrorStatusCode$zodSchema = z.literal(401);
+
+export type AuthErrorStatusCode = z.infer<typeof AuthErrorStatusCode$zodSchema>;
+
 export const AuthErrorType$zodSchema = z.enum([
   "auth_error",
 ]);
@@ -17,7 +21,7 @@ export const AuthErrorCode$zodSchema = z.enum([
 export type AuthErrorCode = z.infer<typeof AuthErrorCode$zodSchema>;
 
 export type AuthError = {
-  status_code: number;
+  status_code: AuthErrorStatusCode;
   type: AuthErrorType;
   code: AuthErrorCode;
   message: string;
@@ -27,6 +31,6 @@ export const AuthError$zodSchema: z.ZodType<AuthError, z.ZodTypeDef, unknown> =
   z.object({
     code: AuthErrorCode$zodSchema,
     message: z.string(),
-    status_code: z.number(),
+    status_code: AuthErrorStatusCode$zodSchema,
     type: AuthErrorType$zodSchema,
   });
