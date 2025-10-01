@@ -170,6 +170,12 @@ export const UpdateFileNotFoundResponseBody$zodSchema: z.ZodType<
   message: z.string(),
 }).describe("File not found");
 
+export const UpdateFileStatusCode$zodSchema = z.literal(403);
+
+export type UpdateFileStatusCode = z.infer<
+  typeof UpdateFileStatusCode$zodSchema
+>;
+
 export const UpdateFileType$zodSchema = z.enum([
   "auth_error",
 ]);
@@ -186,7 +192,7 @@ export type UpdateFileCode = z.infer<typeof UpdateFileCode$zodSchema>;
  * Missing scope
  */
 export type UpdateFileForbiddenResponseBody = {
-  status_code: number;
+  status_code: UpdateFileStatusCode;
   type: UpdateFileType;
   code: UpdateFileCode;
   message: string;
@@ -199,7 +205,7 @@ export const UpdateFileForbiddenResponseBody$zodSchema: z.ZodType<
 > = z.object({
   code: UpdateFileCode$zodSchema,
   message: z.string(),
-  status_code: z.number(),
+  status_code: UpdateFileStatusCode$zodSchema,
   type: UpdateFileType$zodSchema,
 }).describe("Missing scope");
 

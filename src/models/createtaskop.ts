@@ -78,6 +78,12 @@ export const CreateTaskUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("The validation error(s)");
 
+export const CreateTaskStatusCode$zodSchema = z.literal(403);
+
+export type CreateTaskStatusCode = z.infer<
+  typeof CreateTaskStatusCode$zodSchema
+>;
+
 export const CreateTaskType$zodSchema = z.enum([
   "auth_error",
 ]);
@@ -94,7 +100,7 @@ export type CreateTaskCode = z.infer<typeof CreateTaskCode$zodSchema>;
  * Missing scope
  */
 export type CreateTaskForbiddenResponseBody = {
-  status_code: number;
+  status_code: CreateTaskStatusCode;
   type: CreateTaskType;
   code: CreateTaskCode;
   message: string;
@@ -107,7 +113,7 @@ export const CreateTaskForbiddenResponseBody$zodSchema: z.ZodType<
 > = z.object({
   code: CreateTaskCode$zodSchema,
   message: z.string(),
-  status_code: z.number(),
+  status_code: CreateTaskStatusCode$zodSchema,
   type: CreateTaskType$zodSchema,
 }).describe("Missing scope");
 

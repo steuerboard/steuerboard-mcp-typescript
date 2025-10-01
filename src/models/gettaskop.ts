@@ -78,6 +78,10 @@ export const GetTaskUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("Invalid id error");
 
+export const GetTaskStatusCode$zodSchema = z.literal(403);
+
+export type GetTaskStatusCode = z.infer<typeof GetTaskStatusCode$zodSchema>;
+
 export const GetTaskType$zodSchema = z.enum([
   "auth_error",
 ]);
@@ -94,7 +98,7 @@ export type GetTaskCode = z.infer<typeof GetTaskCode$zodSchema>;
  * Missing scope
  */
 export type GetTaskForbiddenResponseBody = {
-  status_code: number;
+  status_code: GetTaskStatusCode;
   type: GetTaskType;
   code: GetTaskCode;
   message: string;
@@ -107,7 +111,7 @@ export const GetTaskForbiddenResponseBody$zodSchema: z.ZodType<
 > = z.object({
   code: GetTaskCode$zodSchema,
   message: z.string(),
-  status_code: z.number(),
+  status_code: GetTaskStatusCode$zodSchema,
   type: GetTaskType$zodSchema,
 }).describe("Missing scope");
 

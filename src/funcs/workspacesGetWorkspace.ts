@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Get a workspace
  *
  * @remarks
- * Returns a single workspace object by ID.
+ * Returns a single workspace by ID.
  */
 export function workspacesGetWorkspace(
   client$: SteuerboardCore,
@@ -170,11 +170,11 @@ async function $do(
     M.json(400, GetWorkspaceResponse$zodSchema, { key: "bad_request" }),
     M.json(401, GetWorkspaceResponse$zodSchema, { key: "auth_error" }),
     M.json(403, GetWorkspaceResponse$zodSchema, {
-      key: "403_application/json_object",
+      key: "fourHundredAndThreeApplicationJsonObject",
     }),
     M.json(404, GetWorkspaceResponse$zodSchema, { key: "not_found" }),
     M.json(422, GetWorkspaceResponse$zodSchema, {
-      key: "422_application/json_object",
+      key: "fourHundredAndTwentyTwoApplicationJsonObject",
     }),
     M.json(429, GetWorkspaceResponse$zodSchema, { key: "rate_limit" }),
     M.nil(500, GetWorkspaceResponse$zodSchema),

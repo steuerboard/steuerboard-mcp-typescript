@@ -7,7 +7,9 @@ import { formatResult, ToolDefinition } from "../tools.js";
 
 export const tool$healthIndex: ToolDefinition = {
   name: "health-index",
-  description: `Index`,
+  description: `Get API index
+
+Returns API information.`,
   tool: async (client, ctx) => {
     const [result, apiCall] = await healthIndex(
       client,

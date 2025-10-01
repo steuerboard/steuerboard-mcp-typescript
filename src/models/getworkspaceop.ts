@@ -81,6 +81,12 @@ export const GetWorkspaceUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("Invalid id error");
 
+export const GetWorkspaceStatusCode$zodSchema = z.literal(403);
+
+export type GetWorkspaceStatusCode = z.infer<
+  typeof GetWorkspaceStatusCode$zodSchema
+>;
+
 export const GetWorkspaceType$zodSchema = z.enum([
   "auth_error",
 ]);
@@ -97,7 +103,7 @@ export type GetWorkspaceCode = z.infer<typeof GetWorkspaceCode$zodSchema>;
  * Missing scope
  */
 export type GetWorkspaceForbiddenResponseBody = {
-  status_code: number;
+  status_code: GetWorkspaceStatusCode;
   type: GetWorkspaceType;
   code: GetWorkspaceCode;
   message: string;
@@ -110,7 +116,7 @@ export const GetWorkspaceForbiddenResponseBody$zodSchema: z.ZodType<
 > = z.object({
   code: GetWorkspaceCode$zodSchema,
   message: z.string(),
-  status_code: z.number(),
+  status_code: GetWorkspaceStatusCode$zodSchema,
   type: GetWorkspaceType$zodSchema,
 }).describe("Missing scope");
 

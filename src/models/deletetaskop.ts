@@ -78,6 +78,12 @@ export const DeleteTaskUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("Invalid id error");
 
+export const DeleteTaskStatusCode$zodSchema = z.literal(403);
+
+export type DeleteTaskStatusCode = z.infer<
+  typeof DeleteTaskStatusCode$zodSchema
+>;
+
 export const DeleteTaskType$zodSchema = z.enum([
   "auth_error",
 ]);
@@ -94,7 +100,7 @@ export type DeleteTaskCode = z.infer<typeof DeleteTaskCode$zodSchema>;
  * Missing scope
  */
 export type DeleteTaskForbiddenResponseBody = {
-  status_code: number;
+  status_code: DeleteTaskStatusCode;
   type: DeleteTaskType;
   code: DeleteTaskCode;
   message: string;
@@ -107,7 +113,7 @@ export const DeleteTaskForbiddenResponseBody$zodSchema: z.ZodType<
 > = z.object({
   code: DeleteTaskCode$zodSchema,
   message: z.string(),
-  status_code: z.number(),
+  status_code: DeleteTaskStatusCode$zodSchema,
   type: DeleteTaskType$zodSchema,
 }).describe("Missing scope");
 

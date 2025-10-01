@@ -23,6 +23,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Me
+ *
+ * @remarks
+ * Returns information about the authenticated principal.
  */
 export function authMe(
   client$: SteuerboardCore,
@@ -129,9 +132,13 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, MeResponse$zodSchema, { key: "200_application/json_object" }),
+    M.json(200, MeResponse$zodSchema, {
+      key: "twoHundredApplicationJsonObject",
+    }),
     M.json(401, MeResponse$zodSchema, { key: "auth_error" }),
-    M.json(403, MeResponse$zodSchema, { key: "403_application/json_object" }),
+    M.json(403, MeResponse$zodSchema, {
+      key: "fourHundredAndThreeApplicationJsonObject",
+    }),
     M.json(429, MeResponse$zodSchema, { key: "rate_limit" }),
     M.nil(500, MeResponse$zodSchema),
   )(response, req$, { extraFields: responseFields$ });

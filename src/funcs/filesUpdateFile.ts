@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Update a file
  *
  * @remarks
- * Updates a file object.
+ * Updates a file by ID.
  */
 export function filesUpdateFile(
   client$: SteuerboardCore,
@@ -167,17 +167,17 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, UpdateFileResponse$zodSchema, { key: "File" }),
+    M.json(200, UpdateFileResponse$zodSchema, { key: "FileT" }),
     M.json(400, UpdateFileResponse$zodSchema, { key: "bad_request" }),
     M.json(401, UpdateFileResponse$zodSchema, { key: "auth_error" }),
     M.json(403, UpdateFileResponse$zodSchema, {
-      key: "403_application/json_object",
+      key: "fourHundredAndThreeApplicationJsonObject",
     }),
     M.json(404, UpdateFileResponse$zodSchema, {
-      key: "404_application/json_object",
+      key: "fourHundredAndFourApplicationJsonObject",
     }),
     M.json(422, UpdateFileResponse$zodSchema, {
-      key: "422_application/json_oneOf",
+      key: "fourHundredAndTwentyTwoApplicationJsonOneOf",
     }),
     M.json(429, UpdateFileResponse$zodSchema, { key: "rate_limit" }),
     M.nil(500, UpdateFileResponse$zodSchema),

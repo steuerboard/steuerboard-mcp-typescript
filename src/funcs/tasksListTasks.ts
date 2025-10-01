@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * List tasks
  *
  * @remarks
- * Returns a paginated list of tasks. Optionally you can filter by client or workspace.
+ * Returns a paginated list of tasks with optional client and workspace filters.
  */
 export function tasksListTasks(
   client$: SteuerboardCore,
@@ -91,6 +91,7 @@ async function $do(
     "cursor": payload$.cursor,
     "limit": payload$.limit,
     "order": payload$.order,
+    "parentId": payload$.parentId,
     "sort": payload$.sort,
     "workspaceId": payload$.workspaceId,
   });
@@ -169,10 +170,10 @@ async function $do(
     M.json(400, ListTasksResponse$zodSchema, { key: "bad_request" }),
     M.json(401, ListTasksResponse$zodSchema, { key: "auth_error" }),
     M.json(403, ListTasksResponse$zodSchema, {
-      key: "403_application/json_object",
+      key: "fourHundredAndThreeApplicationJsonObject",
     }),
     M.json(422, ListTasksResponse$zodSchema, {
-      key: "422_application/json_object",
+      key: "fourHundredAndTwentyTwoApplicationJsonObject",
     }),
     M.json(429, ListTasksResponse$zodSchema, { key: "rate_limit" }),
     M.nil(500, ListTasksResponse$zodSchema),

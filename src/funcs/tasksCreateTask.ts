@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Create a task
  *
  * @remarks
- * Creates a new task and returns the created task object.
+ * Creates a new task and returns the created task.
  */
 export function tasksCreateTask(
   client$: SteuerboardCore,
@@ -162,10 +162,10 @@ async function $do(
     M.json(400, CreateTaskResponse$zodSchema, { key: "bad_request" }),
     M.json(401, CreateTaskResponse$zodSchema, { key: "auth_error" }),
     M.json(403, CreateTaskResponse$zodSchema, {
-      key: "403_application/json_object",
+      key: "fourHundredAndThreeApplicationJsonObject",
     }),
     M.json(422, CreateTaskResponse$zodSchema, {
-      key: "422_application/json_object",
+      key: "fourHundredAndTwentyTwoApplicationJsonObject",
     }),
     M.json(429, CreateTaskResponse$zodSchema, { key: "rate_limit" }),
     M.nil(500, CreateTaskResponse$zodSchema),

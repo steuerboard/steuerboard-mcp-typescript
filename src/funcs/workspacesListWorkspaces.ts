@@ -168,10 +168,10 @@ async function $do(
     M.json(400, ListWorkspacesResponse$zodSchema, { key: "bad_request" }),
     M.json(401, ListWorkspacesResponse$zodSchema, { key: "auth_error" }),
     M.json(403, ListWorkspacesResponse$zodSchema, {
-      key: "403_application/json_object",
+      key: "fourHundredAndThreeApplicationJsonObject",
     }),
     M.json(422, ListWorkspacesResponse$zodSchema, {
-      key: "422_application/json_object",
+      key: "fourHundredAndTwentyTwoApplicationJsonObject",
     }),
     M.json(429, ListWorkspacesResponse$zodSchema, { key: "rate_limit" }),
     M.nil(500, ListWorkspacesResponse$zodSchema),

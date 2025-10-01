@@ -14,7 +14,7 @@ export const tool$adminClientsGetClient: ToolDefinition<typeof args> = {
   name: "admin-clients-get-client",
   description: `Get a client
 
-Returns a single client object by ID.`,
+Returns a single client by ID.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await adminClientsGetClient(

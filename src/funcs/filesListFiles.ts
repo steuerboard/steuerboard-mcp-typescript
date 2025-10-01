@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * List files
  *
  * @remarks
- * Returns a paginated list of files. Optionally you can filter by workspace.
+ * Returns a paginated list of files with optional workspace filters.
  */
 export function filesListFiles(
   client$: SteuerboardCore,
@@ -167,10 +167,10 @@ async function $do(
     M.json(400, ListFilesResponse$zodSchema, { key: "bad_request" }),
     M.json(401, ListFilesResponse$zodSchema, { key: "auth_error" }),
     M.json(403, ListFilesResponse$zodSchema, {
-      key: "403_application/json_object",
+      key: "fourHundredAndThreeApplicationJsonObject",
     }),
     M.json(422, ListFilesResponse$zodSchema, {
-      key: "422_application/json_object",
+      key: "fourHundredAndTwentyTwoApplicationJsonObject",
     }),
     M.json(429, ListFilesResponse$zodSchema, { key: "rate_limit" }),
     M.nil(500, ListFilesResponse$zodSchema),

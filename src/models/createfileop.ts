@@ -78,6 +78,12 @@ export const CreateFileUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("The validation error(s)");
 
+export const RequestEntityTooLargeStatusCode$zodSchema = z.literal(413);
+
+export type RequestEntityTooLargeStatusCode = z.infer<
+  typeof RequestEntityTooLargeStatusCode$zodSchema
+>;
+
 export const RequestEntityTooLargeType$zodSchema = z.enum([
   "bad_request",
 ]);
@@ -98,7 +104,7 @@ export type RequestEntityTooLargeCode = z.infer<
  * Payload too large
  */
 export type CreateFileRequestEntityTooLargeResponseBody = {
-  status_code: number;
+  status_code: RequestEntityTooLargeStatusCode;
   type: RequestEntityTooLargeType;
   code: RequestEntityTooLargeCode;
   message: string;
@@ -111,9 +117,15 @@ export const CreateFileRequestEntityTooLargeResponseBody$zodSchema: z.ZodType<
 > = z.object({
   code: RequestEntityTooLargeCode$zodSchema,
   message: z.string(),
-  status_code: z.number(),
+  status_code: RequestEntityTooLargeStatusCode$zodSchema,
   type: RequestEntityTooLargeType$zodSchema,
 }).describe("Payload too large");
+
+export const CreateFileForbiddenStatusCode$zodSchema = z.literal(403);
+
+export type CreateFileForbiddenStatusCode = z.infer<
+  typeof CreateFileForbiddenStatusCode$zodSchema
+>;
 
 export const CreateFileForbiddenType$zodSchema = z.enum([
   "auth_error",
@@ -135,7 +147,7 @@ export type CreateFileForbiddenCode = z.infer<
  * Missing scope
  */
 export type CreateFileForbiddenResponseBody = {
-  status_code: number;
+  status_code: CreateFileForbiddenStatusCode;
   type: CreateFileForbiddenType;
   code: CreateFileForbiddenCode;
   message: string;
@@ -148,7 +160,7 @@ export const CreateFileForbiddenResponseBody$zodSchema: z.ZodType<
 > = z.object({
   code: CreateFileForbiddenCode$zodSchema,
   message: z.string(),
-  status_code: z.number(),
+  status_code: CreateFileForbiddenStatusCode$zodSchema,
   type: CreateFileForbiddenType$zodSchema,
 }).describe("Missing scope");
 

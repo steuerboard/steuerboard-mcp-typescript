@@ -1,7 +1,7 @@
 {
   "dxt_version": "0.1",
   "name": "@steuerboard/mcp",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "",
   "long_description": "",
   "author": {
@@ -24,27 +24,51 @@
   "tools": [
     {
       "name": "health-index",
-      "description": "Index"
+      "description": "Get API index\n\nReturns API information."
     },
     {
       "name": "health-ping",
-      "description": "Ping Pong"
+      "description": "Ping Pong\n\nReturns a pong response for health checks."
     },
     {
       "name": "auth-me",
-      "description": "Me"
+      "description": "Me\n\nReturns information about the authenticated principal."
     },
     {
       "name": "admin-clients-list-clients",
-      "description": "List clients\n\nReturns a list of clients."
+      "description": "List clients\n\nReturns a paginated list of clients."
     },
     {
       "name": "admin-clients-create-client",
-      "description": "Create a client\n\nCreates a new client for the accountant and returns the created client object."
+      "description": "Create a client\n\nCreates a new client for the accountant and returns the created client."
     },
     {
       "name": "admin-clients-get-client",
-      "description": "Get a client\n\nReturns a single client object by ID."
+      "description": "Get a client\n\nReturns a single client by ID."
+    },
+    {
+      "name": "admin-clients-update-client",
+      "description": "Update a client\n\nUpdates a client by ID."
+    },
+    {
+      "name": "admin-users-list-accountant-users",
+      "description": "List accountant users\n\nReturns a paginated list of accountant users."
+    },
+    {
+      "name": "admin-users-invite-accountant-user",
+      "description": "Invite an accountant user\n\nInvites a new accountant user and returns the created record."
+    },
+    {
+      "name": "admin-users-get-accountant-user",
+      "description": "Get an accountant user\n\nReturns a single accountant user by ID."
+    },
+    {
+      "name": "admin-users-update-accountant-user",
+      "description": "Update an accountant user\n\nUpdates an accountant user by ID."
+    },
+    {
+      "name": "admin-users-delete-accountant-user",
+      "description": "Delete an accountant user\n\nDeletes an accountant user by ID."
     },
     {
       "name": "workspaces-list-workspaces",
@@ -52,15 +76,31 @@
     },
     {
       "name": "workspaces-create-workspace",
-      "description": "Create a workspace\n\nCreates a new workspace and returns the created workspace object."
+      "description": "Create a workspace\n\nCreates a new workspace and returns the created workspace."
     },
     {
       "name": "workspaces-get-workspace",
-      "description": "Get a workspace\n\nReturns a single workspace object by ID."
+      "description": "Get a workspace\n\nReturns a single workspace by ID."
+    },
+    {
+      "name": "workspaces-update-workspace",
+      "description": "Update a workspace\n\nUpdates a workspace by ID."
+    },
+    {
+      "name": "workspace-members-list-workspace-members",
+      "description": "List workspace members\n\nReturns workspace members for a workspace."
+    },
+    {
+      "name": "workspace-members-create-workspace-member",
+      "description": "Create a workspace member\n\nCreates a new workspace member."
+    },
+    {
+      "name": "workspace-members-remove-workspace-member",
+      "description": "Remove a workspace member\n\nRemoves a workspace member from a workspace."
     },
     {
       "name": "files-list-files",
-      "description": "List files\n\nReturns a paginated list of files. Optionally you can filter by workspace."
+      "description": "List files\n\nReturns a paginated list of files with optional workspace filters."
     },
     {
       "name": "files-create-file",
@@ -68,11 +108,11 @@
     },
     {
       "name": "files-get-file",
-      "description": "Get a file\n\nReturns a single file object by ID."
+      "description": "Get a file\n\nReturns a single file by ID."
     },
     {
       "name": "files-update-file",
-      "description": "Update a file\n\nUpdates a file object."
+      "description": "Update a file\n\nUpdates a file by ID."
     },
     {
       "name": "files-delete-file",
@@ -80,23 +120,43 @@
     },
     {
       "name": "tasks-list-tasks",
-      "description": "List tasks\n\nReturns a paginated list of tasks. Optionally you can filter by client or workspace."
+      "description": "List tasks\n\nReturns a paginated list of tasks with optional client and workspace filters."
     },
     {
       "name": "tasks-create-task",
-      "description": "Create a task\n\nCreates a new task and returns the created task object."
+      "description": "Create a task\n\nCreates a new task and returns the created task."
     },
     {
       "name": "tasks-get-task",
-      "description": "Get a task\n\nReturns a single task object by ID."
+      "description": "Get a task\n\nReturns a single task by ID."
     },
     {
       "name": "tasks-update-task",
-      "description": "Update a task\n\nUpdates an existing task object."
+      "description": "Update a task\n\nUpdates a task by ID."
     },
     {
       "name": "tasks-delete-task",
       "description": "Delete a task\n\nDeletes a task by ID."
+    },
+    {
+      "name": "users-list-users",
+      "description": "List users\n\nReturns a paginated list of client users."
+    },
+    {
+      "name": "users-invite-user",
+      "description": "Invite a user\n\nInvites a new client user and returns the created record."
+    },
+    {
+      "name": "users-get-user",
+      "description": "Get a user\n\nReturns a single client user by ID."
+    },
+    {
+      "name": "users-update-user",
+      "description": "Update a user\n\nUpdates a client user by ID."
+    },
+    {
+      "name": "users-delete-user",
+      "description": "Delete a user\n\nDeletes a client user from the client by ID."
     }
   ],
   "prompts": [],

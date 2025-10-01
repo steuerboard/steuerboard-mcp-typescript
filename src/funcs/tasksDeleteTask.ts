@@ -170,11 +170,11 @@ async function $do(
     M.json(400, DeleteTaskResponse$zodSchema, { key: "bad_request" }),
     M.json(401, DeleteTaskResponse$zodSchema, { key: "auth_error" }),
     M.json(403, DeleteTaskResponse$zodSchema, {
-      key: "403_application/json_object",
+      key: "fourHundredAndThreeApplicationJsonObject",
     }),
     M.json(404, DeleteTaskResponse$zodSchema, { key: "not_found" }),
     M.json(422, DeleteTaskResponse$zodSchema, {
-      key: "422_application/json_object",
+      key: "fourHundredAndTwentyTwoApplicationJsonObject",
     }),
     M.json(429, DeleteTaskResponse$zodSchema, { key: "rate_limit" }),
     M.nil(500, DeleteTaskResponse$zodSchema),

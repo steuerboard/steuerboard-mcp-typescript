@@ -16,6 +16,12 @@ import { createRegisterTool } from "./tools.js";
 import { tool$adminClientsCreateClient } from "./tools/adminClientsCreateClient.js";
 import { tool$adminClientsGetClient } from "./tools/adminClientsGetClient.js";
 import { tool$adminClientsListClients } from "./tools/adminClientsListClients.js";
+import { tool$adminClientsUpdateClient } from "./tools/adminClientsUpdateClient.js";
+import { tool$adminUsersDeleteAccountantUser } from "./tools/adminUsersDeleteAccountantUser.js";
+import { tool$adminUsersGetAccountantUser } from "./tools/adminUsersGetAccountantUser.js";
+import { tool$adminUsersInviteAccountantUser } from "./tools/adminUsersInviteAccountantUser.js";
+import { tool$adminUsersListAccountantUsers } from "./tools/adminUsersListAccountantUsers.js";
+import { tool$adminUsersUpdateAccountantUser } from "./tools/adminUsersUpdateAccountantUser.js";
 import { tool$authMe } from "./tools/authMe.js";
 import { tool$filesCreateFile } from "./tools/filesCreateFile.js";
 import { tool$filesDeleteFile } from "./tools/filesDeleteFile.js";
@@ -29,9 +35,18 @@ import { tool$tasksDeleteTask } from "./tools/tasksDeleteTask.js";
 import { tool$tasksGetTask } from "./tools/tasksGetTask.js";
 import { tool$tasksListTasks } from "./tools/tasksListTasks.js";
 import { tool$tasksUpdateTask } from "./tools/tasksUpdateTask.js";
+import { tool$usersDeleteUser } from "./tools/usersDeleteUser.js";
+import { tool$usersGetUser } from "./tools/usersGetUser.js";
+import { tool$usersInviteUser } from "./tools/usersInviteUser.js";
+import { tool$usersListUsers } from "./tools/usersListUsers.js";
+import { tool$usersUpdateUser } from "./tools/usersUpdateUser.js";
+import { tool$workspaceMembersCreateWorkspaceMember } from "./tools/workspaceMembersCreateWorkspaceMember.js";
+import { tool$workspaceMembersListWorkspaceMembers } from "./tools/workspaceMembersListWorkspaceMembers.js";
+import { tool$workspaceMembersRemoveWorkspaceMember } from "./tools/workspaceMembersRemoveWorkspaceMember.js";
 import { tool$workspacesCreateWorkspace } from "./tools/workspacesCreateWorkspace.js";
 import { tool$workspacesGetWorkspace } from "./tools/workspacesGetWorkspace.js";
 import { tool$workspacesListWorkspaces } from "./tools/workspacesListWorkspaces.js";
+import { tool$workspacesUpdateWorkspace } from "./tools/workspacesUpdateWorkspace.js";
 
 export function createMCPServer(deps: {
   logger: ConsoleLogger;
@@ -44,7 +59,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Steuerboard",
-    version: "0.1.2",
+    version: "0.2.0",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -93,9 +108,19 @@ export function createMCPServer(deps: {
   tool(tool$adminClientsListClients);
   tool(tool$adminClientsCreateClient);
   tool(tool$adminClientsGetClient);
+  tool(tool$adminClientsUpdateClient);
+  tool(tool$adminUsersListAccountantUsers);
+  tool(tool$adminUsersInviteAccountantUser);
+  tool(tool$adminUsersGetAccountantUser);
+  tool(tool$adminUsersUpdateAccountantUser);
+  tool(tool$adminUsersDeleteAccountantUser);
   tool(tool$workspacesListWorkspaces);
   tool(tool$workspacesCreateWorkspace);
   tool(tool$workspacesGetWorkspace);
+  tool(tool$workspacesUpdateWorkspace);
+  tool(tool$workspaceMembersListWorkspaceMembers);
+  tool(tool$workspaceMembersCreateWorkspaceMember);
+  tool(tool$workspaceMembersRemoveWorkspaceMember);
   tool(tool$filesListFiles);
   tool(tool$filesCreateFile);
   tool(tool$filesGetFile);
@@ -106,6 +131,11 @@ export function createMCPServer(deps: {
   tool(tool$tasksGetTask);
   tool(tool$tasksUpdateTask);
   tool(tool$tasksDeleteTask);
+  tool(tool$usersListUsers);
+  tool(tool$usersInviteUser);
+  tool(tool$usersGetUser);
+  tool(tool$usersUpdateUser);
+  tool(tool$usersDeleteUser);
 
   return server;
 }

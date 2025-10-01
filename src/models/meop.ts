@@ -6,6 +6,10 @@ import * as z from "zod";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
+export const MeStatusCode$zodSchema = z.literal(403);
+
+export type MeStatusCode = z.infer<typeof MeStatusCode$zodSchema>;
+
 export const MeType$zodSchema = z.enum([
   "auth_error",
 ]);
@@ -22,7 +26,7 @@ export type MeCode = z.infer<typeof MeCode$zodSchema>;
  * Missing scope
  */
 export type MeForbiddenResponseBody = {
-  status_code: number;
+  status_code: MeStatusCode;
   type: MeType;
   code: MeCode;
   message: string;
@@ -35,7 +39,7 @@ export const MeForbiddenResponseBody$zodSchema: z.ZodType<
 > = z.object({
   code: MeCode$zodSchema,
   message: z.string(),
-  status_code: z.number(),
+  status_code: MeStatusCode$zodSchema,
   type: MeType$zodSchema,
 }).describe("Missing scope");
 

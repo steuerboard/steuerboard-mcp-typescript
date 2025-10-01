@@ -4,6 +4,10 @@
 
 import * as z from "zod";
 
+export const RateLimitStatusCode$zodSchema = z.literal(429);
+
+export type RateLimitStatusCode = z.infer<typeof RateLimitStatusCode$zodSchema>;
+
 export const RateLimitType$zodSchema = z.enum([
   "rate_limit",
 ]);
@@ -17,7 +21,7 @@ export const RateLimitCode$zodSchema = z.enum([
 export type RateLimitCode = z.infer<typeof RateLimitCode$zodSchema>;
 
 export type RateLimit = {
-  status_code: number;
+  status_code: RateLimitStatusCode;
   type: RateLimitType;
   code: RateLimitCode;
   message: string;
@@ -27,6 +31,6 @@ export const RateLimit$zodSchema: z.ZodType<RateLimit, z.ZodTypeDef, unknown> =
   z.object({
     code: RateLimitCode$zodSchema,
     message: z.string(),
-    status_code: z.number(),
+    status_code: RateLimitStatusCode$zodSchema,
     type: RateLimitType$zodSchema,
   });

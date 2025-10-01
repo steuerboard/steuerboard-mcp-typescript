@@ -14,7 +14,7 @@ export const tool$workspacesGetWorkspace: ToolDefinition<typeof args> = {
   name: "workspaces-get-workspace",
   description: `Get a workspace
 
-Returns a single workspace object by ID.`,
+Returns a single workspace by ID.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await workspacesGetWorkspace(

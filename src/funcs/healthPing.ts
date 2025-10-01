@@ -22,6 +22,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Ping Pong
+ *
+ * @remarks
+ * Returns a pong response for health checks.
  */
 export function healthPing(
   client$: SteuerboardCore,

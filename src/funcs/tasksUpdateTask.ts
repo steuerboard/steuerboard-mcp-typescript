@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Update a task
  *
  * @remarks
- * Updates an existing task object.
+ * Updates a task by ID.
  */
 export function tasksUpdateTask(
   client$: SteuerboardCore,

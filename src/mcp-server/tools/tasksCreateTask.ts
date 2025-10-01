@@ -14,7 +14,7 @@ export const tool$tasksCreateTask: ToolDefinition<typeof args> = {
   name: "tasks-create-task",
   description: `Create a task
 
-Creates a new task and returns the created task object.`,
+Creates a new task and returns the created task.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await tasksCreateTask(

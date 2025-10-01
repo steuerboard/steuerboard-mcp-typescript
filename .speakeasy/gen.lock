@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 188da4b7-9881-4ae0-a213-c32e68b13c57
 management:
-  docChecksum: 692c8e90a0743217a6c47e490ab9510a
+  docChecksum: 19649e61f4ea72ea603ce10fa5b278e1
   docVersion: 0.1.0
-  speakeasyVersion: 1.622.1
-  generationVersion: 2.709.0
-  releaseVersion: 0.1.2
-  configChecksum: c6f59f66f4a8585a05d44a16e457e290
+  speakeasyVersion: 1.631.5
+  generationVersion: 2.716.16
+  releaseVersion: 0.2.0
+  configChecksum: b340067223fb944da170f0a0d940bb44
   repoURL: https://github.com/steuerboard/steuerboard-mcp-typescript.git
   published: true
 features:
   mcp-typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.0
-    core: 0.4.0
+    core: 0.4.2
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     globalSecurity: 0.1.1
@@ -23,8 +23,7 @@ features:
     responseFormat: 0.1.0
     retries: 0.1.0
     sdkHooks: 0.2.0
-    unions: 0.1.0
-    webhooks: 0.0.0
+    unions: 0.1.2
 generatedFiles:
   - .dxtignore
   - .gitattributes
@@ -38,6 +37,12 @@ generatedFiles:
   - src/funcs/adminClientsCreateClient.ts
   - src/funcs/adminClientsGetClient.ts
   - src/funcs/adminClientsListClients.ts
+  - src/funcs/adminClientsUpdateClient.ts
+  - src/funcs/adminUsersDeleteAccountantUser.ts
+  - src/funcs/adminUsersGetAccountantUser.ts
+  - src/funcs/adminUsersInviteAccountantUser.ts
+  - src/funcs/adminUsersListAccountantUsers.ts
+  - src/funcs/adminUsersUpdateAccountantUser.ts
   - src/funcs/authMe.ts
   - src/funcs/filesCreateFile.ts
   - src/funcs/filesDeleteFile.ts
@@ -51,9 +56,18 @@ generatedFiles:
   - src/funcs/tasksGetTask.ts
   - src/funcs/tasksListTasks.ts
   - src/funcs/tasksUpdateTask.ts
+  - src/funcs/usersDeleteUser.ts
+  - src/funcs/usersGetUser.ts
+  - src/funcs/usersInviteUser.ts
+  - src/funcs/usersListUsers.ts
+  - src/funcs/usersUpdateUser.ts
+  - src/funcs/workspaceMembersCreateWorkspaceMember.ts
+  - src/funcs/workspaceMembersListWorkspaceMembers.ts
+  - src/funcs/workspaceMembersRemoveWorkspaceMember.ts
   - src/funcs/workspacesCreateWorkspace.ts
   - src/funcs/workspacesGetWorkspace.ts
   - src/funcs/workspacesListWorkspaces.ts
+  - src/funcs/workspacesUpdateWorkspace.ts
   - src/hooks/hooks.ts
   - src/hooks/types.ts
   - src/lib/base64.ts
@@ -89,6 +103,12 @@ generatedFiles:
   - src/mcp-server/tools/adminClientsCreateClient.ts
   - src/mcp-server/tools/adminClientsGetClient.ts
   - src/mcp-server/tools/adminClientsListClients.ts
+  - src/mcp-server/tools/adminClientsUpdateClient.ts
+  - src/mcp-server/tools/adminUsersDeleteAccountantUser.ts
+  - src/mcp-server/tools/adminUsersGetAccountantUser.ts
+  - src/mcp-server/tools/adminUsersInviteAccountantUser.ts
+  - src/mcp-server/tools/adminUsersListAccountantUsers.ts
+  - src/mcp-server/tools/adminUsersUpdateAccountantUser.ts
   - src/mcp-server/tools/authMe.ts
   - src/mcp-server/tools/filesCreateFile.ts
   - src/mcp-server/tools/filesDeleteFile.ts
@@ -102,58 +122,90 @@ generatedFiles:
   - src/mcp-server/tools/tasksGetTask.ts
   - src/mcp-server/tools/tasksListTasks.ts
   - src/mcp-server/tools/tasksUpdateTask.ts
+  - src/mcp-server/tools/usersDeleteUser.ts
+  - src/mcp-server/tools/usersGetUser.ts
+  - src/mcp-server/tools/usersInviteUser.ts
+  - src/mcp-server/tools/usersListUsers.ts
+  - src/mcp-server/tools/usersUpdateUser.ts
+  - src/mcp-server/tools/workspaceMembersCreateWorkspaceMember.ts
+  - src/mcp-server/tools/workspaceMembersListWorkspaceMembers.ts
+  - src/mcp-server/tools/workspaceMembersRemoveWorkspaceMember.ts
   - src/mcp-server/tools/workspacesCreateWorkspace.ts
   - src/mcp-server/tools/workspacesGetWorkspace.ts
   - src/mcp-server/tools/workspacesListWorkspaces.ts
+  - src/mcp-server/tools/workspacesUpdateWorkspace.ts
+  - src/models/accountantuser.ts
+  - src/models/accountantuserrole.ts
   - src/models/autherror.ts
   - src/models/badrequest.ts
   - src/models/client.ts
   - src/models/clientcreate.ts
+  - src/models/clientupdate.ts
+  - src/models/clientuser.ts
+  - src/models/clientuserinvite.ts
+  - src/models/clientuserupdate.ts
+  - src/models/conflict.ts
   - src/models/createclientop.ts
   - src/models/createfileop.ts
   - src/models/createtaskop.ts
+  - src/models/createworkspacememberop.ts
   - src/models/createworkspaceop.ts
+  - src/models/deleteaccountantuserop.ts
   - src/models/deletefileop.ts
   - src/models/deleteresponse.ts
   - src/models/deletetaskop.ts
+  - src/models/deleteuserop.ts
   - src/models/errors/apierror.ts
   - src/models/errors/httpclienterrors.ts
   - src/models/errors/sdkvalidationerror.ts
   - src/models/file.ts
   - src/models/filecreate.ts
   - src/models/fileupdate.ts
+  - src/models/getaccountantuserop.ts
   - src/models/getclientop.ts
   - src/models/getfileop.ts
   - src/models/gettaskop.ts
+  - src/models/getuserop.ts
   - src/models/getworkspaceop.ts
   - src/models/indexop.ts
+  - src/models/inviteaccountantuser.ts
+  - src/models/inviteaccountantuserop.ts
+  - src/models/inviteuserop.ts
+  - src/models/listaccountantusersop.ts
   - src/models/listclientsop.ts
   - src/models/listfilesop.ts
   - src/models/listtasksop.ts
+  - src/models/listusersop.ts
+  - src/models/listworkspacemembersop.ts
   - src/models/listworkspacesop.ts
   - src/models/meop.ts
   - src/models/notfound.ts
   - src/models/paginatedclients.ts
   - src/models/paginatedfiles.ts
   - src/models/paginatedtasks.ts
+  - src/models/paginatedusers.ts
   - src/models/paginatedworkspaces.ts
   - src/models/pagination.ts
   - src/models/pingop.ts
   - src/models/ratelimit.ts
+  - src/models/removeworkspacememberop.ts
   - src/models/security.ts
   - src/models/task.ts
   - src/models/taskcreate.ts
   - src/models/taskupdate.ts
+  - src/models/updateaccountantuser.ts
+  - src/models/updateaccountantuserop.ts
+  - src/models/updateclientop.ts
   - src/models/updatefileop.ts
   - src/models/updatetaskop.ts
-  - src/models/webhooksclientchangesop.ts
-  - src/models/webhooksfilechangesop.ts
-  - src/models/webhooksfilecommentcreatedop.ts
-  - src/models/webhookstaskchangesop.ts
-  - src/models/webhookstaskcommentcreatedop.ts
-  - src/models/webhooksworkspacechangesop.ts
+  - src/models/updateuserop.ts
+  - src/models/updateworkspaceop.ts
   - src/models/workspace.ts
   - src/models/workspacecreate.ts
+  - src/models/workspacemember.ts
+  - src/models/workspacemembercreate.ts
+  - src/models/workspacememberremove.ts
+  - src/models/workspaceupdate.ts
   - src/types/async.ts
   - src/types/blobs.ts
   - src/types/enums.ts

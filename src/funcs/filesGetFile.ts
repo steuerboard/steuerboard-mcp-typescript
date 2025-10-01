@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Get a file
  *
  * @remarks
- * Returns a single file object by ID.
+ * Returns a single file by ID.
  */
 export function filesGetFile(
   client$: SteuerboardCore,
@@ -166,17 +166,17 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, GetFileResponse$zodSchema, { key: "File" }),
+    M.json(200, GetFileResponse$zodSchema, { key: "FileT" }),
     M.json(400, GetFileResponse$zodSchema, { key: "bad_request" }),
     M.json(401, GetFileResponse$zodSchema, { key: "auth_error" }),
     M.json(403, GetFileResponse$zodSchema, {
-      key: "403_application/json_object",
+      key: "fourHundredAndThreeApplicationJsonObject",
     }),
     M.json(404, GetFileResponse$zodSchema, {
-      key: "404_application/json_object",
+      key: "fourHundredAndFourApplicationJsonObject",
     }),
     M.json(422, GetFileResponse$zodSchema, {
-      key: "422_application/json_object",
+      key: "fourHundredAndTwentyTwoApplicationJsonObject",
     }),
     M.json(429, GetFileResponse$zodSchema, { key: "rate_limit" }),
     M.nil(500, GetFileResponse$zodSchema),

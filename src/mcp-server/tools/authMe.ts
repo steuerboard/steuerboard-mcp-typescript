@@ -7,7 +7,9 @@ import { formatResult, ToolDefinition } from "../tools.js";
 
 export const tool$authMe: ToolDefinition = {
   name: "auth-me",
-  description: `Me`,
+  description: `Me
+
+Returns information about the authenticated principal.`,
   tool: async (client, ctx) => {
     const [result, apiCall] = await authMe(
       client,

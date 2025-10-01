@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Create a workspace
  *
  * @remarks
- * Creates a new workspace and returns the created workspace object.
+ * Creates a new workspace and returns the created workspace.
  */
 export function workspacesCreateWorkspace(
   client$: SteuerboardCore,
@@ -162,10 +162,10 @@ async function $do(
     M.json(400, CreateWorkspaceResponse$zodSchema, { key: "bad_request" }),
     M.json(401, CreateWorkspaceResponse$zodSchema, { key: "auth_error" }),
     M.json(403, CreateWorkspaceResponse$zodSchema, {
-      key: "403_application/json_object",
+      key: "fourHundredAndThreeApplicationJsonObject",
     }),
     M.json(422, CreateWorkspaceResponse$zodSchema, {
-      key: "422_application/json_object",
+      key: "fourHundredAndTwentyTwoApplicationJsonObject",
     }),
     M.json(429, CreateWorkspaceResponse$zodSchema, { key: "rate_limit" }),
     M.nil(500, CreateWorkspaceResponse$zodSchema),
