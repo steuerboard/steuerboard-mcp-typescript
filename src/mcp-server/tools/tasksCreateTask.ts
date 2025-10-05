@@ -15,6 +15,12 @@ export const tool$tasksCreateTask: ToolDefinition<typeof args> = {
   description: `Create a task
 
 Creates a new task and returns the created task.`,
+  annotations: {
+    "destructiveHint": false,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": false,
+  },
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await tasksCreateTask(

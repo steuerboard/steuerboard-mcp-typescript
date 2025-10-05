@@ -16,6 +16,12 @@ export const tool$adminUsersUpdateAccountantUser: ToolDefinition<typeof args> =
     description: `Update an accountant user
 
 Updates an accountant user by ID.`,
+    annotations: {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false,
+    },
     args,
     tool: async (client, args, ctx) => {
       const [result, apiCall] = await adminUsersUpdateAccountantUser(

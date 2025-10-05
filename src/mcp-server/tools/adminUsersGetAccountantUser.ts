@@ -15,6 +15,12 @@ export const tool$adminUsersGetAccountantUser: ToolDefinition<typeof args> = {
   description: `Get an accountant user
 
 Returns a single accountant user by ID.`,
+  annotations: {
+    "destructiveHint": false,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": true,
+  },
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await adminUsersGetAccountantUser(

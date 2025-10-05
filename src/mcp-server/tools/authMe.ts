@@ -10,6 +10,12 @@ export const tool$authMe: ToolDefinition = {
   description: `Me
 
 Returns information about the authenticated principal.`,
+  annotations: {
+    "destructiveHint": false,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": true,
+  },
   tool: async (client, ctx) => {
     const [result, apiCall] = await authMe(
       client,

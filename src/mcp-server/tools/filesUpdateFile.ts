@@ -15,6 +15,12 @@ export const tool$filesUpdateFile: ToolDefinition<typeof args> = {
   description: `Update a file
 
 Updates a file by ID.`,
+  annotations: {
+    "destructiveHint": false,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": false,
+  },
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await filesUpdateFile(
