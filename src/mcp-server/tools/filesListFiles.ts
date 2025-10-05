@@ -15,6 +15,12 @@ export const tool$filesListFiles: ToolDefinition<typeof args> = {
   description: `List files
 
 Returns a paginated list of files with optional workspace filters.`,
+  annotations: {
+    "destructiveHint": false,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": true,
+  },
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await filesListFiles(

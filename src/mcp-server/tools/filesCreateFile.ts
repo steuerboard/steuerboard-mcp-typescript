@@ -15,6 +15,12 @@ export const tool$filesCreateFile: ToolDefinition<typeof args> = {
   description: `Upload a file
 
 Uploads a new file. Maximum file size is 500MB.`,
+  annotations: {
+    "destructiveHint": false,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": false,
+  },
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await filesCreateFile(

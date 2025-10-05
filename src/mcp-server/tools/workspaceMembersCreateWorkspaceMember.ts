@@ -17,6 +17,12 @@ export const tool$workspaceMembersCreateWorkspaceMember: ToolDefinition<
   description: `Create a workspace member
 
 Creates a new workspace member.`,
+  annotations: {
+    "destructiveHint": false,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": false,
+  },
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await workspaceMembersCreateWorkspaceMember(

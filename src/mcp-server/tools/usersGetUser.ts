@@ -15,6 +15,12 @@ export const tool$usersGetUser: ToolDefinition<typeof args> = {
   description: `Get a user
 
 Returns a single client user by ID.`,
+  annotations: {
+    "destructiveHint": false,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": true,
+  },
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await usersGetUser(

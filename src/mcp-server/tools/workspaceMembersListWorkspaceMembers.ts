@@ -17,6 +17,12 @@ export const tool$workspaceMembersListWorkspaceMembers: ToolDefinition<
   description: `List workspace members
 
 Returns workspace members for a workspace.`,
+  annotations: {
+    "destructiveHint": false,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": true,
+  },
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await workspaceMembersListWorkspaceMembers(

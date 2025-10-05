@@ -15,6 +15,12 @@ export const tool$usersInviteUser: ToolDefinition<typeof args> = {
   description: `Invite a user
 
 Invites a new client user and returns the created record.`,
+  annotations: {
+    "destructiveHint": false,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": false,
+  },
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await usersInviteUser(

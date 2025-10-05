@@ -17,6 +17,12 @@ export const tool$workspaceMembersRemoveWorkspaceMember: ToolDefinition<
   description: `Remove a workspace member
 
 Removes a workspace member from a workspace.`,
+  annotations: {
+    "destructiveHint": true,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": false,
+  },
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await workspaceMembersRemoveWorkspaceMember(

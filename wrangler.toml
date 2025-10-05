@@ -1,5 +1,5 @@
 
-name = "steuerboard-mcp-server"
+name = "@steuerboard/mcp-mcp-server"
 main = "src/cloudflare-worker/cloudflare-worker.ts"
 compatibility_date = "2025-07-15"
 
@@ -13,7 +13,7 @@ class_name = "AtSteuerboardMcpMCP"
 
 # Durable Object migration
 [[migrations]]
-tag = "v2"
+tag = "v1"
 new_classes = ["AtSteuerboardMcpMCP"]
 
 # Static assets configuration
