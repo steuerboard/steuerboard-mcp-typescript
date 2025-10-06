@@ -15,6 +15,12 @@ export const tool$workspacesListWorkspaces: ToolDefinition<typeof args> = {
   description: `List workspaces
 
 Returns a paginated list of workspaces.`,
+  annotations: {
+    "destructiveHint": false,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": true,
+  },
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await workspacesListWorkspaces(

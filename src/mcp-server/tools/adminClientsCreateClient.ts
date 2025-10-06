@@ -15,6 +15,12 @@ export const tool$adminClientsCreateClient: ToolDefinition<typeof args> = {
   description: `Create a client
 
 Creates a new client for the accountant and returns the created client.`,
+  annotations: {
+    "destructiveHint": false,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": false,
+  },
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await adminClientsCreateClient(

@@ -15,6 +15,12 @@ export const tool$tasksDeleteTask: ToolDefinition<typeof args> = {
   description: `Delete a task
 
 Deletes a task by ID.`,
+  annotations: {
+    "destructiveHint": true,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": false,
+  },
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await tasksDeleteTask(

@@ -10,6 +10,12 @@ export const tool$healthIndex: ToolDefinition = {
   description: `Get API index
 
 Returns API information.`,
+  annotations: {
+    "destructiveHint": false,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": true,
+  },
   tool: async (client, ctx) => {
     const [result, apiCall] = await healthIndex(
       client,

@@ -4,12 +4,44 @@
 
 import * as z from "zod";
 
-export type UpdateAccountantUser = { roleId: string };
+export const UpdateAccountantUserRoleEnum$zodSchema = z.enum([
+  "admin",
+  "user",
+]);
+
+export type UpdateAccountantUserRoleEnum = z.infer<
+  typeof UpdateAccountantUserRoleEnum$zodSchema
+>;
+
+/**
+ * Role to assign to the user. Can be 'admin', 'user', or a custom role ID.
+ */
+export type UpdateAccountantUserRoleUnion =
+  | UpdateAccountantUserRoleEnum
+  | string;
+
+export const UpdateAccountantUserRoleUnion$zodSchema: z.ZodType<
+  UpdateAccountantUserRoleUnion,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  UpdateAccountantUserRoleEnum$zodSchema,
+  z.string(),
+]).describe(
+  "Role to assign to the user. Can be 'admin', 'user', or a custom role ID.",
+);
+
+export type UpdateAccountantUser = {
+  role: UpdateAccountantUserRoleEnum | string;
+};
 
 export const UpdateAccountantUser$zodSchema: z.ZodType<
   UpdateAccountantUser,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  roleId: z.string(),
+  role: z.union([
+    UpdateAccountantUserRoleEnum$zodSchema,
+    z.string(),
+  ]),
 });

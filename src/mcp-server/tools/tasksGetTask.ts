@@ -15,6 +15,12 @@ export const tool$tasksGetTask: ToolDefinition<typeof args> = {
   description: `Get a task
 
 Returns a single task by ID.`,
+  annotations: {
+    "destructiveHint": false,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": true,
+  },
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await tasksGetTask(

@@ -15,6 +15,12 @@ export const tool$usersListUsers: ToolDefinition<typeof args> = {
   description: `List users
 
 Returns a paginated list of client users.`,
+  annotations: {
+    "destructiveHint": false,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": true,
+  },
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await usersListUsers(

@@ -4,7 +4,37 @@
 
 import * as z from "zod";
 
-export type InviteAccountantUser = { email: string; roleId: string };
+export const InviteAccountantUserRoleEnum$zodSchema = z.enum([
+  "admin",
+  "user",
+]);
+
+export type InviteAccountantUserRoleEnum = z.infer<
+  typeof InviteAccountantUserRoleEnum$zodSchema
+>;
+
+/**
+ * Role to assign to the invited user. Can be 'admin', 'user', or a custom role ID.
+ */
+export type InviteAccountantUserRoleUnion =
+  | InviteAccountantUserRoleEnum
+  | string;
+
+export const InviteAccountantUserRoleUnion$zodSchema: z.ZodType<
+  InviteAccountantUserRoleUnion,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  InviteAccountantUserRoleEnum$zodSchema,
+  z.string(),
+]).describe(
+  "Role to assign to the invited user. Can be 'admin', 'user', or a custom role ID.",
+);
+
+export type InviteAccountantUser = {
+  email: string;
+  role: InviteAccountantUserRoleEnum | string;
+};
 
 export const InviteAccountantUser$zodSchema: z.ZodType<
   InviteAccountantUser,
@@ -12,5 +42,8 @@ export const InviteAccountantUser$zodSchema: z.ZodType<
   unknown
 > = z.object({
   email: z.string(),
-  roleId: z.string(),
+  role: z.union([
+    InviteAccountantUserRoleEnum$zodSchema,
+    z.string(),
+  ]),
 });

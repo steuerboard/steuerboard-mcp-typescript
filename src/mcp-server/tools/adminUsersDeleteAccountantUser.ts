@@ -16,6 +16,12 @@ export const tool$adminUsersDeleteAccountantUser: ToolDefinition<typeof args> =
     description: `Delete an accountant user
 
 Deletes an accountant user by ID.`,
+    annotations: {
+      "destructiveHint": true,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false,
+    },
     args,
     tool: async (client, args, ctx) => {
       const [result, apiCall] = await adminUsersDeleteAccountantUser(

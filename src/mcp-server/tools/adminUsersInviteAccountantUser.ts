@@ -16,6 +16,12 @@ export const tool$adminUsersInviteAccountantUser: ToolDefinition<typeof args> =
     description: `Invite an accountant user
 
 Invites a new accountant user and returns the created record.`,
+    annotations: {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false,
+    },
     args,
     tool: async (client, args, ctx) => {
       const [result, apiCall] = await adminUsersInviteAccountantUser(

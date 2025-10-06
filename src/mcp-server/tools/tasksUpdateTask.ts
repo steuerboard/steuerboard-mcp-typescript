@@ -15,6 +15,12 @@ export const tool$tasksUpdateTask: ToolDefinition<typeof args> = {
   description: `Update a task
 
 Updates a task by ID.`,
+  annotations: {
+    "destructiveHint": false,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": false,
+  },
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await tasksUpdateTask(

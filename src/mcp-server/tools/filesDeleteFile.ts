@@ -15,6 +15,12 @@ export const tool$filesDeleteFile: ToolDefinition<typeof args> = {
   description: `Delete a file
 
 Deletes a file by ID.`,
+  annotations: {
+    "destructiveHint": true,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": false,
+  },
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await filesDeleteFile(

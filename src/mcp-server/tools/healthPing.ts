@@ -10,6 +10,12 @@ export const tool$healthPing: ToolDefinition = {
   description: `Ping Pong
 
 Returns a pong response for health checks.`,
+  annotations: {
+    "destructiveHint": false,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": true,
+  },
   tool: async (client, ctx) => {
     const [result, apiCall] = await healthPing(
       client,
