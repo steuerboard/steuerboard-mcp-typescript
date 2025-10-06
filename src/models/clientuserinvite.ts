@@ -5,20 +5,20 @@
 import * as z from "zod";
 
 /**
- * Role to assign to the invited user.
+ * Role to assign to the invited user. Can be 'admin', 'user'.
  */
-export const ClientUserInviteRole$zodSchema = z.enum([
-  "client_admin",
-  "client_user",
-]).describe("Role to assign to the invited user.");
+export const ClientUserInviteUserRole$zodSchema = z.enum([
+  "admin",
+  "user",
+]).describe("Role to assign to the invited user. Can be 'admin', 'user'.");
 
-export type ClientUserInviteRole = z.infer<
-  typeof ClientUserInviteRole$zodSchema
+export type ClientUserInviteUserRole = z.infer<
+  typeof ClientUserInviteUserRole$zodSchema
 >;
 
 export type ClientUserInvite = {
   email: string;
-  role: ClientUserInviteRole;
+  role: ClientUserInviteUserRole;
   workspaceIds?: Array<string> | undefined;
 };
 
@@ -28,6 +28,6 @@ export const ClientUserInvite$zodSchema: z.ZodType<
   unknown
 > = z.object({
   email: z.string(),
-  role: ClientUserInviteRole$zodSchema,
+  role: ClientUserInviteUserRole$zodSchema,
   workspaceIds: z.array(z.string()).optional(),
 });

@@ -5,23 +5,23 @@
 import * as z from "zod";
 
 /**
- * Role that should replace the user's current role.
+ * Role to assign to the invited user. Can be 'admin', 'user'.
  */
-export const ClientUserUpdateRole$zodSchema = z.enum([
-  "client_admin",
-  "client_user",
-]).describe("Role that should replace the user's current role.");
+export const ClientUserUpdateUserRole$zodSchema = z.enum([
+  "admin",
+  "user",
+]).describe("Role to assign to the invited user. Can be 'admin', 'user'.");
 
-export type ClientUserUpdateRole = z.infer<
-  typeof ClientUserUpdateRole$zodSchema
+export type ClientUserUpdateUserRole = z.infer<
+  typeof ClientUserUpdateUserRole$zodSchema
 >;
 
-export type ClientUserUpdate = { role: ClientUserUpdateRole };
+export type ClientUserUpdate = { role: ClientUserUpdateUserRole };
 
 export const ClientUserUpdate$zodSchema: z.ZodType<
   ClientUserUpdate,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  role: ClientUserUpdateRole$zodSchema,
+  role: ClientUserUpdateUserRole$zodSchema,
 });

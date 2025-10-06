@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 188da4b7-9881-4ae0-a213-c32e68b13c57
 management:
-  docChecksum: d828283d79a30afa51bbc93caa119af0
+  docChecksum: 4ce3865912c194946fb2e8624400ef80
   docVersion: 0.1.0
   speakeasyVersion: 1.634.2
   generationVersion: 2.721.3
-  releaseVersion: 0.3.0
-  configChecksum: 30eb9044a31caf4bf0ebed3e9f572b49
+  releaseVersion: 0.3.3
+  configChecksum: 60af7db92cfe9e164e34fc4680e5e8ce
   repoURL: https://github.com/steuerboard/steuerboard-mcp-typescript.git
   published: true
 features:
