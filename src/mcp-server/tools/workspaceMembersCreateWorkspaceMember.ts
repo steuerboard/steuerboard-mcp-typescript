@@ -18,6 +18,7 @@ export const tool$workspaceMembersCreateWorkspaceMember: ToolDefinition<
 
 Creates a new workspace member.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

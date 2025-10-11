@@ -18,6 +18,7 @@ export const tool$workspaceMembersRemoveWorkspaceMember: ToolDefinition<
 
 Removes a workspace member from a workspace.`,
   annotations: {
+    "title": "",
     "destructiveHint": true,
     "idempotentHint": false,
     "openWorldHint": false,

@@ -16,6 +16,7 @@ export const tool$adminClientsGetClient: ToolDefinition<typeof args> = {
 
 Returns a single client by ID.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,
