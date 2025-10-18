@@ -16,6 +16,7 @@ export const tool$filesDeleteFile: ToolDefinition<typeof args> = {
 
 Deletes a file by ID.`,
   annotations: {
+    "title": "",
     "destructiveHint": true,
     "idempotentHint": false,
     "openWorldHint": false,

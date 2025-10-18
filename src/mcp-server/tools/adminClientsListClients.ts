@@ -16,6 +16,7 @@ export const tool$adminClientsListClients: ToolDefinition<typeof args> = {
 
 Returns a paginated list of clients.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,
