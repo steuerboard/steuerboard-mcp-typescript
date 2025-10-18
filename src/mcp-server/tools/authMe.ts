@@ -11,6 +11,7 @@ export const tool$authMe: ToolDefinition = {
 
 Returns information about the authenticated principal.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

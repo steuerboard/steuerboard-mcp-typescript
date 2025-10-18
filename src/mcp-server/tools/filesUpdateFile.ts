@@ -16,6 +16,7 @@ export const tool$filesUpdateFile: ToolDefinition<typeof args> = {
 
 Updates a file by ID.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

@@ -16,6 +16,7 @@ export const tool$workspacesGetWorkspace: ToolDefinition<typeof args> = {
 
 Returns a single workspace by ID.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

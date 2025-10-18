@@ -16,6 +16,7 @@ export const tool$tasksCreateTask: ToolDefinition<typeof args> = {
 
 Creates a new task and returns the created task.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

@@ -16,6 +16,7 @@ export const tool$workspacesListWorkspaces: ToolDefinition<typeof args> = {
 
 Returns a paginated list of workspaces.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

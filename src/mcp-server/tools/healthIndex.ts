@@ -11,6 +11,7 @@ export const tool$healthIndex: ToolDefinition = {
 
 Returns API information.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,
