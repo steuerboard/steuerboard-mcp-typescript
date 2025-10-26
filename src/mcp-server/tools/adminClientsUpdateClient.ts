@@ -16,6 +16,7 @@ export const tool$adminClientsUpdateClient: ToolDefinition<typeof args> = {
 
 Updates a client by ID.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,
