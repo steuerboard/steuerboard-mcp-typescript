@@ -16,6 +16,7 @@ export const tool$tasksUpdateTask: ToolDefinition<typeof args> = {
 
 Updates a task by ID.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

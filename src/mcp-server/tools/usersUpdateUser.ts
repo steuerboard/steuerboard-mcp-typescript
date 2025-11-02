@@ -16,6 +16,7 @@ export const tool$usersUpdateUser: ToolDefinition<typeof args> = {
 
 Updates a client user by ID.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

@@ -3,22 +3,22 @@ id: 188da4b7-9881-4ae0-a213-c32e68b13c57
 management:
   docChecksum: 4ce3865912c194946fb2e8624400ef80
   docVersion: 0.1.0
-  speakeasyVersion: 1.634.2
-  generationVersion: 2.721.3
-  releaseVersion: 0.3.3
-  configChecksum: 60af7db92cfe9e164e34fc4680e5e8ce
+  speakeasyVersion: 1.645.1
+  generationVersion: 2.735.1
+  releaseVersion: 0.4.0
+  configChecksum: 6d6355bdddba899f39bc55fc337f110d
   repoURL: https://github.com/steuerboard/steuerboard-mcp-typescript.git
   published: true
 features:
   mcp-typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.0
-    core: 0.5.0
+    core: 0.7.1
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     globalSecurity: 0.1.1
     globalSecurityCallbacks: 0.0.0
-    globalServerURLs: 0.1.0
+    globalServerURLs: 0.1.1
     nullables: 0.1.0
     responseFormat: 0.1.0
     retries: 0.1.0

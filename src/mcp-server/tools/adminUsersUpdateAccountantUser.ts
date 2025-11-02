@@ -17,6 +17,7 @@ export const tool$adminUsersUpdateAccountantUser: ToolDefinition<typeof args> =
 
 Updates an accountant user by ID.`,
     annotations: {
+      "title": "",
       "destructiveHint": false,
       "idempotentHint": false,
       "openWorldHint": false,

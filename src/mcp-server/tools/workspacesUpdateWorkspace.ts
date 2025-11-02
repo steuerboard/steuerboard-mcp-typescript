@@ -16,6 +16,7 @@ export const tool$workspacesUpdateWorkspace: ToolDefinition<typeof args> = {
 
 Updates a workspace by ID.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

@@ -16,6 +16,7 @@ export const tool$adminClientsCreateClient: ToolDefinition<typeof args> = {
 
 Creates a new client for the accountant and returns the created client.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

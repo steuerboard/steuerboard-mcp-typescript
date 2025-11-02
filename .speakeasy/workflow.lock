@@ -1,4 +1,4 @@
-speakeasyVersion: 1.634.2
+speakeasyVersion: 1.645.1
 sources:
     Steuerboard API:
         sourceNamespace: steuerboard-api
@@ -6,6 +6,7 @@ sources:
         sourceBlobDigest: sha256:ce06b2b5022feed59ad3d5e5960325bfeabd710a176040ad77af49c490f53f64
         tags:
             - latest
+            - speakeasy-sdk-regen-1758586280
             - 0.1.0
 targets:
     steuerboard:
