@@ -11,6 +11,7 @@ export const tool$healthPing: ToolDefinition = {
 
 Returns a pong response for health checks.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

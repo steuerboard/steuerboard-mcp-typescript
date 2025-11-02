@@ -16,6 +16,7 @@ export const tool$tasksDeleteTask: ToolDefinition<typeof args> = {
 
 Deletes a task by ID.`,
   annotations: {
+    "title": "",
     "destructiveHint": true,
     "idempotentHint": false,
     "openWorldHint": false,

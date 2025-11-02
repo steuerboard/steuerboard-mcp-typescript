@@ -16,6 +16,7 @@ export const tool$tasksGetTask: ToolDefinition<typeof args> = {
 
 Returns a single task by ID.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

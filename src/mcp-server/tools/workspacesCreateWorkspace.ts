@@ -16,6 +16,7 @@ export const tool$workspacesCreateWorkspace: ToolDefinition<typeof args> = {
 
 Creates a new workspace and returns the created workspace.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,
