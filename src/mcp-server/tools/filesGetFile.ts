@@ -16,6 +16,7 @@ export const tool$filesGetFile: ToolDefinition<typeof args> = {
 
 Returns a single file by ID.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

@@ -17,6 +17,7 @@ export const tool$adminUsersInviteAccountantUser: ToolDefinition<typeof args> =
 
 Invites a new accountant user and returns the created record.`,
     annotations: {
+      "title": "",
       "destructiveHint": false,
       "idempotentHint": false,
       "openWorldHint": false,

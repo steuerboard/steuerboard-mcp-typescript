@@ -16,6 +16,7 @@ export const tool$filesCreateFile: ToolDefinition<typeof args> = {
 
 Uploads a new file. Maximum file size is 500MB.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,
