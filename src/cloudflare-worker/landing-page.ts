@@ -225,18 +225,18 @@ export function landingPage() {
             <div class="method-content" id="claude-desktop-content">
                 <div class="method-description">One-click installation for Claude Desktop users</div>
                 <div class="download-section">
-                    <a href="${o}/mcp-server.dxt" download="mcp-server.dxt" class="download-button">
-                        📥 Download DXT File
+                    <a href="${o}/mcp-server.mcpb" download="mcp-server.mcpb" class="download-button">
+                        📥 Download MCP Bundle
                     </a>
                 </div>
                 <p><strong>Instructions:</strong></p>
                 <ol>
-                    <li>Download the DXT file</li>
+                    <li>Download the MCP bundle file</li>
                     <li>Open Claude Desktop and go to <span class="breadcrumb"><span class="breadcrumb-item">Settings</span><span class="breadcrumb-separator">›</span><span class="breadcrumb-item">Extensions</span></span></li>
-                    <li>Drag the DXT file into the Extensions page to install the MCP server</li>
+                    <li>Drag the MCP bundle file into the Extensions page to install the MCP server</li>
                 </ol>
                 <div class="method-description-small">
-                    The DXT file contains all necessary configuration for the MCP server and will be automatically installed when dragged into the Extensions page.
+                    The MCP bundle file contains all necessary configuration for the MCP server and will be automatically installed when dragged into the Extensions page.
                 </div>
             </div>
         </div>

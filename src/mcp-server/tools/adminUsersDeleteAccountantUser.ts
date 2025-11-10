@@ -17,6 +17,7 @@ export const tool$adminUsersDeleteAccountantUser: ToolDefinition<typeof args> =
 
 Deletes an accountant user by ID.`,
     annotations: {
+      "title": "",
       "destructiveHint": true,
       "idempotentHint": false,
       "openWorldHint": false,

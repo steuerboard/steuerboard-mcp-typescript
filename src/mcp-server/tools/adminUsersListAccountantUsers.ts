@@ -16,6 +16,7 @@ export const tool$adminUsersListAccountantUsers: ToolDefinition<typeof args> = {
 
 Returns a paginated list of accountant users.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

@@ -16,6 +16,7 @@ export const tool$usersDeleteUser: ToolDefinition<typeof args> = {
 
 Deletes a client user from the client by ID.`,
   annotations: {
+    "title": "",
     "destructiveHint": true,
     "idempotentHint": false,
     "openWorldHint": false,
