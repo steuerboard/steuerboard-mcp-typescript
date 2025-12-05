@@ -18,6 +18,7 @@ export const tool$workspaceMembersListWorkspaceMembers: ToolDefinition<
 
 Returns workspace members for a workspace.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

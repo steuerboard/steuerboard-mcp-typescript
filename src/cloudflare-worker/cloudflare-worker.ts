@@ -77,6 +77,14 @@ export default {
       return landingPage();
     }
 
+    // NOTE: we renamed .dxt extension to .mcpb; redirect for backwards compatibility
+    if (url.pathname.endsWith(".dxt")) {
+      const newPath = url.pathname.replace(/\.dxt$/, ".mcpb");
+      const newUrl = new URL(url);
+      newUrl.pathname = newPath;
+      return Response.redirect(newUrl.toString(), 301);
+    }
+
     // Fallback to serving static assets
     const response = await env.ASSETS.fetch(request);
 
@@ -86,7 +94,7 @@ export default {
       return new Response(response.body, {
         headers: {
           "Content-Type": "application/octet-stream",
-          "Content-Disposition": "attachment; filename=\"mcp-server.dxt\"",
+          "Content-Disposition": "attachment; filename=\"mcp-server.mcpb\"",
           "Cache-Control": "public, max-age=3600",
         },
       });

@@ -16,6 +16,7 @@ export const tool$filesListFiles: ToolDefinition<typeof args> = {
 
 Returns a paginated list of files with optional workspace filters.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

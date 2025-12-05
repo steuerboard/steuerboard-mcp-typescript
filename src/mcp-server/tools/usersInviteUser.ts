@@ -16,6 +16,7 @@ export const tool$usersInviteUser: ToolDefinition<typeof args> = {
 
 Invites a new client user and returns the created record.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

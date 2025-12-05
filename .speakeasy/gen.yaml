@@ -19,12 +19,15 @@ generation:
     hoistGlobalSecurity: true
   inferSSEOverload: true
   sdkHooksConfigAccess: true
+  schemas:
+    allOfMergeStrategy: shallowMerge
+  requestBodyFieldName: ""
   tests:
     generateTests: false
     generateNewTests: true
     skipResponseBodyAssertions: false
 mcp-typescript:
-  version: 0.3.3
+  version: 0.4.0
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -35,7 +38,11 @@ mcp-typescript:
   cloudflareURL: https://mcp.steuerboard.com
   defaultErrorName: SteuerboardDefaultError
   envVarPrefix: STEUERBOARD
+  formStringArrayEncodeMode: encoded-string
+  inferUnionDiscriminators: false
   inputModelSuffix: input
   maxMethodParams: 0
+  multipartArrayFormat: legacy
   outputModelSuffix: output
   packageName: '@steuerboard/mcp'
+  responseFormat: envelope

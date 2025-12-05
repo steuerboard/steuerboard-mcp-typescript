@@ -3,21 +3,10 @@
  */
 
 import { SteuerboardCore } from "../core.js";
-import { encodeJSON } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import {
-  ClientCreate,
-  ClientCreate$zodSchema,
-} from "../models/clientcreate.js";
-import {
-  CreateClientResponse,
-  CreateClientResponse$zodSchema,
-} from "../models/createclientop.js";
 import { APIError } from "../models/errors/apierror.js";
 import {
   ConnectionError,
@@ -27,22 +16,25 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import {
+  HealthResponse,
+  HealthResponse$zodSchema,
+} from "../models/healthop.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create a client
+ * Health Check
  *
  * @remarks
- * Creates a new client for the accountant and returns the created client.
+ * Returns service health status for monitoring and container orchestration.
  */
-export function adminClientsCreateClient(
+export function healthHealth(
   client$: SteuerboardCore,
-  request: ClientCreate,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    CreateClientResponse,
+    HealthResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -54,19 +46,17 @@ export function adminClientsCreateClient(
 > {
   return new APIPromise($do(
     client$,
-    request,
     options,
   ));
 }
 
 async function $do(
   client$: SteuerboardCore,
-  request: ClientCreate,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      CreateClientResponse,
+      HealthResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,32 +68,19 @@ async function $do(
     APICall,
   ]
 > {
-  const parsed$ = safeParse(
-    request,
-    (value$) => ClientCreate$zodSchema.parse(value$),
-    "Input validation failed",
-  );
-  if (!parsed$.ok) {
-    return [parsed$, { status: "invalid" }];
-  }
-  const payload$ = parsed$.value;
-  const body$ = encodeJSON("body", payload$, { explode: true });
-  const path$ = pathToFunc("/admin/clients")();
+  const path$ = pathToFunc("/health")();
 
   const headers$ = new Headers(compactMap({
-    "Content-Type": "application/json",
     Accept: "application/json",
   }));
-  const securityInput = await extractSecurity(client$._options.security);
-  const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
     options: client$._options,
     baseURL: options?.serverURL ?? client$._baseURL ?? "",
-    operationID: "createClient",
+    operationID: "health",
     oAuth2Scopes: null,
-    resolvedSecurity: requestSecurity,
-    securitySource: client$._options.security,
+    resolvedSecurity: null,
+    securitySource: null,
     retryConfig: options?.retries
       || client$._options.retryConfig
       || { strategy: "none" },
@@ -117,12 +94,10 @@ async function $do(
   };
 
   const requestRes = client$._createRequest(context, {
-    security: requestSecurity,
-    method: "POST",
+    method: "GET",
     baseURL: options?.serverURL,
     path: path$,
     headers: headers$,
-    body: body$,
     userAgent: client$._options.userAgent,
     timeoutMs: options?.timeoutMs || client$._options.timeoutMs
       || -1,
@@ -147,7 +122,7 @@ async function $do(
   };
 
   const [result$] = await M.match<
-    CreateClientResponse,
+    HealthResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -156,16 +131,9 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(201, CreateClientResponse$zodSchema, { key: "Client" }),
-    M.json(401, CreateClientResponse$zodSchema, { key: "auth_error" }),
-    M.json(403, CreateClientResponse$zodSchema, {
-      key: "fourHundredAndThreeApplicationJsonObject",
-    }),
-    M.json(422, CreateClientResponse$zodSchema, {
-      key: "fourHundredAndTwentyTwoApplicationJsonObject",
-    }),
-    M.json(429, CreateClientResponse$zodSchema, { key: "rate_limit" }),
-    M.nil(500, CreateClientResponse$zodSchema),
+    M.json(200, HealthResponse$zodSchema, { key: "object" }),
+    M.json(429, HealthResponse$zodSchema, { key: "rate_limit" }),
+    M.nil(500, HealthResponse$zodSchema),
   )(response, req$, { extraFields: responseFields$ });
 
   return [result$, { status: "complete", request: req$, response }];
