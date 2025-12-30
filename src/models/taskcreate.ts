@@ -9,6 +9,7 @@ export type TaskCreate = {
   text?: string | undefined;
   dueDate?: string | undefined;
   workspaceId: string;
+  parentId?: string | undefined;
 };
 
 export const TaskCreate$zodSchema: z.ZodType<
@@ -17,6 +18,7 @@ export const TaskCreate$zodSchema: z.ZodType<
   unknown
 > = z.object({
   dueDate: z.string().datetime({ offset: true }).optional(),
+  parentId: z.string().optional(),
   text: z.string().optional(),
   title: z.string(),
   workspaceId: z.string(),

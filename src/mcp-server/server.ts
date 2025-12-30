@@ -28,6 +28,7 @@ import { tool$filesDeleteFile } from "./tools/filesDeleteFile.js";
 import { tool$filesGetFile } from "./tools/filesGetFile.js";
 import { tool$filesListFiles } from "./tools/filesListFiles.js";
 import { tool$filesUpdateFile } from "./tools/filesUpdateFile.js";
+import { tool$healthHealth } from "./tools/healthHealth.js";
 import { tool$healthIndex } from "./tools/healthIndex.js";
 import { tool$healthPing } from "./tools/healthPing.js";
 import { tool$tasksCreateTask } from "./tools/tasksCreateTask.js";
@@ -59,7 +60,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Steuerboard",
-    version: "0.3.3",
+    version: "0.3.4",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -103,6 +104,7 @@ export function createMCPServer(deps: {
   void register; // suppress unused warnings
 
   tool(tool$healthIndex);
+  tool(tool$healthHealth);
   tool(tool$healthPing);
   tool(tool$authMe);
   tool(tool$adminClientsListClients);
