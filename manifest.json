@@ -1,7 +1,7 @@
 {
   "dxt_version": "0.1",
   "name": "@steuerboard/mcp",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "",
   "long_description": "",
   "author": {
@@ -25,6 +25,10 @@
     {
       "name": "health-index",
       "description": "Get API index\n\nReturns API information."
+    },
+    {
+      "name": "health-health",
+      "description": "Health Check\n\nReturns service health status for monitoring and container orchestration."
     },
     {
       "name": "health-ping",
