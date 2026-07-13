@@ -4,7 +4,6 @@
 
 import * as z from "zod";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
-import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 import { Task, Task$zodSchema } from "./task.js";
@@ -78,29 +77,35 @@ export const GetTaskUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("Invalid id error");
 
-export const GetTaskStatusCode$zodSchema = z.literal(403);
+export const GetTaskForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type GetTaskStatusCode = z.infer<typeof GetTaskStatusCode$zodSchema>;
+export type GetTaskForbiddenStatusCode = z.infer<
+  typeof GetTaskForbiddenStatusCode$zodSchema
+>;
 
-export const GetTaskType$zodSchema = z.enum([
+export const GetTaskForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type GetTaskType = z.infer<typeof GetTaskType$zodSchema>;
+export type GetTaskForbiddenType = z.infer<
+  typeof GetTaskForbiddenType$zodSchema
+>;
 
-export const GetTaskCode$zodSchema = z.enum([
+export const GetTaskForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
 
-export type GetTaskCode = z.infer<typeof GetTaskCode$zodSchema>;
+export type GetTaskForbiddenCode = z.infer<
+  typeof GetTaskForbiddenCode$zodSchema
+>;
 
 /**
  * Missing scope
  */
 export type GetTaskForbiddenResponseBody = {
-  status_code: GetTaskStatusCode;
-  type: GetTaskType;
-  code: GetTaskCode;
+  status_code: GetTaskForbiddenStatusCode;
+  type: GetTaskForbiddenType;
+  code: GetTaskForbiddenCode;
   message: string;
 };
 
@@ -109,46 +114,74 @@ export const GetTaskForbiddenResponseBody$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  code: GetTaskCode$zodSchema,
+  code: GetTaskForbiddenCode$zodSchema,
   message: z.string(),
-  status_code: GetTaskStatusCode$zodSchema,
-  type: GetTaskType$zodSchema,
+  status_code: GetTaskForbiddenStatusCode$zodSchema,
+  type: GetTaskForbiddenType$zodSchema,
 }).describe("Missing scope");
 
-export type GetTaskResponse = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: Response;
-  Task?: Task | undefined;
-  bad_request?: BadRequest | undefined;
-  auth_error?: AuthError | undefined;
-  fourHundredAndThreeApplicationJsonObject?:
-    | GetTaskForbiddenResponseBody
-    | undefined;
-  not_found?: NotFound | undefined;
-  fourHundredAndTwentyTwoApplicationJsonObject?:
-    | GetTaskUnprocessableEntityResponseBody
-    | undefined;
-  rate_limit?: RateLimit | undefined;
+export const GetTaskStatusCode400$zodSchema = z.literal(400);
+
+export type GetTaskStatusCode400 = z.infer<
+  typeof GetTaskStatusCode400$zodSchema
+>;
+
+export const GetTaskBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export type GetTaskBadRequestType = z.infer<
+  typeof GetTaskBadRequestType$zodSchema
+>;
+
+export const GetTaskCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
+
+export type GetTaskCodeMissingClientID = z.infer<
+  typeof GetTaskCodeMissingClientID$zodSchema
+>;
+
+/**
+ * Missing client ID
+ */
+export type GetTaskBadRequestResponseBody = {
+  status_code: GetTaskStatusCode400;
+  type: GetTaskBadRequestType;
+  code: GetTaskCodeMissingClientID;
+  message: string;
 };
+
+export const GetTaskBadRequestResponseBody$zodSchema: z.ZodType<
+  GetTaskBadRequestResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  code: GetTaskCodeMissingClientID$zodSchema,
+  message: z.string(),
+  status_code: GetTaskStatusCode400$zodSchema,
+  type: GetTaskBadRequestType$zodSchema,
+}).describe("Missing client ID");
+
+export type GetTaskResponse =
+  | Task
+  | GetTaskBadRequestResponseBody
+  | AuthError
+  | GetTaskForbiddenResponseBody
+  | NotFound
+  | RateLimit
+  | GetTaskUnprocessableEntityResponseBody;
 
 export const GetTaskResponse$zodSchema: z.ZodType<
   GetTaskResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  Task: Task$zodSchema.optional(),
-  auth_error: AuthError$zodSchema.optional(),
-  bad_request: BadRequest$zodSchema.optional(),
-  fourHundredAndThreeApplicationJsonObject: z.lazy(() =>
-    GetTaskForbiddenResponseBody$zodSchema
-  ).optional(),
-  fourHundredAndTwentyTwoApplicationJsonObject: z.lazy(() =>
-    GetTaskUnprocessableEntityResponseBody$zodSchema
-  ).optional(),
-  not_found: NotFound$zodSchema.optional(),
-  rate_limit: RateLimit$zodSchema.optional(),
-});
+> = z.union([
+  Task$zodSchema,
+  z.lazy(() => GetTaskBadRequestResponseBody$zodSchema),
+  AuthError$zodSchema,
+  z.lazy(() => GetTaskForbiddenResponseBody$zodSchema),
+  NotFound$zodSchema,
+  RateLimit$zodSchema,
+  z.lazy(() => GetTaskUnprocessableEntityResponseBody$zodSchema),
+]);

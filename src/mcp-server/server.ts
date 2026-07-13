@@ -23,11 +23,21 @@ import { tool$adminUsersInviteAccountantUser } from "./tools/adminUsersInviteAcc
 import { tool$adminUsersListAccountantUsers } from "./tools/adminUsersListAccountantUsers.js";
 import { tool$adminUsersUpdateAccountantUser } from "./tools/adminUsersUpdateAccountantUser.js";
 import { tool$authMe } from "./tools/authMe.js";
+import { tool$collectSessionsCompleteCollectSession } from "./tools/collectSessionsCompleteCollectSession.js";
+import { tool$collectSessionsDeleteCollectSubmission } from "./tools/collectSessionsDeleteCollectSubmission.js";
+import { tool$collectSessionsGetcollectSessionByToken } from "./tools/collectSessionsGetcollectSessionByToken.js";
+import { tool$collectSessionsPingCollectSession } from "./tools/collectSessionsPingCollectSession.js";
+import { tool$collectSessionsRequestLinkCollectToken } from "./tools/collectSessionsRequestLinkCollectToken.js";
+import { tool$collectSessionsSubmitCollectBulk } from "./tools/collectSessionsSubmitCollectBulk.js";
+import { tool$collectSessionsSubmitCollectFile } from "./tools/collectSessionsSubmitCollectFile.js";
+import { tool$collectSessionsSubmitCollectFormData } from "./tools/collectSessionsSubmitCollectFormData.js";
 import { tool$filesCreateFile } from "./tools/filesCreateFile.js";
 import { tool$filesDeleteFile } from "./tools/filesDeleteFile.js";
+import { tool$filesDownloadFileContent } from "./tools/filesDownloadFileContent.js";
 import { tool$filesGetFile } from "./tools/filesGetFile.js";
 import { tool$filesListFiles } from "./tools/filesListFiles.js";
 import { tool$filesUpdateFile } from "./tools/filesUpdateFile.js";
+import { tool$healthHealth } from "./tools/healthHealth.js";
 import { tool$healthIndex } from "./tools/healthIndex.js";
 import { tool$healthPing } from "./tools/healthPing.js";
 import { tool$tasksCreateTask } from "./tools/tasksCreateTask.js";
@@ -59,7 +69,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Steuerboard",
-    version: "0.3.3",
+    version: "0.3.4",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -103,6 +113,7 @@ export function createMCPServer(deps: {
   void register; // suppress unused warnings
 
   tool(tool$healthIndex);
+  tool(tool$healthHealth);
   tool(tool$healthPing);
   tool(tool$authMe);
   tool(tool$adminClientsListClients);
@@ -114,6 +125,14 @@ export function createMCPServer(deps: {
   tool(tool$adminUsersGetAccountantUser);
   tool(tool$adminUsersUpdateAccountantUser);
   tool(tool$adminUsersDeleteAccountantUser);
+  tool(tool$collectSessionsGetcollectSessionByToken);
+  tool(tool$collectSessionsPingCollectSession);
+  tool(tool$collectSessionsCompleteCollectSession);
+  tool(tool$collectSessionsRequestLinkCollectToken);
+  tool(tool$collectSessionsSubmitCollectFile);
+  tool(tool$collectSessionsSubmitCollectFormData);
+  tool(tool$collectSessionsSubmitCollectBulk);
+  tool(tool$collectSessionsDeleteCollectSubmission);
   tool(tool$workspacesListWorkspaces);
   tool(tool$workspacesCreateWorkspace);
   tool(tool$workspacesGetWorkspace);
@@ -126,6 +145,7 @@ export function createMCPServer(deps: {
   tool(tool$filesGetFile);
   tool(tool$filesUpdateFile);
   tool(tool$filesDeleteFile);
+  tool(tool$filesDownloadFileContent);
   tool(tool$tasksListTasks);
   tool(tool$tasksCreateTask);
   tool(tool$tasksGetTask);

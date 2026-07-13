@@ -4,7 +4,6 @@
 
 import * as z from "zod";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
-import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
 import { PaginatedFiles, PaginatedFiles$zodSchema } from "./paginatedfiles.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
@@ -84,29 +83,35 @@ export const ListFilesUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("The validation error(s)");
 
-export const ListFilesStatusCode$zodSchema = z.literal(403);
+export const ListFilesForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type ListFilesStatusCode = z.infer<typeof ListFilesStatusCode$zodSchema>;
+export type ListFilesForbiddenStatusCode = z.infer<
+  typeof ListFilesForbiddenStatusCode$zodSchema
+>;
 
-export const ListFilesType$zodSchema = z.enum([
+export const ListFilesForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type ListFilesType = z.infer<typeof ListFilesType$zodSchema>;
+export type ListFilesForbiddenType = z.infer<
+  typeof ListFilesForbiddenType$zodSchema
+>;
 
-export const ListFilesCode$zodSchema = z.enum([
+export const ListFilesForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
 
-export type ListFilesCode = z.infer<typeof ListFilesCode$zodSchema>;
+export type ListFilesForbiddenCode = z.infer<
+  typeof ListFilesForbiddenCode$zodSchema
+>;
 
 /**
  * Missing scope
  */
 export type ListFilesForbiddenResponseBody = {
-  status_code: ListFilesStatusCode;
-  type: ListFilesType;
-  code: ListFilesCode;
+  status_code: ListFilesForbiddenStatusCode;
+  type: ListFilesForbiddenType;
+  code: ListFilesForbiddenCode;
   message: string;
 };
 
@@ -115,44 +120,72 @@ export const ListFilesForbiddenResponseBody$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  code: ListFilesCode$zodSchema,
+  code: ListFilesForbiddenCode$zodSchema,
   message: z.string(),
-  status_code: ListFilesStatusCode$zodSchema,
-  type: ListFilesType$zodSchema,
+  status_code: ListFilesForbiddenStatusCode$zodSchema,
+  type: ListFilesForbiddenType$zodSchema,
 }).describe("Missing scope");
 
-export type ListFilesResponse = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: Response;
-  PaginatedFiles?: PaginatedFiles | undefined;
-  bad_request?: BadRequest | undefined;
-  auth_error?: AuthError | undefined;
-  fourHundredAndThreeApplicationJsonObject?:
-    | ListFilesForbiddenResponseBody
-    | undefined;
-  fourHundredAndTwentyTwoApplicationJsonObject?:
-    | ListFilesUnprocessableEntityResponseBody
-    | undefined;
-  rate_limit?: RateLimit | undefined;
+export const ListFilesStatusCode400$zodSchema = z.literal(400);
+
+export type ListFilesStatusCode400 = z.infer<
+  typeof ListFilesStatusCode400$zodSchema
+>;
+
+export const ListFilesBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export type ListFilesBadRequestType = z.infer<
+  typeof ListFilesBadRequestType$zodSchema
+>;
+
+export const ListFilesCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
+
+export type ListFilesCodeMissingClientID = z.infer<
+  typeof ListFilesCodeMissingClientID$zodSchema
+>;
+
+/**
+ * Missing client ID
+ */
+export type ListFilesBadRequestResponseBody = {
+  status_code: ListFilesStatusCode400;
+  type: ListFilesBadRequestType;
+  code: ListFilesCodeMissingClientID;
+  message: string;
 };
+
+export const ListFilesBadRequestResponseBody$zodSchema: z.ZodType<
+  ListFilesBadRequestResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  code: ListFilesCodeMissingClientID$zodSchema,
+  message: z.string(),
+  status_code: ListFilesStatusCode400$zodSchema,
+  type: ListFilesBadRequestType$zodSchema,
+}).describe("Missing client ID");
+
+export type ListFilesResponse =
+  | ListFilesBadRequestResponseBody
+  | AuthError
+  | ListFilesForbiddenResponseBody
+  | RateLimit
+  | PaginatedFiles
+  | ListFilesUnprocessableEntityResponseBody;
 
 export const ListFilesResponse$zodSchema: z.ZodType<
   ListFilesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  PaginatedFiles: PaginatedFiles$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  auth_error: AuthError$zodSchema.optional(),
-  bad_request: BadRequest$zodSchema.optional(),
-  fourHundredAndThreeApplicationJsonObject: z.lazy(() =>
-    ListFilesForbiddenResponseBody$zodSchema
-  ).optional(),
-  fourHundredAndTwentyTwoApplicationJsonObject: z.lazy(() =>
-    ListFilesUnprocessableEntityResponseBody$zodSchema
-  ).optional(),
-  rate_limit: RateLimit$zodSchema.optional(),
-});
+> = z.union([
+  z.lazy(() => ListFilesBadRequestResponseBody$zodSchema),
+  AuthError$zodSchema,
+  z.lazy(() => ListFilesForbiddenResponseBody$zodSchema),
+  RateLimit$zodSchema,
+  PaginatedFiles$zodSchema,
+  z.lazy(() => ListFilesUnprocessableEntityResponseBody$zodSchema),
+]);

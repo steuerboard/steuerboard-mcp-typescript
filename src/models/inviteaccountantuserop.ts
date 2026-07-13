@@ -114,40 +114,25 @@ export const InviteAccountantUserForbiddenResponseBody$zodSchema: z.ZodType<
   type: InviteAccountantUserType$zodSchema,
 }).describe("Missing scope");
 
-export type InviteAccountantUserResponse = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: Response;
-  AccountantUser?: AccountantUser | undefined;
-  auth_error?: AuthError | undefined;
-  fourHundredAndThreeApplicationJsonObject?:
-    | InviteAccountantUserForbiddenResponseBody
-    | undefined;
-  not_found?: NotFound | undefined;
-  conflict?: Conflict | undefined;
-  fourHundredAndTwentyTwoApplicationJsonObject?:
-    | InviteAccountantUserUnprocessableEntityResponseBody
-    | undefined;
-  rate_limit?: RateLimit | undefined;
-};
+export type InviteAccountantUserResponse =
+  | AccountantUser
+  | AuthError
+  | InviteAccountantUserForbiddenResponseBody
+  | NotFound
+  | Conflict
+  | RateLimit
+  | InviteAccountantUserUnprocessableEntityResponseBody;
 
 export const InviteAccountantUserResponse$zodSchema: z.ZodType<
   InviteAccountantUserResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  AccountantUser: AccountantUser$zodSchema.optional(),
-  ContentType: z.string(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  auth_error: AuthError$zodSchema.optional(),
-  conflict: Conflict$zodSchema.optional(),
-  fourHundredAndThreeApplicationJsonObject: z.lazy(() =>
-    InviteAccountantUserForbiddenResponseBody$zodSchema
-  ).optional(),
-  fourHundredAndTwentyTwoApplicationJsonObject: z.lazy(() =>
-    InviteAccountantUserUnprocessableEntityResponseBody$zodSchema
-  ).optional(),
-  not_found: NotFound$zodSchema.optional(),
-  rate_limit: RateLimit$zodSchema.optional(),
-});
+> = z.union([
+  AccountantUser$zodSchema,
+  AuthError$zodSchema,
+  z.lazy(() => InviteAccountantUserForbiddenResponseBody$zodSchema),
+  NotFound$zodSchema,
+  Conflict$zodSchema,
+  RateLimit$zodSchema,
+  z.lazy(() => InviteAccountantUserUnprocessableEntityResponseBody$zodSchema),
+]);

@@ -4,7 +4,6 @@
 
 import * as z from "zod";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
-import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
 import { DeleteResponse, DeleteResponse$zodSchema } from "./deleteresponse.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
@@ -152,31 +151,35 @@ export const DeleteUserResponseBody$zodSchema: z.ZodType<
   z.lazy(() => DeleteUserResponseBody2$zodSchema),
 ]).describe("The validation error(s)");
 
-export const DeleteUserStatusCode$zodSchema = z.literal(403);
+export const DeleteUserForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type DeleteUserStatusCode = z.infer<
-  typeof DeleteUserStatusCode$zodSchema
+export type DeleteUserForbiddenStatusCode = z.infer<
+  typeof DeleteUserForbiddenStatusCode$zodSchema
 >;
 
-export const DeleteUserType$zodSchema = z.enum([
+export const DeleteUserForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type DeleteUserType = z.infer<typeof DeleteUserType$zodSchema>;
+export type DeleteUserForbiddenType = z.infer<
+  typeof DeleteUserForbiddenType$zodSchema
+>;
 
-export const DeleteUserCode$zodSchema = z.enum([
+export const DeleteUserForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
 
-export type DeleteUserCode = z.infer<typeof DeleteUserCode$zodSchema>;
+export type DeleteUserForbiddenCode = z.infer<
+  typeof DeleteUserForbiddenCode$zodSchema
+>;
 
 /**
  * Missing scope
  */
 export type DeleteUserForbiddenResponseBody = {
-  status_code: DeleteUserStatusCode;
-  type: DeleteUserType;
-  code: DeleteUserCode;
+  status_code: DeleteUserForbiddenStatusCode;
+  type: DeleteUserForbiddenType;
+  code: DeleteUserForbiddenCode;
   message: string;
 };
 
@@ -185,41 +188,78 @@ export const DeleteUserForbiddenResponseBody$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  code: DeleteUserCode$zodSchema,
+  code: DeleteUserForbiddenCode$zodSchema,
   message: z.string(),
-  status_code: DeleteUserStatusCode$zodSchema,
-  type: DeleteUserType$zodSchema,
+  status_code: DeleteUserForbiddenStatusCode$zodSchema,
+  type: DeleteUserForbiddenType$zodSchema,
 }).describe("Missing scope");
 
-export type DeleteUserResponse = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: Response;
-  DeleteResponse?: DeleteResponse | undefined;
-  bad_request?: BadRequest | undefined;
-  auth_error?: AuthError | undefined;
-  object?: DeleteUserForbiddenResponseBody | undefined;
-  not_found?: NotFound | undefined;
-  oneOf?: DeleteUserResponseBody1 | DeleteUserResponseBody2 | undefined;
-  rate_limit?: RateLimit | undefined;
+export const DeleteUserStatusCode400$zodSchema = z.literal(400);
+
+export type DeleteUserStatusCode400 = z.infer<
+  typeof DeleteUserStatusCode400$zodSchema
+>;
+
+export const DeleteUserBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export type DeleteUserBadRequestType = z.infer<
+  typeof DeleteUserBadRequestType$zodSchema
+>;
+
+export const DeleteUserCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
+
+export type DeleteUserCodeMissingClientID = z.infer<
+  typeof DeleteUserCodeMissingClientID$zodSchema
+>;
+
+/**
+ * Missing client ID
+ */
+export type DeleteUserBadRequestResponseBody = {
+  status_code: DeleteUserStatusCode400;
+  type: DeleteUserBadRequestType;
+  code: DeleteUserCodeMissingClientID;
+  message: string;
 };
+
+export const DeleteUserBadRequestResponseBody$zodSchema: z.ZodType<
+  DeleteUserBadRequestResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  code: DeleteUserCodeMissingClientID$zodSchema,
+  message: z.string(),
+  status_code: DeleteUserStatusCode400$zodSchema,
+  type: DeleteUserBadRequestType$zodSchema,
+}).describe("Missing client ID");
+
+export type DeleteUserResponse =
+  | DeleteUserBadRequestResponseBody
+  | AuthError
+  | DeleteUserForbiddenResponseBody
+  | NotFound
+  | RateLimit
+  | DeleteResponse
+  | DeleteUserResponseBody1
+  | DeleteUserResponseBody2;
 
 export const DeleteUserResponse$zodSchema: z.ZodType<
   DeleteUserResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  DeleteResponse: DeleteResponse$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  auth_error: AuthError$zodSchema.optional(),
-  bad_request: BadRequest$zodSchema.optional(),
-  not_found: NotFound$zodSchema.optional(),
-  object: z.lazy(() => DeleteUserForbiddenResponseBody$zodSchema).optional(),
-  oneOf: z.union([
+> = z.union([
+  z.lazy(() => DeleteUserBadRequestResponseBody$zodSchema),
+  AuthError$zodSchema,
+  z.lazy(() => DeleteUserForbiddenResponseBody$zodSchema),
+  NotFound$zodSchema,
+  RateLimit$zodSchema,
+  DeleteResponse$zodSchema,
+  z.union([
     z.lazy(() => DeleteUserResponseBody1$zodSchema),
     z.lazy(() => DeleteUserResponseBody2$zodSchema),
-  ]).optional(),
-  rate_limit: RateLimit$zodSchema.optional(),
-});
+  ]),
+]);

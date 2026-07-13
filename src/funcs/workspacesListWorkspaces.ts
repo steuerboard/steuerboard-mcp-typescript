@@ -165,7 +165,9 @@ async function $do(
     M.json(200, ListWorkspacesResponse$zodSchema, {
       key: "PaginatedWorkspaces",
     }),
-    M.json(400, ListWorkspacesResponse$zodSchema, { key: "bad_request" }),
+    M.json(400, ListWorkspacesResponse$zodSchema, {
+      key: "fourHundredApplicationJsonObject",
+    }),
     M.json(401, ListWorkspacesResponse$zodSchema, { key: "auth_error" }),
     M.json(403, ListWorkspacesResponse$zodSchema, {
       key: "fourHundredAndThreeApplicationJsonObject",

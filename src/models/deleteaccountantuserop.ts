@@ -62,30 +62,23 @@ export const DeleteAccountantUserResponseBody$zodSchema: z.ZodType<
   type: DeleteAccountantUserType$zodSchema,
 }).describe("Missing scope");
 
-export type DeleteAccountantUserResponse = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: Response;
-  DeleteResponse?: DeleteResponse | undefined;
-  auth_error?: AuthError | undefined;
-  object?: DeleteAccountantUserResponseBody | undefined;
-  not_found?: NotFound | undefined;
-  conflict?: Conflict | undefined;
-  rate_limit?: RateLimit | undefined;
-};
+export type DeleteAccountantUserResponse =
+  | AuthError
+  | DeleteAccountantUserResponseBody
+  | NotFound
+  | Conflict
+  | RateLimit
+  | DeleteResponse;
 
 export const DeleteAccountantUserResponse$zodSchema: z.ZodType<
   DeleteAccountantUserResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  DeleteResponse: DeleteResponse$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  auth_error: AuthError$zodSchema.optional(),
-  conflict: Conflict$zodSchema.optional(),
-  not_found: NotFound$zodSchema.optional(),
-  object: z.lazy(() => DeleteAccountantUserResponseBody$zodSchema).optional(),
-  rate_limit: RateLimit$zodSchema.optional(),
-});
+> = z.union([
+  AuthError$zodSchema,
+  z.lazy(() => DeleteAccountantUserResponseBody$zodSchema),
+  NotFound$zodSchema,
+  Conflict$zodSchema,
+  RateLimit$zodSchema,
+  DeleteResponse$zodSchema,
+]);

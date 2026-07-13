@@ -4,7 +4,7 @@
 
 import * as z from "zod";
 
-export const BadRequestStatusCode$zodSchema = z.literal(400);
+export const BadRequestStatusCode$zodSchema = z.literal(410);
 
 export type BadRequestStatusCode = z.infer<
   typeof BadRequestStatusCode$zodSchema
@@ -17,7 +17,7 @@ export const BadRequestType$zodSchema = z.enum([
 export type BadRequestType = z.infer<typeof BadRequestType$zodSchema>;
 
 export const BadRequestCode$zodSchema = z.enum([
-  "missing_client_id",
+  "collect_token_expired",
 ]);
 
 export type BadRequestCode = z.infer<typeof BadRequestCode$zodSchema>;

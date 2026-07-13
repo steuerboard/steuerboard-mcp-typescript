@@ -1,13 +1,14 @@
 lockVersion: 2.0.0
 id: 188da4b7-9881-4ae0-a213-c32e68b13c57
 management:
-  docChecksum: 4ce3865912c194946fb2e8624400ef80
+  docChecksum: 8cc6cff538a71862148569a7befc3516
   docVersion: 0.1.0
   speakeasyVersion: 1.634.2
   generationVersion: 2.721.3
-  releaseVersion: 0.3.3
-  configChecksum: 60af7db92cfe9e164e34fc4680e5e8ce
+  releaseVersion: 0.3.4
+  configChecksum: 61dffd3070c16fe5a041d4ff2fca2a25
   repoURL: https://github.com/steuerboard/steuerboard-mcp-typescript.git
+  installationURL: https://github.com/steuerboard/steuerboard-mcp-typescript
   published: true
 features:
   mcp-typescript:
@@ -44,11 +45,21 @@ generatedFiles:
   - src/funcs/adminUsersListAccountantUsers.ts
   - src/funcs/adminUsersUpdateAccountantUser.ts
   - src/funcs/authMe.ts
+  - src/funcs/collectSessionsCompleteCollectSession.ts
+  - src/funcs/collectSessionsDeleteCollectSubmission.ts
+  - src/funcs/collectSessionsGetcollectSessionByToken.ts
+  - src/funcs/collectSessionsPingCollectSession.ts
+  - src/funcs/collectSessionsRequestLinkCollectToken.ts
+  - src/funcs/collectSessionsSubmitCollectBulk.ts
+  - src/funcs/collectSessionsSubmitCollectFile.ts
+  - src/funcs/collectSessionsSubmitCollectFormData.ts
   - src/funcs/filesCreateFile.ts
   - src/funcs/filesDeleteFile.ts
+  - src/funcs/filesDownloadFileContent.ts
   - src/funcs/filesGetFile.ts
   - src/funcs/filesListFiles.ts
   - src/funcs/filesUpdateFile.ts
+  - src/funcs/healthHealth.ts
   - src/funcs/healthIndex.ts
   - src/funcs/healthPing.ts
   - src/funcs/tasksCreateTask.ts
@@ -110,11 +121,21 @@ generatedFiles:
   - src/mcp-server/tools/adminUsersListAccountantUsers.ts
   - src/mcp-server/tools/adminUsersUpdateAccountantUser.ts
   - src/mcp-server/tools/authMe.ts
+  - src/mcp-server/tools/collectSessionsCompleteCollectSession.ts
+  - src/mcp-server/tools/collectSessionsDeleteCollectSubmission.ts
+  - src/mcp-server/tools/collectSessionsGetcollectSessionByToken.ts
+  - src/mcp-server/tools/collectSessionsPingCollectSession.ts
+  - src/mcp-server/tools/collectSessionsRequestLinkCollectToken.ts
+  - src/mcp-server/tools/collectSessionsSubmitCollectBulk.ts
+  - src/mcp-server/tools/collectSessionsSubmitCollectFile.ts
+  - src/mcp-server/tools/collectSessionsSubmitCollectFormData.ts
   - src/mcp-server/tools/filesCreateFile.ts
   - src/mcp-server/tools/filesDeleteFile.ts
+  - src/mcp-server/tools/filesDownloadFileContent.ts
   - src/mcp-server/tools/filesGetFile.ts
   - src/mcp-server/tools/filesListFiles.ts
   - src/mcp-server/tools/filesUpdateFile.ts
+  - src/mcp-server/tools/healthHealth.ts
   - src/mcp-server/tools/healthIndex.ts
   - src/mcp-server/tools/healthPing.ts
   - src/mcp-server/tools/tasksCreateTask.ts
@@ -144,6 +165,16 @@ generatedFiles:
   - src/models/clientuser.ts
   - src/models/clientuserinvite.ts
   - src/models/clientuserupdate.ts
+  - src/models/collectbulksubmission.ts
+  - src/models/collectbulksubmitform.ts
+  - src/models/collectfilesubmission.ts
+  - src/models/collectfilesubmitform.ts
+  - src/models/collectformdatasubmission.ts
+  - src/models/collectformdatasubmit.ts
+  - src/models/collectsessionbytoken.ts
+  - src/models/completecollectsessionop.ts
+  - src/models/completesessionbody.ts
+  - src/models/completesessionresponse.ts
   - src/models/conflict.ts
   - src/models/createclientop.ts
   - src/models/createfileop.ts
@@ -151,22 +182,28 @@ generatedFiles:
   - src/models/createworkspacememberop.ts
   - src/models/createworkspaceop.ts
   - src/models/deleteaccountantuserop.ts
+  - src/models/deletecollectsubmissionop.ts
+  - src/models/deletecollectsubmissionresponse.ts
   - src/models/deletefileop.ts
   - src/models/deleteresponse.ts
   - src/models/deletetaskop.ts
   - src/models/deleteuserop.ts
+  - src/models/downloadfilecontentop.ts
   - src/models/errors/apierror.ts
   - src/models/errors/httpclienterrors.ts
   - src/models/errors/sdkvalidationerror.ts
   - src/models/file.ts
+  - src/models/filecontent.ts
   - src/models/filecreate.ts
   - src/models/fileupdate.ts
   - src/models/getaccountantuserop.ts
   - src/models/getclientop.ts
+  - src/models/getcollectsessionbytokenop.ts
   - src/models/getfileop.ts
   - src/models/gettaskop.ts
   - src/models/getuserop.ts
   - src/models/getworkspaceop.ts
+  - src/models/healthop.ts
   - src/models/indexop.ts
   - src/models/inviteaccountantuser.ts
   - src/models/inviteaccountantuserop.ts
@@ -186,10 +223,18 @@ generatedFiles:
   - src/models/paginatedusers.ts
   - src/models/paginatedworkspaces.ts
   - src/models/pagination.ts
+  - src/models/pingcollectsessionop.ts
   - src/models/pingop.ts
+  - src/models/pingsessionresponse.ts
   - src/models/ratelimit.ts
   - src/models/removeworkspacememberop.ts
+  - src/models/requestlinkbody.ts
+  - src/models/requestlinkcollecttokenop.ts
+  - src/models/requestlinkresponse.ts
   - src/models/security.ts
+  - src/models/submitcollectbulkop.ts
+  - src/models/submitcollectfileop.ts
+  - src/models/submitcollectformdataop.ts
   - src/models/task.ts
   - src/models/taskcreate.ts
   - src/models/taskupdate.ts
@@ -216,4 +261,1330 @@ generatedFiles:
   - worker-configuration.d.ts
   - worker-configuration.ts
   - wrangler.toml
+examples:
+  index:
+    speakeasy-default-index:
+      responses:
+        "200":
+          application/json: {"message": "Steuerboard API"}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  health:
+    speakeasy-default-health:
+      responses:
+        "200":
+          application/json: {"status": "<value>", "timestamp": "<value>"}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  ping:
+    speakeasy-default-ping:
+      responses:
+        "200":
+          application/json: {"ping": "<value>"}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  me:
+    speakeasy-default-me:
+      responses:
+        "200":
+          application/json: {"type": "<value>", "accountantId": "<id>", "clientId": "<id>", "apiKeyId": "<id>", "rateLimitMax": 6814.01, "rateLimitTimeWindow": 6507.42, "permissions": ["<value 1>", "<value 2>", "<value 3>"]}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  listClients:
+    speakeasy-default-list-clients:
+      parameters:
+        query:
+          limit: 20
+          cursor: "cmf41ajzv003706un4i99q19z"
+          customId: "455148"
+          slug: "muster-gmbh"
+          archived: "false"
+          type: "legal_person"
+          sort: "createdAt"
+          order: "desc"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "cmf41ajzv003706un4i99q19z", "name": "Muster GmbH", "slug": "muster-gmbh", "type": "legal_person", "customId": "ABC123", "legalName": "Muster GmbH", "archivedAt": "2021-01-01T00:00:00Z", "datevClientId": "ABC123", "createdAt": "2021-01-01T00:00:00Z", "updatedAt": "2021-01-01T00:00:00Z"}], "pagination": {"nextCursor": "cmf41ajzv003706un4i99q19z", "previousCursor": "cmf41ajzv003706un4i99q19z", "limit": 20, "total": 134}}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["fieldName"], "message": "Expected string, received undefined"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  createClient:
+    speakeasy-default-create-client:
+      requestBody:
+        application/json: {"name": "Muster GmbH", "type": "legal_person", "customId": "ABC123", "address": {"line1": "Musterstraße 1", "line2": "12345 Musterstadt", "city": "Musterstadt", "postalCode": "12345", "countryCode": "DE"}}
+      responses:
+        "201":
+          application/json: {"id": "cmf41ajzv003706un4i99q19z", "name": "Muster GmbH", "slug": "muster-gmbh", "type": "legal_person", "customId": "ABC123", "legalName": "Muster GmbH", "archivedAt": "2021-01-01T00:00:00Z", "datevClientId": "ABC123", "createdAt": "2021-01-01T00:00:00Z", "updatedAt": "2021-01-01T00:00:00Z"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["name"], "message": "Required"}, {"code": "invalid_type", "path": ["type"], "message": "Required"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  getClient:
+    speakeasy-default-get-client:
+      parameters:
+        path:
+          id: "cmf41ajzv003706un4i99q19z"
+      responses:
+        "200":
+          application/json: {"id": "cmf41ajzv003706un4i99q19z", "name": "Muster GmbH", "slug": "muster-gmbh", "type": "legal_person", "customId": "ABC123", "legalName": "Muster GmbH", "archivedAt": "2021-01-01T00:00:00Z", "datevClientId": "ABC123", "createdAt": "2021-01-01T00:00:00Z", "updatedAt": "2021-01-01T00:00:00Z"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "404":
+          application/json: {"status_code": 404, "type": "not_found", "code": "not_found", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  updateClient:
+    speakeasy-default-update-client:
+      parameters:
+        path:
+          id: "cmf41ajzv003706un4i99q19z"
+      requestBody:
+        application/json: {"name": "Muster GmbH", "type": "legal_person", "customId": "ABC123", "legalName": "Muster GmbH", "address": {"line1": "Musterstraße 1", "line2": "12345 Musterstadt", "city": "Musterstadt", "postalCode": "12345", "countryCode": "DE"}}
+      responses:
+        "200":
+          application/json: {"id": "cmf41ajzv003706un4i99q19z", "name": "Muster GmbH", "slug": "muster-gmbh", "type": "legal_person", "customId": "ABC123", "legalName": "Muster GmbH", "archivedAt": "2021-01-01T00:00:00Z", "datevClientId": "ABC123", "createdAt": "2021-01-01T00:00:00Z", "updatedAt": "2021-01-01T00:00:00Z"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "404":
+          application/json: {"status_code": 404, "type": "not_found", "code": "not_found", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["fieldName"], "message": "Expected string, received undefined"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  listAccountantUsers:
+    speakeasy-default-list-accountant-users:
+      parameters:
+        query:
+          limit: 20
+          cursor: "cmf41ajzv003706un4i99q19z"
+          sort: "createdAt"
+          order: "desc"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "cmf41ajzv003706un4i99q1b1", "createdAt": "2024-08-20T12:34:56Z", "email": "alex@example.com", "firstName": "Alex", "lastName": "Müller", "roles": []}], "pagination": {"nextCursor": "cmf41ajzv003706un4i99q19z", "previousCursor": "cmf41ajzv003706un4i99q19z", "limit": 20, "total": 134}}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["fieldName"], "message": "Expected string, received undefined"}], "name": "ZodError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  inviteAccountantUser:
+    speakeasy-default-invite-accountant-user:
+      requestBody:
+        application/json: {"email": "frida@example.com", "role": "admin"}
+      responses:
+        "201":
+          application/json: {"id": "cmf41ajzv003706un4i99q1b1", "createdAt": "2024-08-20T12:34:56Z", "email": "alex@example.com", "firstName": "Alex", "lastName": "Müller", "roles": [{"id": "cmf41ajzv003706un4i99q1a0", "name": "accountant_admin", "customName": "Head of Accounting"}]}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "404":
+          application/json: {"status_code": 404, "type": "not_found", "code": "not_found", "message": "<value>"}
+        "409":
+          application/json: {"status_code": 409, "type": "conflict", "code": "conflict", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["email"], "message": "Required"}, {"code": "invalid_union", "path": ["role"], "message": "Invalid input"}], "name": "ZodError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  getAccountantUser:
+    speakeasy-default-get-accountant-user:
+      parameters:
+        path:
+          id: "cmf41ajzv003706un4i99q19z"
+      responses:
+        "200":
+          application/json: {"id": "cmf41ajzv003706un4i99q1b1", "createdAt": "2024-08-20T12:34:56Z", "email": "alex@example.com", "firstName": "Alex", "lastName": "Müller", "roles": [{"id": "cmf41ajzv003706un4i99q1a0", "name": "accountant_admin", "customName": "Head of Accounting"}]}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "404":
+          application/json: {"status_code": 404, "type": "not_found", "code": "not_found", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ZodError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  deleteAccountantUser:
+    speakeasy-default-delete-accountant-user:
+      parameters:
+        path:
+          id: "cmf41ajzv003706un4i99q19z"
+      responses:
+        "200":
+          application/json: {"object": "file", "deleted": true, "id": "cmf41ajzv003706un4i99q19z"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "404":
+          application/json: {"status_code": 404, "type": "not_found", "code": "not_found", "message": "<value>"}
+        "409":
+          application/json: {"status_code": 409, "type": "conflict", "code": "conflict", "message": "<value>"}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  updateAccountantUser:
+    speakeasy-default-update-accountant-user:
+      parameters:
+        path:
+          id: "cmf41ajzv003706un4i99q19z"
+      requestBody:
+        application/json: {"role": "admin"}
+      responses:
+        "200":
+          application/json: {"id": "cmf41ajzv003706un4i99q1b1", "createdAt": "2024-08-20T12:34:56Z", "email": "alex@example.com", "firstName": "Alex", "lastName": "Müller", "roles": []}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "404":
+          application/json: {"status_code": 404, "type": "not_found", "code": "not_found", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_union", "path": ["role"], "message": "Invalid input"}], "name": "ZodError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  getcollectSessionByToken:
+    speakeasy-default-getcollect-session-by-token:
+      parameters:
+        path:
+          token: "cs_live_cmll8jh7b00013b6tlu7lvntw"
+      responses:
+        "200":
+          application/json: {"id": "3b37bb4e-4fe5-49d4-bd85-16b2301dfc73", "description": "hypothesize trolley bobble forceful indeed hippodrome phew oh ack", "status": "active", "channelConfig": {"channel": "collectUi", "pinProtected": false, "submitButtonLabel": "Submit", "locale": "de"}, "groups": [{"id": "7165d6ba-8b60-4db8-af30-ecac5c4b3f1e", "label": "<value>", "description": "oddly reflecting cripple mozzarella beside for attest acknowledge gah solidly", "sortOrder": 28189, "evaluationMode": "batch", "repeatable": true, "minInstances": 776519, "maxInstances": 269842, "items": [{"id": "a8f6bdd5-740e-45f5-8324-d4999351661a", "type": "confirmation", "description": "if peaceful diligently verbally", "status": "pending", "sortOrder": 694287, "config": {"type": "fileUpload", "maxFileSizeMb": 25}, "groupId": "cbb3c3e8-b894-480c-83f0-a6c8558efd2e", "submissions": []}]}]}
+        "404":
+          application/json: {"status_code": 404, "type": "not_found", "code": "collect_token_not_found", "message": "<value>"}
+        "410":
+          application/json: {"status_code": 410, "type": "bad_request", "code": "collect_token_expired", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["token"], "message": "Required"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  pingCollectSession:
+    speakeasy-default-ping-collect-session:
+      parameters:
+        path:
+          token: "cs_live_cmll8jh7b00013b6tlu7lvntw"
+      responses:
+        "202":
+          application/json: {"success": true}
+        "404":
+          application/json: {"status_code": 404, "type": "not_found", "code": "collect_token_not_found", "message": "<value>"}
+        "410":
+          application/json: {"status_code": 410, "type": "bad_request", "code": "collect_token_expired", "message": "<value>"}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  completeCollectSession:
+    speakeasy-default-complete-collect-session:
+      parameters:
+        path:
+          token: "cs_live_cmll8jh7b00013b6tlu7lvntw"
+      requestBody:
+        application/json: {"outcome": "complete"}
+      responses:
+        "202":
+          application/json: {"success": true}
+        "404":
+          application/json: {"status_code": 404, "type": "not_found", "code": "collect_token_not_found", "message": "<value>"}
+        "410":
+          application/json: {"status_code": 410, "type": "bad_request", "code": "collect_token_expired", "message": "<value>"}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  requestLinkCollectToken:
+    speakeasy-default-request-link-collect-token:
+      parameters:
+        path:
+          token: "cs_live_cmll8jh7b00013b6tlu7lvntw"
+      requestBody:
+        application/json: {"email": "client@example.com"}
+      responses:
+        "202":
+          application/json: {"success": true}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["email"], "message": "Required"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  submitCollectFile:
+    speakeasy-default-submit-collect-file:
+      parameters:
+        path:
+          token: "cs_live_cmll8jh7b00013b6tlu7lvntw"
+      requestBody:
+        multipart/form-data: {"file": "x-file: example.file", "collectItemId": "550e8400-e29b-41d4-a716-446655440000"}
+      responses:
+        "201":
+          application/json: {"id": "550e8400-e29b-41d4-a716-446655440000", "status": "pending", "fileName": "invoice.pdf", "fileSize": 1024, "fileMimeType": "application/pdf", "collectItemId": "550e8400-e29b-41d4-a716-446655440000", "createdAt": "2024-01-01T00:00:00.000Z"}
+        "404":
+          application/json: {"status_code": 404, "type": "not_found", "code": "collect_token_not_found", "message": "<value>"}
+        "410":
+          application/json: {"status_code": 410, "type": "bad_request", "code": "collect_token_expired", "message": "<value>"}
+        "413":
+          application/json: {"status_code": 413, "type": "bad_request", "code": "payload_too_large", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "custom", "path": ["file"], "message": "Input not instance of File"}, {"code": "invalid_type", "path": ["collectItemId"], "message": "Required"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  submitCollectFormData:
+    speakeasy-default-submit-collect-form-data:
+      parameters:
+        path:
+          token: "cs_live_cmll8jh7b00013b6tlu7lvntw"
+      requestBody:
+        application/json: {"collectItemId": "550e8400-e29b-41d4-a716-446655440000", "value": "Max Mustermann"}
+      responses:
+        "201":
+          application/json: {"id": "550e8400-e29b-41d4-a716-446655440000", "status": "pending", "value": "Max Mustermann", "collectItemId": "550e8400-e29b-41d4-a716-446655440000", "createdAt": "2024-01-01T00:00:00.000Z"}
+        "404":
+          application/json: {"status_code": 404, "type": "not_found", "code": "collect_token_not_found", "message": "<value>"}
+        "410":
+          application/json: {"status_code": 410, "type": "bad_request", "code": "collect_token_expired", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["token"], "message": "Required"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  submitCollectBulk:
+    speakeasy-default-submit-collect-bulk:
+      parameters:
+        path:
+          token: "cs_live_cmll8jh7b00013b6tlu7lvntw"
+      requestBody:
+        multipart/form-data: {"files": [], "groupId": "550e8400-e29b-41d4-a716-446655440000"}
+      responses:
+        "201":
+          application/json: {"submissions": [{"id": "83a4c2d4-b82f-43b0-82b3-90890d5fe69d", "status": "<value>", "fileName": "example.file", "fileSize": 4613.81, "fileMimeType": "<value>", "createdAt": "2026-01-04T08:07:36.682Z"}]}
+        "404":
+          application/json: {"status_code": 404, "type": "not_found", "code": "collect_token_not_found", "message": "<value>"}
+        "410":
+          application/json: {"status_code": 410, "type": "bad_request", "code": "collect_token_expired", "message": "<value>"}
+        "413":
+          application/json: {"status_code": 413, "type": "bad_request", "code": "payload_too_large", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "too_small", "path": ["files"], "message": "Array must contain at least 1 element(s)"}, {"code": "invalid_type", "path": ["groupId"], "message": "Required"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  deleteCollectSubmission:
+    speakeasy-default-delete-collect-submission:
+      parameters:
+        path:
+          token: "cs_live_cmll8jh7b00013b6tlu7lvntw"
+          submissionId: "550e8400-e29b-41d4-a716-446655440000"
+      responses:
+        "200":
+          application/json: {"deleted": true}
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "invalid_input", "message": "<value>"}
+        "404":
+          application/json: {"status_code": 404, "type": "not_found", "code": "collect_token_not_found", "message": "<value>"}
+        "410":
+          application/json: {"status_code": 410, "type": "bad_request", "code": "collect_token_expired", "message": "<value>"}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  listWorkspaces:
+    speakeasy-default-list-workspaces:
+      parameters:
+        query:
+          limit: 20
+          cursor: "cmf41ajzv003706un4i99q19z"
+        header:
+          x-client-id: "cmf41ajzv003706un4i99q19z"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "cmf41ajzv003706un4i99q19z", "name": "FiBu", "createdAt": "2021-01-01T00:00:00Z", "updatedAt": "2021-01-01T00:00:00Z", "archivedAt": "2021-01-01T00:00:00Z", "clientId": "cmf41ajzv003706un4i99q19z"}], "pagination": {"nextCursor": "cmf41ajzv003706un4i99q19z", "previousCursor": "cmf41ajzv003706un4i99q19z", "limit": 20, "total": 134}}
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "missing_client_id", "message": "<value>"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["fieldName"], "message": "Expected string, received undefined"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  createWorkspace:
+    speakeasy-default-create-workspace:
+      parameters:
+        header:
+          x-client-id: "cmf41ajzv003706un4i99q19z"
+      requestBody:
+        application/json: {"name": "FiBu"}
+      responses:
+        "201":
+          application/json: {"id": "cmf41ajzv003706un4i99q19z", "name": "FiBu", "createdAt": "2021-01-01T00:00:00Z", "updatedAt": "2021-01-01T00:00:00Z", "archivedAt": "2021-01-01T00:00:00Z", "clientId": "cmf41ajzv003706un4i99q19z"}
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "missing_client_id", "message": "<value>"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["name"], "message": "Required"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  getWorkspace:
+    speakeasy-default-get-workspace:
+      parameters:
+        path:
+          id: "cmf41ajzv003706un4i99q19z"
+        header:
+          x-client-id: "cmf41ajzv003706un4i99q19z"
+      responses:
+        "200":
+          application/json: {"id": "cmf41ajzv003706un4i99q19z", "name": "FiBu", "createdAt": "2021-01-01T00:00:00Z", "updatedAt": "2021-01-01T00:00:00Z", "archivedAt": "2021-01-01T00:00:00Z", "clientId": "cmf41ajzv003706un4i99q19z"}
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "missing_client_id", "message": "<value>"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "404":
+          application/json: {"status_code": 404, "type": "not_found", "code": "not_found", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  updateWorkspace:
+    speakeasy-default-update-workspace:
+      parameters:
+        path:
+          id: "cmf41ajzv003706un4i99q19z"
+        header:
+          x-client-id: "cmf41ajzv003706un4i99q19z"
+      requestBody:
+        application/json: {"name": "Finanzbuchhaltung"}
+      responses:
+        "200":
+          application/json: {"id": "cmf41ajzv003706un4i99q19z", "name": "FiBu", "createdAt": "2021-01-01T00:00:00Z", "updatedAt": "2021-01-01T00:00:00Z", "archivedAt": "2021-01-01T00:00:00Z", "clientId": "cmf41ajzv003706un4i99q19z"}
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "missing_client_id", "message": "<value>"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "404":
+          application/json: {"status_code": 404, "type": "not_found", "code": "not_found", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["name"], "message": "Required"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  listWorkspaceMembers:
+    speakeasy-default-list-workspace-members:
+      parameters:
+        path:
+          id: "cmf41ajzv003706un4i99q19z"
+        header:
+          x-client-id: "cmf41ajzv003706un4i99q19z"
+      responses:
+        "200":
+          application/json: [{"createdAt": "2024-05-14T08:30:00Z", "updatedAt": "2024-06-01T12:00:00Z", "workspaceId": "cmf41ajzv003706un4i99q19z", "isMuted": false, "userId": "cmf41ajzv003706un4i99q1a0", "user": {"id": "cmf41ajzv003706un4i99q1a0", "email": "frida@example.com", "firstName": "Frida", "lastName": "Meyer", "image": null}}]
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "missing_client_id", "message": "<value>"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  createWorkspaceMember:
+    speakeasy-default-create-workspace-member:
+      parameters:
+        path:
+          id: "cmf41ajzv003706un4i99q19z"
+        header:
+          x-client-id: "cmf41ajzv003706un4i99q19z"
+      requestBody:
+        application/json: {"userId": "cmf41ajzv003706un4i99q1a0"}
+      responses:
+        "201":
+          application/json: {"createdAt": "2024-05-14T08:30:00Z", "updatedAt": "2024-06-01T12:00:00Z", "workspaceId": "cmf41ajzv003706un4i99q19z", "isMuted": false, "userId": "cmf41ajzv003706un4i99q1a0", "user": {"id": "cmf41ajzv003706un4i99q1a0", "email": "frida@example.com", "firstName": "Frida", "lastName": "Meyer", "image": null}}
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "missing_client_id", "message": "<value>"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["userId"], "message": "Required"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  removeWorkspaceMember:
+    speakeasy-default-remove-workspace-member:
+      parameters:
+        path:
+          id: "cmf41ajzv003706un4i99q19z"
+        header:
+          x-client-id: "cmf41ajzv003706un4i99q19z"
+      requestBody:
+        application/json: {"userId": "cmf41ajzv003706un4i99q1a0"}
+      responses:
+        "200":
+          application/json: {"object": "file", "deleted": true, "id": "cmf41ajzv003706un4i99q19z"}
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "missing_client_id", "message": "<value>"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  listFiles:
+    speakeasy-default-list-files:
+      parameters:
+        query:
+          limit: 20
+          cursor: "cmf41ajzv003706un4i99q19z"
+        header:
+          x-client-id: "cmf41ajzv003706un4i99q19z"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "cmf41ajzv003706un4i99q19z", "documentDate": "2021-01-01T00:00:00Z", "createdAt": "2021-01-01T00:00:00Z", "updatedAt": "2021-01-01T00:00:00Z", "name": "document.pdf", "mimetype": "application/pdf", "size": 1024, "workspaceId": "cmf41ajzv003706un4i99q19z", "createdById": "cmf41ajzv003706un4i99q19z", "taskId": "cmf41ajzv003706un4i99q19z", "folderId": "cmf41ajzv003706un4i99q19z", "labelIds": ["cmf41ajzv003706un4i99q19z"]}], "pagination": {"nextCursor": "cmf41ajzv003706un4i99q19z", "previousCursor": "cmf41ajzv003706un4i99q19z", "limit": 20, "total": 134}}
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "missing_client_id", "message": "<value>"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["fieldName"], "message": "Expected string, received undefined"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  createFile:
+    speakeasy-default-create-file:
+      parameters:
+        header:
+          x-client-id: "cmf41ajzv003706un4i99q19z"
+      requestBody:
+        multipart/form-data: {"workspaceId": "cmf41ajzv003706un4i99q19z", "file": "x-file: example.file", "labelIds": ["cmf41ajzv003706un4i99q19z"], "name": "document.pdf", "folderId": "cmf41ajzv003706un4i99q19z", "taskId": "cmf41ajzv003706un4i99q19z"}
+      responses:
+        "201":
+          application/json: {"id": "cmf41ajzv003706un4i99q19z", "documentDate": "2021-01-01T00:00:00Z", "createdAt": "2021-01-01T00:00:00Z", "updatedAt": "2021-01-01T00:00:00Z", "name": "document.pdf", "mimetype": "application/pdf", "size": 1024, "workspaceId": "cmf41ajzv003706un4i99q19z", "createdById": "cmf41ajzv003706un4i99q19z", "taskId": "cmf41ajzv003706un4i99q19z", "folderId": "cmf41ajzv003706un4i99q19z", "labelIds": ["cmf41ajzv003706un4i99q19z"]}
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "missing_client_id", "message": "<value>"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "413":
+          application/json: {"status_code": 413, "type": "bad_request", "code": "payload_too_large", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["workspaceId"], "message": "Required"}, {"code": "custom", "path": ["file"], "message": "Input not instance of File"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  getFile:
+    speakeasy-default-get-file:
+      parameters:
+        path:
+          id: "cmf41ajzv003706un4i99q19z"
+        header:
+          x-client-id: "cmf41ajzv003706un4i99q19z"
+      responses:
+        "200":
+          application/json: {"id": "cmf41ajzv003706un4i99q19z", "documentDate": "2021-01-01T00:00:00Z", "createdAt": "2021-01-01T00:00:00Z", "updatedAt": "2021-01-01T00:00:00Z", "name": "document.pdf", "mimetype": "application/pdf", "size": 1024, "workspaceId": "cmf41ajzv003706un4i99q19z", "createdById": "cmf41ajzv003706un4i99q19z", "taskId": "cmf41ajzv003706un4i99q19z", "folderId": "cmf41ajzv003706un4i99q19z", "labelIds": ["cmf41ajzv003706un4i99q19z"]}
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "missing_client_id", "message": "<value>"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "404":
+          application/json: {"message": "File not found"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  deleteFile:
+    speakeasy-default-delete-file:
+      parameters:
+        path:
+          id: "cmf41ajzv003706un4i99q19z"
+        header:
+          x-client-id: "cmf41ajzv003706un4i99q19z"
+      responses:
+        "200":
+          application/json: {"object": "file", "deleted": true, "id": "cmf41ajzv003706un4i99q19z"}
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "missing_client_id", "message": "<value>"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "404":
+          application/json: {"status_code": 404, "type": "not_found", "code": "not_found", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  updateFile:
+    speakeasy-default-update-file:
+      parameters:
+        path:
+          id: "cmf41ajzv003706un4i99q19z"
+        header:
+          x-client-id: "cmf41ajzv003706un4i99q19z"
+      requestBody:
+        application/json: {"name": "document.pdf", "documentDate": "2021-01-01T00:00:00Z", "folderId": "cmf41ajzv003706un4i99q19z"}
+      responses:
+        "200":
+          application/json: {"id": "cmf41ajzv003706un4i99q19z", "documentDate": "2021-01-01T00:00:00Z", "createdAt": "2021-01-01T00:00:00Z", "updatedAt": "2021-01-01T00:00:00Z", "name": "document.pdf", "mimetype": "application/pdf", "size": 1024, "workspaceId": "cmf41ajzv003706un4i99q19z", "createdById": "cmf41ajzv003706un4i99q19z", "taskId": "cmf41ajzv003706un4i99q19z", "folderId": "cmf41ajzv003706un4i99q19z", "labelIds": ["cmf41ajzv003706un4i99q19z"]}
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "missing_client_id", "message": "<value>"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "404":
+          application/json: {"message": "File not found"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  downloadFileContent:
+    speakeasy-default-download-file-content:
+      parameters:
+        path:
+          id: "cmf41ajzv003706un4i99q19z"
+        header:
+          x-client-id: "cmf41ajzv003706un4i99q19z"
+      responses:
+        "200":
+          application/json: {"url": "https://s3.eu-central-1.amazonaws.com/bucket/...", "expiresIn": 600}
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "missing_client_id", "message": "<value>"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "404":
+          application/json: {"message": "File not found"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  listTasks:
+    speakeasy-default-list-tasks:
+      parameters:
+        query:
+          limit: 20
+          cursor: "cmf41ajzv003706un4i99q19z"
+          workspaceId: "cmf41ajzv003706un4i99q19z"
+          parentId: "cmf41ajzv003706un4i99q19z"
+          sort: "createdAt"
+          order: "desc"
+        header:
+          x-client-id: "cmf41ajzv003706un4i99q19z"
+      responses:
+        "200":
+          application/json: {"data": [], "pagination": {"nextCursor": "cmf41ajzv003706un4i99q19z", "previousCursor": "cmf41ajzv003706un4i99q19z", "limit": 20, "total": 134}}
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "missing_client_id", "message": "<value>"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["fieldName"], "message": "Expected string, received undefined"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  createTask:
+    speakeasy-default-create-task:
+      parameters:
+        header:
+          x-client-id: "cmf41ajzv003706un4i99q19z"
+      requestBody:
+        application/json: {"title": "Task Upload Documents", "text": "Upload the documents", "dueDate": "2021-01-01T00:00:00Z", "workspaceId": "cmf41ajzv003706un4i99q19z", "parentId": "cmf41ajzv003706un4i99q19z"}
+      responses:
+        "201":
+          application/json: {"id": "cmf41ajzv003706un4i99q19z", "title": "Task 1", "text": "Upload the documents", "status": "OPEN", "dueDate": "2021-01-01T00:00:00Z", "workspaceId": "cmf41ajzv003706un4i99q19z", "createdById": "cmf41ajzv003706un4i99q19z", "actorType": "USER", "parentId": "cmf41ajzv003706un4i99q19z", "destinationFolderId": "cmf41ajzv003706un4i99q19z", "createdAt": "2021-01-01T00:00:00Z", "updatedAt": "2021-01-01T00:00:00Z"}
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "missing_client_id", "message": "<value>"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["title"], "message": "Required"}, {"code": "invalid_type", "path": ["workspaceId"], "message": "Required"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  getTask:
+    speakeasy-default-get-task:
+      parameters:
+        path:
+          id: "cmf41ajzv003706un4i99q19z"
+        header:
+          x-client-id: "cmf41ajzv003706un4i99q19z"
+      responses:
+        "200":
+          application/json: {"id": "cmf41ajzv003706un4i99q19z", "title": "Task 1", "text": "Upload the documents", "status": "OPEN", "dueDate": "2021-01-01T00:00:00Z", "workspaceId": "cmf41ajzv003706un4i99q19z", "createdById": "cmf41ajzv003706un4i99q19z", "actorType": "USER", "parentId": "cmf41ajzv003706un4i99q19z", "destinationFolderId": "cmf41ajzv003706un4i99q19z", "createdAt": "2021-01-01T00:00:00Z", "updatedAt": "2021-01-01T00:00:00Z"}
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "missing_client_id", "message": "<value>"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "404":
+          application/json: {"status_code": 404, "type": "not_found", "code": "not_found", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  deleteTask:
+    speakeasy-default-delete-task:
+      parameters:
+        path:
+          id: "cmf41ajzv003706un4i99q19z"
+        header:
+          x-client-id: "cmf41ajzv003706un4i99q19z"
+      responses:
+        "200":
+          application/json: {"id": "cmf41ajzv003706un4i99q19z", "title": "Task 1", "text": "Upload the documents", "status": "OPEN", "dueDate": "2021-01-01T00:00:00Z", "workspaceId": "cmf41ajzv003706un4i99q19z", "createdById": "cmf41ajzv003706un4i99q19z", "actorType": "USER", "parentId": "cmf41ajzv003706un4i99q19z", "destinationFolderId": "cmf41ajzv003706un4i99q19z", "createdAt": "2021-01-01T00:00:00Z", "updatedAt": "2021-01-01T00:00:00Z"}
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "missing_client_id", "message": "<value>"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "404":
+          application/json: {"status_code": 404, "type": "not_found", "code": "not_found", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  updateTask:
+    speakeasy-default-update-task:
+      parameters:
+        path:
+          id: "cmf41ajzv003706un4i99q19z"
+        header:
+          x-client-id: "cmf41ajzv003706un4i99q19z"
+      requestBody:
+        application/json: {"title": "Updated Task Upload Documents", "text": "Upload the documents", "dueDate": "2021-01-01T00:00:00Z", "status": "OPEN", "destinationFolderId": "cmf41ajzv003706un4i99q19z", "assetFileIds": ["cmf41ajzv003706un4i99q19z"], "parentId": "cmf41ajzv003706un4i99q19z"}
+      responses:
+        "200":
+          application/json: {"id": "cmf41ajzv003706un4i99q19z", "title": "Task 1", "text": "Upload the documents", "status": "OPEN", "dueDate": "2021-01-01T00:00:00Z", "workspaceId": "cmf41ajzv003706un4i99q19z", "createdById": "cmf41ajzv003706un4i99q19z", "actorType": "USER", "parentId": "cmf41ajzv003706un4i99q19z", "destinationFolderId": "cmf41ajzv003706un4i99q19z", "createdAt": "2021-01-01T00:00:00Z", "updatedAt": "2021-01-01T00:00:00Z"}
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "missing_client_id", "message": "<value>"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "404":
+          application/json: {"status_code": 404, "type": "not_found", "code": "not_found", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["fieldName"], "message": "Expected string, received undefined"}], "name": "ValidationError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  listUsers:
+    speakeasy-default-list-users:
+      parameters:
+        query:
+          limit: 20
+          cursor: "cmf41ajzv003706un4i99q19z"
+        header:
+          x-client-id: "cmf41ajzv003706un4i99q19z"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "cmf41ajzv003706un4i99q1a0", "createdAt": "2024-05-14T08:30:00Z", "email": "frida@example.com", "firstName": "Frida", "lastName": "Meyer", "roles": ["client_admin"]}], "pagination": {"nextCursor": "cmf41ajzv003706un4i99q19z", "previousCursor": "cmf41ajzv003706un4i99q19z", "limit": 20, "total": 134}}
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "missing_client_id", "message": "<value>"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["fieldName"], "message": "Expected string, received undefined"}], "name": "ZodError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  inviteUser:
+    speakeasy-default-invite-user:
+      parameters:
+        header:
+          x-client-id: "cmf41ajzv003706un4i99q19z"
+      requestBody:
+        application/json: {"email": "frida@example.com", "role": "admin", "workspaceIds": ["cmf41ajzv003706un4i99q19z"]}
+      responses:
+        "201":
+          application/json: {"id": "cmf41ajzv003706un4i99q1a0", "createdAt": "2024-05-14T08:30:00Z", "email": "frida@example.com", "firstName": "Frida", "lastName": "Meyer", "roles": ["client_admin"]}
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "missing_client_id", "message": "<value>"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "404":
+          application/json: {"status_code": 404, "type": "not_found", "code": "not_found", "message": "<value>"}
+        "409":
+          application/json: {"status_code": 409, "type": "conflict", "code": "conflict", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["email"], "message": "Required"}, {"code": "invalid_type", "path": ["role"], "message": "Required"}], "name": "ZodError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  getUser:
+    speakeasy-default-get-user:
+      parameters:
+        path:
+          id: "cmf41ajzv003706un4i99q19z"
+        header:
+          x-client-id: "cmf41ajzv003706un4i99q19z"
+      responses:
+        "200":
+          application/json: {"id": "cmf41ajzv003706un4i99q1a0", "createdAt": "2024-05-14T08:30:00Z", "email": "frida@example.com", "firstName": "Frida", "lastName": "Meyer", "roles": ["client_admin"]}
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "missing_client_id", "message": "<value>"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "404":
+          application/json: {"status_code": 404, "type": "not_found", "code": "not_found", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ZodError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  deleteUser:
+    speakeasy-default-delete-user:
+      parameters:
+        path:
+          id: "cmf41ajzv003706un4i99q19z"
+        header:
+          x-client-id: "cmf41ajzv003706un4i99q19z"
+      responses:
+        "200":
+          application/json: {"object": "file", "deleted": true, "id": "cmf41ajzv003706un4i99q19z"}
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "missing_client_id", "message": "<value>"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "404":
+          application/json: {"status_code": 404, "type": "not_found", "code": "not_found", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["object"], "message": "Required"}, {"code": "invalid_type", "path": ["deleted"], "message": "Required"}, {"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ZodError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+  updateUser:
+    speakeasy-default-update-user:
+      parameters:
+        path:
+          id: "cmf41ajzv003706un4i99q19z"
+        header:
+          x-client-id: "cmf41ajzv003706un4i99q19z"
+      requestBody:
+        application/json: {"role": "admin"}
+      responses:
+        "200":
+          application/json: {"id": "cmf41ajzv003706un4i99q1a0", "createdAt": "2024-05-14T08:30:00Z", "email": "frida@example.com", "firstName": "Frida", "lastName": "Meyer", "roles": ["client_admin"]}
+        "400":
+          application/json: {"status_code": 400, "type": "bad_request", "code": "missing_client_id", "message": "<value>"}
+        "401":
+          application/json: {"status_code": 401, "type": "auth_error", "code": "unauthorized", "message": "<value>"}
+        "403":
+          application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
+        "404":
+          application/json: {"status_code": 404, "type": "not_found", "code": "not_found", "message": "<value>"}
+        "422":
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["role"], "message": "Required"}], "name": "ZodError"}}
+        "429":
+          application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
 examplesVersion: 1.0.2
+releaseNotes: "## Mcp-typescript SDK Changes Detected:\n* `Steuerboard.health.health()`: **Added**\n* `Steuerboard.collect.sessions.getcollectSessionByToken()`: **Added**\n* `Steuerboard.collect.sessions.pingCollectSession()`: **Added**\n* `Steuerboard.collect.sessions.completeCollectSession()`: **Added**\n* `Steuerboard.collect.sessions.requestLinkCollectToken()`: **Added**\n* `Steuerboard.collect.sessions.submitCollectFile()`: **Added**\n* `Steuerboard.collect.sessions.submitCollectFormData()`: **Added**\n* `Steuerboard.collect.sessions.submitCollectBulk()`: **Added**\n* `Steuerboard.collect.sessions.deleteCollectSubmission()`: **Added**\n* `Steuerboard.files.downloadFileContent()`: **Added**\n* `Steuerboard.workspace.members.listWorkspaceMembers()`:  `response.[].user.image` **Added**\n* `Steuerboard.workspace.members.createWorkspaceMember()`:  `response.user.image` **Added**\n* `Steuerboard.tasks.createTask()`: \n  *  `request.TaskCreate.parentId` **Added**\n"
+trackedFiles:
+  .dxtignore:
+    last_write_checksum: sha1:0cbab1b303d9060f6324f6a9cddabe13c2cfa7c9
+  .gitattributes:
+    last_write_checksum: sha1:26d16d8297b104945139da8c25bd38feeaad3e25
+  .npmignore:
+    last_write_checksum: sha1:aa14435f0c166ebc0edbf1ae6f65128e33dc8c97
+  eslint.config.mjs:
+    last_write_checksum: sha1:576025302d3d8650f37276bc9075f6ade3842cc7
+  manifest.json:
+    last_write_checksum: sha1:c0215a78c2eb762cebe30b85b44274b4db43ca63
+  package.json:
+    last_write_checksum: sha1:63c0fd2a59bc8a018bb71ee436b2c02d300dc293
+  src/cloudflare-worker/cloudflare-worker.ts:
+    last_write_checksum: sha1:cb80bd61bf1d7fb116dfd955d8a5987247b487cb
+  src/core.ts:
+    last_write_checksum: sha1:c5c00965f6963f05230e18c2c94c86a8ca77c9e0
+  src/funcs/adminClientsCreateClient.ts:
+    last_write_checksum: sha1:5dc402bdb44bdc8aa4b04eec1d92b7c43b23d0b6
+  src/funcs/adminClientsGetClient.ts:
+    last_write_checksum: sha1:dfbd4f24e4483c6729c7030342b3061544acd974
+  src/funcs/adminClientsListClients.ts:
+    last_write_checksum: sha1:75b2d712fca939d04118888e589952e734fd7071
+  src/funcs/adminClientsUpdateClient.ts:
+    last_write_checksum: sha1:4051c5ea9a0f44465732f335abfbb4065cdbae7d
+  src/funcs/adminUsersDeleteAccountantUser.ts:
+    last_write_checksum: sha1:32c1f77e605b77732bcb0c71410190aea4856b87
+  src/funcs/adminUsersGetAccountantUser.ts:
+    last_write_checksum: sha1:947c581a0d6cf2b58775d31b50dd57d2f298f5cb
+  src/funcs/adminUsersInviteAccountantUser.ts:
+    last_write_checksum: sha1:295f3d66e975d4f37d2d446199be20f6e25a2667
+  src/funcs/adminUsersListAccountantUsers.ts:
+    last_write_checksum: sha1:88268dcb8baac00dd2f13ede8bfd634add5de613
+  src/funcs/adminUsersUpdateAccountantUser.ts:
+    last_write_checksum: sha1:6596d5f44486191d7018bf61f846b1f788813d93
+  src/funcs/authMe.ts:
+    last_write_checksum: sha1:6c0b2dd360e8a0fe1b21cc2437af3972295a2742
+  src/funcs/collectSessionsCompleteCollectSession.ts:
+    last_write_checksum: sha1:cb40f287b2b69caefa515ce6b838114fd5f6869f
+  src/funcs/collectSessionsDeleteCollectSubmission.ts:
+    last_write_checksum: sha1:1afa068244049c34dae2d1b3585a97c581c659e1
+  src/funcs/collectSessionsGetcollectSessionByToken.ts:
+    last_write_checksum: sha1:e7bf604ce9803d15955e6c5cd61c9e26c064ff11
+  src/funcs/collectSessionsPingCollectSession.ts:
+    last_write_checksum: sha1:92bbbffcb8a0dbaea1b5f207db70556cb3f5ab9a
+  src/funcs/collectSessionsRequestLinkCollectToken.ts:
+    last_write_checksum: sha1:52b9bf517eacb886f9e705678352bc422d417a77
+  src/funcs/collectSessionsSubmitCollectBulk.ts:
+    last_write_checksum: sha1:9d1ef15f85c4c03524cbc8ac9ee48487eb9235a8
+  src/funcs/collectSessionsSubmitCollectFile.ts:
+    last_write_checksum: sha1:86ef0cade63ba15c9c391f01eaa6a6a1e4ba36bf
+  src/funcs/collectSessionsSubmitCollectFormData.ts:
+    last_write_checksum: sha1:e226e41dc57be3c83761f132145c9c3e91b1a4c1
+  src/funcs/filesCreateFile.ts:
+    last_write_checksum: sha1:ecee26bd0a00f887a422c64e9339a982f1f9e445
+  src/funcs/filesDeleteFile.ts:
+    last_write_checksum: sha1:bac023bee3b68dd6735e07fa969dce105d9f0c08
+  src/funcs/filesDownloadFileContent.ts:
+    last_write_checksum: sha1:d0644fe8a9716dcc15592b8db6d3f25705fcc353
+  src/funcs/filesGetFile.ts:
+    last_write_checksum: sha1:afde0d55e46c7a5df80dc32eba56b0066d02d9b1
+  src/funcs/filesListFiles.ts:
+    last_write_checksum: sha1:22361911e8c35946f2b86baea8fa3a8c2bf74611
+  src/funcs/filesUpdateFile.ts:
+    last_write_checksum: sha1:c345c87dbbbe02ef400979e05ae2dae00547efe8
+  src/funcs/healthHealth.ts:
+    last_write_checksum: sha1:c361bd17be49726a0fe0d1c13e17428af23a6bc6
+  src/funcs/healthIndex.ts:
+    last_write_checksum: sha1:6a86ee442c37b820bf2af330231ff8e1460c8ad2
+  src/funcs/healthPing.ts:
+    last_write_checksum: sha1:4bb36ed2ade18a78d06d19582c7b615a38b75c0f
+  src/funcs/tasksCreateTask.ts:
+    last_write_checksum: sha1:8877e860906b6bd0f8daf6f6371d49126704424d
+  src/funcs/tasksDeleteTask.ts:
+    last_write_checksum: sha1:f05e497bc33a2edf9e2bdc7ac15ebbc8e30e8449
+  src/funcs/tasksGetTask.ts:
+    last_write_checksum: sha1:178651c8b2ffa172593dfdf0d71ee283eeb86b8e
+  src/funcs/tasksListTasks.ts:
+    last_write_checksum: sha1:3ee155c6b3d2e6b3e5e3a3e43bf69d945f87cddc
+  src/funcs/tasksUpdateTask.ts:
+    last_write_checksum: sha1:d29eacb854dc76ee72ad102df319aa594e0dbe73
+  src/funcs/usersDeleteUser.ts:
+    last_write_checksum: sha1:9c5d8411b5c146ae253c8bcf30bac9507166a64b
+  src/funcs/usersGetUser.ts:
+    last_write_checksum: sha1:799bde6be608c51dcd1465e808e95a1ab54cda45
+  src/funcs/usersInviteUser.ts:
+    last_write_checksum: sha1:b7e7516bcd478e459dcaedf47a409fd54ef15dfb
+  src/funcs/usersListUsers.ts:
+    last_write_checksum: sha1:3937f593ef80cf2f27e74653f09aa04a4756d727
+  src/funcs/usersUpdateUser.ts:
+    last_write_checksum: sha1:8a672040d03eecb9361d736acf88e9964e736f25
+  src/funcs/workspaceMembersCreateWorkspaceMember.ts:
+    last_write_checksum: sha1:90c33b130027239b6b5eb3746e9743ed87e80ca9
+  src/funcs/workspaceMembersListWorkspaceMembers.ts:
+    last_write_checksum: sha1:4393dc3f0f512e460f34615893e0e903f82e9146
+  src/funcs/workspaceMembersRemoveWorkspaceMember.ts:
+    last_write_checksum: sha1:f9c2b4a8083b013e4e86b2907513ca4139d1810a
+  src/funcs/workspacesCreateWorkspace.ts:
+    last_write_checksum: sha1:45229e87ac0c8cf426648db2237d623707aa8a79
+  src/funcs/workspacesGetWorkspace.ts:
+    last_write_checksum: sha1:7377efec8c365338bf366c2f17bcf165896c8a24
+  src/funcs/workspacesListWorkspaces.ts:
+    last_write_checksum: sha1:01c9b556520f90d82830957128b6da468e26aff4
+  src/funcs/workspacesUpdateWorkspace.ts:
+    last_write_checksum: sha1:18499f38196208cede9dd47675447a36bc35675e
+  src/hooks/hooks.ts:
+    last_write_checksum: sha1:141e45a4b047589e6ec69eef5da26fab909f44e9
+  src/hooks/types.ts:
+    last_write_checksum: sha1:27a3444c4839bec58ae89820fd8c2483edafc3f4
+  src/landing-page.ts:
+    last_write_checksum: sha1:5051965da7721c08af6d6cd8b0c06c91bb9df780
+  src/lib/base64.ts:
+    last_write_checksum: sha1:e9f04a037018040361043104960982f7c22db52d
+  src/lib/config.ts:
+    last_write_checksum: sha1:3ed1d62cd0b3970f832c44074a910da58cdadb9a
+  src/lib/encodings.ts:
+    last_write_checksum: sha1:9b859366c917d31f7ee533176f71631872fb05fa
+  src/lib/env.ts:
+    last_write_checksum: sha1:e170f3415714a5bee471373385543daa8a23e1a4
+  src/lib/files.ts:
+    last_write_checksum: sha1:795c14026405d547bfc47012f7ad9666e530fa7f
+  src/lib/http.ts:
+    last_write_checksum: sha1:a56435907625a816051aa2131d60909c59f1da27
+  src/lib/logger.ts:
+    last_write_checksum: sha1:0ec9d3a2a34c362746b767e4f9a746c055d57a7b
+  src/lib/matchers.ts:
+    last_write_checksum: sha1:6f1f0f05cffa8b55b145472a4e4a3ec73f137709
+  src/lib/primitives.ts:
+    last_write_checksum: sha1:6f2cc1b00581006b4f70a853467df8cae81bc483
+  src/lib/result.ts:
+    last_write_checksum: sha1:d24994d58f37a1ca106847fcc6d2e976c6f1c093
+  src/lib/retries.ts:
+    last_write_checksum: sha1:42c8f6cc4c875be236230a8c760f4f32d8c1ab68
+  src/lib/schemas.ts:
+    last_write_checksum: sha1:7c7ba40781682f6d44bb585b5016e2527b52660e
+  src/lib/sdks.ts:
+    last_write_checksum: sha1:bbad39cf78d2037654722b10e2c725bed9de1052
+  src/lib/security.ts:
+    last_write_checksum: sha1:f3369d1b4517fc06c59d14318b7cd0132715bf68
+  src/lib/url.ts:
+    last_write_checksum: sha1:9550819577dc1e514e61496167aefcc137238aaf
+  src/mcp-server/build.mts:
+    last_write_checksum: sha1:c6f73b6c371dfcb9c6fe1265231b4459f61f0743
+  src/mcp-server/cli.ts:
+    last_write_checksum: sha1:7331efddde881832342fa8779d23be7445d4480c
+  src/mcp-server/cli/serve/command.ts:
+    last_write_checksum: sha1:9e4a4056e27c7bf52c72ab90636def53d0e06cec
+  src/mcp-server/cli/serve/impl.ts:
+    last_write_checksum: sha1:1aa78864674638e3d08f4279de19046d4ad33f41
+  src/mcp-server/cli/start/command.ts:
+    last_write_checksum: sha1:87b82db632ce174364f453306d6daae4a4152a9b
+  src/mcp-server/cli/start/impl.ts:
+    last_write_checksum: sha1:a08f4928fac56132dba688efd212becf046f8ff6
+  src/mcp-server/console-logger.ts:
+    last_write_checksum: sha1:0c4b9b7c79ad0a81359210cb31b9ee4d887d5de1
+  src/mcp-server/extensions.ts:
+    last_write_checksum: sha1:27de1e2b8aaedc8965d1d4c4d4c500df1f28b483
+  src/mcp-server/flags.ts:
+    last_write_checksum: sha1:3cf39d945e5689f320088ebdef7b3204758c1bfe
+  src/mcp-server/mcp-server.ts:
+    last_write_checksum: sha1:12dc47ba9825230fac1cfbfea1af8cb28b85f4a2
+  src/mcp-server/prompts.ts:
+    last_write_checksum: sha1:b5db7820d4a2782a49c031f6692cfdb6a126f394
+  src/mcp-server/resources.ts:
+    last_write_checksum: sha1:3b2776b8ce52a1b295484d2cf96c8997af841357
+  src/mcp-server/scopes.ts:
+    last_write_checksum: sha1:77d0eb95785e84f9fd0b27c4612f8c6470489fe4
+  src/mcp-server/server.ts:
+    last_write_checksum: sha1:ffa9725572e7e60403aac295d341c7045b87b836
+  src/mcp-server/shared.ts:
+    last_write_checksum: sha1:19c9034032819a14f15c430de4350c8aba99d725
+  src/mcp-server/tools.ts:
+    last_write_checksum: sha1:67a803ebf7f0f80658044842433bc743738da5d9
+  src/mcp-server/tools/adminClientsCreateClient.ts:
+    last_write_checksum: sha1:9b188d8c722cf34590e9cacdeadce5b7be3e9b2c
+  src/mcp-server/tools/adminClientsGetClient.ts:
+    last_write_checksum: sha1:8f4abf4517c30ebac2d5f6c526a5418d94a05fb5
+  src/mcp-server/tools/adminClientsListClients.ts:
+    last_write_checksum: sha1:898fc04ed4e4cc5d646c597e123d037b6111db2f
+  src/mcp-server/tools/adminClientsUpdateClient.ts:
+    last_write_checksum: sha1:7d69afa5eeee0f354aaf1eb83045da1534b10ca9
+  src/mcp-server/tools/adminUsersDeleteAccountantUser.ts:
+    last_write_checksum: sha1:6e350f3174468db74b408047bdf8f368c2bc3573
+  src/mcp-server/tools/adminUsersGetAccountantUser.ts:
+    last_write_checksum: sha1:4948c4c65918c786ef6786c75cabe8ee722c5c33
+  src/mcp-server/tools/adminUsersInviteAccountantUser.ts:
+    last_write_checksum: sha1:6770d23781cdde0054f712da1fe9f90b92fcc480
+  src/mcp-server/tools/adminUsersListAccountantUsers.ts:
+    last_write_checksum: sha1:1e3b2900daae8625b44769a2e388c0b6472d6e88
+  src/mcp-server/tools/adminUsersUpdateAccountantUser.ts:
+    last_write_checksum: sha1:8a156f6173108b1fa1a746453896cbab87339cef
+  src/mcp-server/tools/authMe.ts:
+    last_write_checksum: sha1:06029b2830cbb6f11a7b06ef62e5cad7b36feba0
+  src/mcp-server/tools/collectSessionsCompleteCollectSession.ts:
+    last_write_checksum: sha1:b8721dfe8d50f6e40a08933087d8b7f74aa91f9a
+  src/mcp-server/tools/collectSessionsDeleteCollectSubmission.ts:
+    last_write_checksum: sha1:577265ebec0d022362a719ff6c75743e4b85ccec
+  src/mcp-server/tools/collectSessionsGetcollectSessionByToken.ts:
+    last_write_checksum: sha1:134a5cb56801eec8500eb67d8535c6640aa2d721
+  src/mcp-server/tools/collectSessionsPingCollectSession.ts:
+    last_write_checksum: sha1:31e1c00db13eb7c00b6fbb8a7e1b178bceafe9c0
+  src/mcp-server/tools/collectSessionsRequestLinkCollectToken.ts:
+    last_write_checksum: sha1:16ddbd5b7e57403597895f7b98365a91934a2f51
+  src/mcp-server/tools/collectSessionsSubmitCollectBulk.ts:
+    last_write_checksum: sha1:b5950ac2e854e91c7e6459a35b27bcba3725f1f2
+  src/mcp-server/tools/collectSessionsSubmitCollectFile.ts:
+    last_write_checksum: sha1:d3dd15c16adac2390172361c1b2761f44523d02a
+  src/mcp-server/tools/collectSessionsSubmitCollectFormData.ts:
+    last_write_checksum: sha1:3f397b0679fd14053809010a98e05b7ef237f79f
+  src/mcp-server/tools/filesCreateFile.ts:
+    last_write_checksum: sha1:ced088be89ebdd8623c263c2f592bec2d47133a6
+  src/mcp-server/tools/filesDeleteFile.ts:
+    last_write_checksum: sha1:e4a9b3b7c8b32ae2acb482836ac39abc477e1be2
+  src/mcp-server/tools/filesDownloadFileContent.ts:
+    last_write_checksum: sha1:e3c04f0a028c295a3ac79df6d82d2ad108dbd8e1
+  src/mcp-server/tools/filesGetFile.ts:
+    last_write_checksum: sha1:2761db4bf1f6f23246307002dae8c796373b43b9
+  src/mcp-server/tools/filesListFiles.ts:
+    last_write_checksum: sha1:553b746bc04428229129244fcedbc432cbc2bc93
+  src/mcp-server/tools/filesUpdateFile.ts:
+    last_write_checksum: sha1:c44defac345011861c382109f7b4939a05c6c53d
+  src/mcp-server/tools/healthHealth.ts:
+    last_write_checksum: sha1:81a8e74ccd3e870606034e403c1a9b1333459fb2
+  src/mcp-server/tools/healthIndex.ts:
+    last_write_checksum: sha1:2aeb9bcc7b3ffc48b51e5540ad44a2a73887fc10
+  src/mcp-server/tools/healthPing.ts:
+    last_write_checksum: sha1:21d9f18548527593816e980e51c68e84cdf01f67
+  src/mcp-server/tools/tasksCreateTask.ts:
+    last_write_checksum: sha1:69624a9e9e3b14afd02b59176ada50494e490b04
+  src/mcp-server/tools/tasksDeleteTask.ts:
+    last_write_checksum: sha1:5f0fdaee56f22cf0fbe1bfd314fe8378371f4aae
+  src/mcp-server/tools/tasksGetTask.ts:
+    last_write_checksum: sha1:d46af270931fcfbdbd75120a863b723b73668640
+  src/mcp-server/tools/tasksListTasks.ts:
+    last_write_checksum: sha1:a73b7b200dc8409da08f5393fecb4e8a5632e7a2
+  src/mcp-server/tools/tasksUpdateTask.ts:
+    last_write_checksum: sha1:e34a509f47bacb39e479ce086ac90020eca98815
+  src/mcp-server/tools/usersDeleteUser.ts:
+    last_write_checksum: sha1:642d4090c26d5babc52e6dc91f765624fa558161
+  src/mcp-server/tools/usersGetUser.ts:
+    last_write_checksum: sha1:005b888b042499927a135ee9ae4f5117116c1c1f
+  src/mcp-server/tools/usersInviteUser.ts:
+    last_write_checksum: sha1:5240e9be0e0f41e4314f5ce9533d4d9cf195b848
+  src/mcp-server/tools/usersListUsers.ts:
+    last_write_checksum: sha1:e08eb364aab65508209c4f46b4a6d65adb2693f8
+  src/mcp-server/tools/usersUpdateUser.ts:
+    last_write_checksum: sha1:7f9c3d2992139cd7bfac605577a360e7b28289e6
+  src/mcp-server/tools/workspaceMembersCreateWorkspaceMember.ts:
+    last_write_checksum: sha1:6b0ca343074c1fddfb19ba49041b6619e238a675
+  src/mcp-server/tools/workspaceMembersListWorkspaceMembers.ts:
+    last_write_checksum: sha1:19f5dee5d096ded21c64ee7a57466ae3230c9f2e
+  src/mcp-server/tools/workspaceMembersRemoveWorkspaceMember.ts:
+    last_write_checksum: sha1:79603f2368c690cb5f2ed6bf4b496a50ef234d7c
+  src/mcp-server/tools/workspacesCreateWorkspace.ts:
+    last_write_checksum: sha1:d62fcc7ccfc83af31378d65c0e0753d88e663260
+  src/mcp-server/tools/workspacesGetWorkspace.ts:
+    last_write_checksum: sha1:02e1b325976b0e9e5493f1838d2c1838294077ef
+  src/mcp-server/tools/workspacesListWorkspaces.ts:
+    last_write_checksum: sha1:37487db6ecc486fd11d5b8521e17e0d95ea9bd9c
+  src/mcp-server/tools/workspacesUpdateWorkspace.ts:
+    last_write_checksum: sha1:58b61cce212cf1b0595ca95a0b4c222cbc651caf
+  src/models/accountantuser.ts:
+    last_write_checksum: sha1:b11c1db1fa567a2344828584e227b76fef7ae62d
+  src/models/accountantuserrole.ts:
+    last_write_checksum: sha1:fe0edd1b39036b67eb8c659a9413f64156bfbb39
+  src/models/autherror.ts:
+    last_write_checksum: sha1:6791816c5edbae29fd72ca4ded89d6a40a1d1db4
+  src/models/badrequest.ts:
+    last_write_checksum: sha1:b872c9114a41b3a26e3bbcbcbf85d92cb07df98a
+  src/models/client.ts:
+    last_write_checksum: sha1:37be59735d67064a3eaf8bf4442251403ad3e58d
+  src/models/clientcreate.ts:
+    last_write_checksum: sha1:397251f2ae542e5cfbaa292c52760dc0da0b9021
+  src/models/clientupdate.ts:
+    last_write_checksum: sha1:3f35363719fa86461a7eae7c0b0b092f71835116
+  src/models/clientuser.ts:
+    last_write_checksum: sha1:d94b754d9034ef6cf11b7a22586a2289c306f0cc
+  src/models/clientuserinvite.ts:
+    last_write_checksum: sha1:4c2a2e7276b886cf7349d38517ce8e11b5c28469
+  src/models/clientuserupdate.ts:
+    last_write_checksum: sha1:33c59f7b4fa9ef05c0291baf512bd4a583b082a4
+  src/models/collectbulksubmission.ts:
+    last_write_checksum: sha1:d99ddcb5855af23bd3777f404407f2b02ec29b29
+  src/models/collectbulksubmitform.ts:
+    last_write_checksum: sha1:36b7114471c20f210c3185786200af30ad23d08c
+  src/models/collectfilesubmission.ts:
+    last_write_checksum: sha1:f2f7f42152da77ecb105faae9a3b86fd8d125f2d
+  src/models/collectfilesubmitform.ts:
+    last_write_checksum: sha1:e7ebe17873793748af5f9aa37bcc305adf917b16
+  src/models/collectformdatasubmission.ts:
+    last_write_checksum: sha1:862b80ce9c6678a9886c869ee1ab3ab8c597540c
+  src/models/collectformdatasubmit.ts:
+    last_write_checksum: sha1:2110cdca7bf807acd35c080bd898583a29ecd00f
+  src/models/collectsessionbytoken.ts:
+    last_write_checksum: sha1:5d9d4f9d19a9a7388b6201531476fe68d1798f90
+  src/models/completecollectsessionop.ts:
+    last_write_checksum: sha1:e02670a0db8be1cf3dae3438a3b14a3ddb8dbd36
+  src/models/completesessionbody.ts:
+    last_write_checksum: sha1:71ded77af9fd887c47574e85862a6e12cd7cb366
+  src/models/completesessionresponse.ts:
+    last_write_checksum: sha1:5ab4bc4cd2c697affa3cef74c440e04d650cca18
+  src/models/conflict.ts:
+    last_write_checksum: sha1:287e5b2e81e7d07c80b74dfa8e3fbdc04517c106
+  src/models/createclientop.ts:
+    last_write_checksum: sha1:26148ee49c0ff3c4c2a537af58bc8aa79ae628f3
+  src/models/createfileop.ts:
+    last_write_checksum: sha1:bbfff27ea0e8caa2a7dc46779fff3032d8a9b26f
+  src/models/createtaskop.ts:
+    last_write_checksum: sha1:7c83538a979456868144086b0c391046df91ef7b
+  src/models/createworkspacememberop.ts:
+    last_write_checksum: sha1:aa7ad3a0d9073778ede81e6d41e395edd48044d5
+  src/models/createworkspaceop.ts:
+    last_write_checksum: sha1:89ba20757adfc8ef58c1f6628fe4fe768b5fd162
+  src/models/deleteaccountantuserop.ts:
+    last_write_checksum: sha1:20f4bd1cc351f3131ef4442b7e33f5457d680665
+  src/models/deletecollectsubmissionop.ts:
+    last_write_checksum: sha1:d7bdd87b8603aa5d5d5b7068b168ccdaeabfd96b
+  src/models/deletecollectsubmissionresponse.ts:
+    last_write_checksum: sha1:296dbbebb0c7ef8ea83d97bebd3dc151ab291e3f
+  src/models/deletefileop.ts:
+    last_write_checksum: sha1:a668cede03abb393083789682a20a30bf483f7d6
+  src/models/deleteresponse.ts:
+    last_write_checksum: sha1:eb75c234b430b8582c1165cb5e5a0e4c378104b8
+  src/models/deletetaskop.ts:
+    last_write_checksum: sha1:032047466196bdb6f7dbc0698449561525c44279
+  src/models/deleteuserop.ts:
+    last_write_checksum: sha1:60ff1d829abe4c8b5d6980c9eee35bee026b48cf
+  src/models/downloadfilecontentop.ts:
+    last_write_checksum: sha1:7a1b59a0491978ff21841deef3a60c80ad95b384
+  src/models/errors/apierror.ts:
+    last_write_checksum: sha1:1a4199dec47757c19b2e88dbd767d7f24ab9522a
+  src/models/errors/httpclienterrors.ts:
+    last_write_checksum: sha1:994ced121c54fecd0af038ccfb7855fbfd3868ec
+  src/models/errors/sdkvalidationerror.ts:
+    last_write_checksum: sha1:ce8bb73a1243f8ea8fa3b71a181e586e29dd02c9
+  src/models/file.ts:
+    last_write_checksum: sha1:9a56cb593b2781774bcc6486707972b308ccfa45
+  src/models/filecontent.ts:
+    last_write_checksum: sha1:5f2d7c2f2383cb64b15a9016193e8982100ae0aa
+  src/models/filecreate.ts:
+    last_write_checksum: sha1:d62b65bffb8e26b9b4c58e3d1471cb22421234c4
+  src/models/fileupdate.ts:
+    last_write_checksum: sha1:b4aa5adb698616c705e0a952429f9b657957fc14
+  src/models/getaccountantuserop.ts:
+    last_write_checksum: sha1:b188f7bc1067e505f8087ba3a8fe09768104413e
+  src/models/getclientop.ts:
+    last_write_checksum: sha1:ac640cff6c5167cf755858f9011078573388efca
+  src/models/getcollectsessionbytokenop.ts:
+    last_write_checksum: sha1:9bb69e1da987c84455de93f64d2511950aa42836
+  src/models/getfileop.ts:
+    last_write_checksum: sha1:cbc5c685cada3eb9a0a1284674ca17dbf9e90ee0
+  src/models/gettaskop.ts:
+    last_write_checksum: sha1:869a277a5b6ecfa2c781e0e0d2b7d60a1bd02cb0
+  src/models/getuserop.ts:
+    last_write_checksum: sha1:cae303e8866cb4e04d1db8e428c1d7a54943ebf9
+  src/models/getworkspaceop.ts:
+    last_write_checksum: sha1:5485b9084e01c8140c8a9a955e7234b0c1fa83a4
+  src/models/healthop.ts:
+    last_write_checksum: sha1:7d3030e1c98d703a75a1dac0a807ecc61922f163
+  src/models/indexop.ts:
+    last_write_checksum: sha1:88b040564190e1d671497e9ce9c0a16bd82da221
+  src/models/inviteaccountantuser.ts:
+    last_write_checksum: sha1:f2b7511fa8013980b4dcc0c768c16f04b4fa5d7d
+  src/models/inviteaccountantuserop.ts:
+    last_write_checksum: sha1:8c1e0136f5c69f6ef2050d1739057308ef549274
+  src/models/inviteuserop.ts:
+    last_write_checksum: sha1:08a2a945abc2fc237c636ab9a9b50083fafa2b80
+  src/models/listaccountantusersop.ts:
+    last_write_checksum: sha1:16acc1aa1dd7966a3f9fcf7d688b441d69ff68dc
+  src/models/listclientsop.ts:
+    last_write_checksum: sha1:2cf82631e896ebbccb410e9d507ad094b603cf38
+  src/models/listfilesop.ts:
+    last_write_checksum: sha1:a7713f6ffebfedbfa91c67d8b957d1234723c234
+  src/models/listtasksop.ts:
+    last_write_checksum: sha1:568fada1170711f4ea7ce4b884393f12f7e9c3c1
+  src/models/listusersop.ts:
+    last_write_checksum: sha1:82225cc3fbe694d735189d994a7e3cf27218f9cf
+  src/models/listworkspacemembersop.ts:
+    last_write_checksum: sha1:c3dd61ab1210621630397f9d1364a788c746f4de
+  src/models/listworkspacesop.ts:
+    last_write_checksum: sha1:7ff82396a1d7efeae69e9e17cc285180eb58c07e
+  src/models/meop.ts:
+    last_write_checksum: sha1:44121a9023927a9d78a350eadf70f3942da6c3df
+  src/models/notfound.ts:
+    last_write_checksum: sha1:cfa69ccdef32e6c2ed3883503a6b794e33da2e4a
+  src/models/paginatedclients.ts:
+    last_write_checksum: sha1:f77263f56203766f9e62101e3357003533ffc2bf
+  src/models/paginatedfiles.ts:
+    last_write_checksum: sha1:b4f12c377fd26100b125fc4874a82e4a3e0947b7
+  src/models/paginatedtasks.ts:
+    last_write_checksum: sha1:c76a259310105dde7a5dcab802bc822f16d2fc55
+  src/models/paginatedusers.ts:
+    last_write_checksum: sha1:93e679b9fb7bf98614afb1b7eac7392b8faa15c8
+  src/models/paginatedworkspaces.ts:
+    last_write_checksum: sha1:b9d643dc126bc7682753ce511f0a4f1cc44000b9
+  src/models/pagination.ts:
+    last_write_checksum: sha1:7e4c9dba1ec6ce822ba9301e92a58f9058d79e31
+  src/models/pingcollectsessionop.ts:
+    last_write_checksum: sha1:7ff1161c221da6f2b00a7a62d44a7fbf0bad045d
+  src/models/pingop.ts:
+    last_write_checksum: sha1:3f3494f932faeeae71ed704628c0ea601e9c30ba
+  src/models/pingsessionresponse.ts:
+    last_write_checksum: sha1:e8a22e30721c46e1a04cb4c8951d9d943bcb1c84
+  src/models/ratelimit.ts:
+    last_write_checksum: sha1:dcf57057ceae42486c4c91f9c759194ea66a8642
+  src/models/removeworkspacememberop.ts:
+    last_write_checksum: sha1:f4361f5198f32e55bbe19cb4f0362875d05967c4
+  src/models/requestlinkbody.ts:
+    last_write_checksum: sha1:d528e30a19dc0b5b398b3b7089d8086ec3b45b7e
+  src/models/requestlinkcollecttokenop.ts:
+    last_write_checksum: sha1:caf53ed73af1f2511ef2b0d49d6f4c4a0dd504e1
+  src/models/requestlinkresponse.ts:
+    last_write_checksum: sha1:3bfdfc9fa0e7a43b2b1983a608d17e51153a9ace
+  src/models/security.ts:
+    last_write_checksum: sha1:c1b8e3bca5eb1dc24eb86c2c385ef8139cdc5cc4
+  src/models/submitcollectbulkop.ts:
+    last_write_checksum: sha1:5641afb788be55bd7ebc2e4b9788586b7e19a2eb
+  src/models/submitcollectfileop.ts:
+    last_write_checksum: sha1:6cfd6097d8cb650e69cb2085254ec4602486d113
+  src/models/submitcollectformdataop.ts:
+    last_write_checksum: sha1:551bb244304ab01f55f199a783f6a73bba776708
+  src/models/task.ts:
+    last_write_checksum: sha1:ed8814ae944d68476a64e51c8cd5a072ddb296fb
+  src/models/taskcreate.ts:
+    last_write_checksum: sha1:1749287d7d40132763942af1dbac40eb165031e5
+  src/models/taskupdate.ts:
+    last_write_checksum: sha1:3dc658c6d94c34c66cdfc519615e49c8dad4a2fb
+  src/models/updateaccountantuser.ts:
+    last_write_checksum: sha1:d603fa2bd69ae2799ca9f32d865d41688037f180
+  src/models/updateaccountantuserop.ts:
+    last_write_checksum: sha1:35673b8c6e25e0acc7d1811284b4f63d7e9c70be
+  src/models/updateclientop.ts:
+    last_write_checksum: sha1:774daa0f0e69525184f08c28f1f7f652ebb431fa
+  src/models/updatefileop.ts:
+    last_write_checksum: sha1:afb01966c0636780958f439bf57f3711b48d39b2
+  src/models/updatetaskop.ts:
+    last_write_checksum: sha1:a9dbee0c09f335de26a0b290abeb9ad4ca79dd32
+  src/models/updateuserop.ts:
+    last_write_checksum: sha1:a862af572db1b1c14e4a012066167e3c11c770a8
+  src/models/updateworkspaceop.ts:
+    last_write_checksum: sha1:782ac49214a2f4e89db630756c1741465ad16ca5
+  src/models/workspace.ts:
+    last_write_checksum: sha1:2ad25ae0e5a6b546bd4648fb82a5560508a4b301
+  src/models/workspacecreate.ts:
+    last_write_checksum: sha1:f0ebbe22323240641acc695cd862a11bdaf79e59
+  src/models/workspacemember.ts:
+    last_write_checksum: sha1:cf83da69942c7caba89f6b6dadb957929e702063
+  src/models/workspacemembercreate.ts:
+    last_write_checksum: sha1:bd00b41f7b004223db59cbe2f4462f528393e6e6
+  src/models/workspacememberremove.ts:
+    last_write_checksum: sha1:e9a404663b88c4efbb17cd00c81123ef364c27fb
+  src/models/workspaceupdate.ts:
+    last_write_checksum: sha1:5cc18bc2765ea6675a7ac9c1c34d6a51ce1fdba0
+  src/tool-names.ts:
+    last_write_checksum: sha1:b00e10deb1becbd69df6f40f268fe68a26ba2d95
+  src/types/async.ts:
+    last_write_checksum: sha1:675d04bb4b4081dc3482f18de98674f9b446e7b4
+  src/types/bigint.ts:
+    last_write_checksum: sha1:ebf6d4b27fc3aa7ff76dbedae9a19fb7f39e5dc7
+  src/types/blobs.ts:
+    last_write_checksum: sha1:9cc86e0e9420999afb48d53c57d71584be745fd7
+  src/types/enums.ts:
+    last_write_checksum: sha1:384e3fc4bee3f006cd8f39556a44b3508597b8e5
+  src/types/fp.ts:
+    last_write_checksum: sha1:d24994d58f37a1ca106847fcc6d2e976c6f1c093
+  src/types/rfcdate.ts:
+    last_write_checksum: sha1:8e5f382e02fe21c2f2e24deb1b7bbf8cddd3dd16
+  src/types/streams.ts:
+    last_write_checksum: sha1:cc9ced2dd34a76c3a1bd7784ccda1cc3b37ab9a9
+  tsconfig.json:
+    last_write_checksum: sha1:1c4444fe3e9a02b46de9523b7c0aa073776a3fec
+  worker-configuration.d.ts:
+    last_write_checksum: sha1:311a979e7b7a6853fb8bb606f76b87da4b082088
+  worker-configuration.ts:
+    last_write_checksum: sha1:c624f1f2276c118b8860d7cd94160cbead4e6c9e
+  wrangler.toml:
+    last_write_checksum: sha1:ef22507c75260bc774fdec5584285851b4c25c7c

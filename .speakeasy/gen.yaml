@@ -13,6 +13,8 @@ generation:
     requestResponseComponentNamesFeb2024: true
     securityFeb2025: true
     sharedErrorComponentsApr2025: true
+    nameOverrideFeb2026: false
+    sharedNestedComponentsJan2026: false
   auth:
     oAuth2ClientCredentialsEnabled: false
     oAuth2PasswordEnabled: false
@@ -23,19 +25,32 @@ generation:
     generateTests: false
     generateNewTests: true
     skipResponseBodyAssertions: false
+  persistentEdits: {}
+  requestBodyFieldName: ""
+  schemas:
+    allOfMergeStrategy: shallowMerge
+  versioningStrategy: automatic
 mcp-typescript:
-  version: 0.3.3
+  version: 0.3.4
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
     peerDependencies: {}
+  advancedFlags: []
   author: Steuerboard
   baseErrorName: SteuerboardError
   cloudflareEnabled: true
   cloudflareURL: https://mcp.steuerboard.com
   defaultErrorName: SteuerboardDefaultError
   envVarPrefix: STEUERBOARD
+  fixEnumNameSanitization: false
+  formStringArrayEncodeMode: encoded-string
+  gramEnabled: false
+  inferUnionDiscriminators: false
   inputModelSuffix: input
   maxMethodParams: 0
+  multipartArrayFormat: legacy
   outputModelSuffix: output
   packageName: '@steuerboard/mcp'
+  responseFormat: flat
+  validateResponse: true

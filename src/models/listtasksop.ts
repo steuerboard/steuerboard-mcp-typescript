@@ -4,7 +4,6 @@
 
 import * as z from "zod";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
-import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
 import { PaginatedTasks, PaginatedTasks$zodSchema } from "./paginatedtasks.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
@@ -113,29 +112,35 @@ export const ListTasksUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("The validation error(s)");
 
-export const ListTasksStatusCode$zodSchema = z.literal(403);
+export const ListTasksForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type ListTasksStatusCode = z.infer<typeof ListTasksStatusCode$zodSchema>;
+export type ListTasksForbiddenStatusCode = z.infer<
+  typeof ListTasksForbiddenStatusCode$zodSchema
+>;
 
-export const ListTasksType$zodSchema = z.enum([
+export const ListTasksForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type ListTasksType = z.infer<typeof ListTasksType$zodSchema>;
+export type ListTasksForbiddenType = z.infer<
+  typeof ListTasksForbiddenType$zodSchema
+>;
 
-export const ListTasksCode$zodSchema = z.enum([
+export const ListTasksForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
 
-export type ListTasksCode = z.infer<typeof ListTasksCode$zodSchema>;
+export type ListTasksForbiddenCode = z.infer<
+  typeof ListTasksForbiddenCode$zodSchema
+>;
 
 /**
  * Missing scope
  */
 export type ListTasksForbiddenResponseBody = {
-  status_code: ListTasksStatusCode;
-  type: ListTasksType;
-  code: ListTasksCode;
+  status_code: ListTasksForbiddenStatusCode;
+  type: ListTasksForbiddenType;
+  code: ListTasksForbiddenCode;
   message: string;
 };
 
@@ -144,44 +149,72 @@ export const ListTasksForbiddenResponseBody$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  code: ListTasksCode$zodSchema,
+  code: ListTasksForbiddenCode$zodSchema,
   message: z.string(),
-  status_code: ListTasksStatusCode$zodSchema,
-  type: ListTasksType$zodSchema,
+  status_code: ListTasksForbiddenStatusCode$zodSchema,
+  type: ListTasksForbiddenType$zodSchema,
 }).describe("Missing scope");
 
-export type ListTasksResponse = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: Response;
-  PaginatedTasks?: PaginatedTasks | undefined;
-  bad_request?: BadRequest | undefined;
-  auth_error?: AuthError | undefined;
-  fourHundredAndThreeApplicationJsonObject?:
-    | ListTasksForbiddenResponseBody
-    | undefined;
-  fourHundredAndTwentyTwoApplicationJsonObject?:
-    | ListTasksUnprocessableEntityResponseBody
-    | undefined;
-  rate_limit?: RateLimit | undefined;
+export const ListTasksStatusCode400$zodSchema = z.literal(400);
+
+export type ListTasksStatusCode400 = z.infer<
+  typeof ListTasksStatusCode400$zodSchema
+>;
+
+export const ListTasksBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export type ListTasksBadRequestType = z.infer<
+  typeof ListTasksBadRequestType$zodSchema
+>;
+
+export const ListTasksCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
+
+export type ListTasksCodeMissingClientID = z.infer<
+  typeof ListTasksCodeMissingClientID$zodSchema
+>;
+
+/**
+ * Missing client ID
+ */
+export type ListTasksBadRequestResponseBody = {
+  status_code: ListTasksStatusCode400;
+  type: ListTasksBadRequestType;
+  code: ListTasksCodeMissingClientID;
+  message: string;
 };
+
+export const ListTasksBadRequestResponseBody$zodSchema: z.ZodType<
+  ListTasksBadRequestResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  code: ListTasksCodeMissingClientID$zodSchema,
+  message: z.string(),
+  status_code: ListTasksStatusCode400$zodSchema,
+  type: ListTasksBadRequestType$zodSchema,
+}).describe("Missing client ID");
+
+export type ListTasksResponse =
+  | ListTasksBadRequestResponseBody
+  | AuthError
+  | ListTasksForbiddenResponseBody
+  | RateLimit
+  | PaginatedTasks
+  | ListTasksUnprocessableEntityResponseBody;
 
 export const ListTasksResponse$zodSchema: z.ZodType<
   ListTasksResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  PaginatedTasks: PaginatedTasks$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  auth_error: AuthError$zodSchema.optional(),
-  bad_request: BadRequest$zodSchema.optional(),
-  fourHundredAndThreeApplicationJsonObject: z.lazy(() =>
-    ListTasksForbiddenResponseBody$zodSchema
-  ).optional(),
-  fourHundredAndTwentyTwoApplicationJsonObject: z.lazy(() =>
-    ListTasksUnprocessableEntityResponseBody$zodSchema
-  ).optional(),
-  rate_limit: RateLimit$zodSchema.optional(),
-});
+> = z.union([
+  z.lazy(() => ListTasksBadRequestResponseBody$zodSchema),
+  AuthError$zodSchema,
+  z.lazy(() => ListTasksForbiddenResponseBody$zodSchema),
+  RateLimit$zodSchema,
+  PaginatedTasks$zodSchema,
+  z.lazy(() => ListTasksUnprocessableEntityResponseBody$zodSchema),
+]);

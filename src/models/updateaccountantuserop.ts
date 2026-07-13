@@ -201,37 +201,27 @@ export const UpdateAccountantUserForbiddenResponseBody$zodSchema: z.ZodType<
   type: UpdateAccountantUserType$zodSchema,
 }).describe("Missing scope");
 
-export type UpdateAccountantUserResponse = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: Response;
-  AccountantUser?: AccountantUser | undefined;
-  auth_error?: AuthError | undefined;
-  object?: UpdateAccountantUserForbiddenResponseBody | undefined;
-  not_found?: NotFound | undefined;
-  oneOf?:
-    | UpdateAccountantUserResponseBody1
-    | UpdateAccountantUserResponseBody2
-    | undefined;
-  rate_limit?: RateLimit | undefined;
-};
+export type UpdateAccountantUserResponse =
+  | AccountantUser
+  | AuthError
+  | UpdateAccountantUserForbiddenResponseBody
+  | NotFound
+  | RateLimit
+  | UpdateAccountantUserResponseBody1
+  | UpdateAccountantUserResponseBody2;
 
 export const UpdateAccountantUserResponse$zodSchema: z.ZodType<
   UpdateAccountantUserResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  AccountantUser: AccountantUser$zodSchema.optional(),
-  ContentType: z.string(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  auth_error: AuthError$zodSchema.optional(),
-  not_found: NotFound$zodSchema.optional(),
-  object: z.lazy(() => UpdateAccountantUserForbiddenResponseBody$zodSchema)
-    .optional(),
-  oneOf: z.union([
+> = z.union([
+  AccountantUser$zodSchema,
+  AuthError$zodSchema,
+  z.lazy(() => UpdateAccountantUserForbiddenResponseBody$zodSchema),
+  NotFound$zodSchema,
+  RateLimit$zodSchema,
+  z.union([
     z.lazy(() => UpdateAccountantUserResponseBody1$zodSchema),
     z.lazy(() => UpdateAccountantUserResponseBody2$zodSchema),
-  ]).optional(),
-  rate_limit: RateLimit$zodSchema.optional(),
-});
+  ]),
+]);

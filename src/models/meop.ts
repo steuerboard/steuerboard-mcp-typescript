@@ -70,31 +70,19 @@ export const MeResponseBody$zodSchema: z.ZodType<
   type: z.string(),
 }).describe("Me");
 
-export type MeResponse = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: Response;
-  twoHundredApplicationJsonObject?: MeResponseBody | undefined;
-  auth_error?: AuthError | undefined;
-  fourHundredAndThreeApplicationJsonObject?:
-    | MeForbiddenResponseBody
-    | undefined;
-  rate_limit?: RateLimit | undefined;
-};
+export type MeResponse =
+  | MeResponseBody
+  | AuthError
+  | MeForbiddenResponseBody
+  | RateLimit;
 
 export const MeResponse$zodSchema: z.ZodType<
   MeResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  auth_error: AuthError$zodSchema.optional(),
-  fourHundredAndThreeApplicationJsonObject: z.lazy(() =>
-    MeForbiddenResponseBody$zodSchema
-  ).optional(),
-  rate_limit: RateLimit$zodSchema.optional(),
-  twoHundredApplicationJsonObject: z.lazy(() => MeResponseBody$zodSchema)
-    .optional(),
-});
+> = z.union([
+  z.lazy(() => MeResponseBody$zodSchema),
+  AuthError$zodSchema,
+  z.lazy(() => MeForbiddenResponseBody$zodSchema),
+  RateLimit$zodSchema,
+]);
