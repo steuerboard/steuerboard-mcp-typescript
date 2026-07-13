@@ -17,7 +17,13 @@ export type ListFilesRequest = {
 
 export const ListFilesRequest$zodSchema: z.ZodType<ListFilesRequest> = z.object(
   {
-    cursor: z.string().optional(),
+    cursor: z.string().optional().describe(
+      [
+        "Opaque pagination cursor for fetching the next page of results.",
+        "Omit this parameter on the first request to get the first page.",
+        "Only pass the exact `nextCursor` or `previousCursor` value returned by a previous call to this same endpoint — never invent, guess, or pass an empty string.",
+      ].join("\n"),
+    ),
     limit: z.number().default(20),
     workspaceId: z.string().optional(),
     xClientId: z.string(),
