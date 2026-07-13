@@ -6,10 +6,7 @@ import * as z from "zod";
 
 export type PingSessionResponse = { success: boolean };
 
-export const PingSessionResponse$zodSchema: z.ZodType<
-  PingSessionResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  success: z.boolean(),
-});
+export const PingSessionResponse$zodSchema: z.ZodType<PingSessionResponse> = z
+  .object({
+    success: z.boolean(),
+  });

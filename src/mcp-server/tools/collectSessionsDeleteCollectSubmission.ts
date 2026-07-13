@@ -18,6 +18,7 @@ export const tool$collectSessionsDeleteCollectSubmission: ToolDefinition<
 
 Deletes a pending submission and its associated file from storage.`,
   annotations: {
+    "title": "",
     "destructiveHint": true,
     "idempotentHint": false,
     "openWorldHint": false,

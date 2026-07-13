@@ -6,11 +6,7 @@ import * as z from "zod";
 
 export type FileContent = { url: string; expiresIn: number };
 
-export const FileContent$zodSchema: z.ZodType<
-  FileContent,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  expiresIn: z.number().int(),
-  url: z.string(),
+export const FileContent$zodSchema: z.ZodType<FileContent> = z.object({
+  expiresIn: z.int().describe("Seconds until the URL expires"),
+  url: z.string().describe("A temporary presigned URL to download the file"),
 });

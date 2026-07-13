@@ -18,6 +18,7 @@ export const tool$collectSessionsCompleteCollectSession: ToolDefinition<
 
 Marks the session as completed by the client, optionally with a note about missing documents.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

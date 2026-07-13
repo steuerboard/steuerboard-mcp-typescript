@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
@@ -10,22 +11,15 @@ import { Workspace, Workspace$zodSchema } from "./workspace.js";
 
 export type GetWorkspaceRequest = { id: string; xClientId: string };
 
-export const GetWorkspaceRequest$zodSchema: z.ZodType<
-  GetWorkspaceRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  xClientId: z.string(),
-});
+export const GetWorkspaceRequest$zodSchema: z.ZodType<GetWorkspaceRequest> = z
+  .object({
+    id: z.string(),
+    xClientId: z.string(),
+  });
 
 export type GetWorkspacePath = string | number;
 
-export const GetWorkspacePath$zodSchema: z.ZodType<
-  GetWorkspacePath,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
+export const GetWorkspacePath$zodSchema: z.ZodType<GetWorkspacePath> = z.union([
   z.string(),
   z.number(),
 ]);
@@ -36,32 +30,26 @@ export type GetWorkspaceIssue = {
   message?: string | undefined;
 };
 
-export const GetWorkspaceIssue$zodSchema: z.ZodType<
-  GetWorkspaceIssue,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  code: z.string(),
-  message: z.string().optional(),
-  path: z.array(z.union([
-    z.string(),
-    z.number(),
-  ])),
-});
+export const GetWorkspaceIssue$zodSchema: z.ZodType<GetWorkspaceIssue> = z
+  .object({
+    code: z.string(),
+    message: z.string().optional(),
+    path: z.array(z.union([
+      z.string(),
+      z.number(),
+    ])),
+  });
 
 export type GetWorkspaceError = {
   issues: Array<GetWorkspaceIssue>;
   name: string;
 };
 
-export const GetWorkspaceError$zodSchema: z.ZodType<
-  GetWorkspaceError,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  issues: z.array(z.lazy(() => GetWorkspaceIssue$zodSchema)),
-  name: z.string(),
-});
+export const GetWorkspaceError$zodSchema: z.ZodType<GetWorkspaceError> = z
+  .object({
+    issues: z.array(z.lazy(() => GetWorkspaceIssue$zodSchema)),
+    name: z.string(),
+  });
 
 /**
  * Invalid id error
@@ -72,35 +60,42 @@ export type GetWorkspaceUnprocessableEntityResponseBody = {
 };
 
 export const GetWorkspaceUnprocessableEntityResponseBody$zodSchema: z.ZodType<
-  GetWorkspaceUnprocessableEntityResponseBody,
-  z.ZodTypeDef,
-  unknown
+  GetWorkspaceUnprocessableEntityResponseBody
 > = z.object({
   error: z.lazy(() => GetWorkspaceError$zodSchema),
   success: z.boolean(),
 }).describe("Invalid id error");
 
+export const GetWorkspaceForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type GetWorkspaceForbiddenStatusCode = ClosedEnum<
+  typeof GetWorkspaceForbiddenStatusCode
+>;
+
 export const GetWorkspaceForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type GetWorkspaceForbiddenStatusCode = z.infer<
-  typeof GetWorkspaceForbiddenStatusCode$zodSchema
+export const GetWorkspaceForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type GetWorkspaceForbiddenType = ClosedEnum<
+  typeof GetWorkspaceForbiddenType
 >;
 
 export const GetWorkspaceForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type GetWorkspaceForbiddenType = z.infer<
-  typeof GetWorkspaceForbiddenType$zodSchema
+export const GetWorkspaceForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type GetWorkspaceForbiddenCode = ClosedEnum<
+  typeof GetWorkspaceForbiddenCode
 >;
 
 export const GetWorkspaceForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
-
-export type GetWorkspaceForbiddenCode = z.infer<
-  typeof GetWorkspaceForbiddenCode$zodSchema
->;
 
 /**
  * Missing scope
@@ -113,9 +108,7 @@ export type GetWorkspaceForbiddenResponseBody = {
 };
 
 export const GetWorkspaceForbiddenResponseBody$zodSchema: z.ZodType<
-  GetWorkspaceForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  GetWorkspaceForbiddenResponseBody
 > = z.object({
   code: GetWorkspaceForbiddenCode$zodSchema,
   message: z.string(),
@@ -123,27 +116,36 @@ export const GetWorkspaceForbiddenResponseBody$zodSchema: z.ZodType<
   type: GetWorkspaceForbiddenType$zodSchema,
 }).describe("Missing scope");
 
+export const GetWorkspaceStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type GetWorkspaceStatusCode400 = ClosedEnum<
+  typeof GetWorkspaceStatusCode400
+>;
+
 export const GetWorkspaceStatusCode400$zodSchema = z.literal(400);
 
-export type GetWorkspaceStatusCode400 = z.infer<
-  typeof GetWorkspaceStatusCode400$zodSchema
+export const GetWorkspaceBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type GetWorkspaceBadRequestType = ClosedEnum<
+  typeof GetWorkspaceBadRequestType
 >;
 
 export const GetWorkspaceBadRequestType$zodSchema = z.enum([
   "bad_request",
 ]);
 
-export type GetWorkspaceBadRequestType = z.infer<
-  typeof GetWorkspaceBadRequestType$zodSchema
+export const GetWorkspaceCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type GetWorkspaceCodeMissingClientID = ClosedEnum<
+  typeof GetWorkspaceCodeMissingClientID
 >;
 
 export const GetWorkspaceCodeMissingClientID$zodSchema = z.enum([
   "missing_client_id",
 ]);
-
-export type GetWorkspaceCodeMissingClientID = z.infer<
-  typeof GetWorkspaceCodeMissingClientID$zodSchema
->;
 
 /**
  * Missing client ID
@@ -156,9 +158,7 @@ export type GetWorkspaceBadRequestResponseBody = {
 };
 
 export const GetWorkspaceBadRequestResponseBody$zodSchema: z.ZodType<
-  GetWorkspaceBadRequestResponseBody,
-  z.ZodTypeDef,
-  unknown
+  GetWorkspaceBadRequestResponseBody
 > = z.object({
   code: GetWorkspaceCodeMissingClientID$zodSchema,
   message: z.string(),
@@ -175,16 +175,13 @@ export type GetWorkspaceResponse =
   | RateLimit
   | GetWorkspaceUnprocessableEntityResponseBody;
 
-export const GetWorkspaceResponse$zodSchema: z.ZodType<
-  GetWorkspaceResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  Workspace$zodSchema,
-  z.lazy(() => GetWorkspaceBadRequestResponseBody$zodSchema),
-  AuthError$zodSchema,
-  z.lazy(() => GetWorkspaceForbiddenResponseBody$zodSchema),
-  NotFound$zodSchema,
-  RateLimit$zodSchema,
-  z.lazy(() => GetWorkspaceUnprocessableEntityResponseBody$zodSchema),
-]);
+export const GetWorkspaceResponse$zodSchema: z.ZodType<GetWorkspaceResponse> = z
+  .union([
+    Workspace$zodSchema,
+    z.lazy(() => GetWorkspaceBadRequestResponseBody$zodSchema),
+    AuthError$zodSchema,
+    z.lazy(() => GetWorkspaceForbiddenResponseBody$zodSchema),
+    NotFound$zodSchema,
+    RateLimit$zodSchema,
+    z.lazy(() => GetWorkspaceUnprocessableEntityResponseBody$zodSchema),
+  ]);

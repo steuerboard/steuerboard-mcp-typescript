@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
 import {
   CompleteSessionBody,
@@ -20,35 +21,44 @@ export type CompleteCollectSessionRequest = {
 };
 
 export const CompleteCollectSessionRequest$zodSchema: z.ZodType<
-  CompleteCollectSessionRequest,
-  z.ZodTypeDef,
-  unknown
+  CompleteCollectSessionRequest
 > = z.object({
-  CompleteSessionBody: CompleteSessionBody$zodSchema.optional(),
+  CompleteSessionBody: CompleteSessionBody$zodSchema.optional().describe(
+    "Completion details",
+  ),
   token: z.string(),
 });
 
+export const CompleteCollectSessionStatusCode = {
+  FourHundredAndFour: 404,
+} as const;
+export type CompleteCollectSessionStatusCode = ClosedEnum<
+  typeof CompleteCollectSessionStatusCode
+>;
+
 export const CompleteCollectSessionStatusCode$zodSchema = z.literal(404);
 
-export type CompleteCollectSessionStatusCode = z.infer<
-  typeof CompleteCollectSessionStatusCode$zodSchema
+export const CompleteCollectSessionType = {
+  NotFound: "not_found",
+} as const;
+export type CompleteCollectSessionType = ClosedEnum<
+  typeof CompleteCollectSessionType
 >;
 
 export const CompleteCollectSessionType$zodSchema = z.enum([
   "not_found",
 ]);
 
-export type CompleteCollectSessionType = z.infer<
-  typeof CompleteCollectSessionType$zodSchema
+export const CompleteCollectSessionCode = {
+  CollectTokenNotFound: "collect_token_not_found",
+} as const;
+export type CompleteCollectSessionCode = ClosedEnum<
+  typeof CompleteCollectSessionCode
 >;
 
 export const CompleteCollectSessionCode$zodSchema = z.enum([
   "collect_token_not_found",
 ]);
-
-export type CompleteCollectSessionCode = z.infer<
-  typeof CompleteCollectSessionCode$zodSchema
->;
 
 /**
  * Collect session not found. The token may be invalid or revoked.
@@ -61,9 +71,7 @@ export type CompleteCollectSessionResponseBody = {
 };
 
 export const CompleteCollectSessionResponseBody$zodSchema: z.ZodType<
-  CompleteCollectSessionResponseBody,
-  z.ZodTypeDef,
-  unknown
+  CompleteCollectSessionResponseBody
 > = z.object({
   code: CompleteCollectSessionCode$zodSchema,
   message: z.string(),
@@ -78,9 +86,7 @@ export type CompleteCollectSessionResponse =
   | CompleteSessionResponse;
 
 export const CompleteCollectSessionResponse$zodSchema: z.ZodType<
-  CompleteCollectSessionResponse,
-  z.ZodTypeDef,
-  unknown
+  CompleteCollectSessionResponse
 > = z.union([
   z.lazy(() => CompleteCollectSessionResponseBody$zodSchema),
   BadRequest$zodSchema,

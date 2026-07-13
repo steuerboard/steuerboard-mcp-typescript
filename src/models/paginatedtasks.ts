@@ -8,11 +8,7 @@ import { Task, Task$zodSchema } from "./task.js";
 
 export type PaginatedTasks = { data: Array<Task>; pagination: Pagination };
 
-export const PaginatedTasks$zodSchema: z.ZodType<
-  PaginatedTasks,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const PaginatedTasks$zodSchema: z.ZodType<PaginatedTasks> = z.object({
   data: z.array(Task$zodSchema),
   pagination: Pagination$zodSchema,
 });

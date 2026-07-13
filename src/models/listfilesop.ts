@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { PaginatedFiles, PaginatedFiles$zodSchema } from "./paginatedfiles.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
@@ -14,24 +15,18 @@ export type ListFilesRequest = {
   xClientId: string;
 };
 
-export const ListFilesRequest$zodSchema: z.ZodType<
-  ListFilesRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  cursor: z.string().optional(),
-  limit: z.number().default(20),
-  workspaceId: z.string().optional(),
-  xClientId: z.string(),
-});
+export const ListFilesRequest$zodSchema: z.ZodType<ListFilesRequest> = z.object(
+  {
+    cursor: z.string().optional(),
+    limit: z.number().default(20),
+    workspaceId: z.string().optional(),
+    xClientId: z.string(),
+  },
+);
 
 export type ListFilesPath = string | number;
 
-export const ListFilesPath$zodSchema: z.ZodType<
-  ListFilesPath,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
+export const ListFilesPath$zodSchema: z.ZodType<ListFilesPath> = z.union([
   z.string(),
   z.number(),
 ]);
@@ -42,11 +37,7 @@ export type ListFilesIssue = {
   message?: string | undefined;
 };
 
-export const ListFilesIssue$zodSchema: z.ZodType<
-  ListFilesIssue,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const ListFilesIssue$zodSchema: z.ZodType<ListFilesIssue> = z.object({
   code: z.string(),
   message: z.string().optional(),
   path: z.array(z.union([
@@ -57,11 +48,7 @@ export const ListFilesIssue$zodSchema: z.ZodType<
 
 export type ListFilesError = { issues: Array<ListFilesIssue>; name: string };
 
-export const ListFilesError$zodSchema: z.ZodType<
-  ListFilesError,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const ListFilesError$zodSchema: z.ZodType<ListFilesError> = z.object({
   issues: z.array(z.lazy(() => ListFilesIssue$zodSchema)),
   name: z.string(),
 });
@@ -75,35 +62,38 @@ export type ListFilesUnprocessableEntityResponseBody = {
 };
 
 export const ListFilesUnprocessableEntityResponseBody$zodSchema: z.ZodType<
-  ListFilesUnprocessableEntityResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListFilesUnprocessableEntityResponseBody
 > = z.object({
   error: z.lazy(() => ListFilesError$zodSchema),
   success: z.boolean(),
 }).describe("The validation error(s)");
 
+export const ListFilesForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type ListFilesForbiddenStatusCode = ClosedEnum<
+  typeof ListFilesForbiddenStatusCode
+>;
+
 export const ListFilesForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type ListFilesForbiddenStatusCode = z.infer<
-  typeof ListFilesForbiddenStatusCode$zodSchema
->;
+export const ListFilesForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type ListFilesForbiddenType = ClosedEnum<typeof ListFilesForbiddenType>;
 
 export const ListFilesForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type ListFilesForbiddenType = z.infer<
-  typeof ListFilesForbiddenType$zodSchema
->;
+export const ListFilesForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type ListFilesForbiddenCode = ClosedEnum<typeof ListFilesForbiddenCode>;
 
 export const ListFilesForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
-
-export type ListFilesForbiddenCode = z.infer<
-  typeof ListFilesForbiddenCode$zodSchema
->;
 
 /**
  * Missing scope
@@ -116,9 +106,7 @@ export type ListFilesForbiddenResponseBody = {
 };
 
 export const ListFilesForbiddenResponseBody$zodSchema: z.ZodType<
-  ListFilesForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListFilesForbiddenResponseBody
 > = z.object({
   code: ListFilesForbiddenCode$zodSchema,
   message: z.string(),
@@ -126,27 +114,34 @@ export const ListFilesForbiddenResponseBody$zodSchema: z.ZodType<
   type: ListFilesForbiddenType$zodSchema,
 }).describe("Missing scope");
 
+export const ListFilesStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type ListFilesStatusCode400 = ClosedEnum<typeof ListFilesStatusCode400>;
+
 export const ListFilesStatusCode400$zodSchema = z.literal(400);
 
-export type ListFilesStatusCode400 = z.infer<
-  typeof ListFilesStatusCode400$zodSchema
+export const ListFilesBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type ListFilesBadRequestType = ClosedEnum<
+  typeof ListFilesBadRequestType
 >;
 
 export const ListFilesBadRequestType$zodSchema = z.enum([
   "bad_request",
 ]);
 
-export type ListFilesBadRequestType = z.infer<
-  typeof ListFilesBadRequestType$zodSchema
+export const ListFilesCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type ListFilesCodeMissingClientID = ClosedEnum<
+  typeof ListFilesCodeMissingClientID
 >;
 
 export const ListFilesCodeMissingClientID$zodSchema = z.enum([
   "missing_client_id",
 ]);
-
-export type ListFilesCodeMissingClientID = z.infer<
-  typeof ListFilesCodeMissingClientID$zodSchema
->;
 
 /**
  * Missing client ID
@@ -159,9 +154,7 @@ export type ListFilesBadRequestResponseBody = {
 };
 
 export const ListFilesBadRequestResponseBody$zodSchema: z.ZodType<
-  ListFilesBadRequestResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListFilesBadRequestResponseBody
 > = z.object({
   code: ListFilesCodeMissingClientID$zodSchema,
   message: z.string(),
@@ -177,15 +170,12 @@ export type ListFilesResponse =
   | PaginatedFiles
   | ListFilesUnprocessableEntityResponseBody;
 
-export const ListFilesResponse$zodSchema: z.ZodType<
-  ListFilesResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => ListFilesBadRequestResponseBody$zodSchema),
-  AuthError$zodSchema,
-  z.lazy(() => ListFilesForbiddenResponseBody$zodSchema),
-  RateLimit$zodSchema,
-  PaginatedFiles$zodSchema,
-  z.lazy(() => ListFilesUnprocessableEntityResponseBody$zodSchema),
-]);
+export const ListFilesResponse$zodSchema: z.ZodType<ListFilesResponse> = z
+  .union([
+    z.lazy(() => ListFilesBadRequestResponseBody$zodSchema),
+    AuthError$zodSchema,
+    z.lazy(() => ListFilesForbiddenResponseBody$zodSchema),
+    RateLimit$zodSchema,
+    PaginatedFiles$zodSchema,
+    z.lazy(() => ListFilesUnprocessableEntityResponseBody$zodSchema),
+  ]);

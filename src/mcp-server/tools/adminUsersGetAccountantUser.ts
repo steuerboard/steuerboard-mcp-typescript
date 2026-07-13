@@ -16,6 +16,7 @@ export const tool$adminUsersGetAccountantUser: ToolDefinition<typeof args> = {
 
 Returns a single accountant user by ID.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

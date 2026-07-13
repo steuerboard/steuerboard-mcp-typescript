@@ -3,22 +3,32 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
+
+export const NotFoundStatusCode = {
+  FourHundredAndFour: 404,
+} as const;
+export type NotFoundStatusCode = ClosedEnum<typeof NotFoundStatusCode>;
 
 export const NotFoundStatusCode$zodSchema = z.literal(404);
 
-export type NotFoundStatusCode = z.infer<typeof NotFoundStatusCode$zodSchema>;
+export const NotFoundType = {
+  NotFound: "not_found",
+} as const;
+export type NotFoundType = ClosedEnum<typeof NotFoundType>;
 
 export const NotFoundType$zodSchema = z.enum([
   "not_found",
 ]);
 
-export type NotFoundType = z.infer<typeof NotFoundType$zodSchema>;
+export const NotFoundCode = {
+  NotFound: "not_found",
+} as const;
+export type NotFoundCode = ClosedEnum<typeof NotFoundCode>;
 
 export const NotFoundCode$zodSchema = z.enum([
   "not_found",
 ]);
-
-export type NotFoundCode = z.infer<typeof NotFoundCode$zodSchema>;
 
 export type NotFound = {
   status_code: NotFoundStatusCode;
@@ -27,10 +37,9 @@ export type NotFound = {
   message: string;
 };
 
-export const NotFound$zodSchema: z.ZodType<NotFound, z.ZodTypeDef, unknown> = z
-  .object({
-    code: NotFoundCode$zodSchema,
-    message: z.string(),
-    status_code: NotFoundStatusCode$zodSchema,
-    type: NotFoundType$zodSchema,
-  });
+export const NotFound$zodSchema: z.ZodType<NotFound> = z.object({
+  code: NotFoundCode$zodSchema,
+  message: z.string(),
+  status_code: NotFoundStatusCode$zodSchema,
+  type: NotFoundType$zodSchema,
+});

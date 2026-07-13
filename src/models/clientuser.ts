@@ -13,15 +13,19 @@ export type ClientUser = {
   roles: Array<string>;
 };
 
-export const ClientUser$zodSchema: z.ZodType<
-  ClientUser,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  createdAt: z.string().datetime({ offset: true }),
-  email: z.string(),
-  firstName: z.string().nullable(),
-  id: z.string(),
-  lastName: z.string().nullable(),
-  roles: z.array(z.string()),
+export const ClientUser$zodSchema: z.ZodType<ClientUser> = z.object({
+  createdAt: z.iso.datetime({ offset: true }).describe(
+    "The date and time when the client user record was created. ISO-8601 format (YYYY-MM-DDTHH:MM:SSZ).",
+  ),
+  email: z.string().describe("Email address of the client user."),
+  firstName: z.string().nullable().describe(
+    "First name of the client user, if provided.",
+  ),
+  id: z.string().describe("Identifier of the client user."),
+  lastName: z.string().nullable().describe(
+    "Last name of the client user, if provided.",
+  ),
+  roles: z.array(z.string()).describe(
+    "List of role names assigned to the user.",
+  ),
 });

@@ -15,12 +15,18 @@ export type User = {
   image: string | null;
 };
 
-export const User$zodSchema: z.ZodType<User, z.ZodTypeDef, unknown> = z.object({
-  email: z.string(),
-  firstName: z.string().nullable(),
-  id: z.string(),
-  image: z.string().nullable(),
-  lastName: z.string().nullable(),
+export const User$zodSchema: z.ZodType<User> = z.object({
+  email: z.string().describe("Email address of the user."),
+  firstName: z.string().nullable().describe(
+    "First name of the user, if available.",
+  ),
+  id: z.string().describe("Identifier of the user."),
+  image: z.string().nullable().describe(
+    "Profile image URL of the user, if available.",
+  ),
+  lastName: z.string().nullable().describe(
+    "Last name of the user, if available.",
+  ),
 }).describe(
   "Optional user object with denormalised information for convenience.",
 );
@@ -34,15 +40,23 @@ export type WorkspaceMember = {
   user?: User | undefined;
 };
 
-export const WorkspaceMember$zodSchema: z.ZodType<
-  WorkspaceMember,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  createdAt: z.string().datetime({ offset: true }),
-  isMuted: z.boolean(),
-  updatedAt: z.string().datetime({ offset: true }),
-  user: z.lazy(() => User$zodSchema).optional(),
-  userId: z.string(),
-  workspaceId: z.string(),
+export const WorkspaceMember$zodSchema: z.ZodType<WorkspaceMember> = z.object({
+  createdAt: z.iso.datetime({ offset: true }).describe(
+    "The date and time when the workspace membership was created. ISO-8601 format (YYYY-MM-DDTHH:MM:SSZ).",
+  ),
+  isMuted: z.boolean().describe(
+    "Whether the member has muted notifications for the workspace.",
+  ),
+  updatedAt: z.iso.datetime({ offset: true }).describe(
+    "The date and time when the workspace membership was last updated. ISO-8601 format (YYYY-MM-DDTHH:MM:SSZ).",
+  ),
+  user: z.lazy(() => User$zodSchema).optional().describe(
+    "Optional user object with denormalised information for convenience.",
+  ),
+  userId: z.string().describe(
+    "Identifier of the user that is a member of the workspace.",
+  ),
+  workspaceId: z.string().describe(
+    "The identifier of the workspace the member belongs to.",
+  ),
 });

@@ -11,6 +11,7 @@ export const tool$healthHealth: ToolDefinition = {
 
 Returns service health status for monitoring and container orchestration.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

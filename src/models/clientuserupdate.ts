@@ -3,25 +3,33 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 
 /**
  * Role to assign to the invited user. Can be 'admin', 'user'.
  */
+export const ClientUserUpdateUserRole = {
+  Admin: "admin",
+  User: "user",
+} as const;
+/**
+ * Role to assign to the invited user. Can be 'admin', 'user'.
+ */
+export type ClientUserUpdateUserRole = ClosedEnum<
+  typeof ClientUserUpdateUserRole
+>;
+
 export const ClientUserUpdateUserRole$zodSchema = z.enum([
   "admin",
   "user",
 ]).describe("Role to assign to the invited user. Can be 'admin', 'user'.");
 
-export type ClientUserUpdateUserRole = z.infer<
-  typeof ClientUserUpdateUserRole$zodSchema
->;
-
 export type ClientUserUpdate = { role: ClientUserUpdateUserRole };
 
-export const ClientUserUpdate$zodSchema: z.ZodType<
-  ClientUserUpdate,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: ClientUserUpdateUserRole$zodSchema,
-});
+export const ClientUserUpdate$zodSchema: z.ZodType<ClientUserUpdate> = z.object(
+  {
+    role: ClientUserUpdateUserRole$zodSchema.describe(
+      "Role to assign to the invited user. Can be 'admin', 'user'.",
+    ),
+  },
+);

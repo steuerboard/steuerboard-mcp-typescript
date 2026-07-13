@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 import { Task, Task$zodSchema } from "./task.js";
@@ -10,22 +11,15 @@ import { TaskCreate, TaskCreate$zodSchema } from "./taskcreate.js";
 
 export type CreateTaskRequest = { xClientId: string; TaskCreate: TaskCreate };
 
-export const CreateTaskRequest$zodSchema: z.ZodType<
-  CreateTaskRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  TaskCreate: TaskCreate$zodSchema,
-  xClientId: z.string(),
-});
+export const CreateTaskRequest$zodSchema: z.ZodType<CreateTaskRequest> = z
+  .object({
+    TaskCreate: TaskCreate$zodSchema.describe("Task create"),
+    xClientId: z.string(),
+  });
 
 export type CreateTaskPath = string | number;
 
-export const CreateTaskPath$zodSchema: z.ZodType<
-  CreateTaskPath,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
+export const CreateTaskPath$zodSchema: z.ZodType<CreateTaskPath> = z.union([
   z.string(),
   z.number(),
 ]);
@@ -36,11 +30,7 @@ export type CreateTaskIssue = {
   message?: string | undefined;
 };
 
-export const CreateTaskIssue$zodSchema: z.ZodType<
-  CreateTaskIssue,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const CreateTaskIssue$zodSchema: z.ZodType<CreateTaskIssue> = z.object({
   code: z.string(),
   message: z.string().optional(),
   path: z.array(z.union([
@@ -51,11 +41,7 @@ export const CreateTaskIssue$zodSchema: z.ZodType<
 
 export type CreateTaskError = { issues: Array<CreateTaskIssue>; name: string };
 
-export const CreateTaskError$zodSchema: z.ZodType<
-  CreateTaskError,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const CreateTaskError$zodSchema: z.ZodType<CreateTaskError> = z.object({
   issues: z.array(z.lazy(() => CreateTaskIssue$zodSchema)),
   name: z.string(),
 });
@@ -69,35 +55,42 @@ export type CreateTaskUnprocessableEntityResponseBody = {
 };
 
 export const CreateTaskUnprocessableEntityResponseBody$zodSchema: z.ZodType<
-  CreateTaskUnprocessableEntityResponseBody,
-  z.ZodTypeDef,
-  unknown
+  CreateTaskUnprocessableEntityResponseBody
 > = z.object({
   error: z.lazy(() => CreateTaskError$zodSchema),
   success: z.boolean(),
 }).describe("The validation error(s)");
 
+export const CreateTaskForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type CreateTaskForbiddenStatusCode = ClosedEnum<
+  typeof CreateTaskForbiddenStatusCode
+>;
+
 export const CreateTaskForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type CreateTaskForbiddenStatusCode = z.infer<
-  typeof CreateTaskForbiddenStatusCode$zodSchema
+export const CreateTaskForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type CreateTaskForbiddenType = ClosedEnum<
+  typeof CreateTaskForbiddenType
 >;
 
 export const CreateTaskForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type CreateTaskForbiddenType = z.infer<
-  typeof CreateTaskForbiddenType$zodSchema
+export const CreateTaskForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type CreateTaskForbiddenCode = ClosedEnum<
+  typeof CreateTaskForbiddenCode
 >;
 
 export const CreateTaskForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
-
-export type CreateTaskForbiddenCode = z.infer<
-  typeof CreateTaskForbiddenCode$zodSchema
->;
 
 /**
  * Missing scope
@@ -110,9 +103,7 @@ export type CreateTaskForbiddenResponseBody = {
 };
 
 export const CreateTaskForbiddenResponseBody$zodSchema: z.ZodType<
-  CreateTaskForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  CreateTaskForbiddenResponseBody
 > = z.object({
   code: CreateTaskForbiddenCode$zodSchema,
   message: z.string(),
@@ -120,27 +111,36 @@ export const CreateTaskForbiddenResponseBody$zodSchema: z.ZodType<
   type: CreateTaskForbiddenType$zodSchema,
 }).describe("Missing scope");
 
+export const CreateTaskStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type CreateTaskStatusCode400 = ClosedEnum<
+  typeof CreateTaskStatusCode400
+>;
+
 export const CreateTaskStatusCode400$zodSchema = z.literal(400);
 
-export type CreateTaskStatusCode400 = z.infer<
-  typeof CreateTaskStatusCode400$zodSchema
+export const CreateTaskBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type CreateTaskBadRequestType = ClosedEnum<
+  typeof CreateTaskBadRequestType
 >;
 
 export const CreateTaskBadRequestType$zodSchema = z.enum([
   "bad_request",
 ]);
 
-export type CreateTaskBadRequestType = z.infer<
-  typeof CreateTaskBadRequestType$zodSchema
+export const CreateTaskCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type CreateTaskCodeMissingClientID = ClosedEnum<
+  typeof CreateTaskCodeMissingClientID
 >;
 
 export const CreateTaskCodeMissingClientID$zodSchema = z.enum([
   "missing_client_id",
 ]);
-
-export type CreateTaskCodeMissingClientID = z.infer<
-  typeof CreateTaskCodeMissingClientID$zodSchema
->;
 
 /**
  * Missing client ID
@@ -153,9 +153,7 @@ export type CreateTaskBadRequestResponseBody = {
 };
 
 export const CreateTaskBadRequestResponseBody$zodSchema: z.ZodType<
-  CreateTaskBadRequestResponseBody,
-  z.ZodTypeDef,
-  unknown
+  CreateTaskBadRequestResponseBody
 > = z.object({
   code: CreateTaskCodeMissingClientID$zodSchema,
   message: z.string(),
@@ -171,15 +169,12 @@ export type CreateTaskResponse =
   | RateLimit
   | CreateTaskUnprocessableEntityResponseBody;
 
-export const CreateTaskResponse$zodSchema: z.ZodType<
-  CreateTaskResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  Task$zodSchema,
-  z.lazy(() => CreateTaskBadRequestResponseBody$zodSchema),
-  AuthError$zodSchema,
-  z.lazy(() => CreateTaskForbiddenResponseBody$zodSchema),
-  RateLimit$zodSchema,
-  z.lazy(() => CreateTaskUnprocessableEntityResponseBody$zodSchema),
-]);
+export const CreateTaskResponse$zodSchema: z.ZodType<CreateTaskResponse> = z
+  .union([
+    Task$zodSchema,
+    z.lazy(() => CreateTaskBadRequestResponseBody$zodSchema),
+    AuthError$zodSchema,
+    z.lazy(() => CreateTaskForbiddenResponseBody$zodSchema),
+    RateLimit$zodSchema,
+    z.lazy(() => CreateTaskUnprocessableEntityResponseBody$zodSchema),
+  ]);

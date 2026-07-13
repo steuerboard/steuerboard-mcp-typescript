@@ -18,6 +18,7 @@ export const tool$collectSessionsSubmitCollectFormData: ToolDefinition<
 
 Submits a form field value for a collect item via a public token.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

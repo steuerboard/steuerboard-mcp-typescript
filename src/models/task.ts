@@ -3,10 +3,23 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 
 /**
  * The status of the task
  */
+export const TaskStatus = {
+  InProgress: "IN_PROGRESS",
+  Accepted: "ACCEPTED",
+  Open: "OPEN",
+  InReview: "IN_REVIEW",
+  Declined: "DECLINED",
+} as const;
+/**
+ * The status of the task
+ */
+export type TaskStatus = ClosedEnum<typeof TaskStatus>;
+
 export const TaskStatus$zodSchema = z.enum([
   "IN_PROGRESS",
   "ACCEPTED",
@@ -15,19 +28,26 @@ export const TaskStatus$zodSchema = z.enum([
   "DECLINED",
 ]).describe("The status of the task");
 
-export type TaskStatus = z.infer<typeof TaskStatus$zodSchema>;
-
 /**
  * The type of the actor
  */
+export const ActorType = {
+  User: "USER",
+  System: "SYSTEM",
+  Ai: "AI",
+  Api: "API",
+} as const;
+/**
+ * The type of the actor
+ */
+export type ActorType = ClosedEnum<typeof ActorType>;
+
 export const ActorType$zodSchema = z.enum([
   "USER",
   "SYSTEM",
   "AI",
   "API",
 ]).describe("The type of the actor");
-
-export type ActorType = z.infer<typeof ActorType$zodSchema>;
 
 export type Task = {
   id: string;
@@ -44,17 +64,25 @@ export type Task = {
   updatedAt: string;
 };
 
-export const Task$zodSchema: z.ZodType<Task, z.ZodTypeDef, unknown> = z.object({
-  actorType: ActorType$zodSchema,
-  createdAt: z.string().datetime({ offset: true }),
-  createdById: z.string().nullable(),
-  destinationFolderId: z.string().nullable(),
-  dueDate: z.string().datetime({ offset: true }).nullable(),
-  id: z.string(),
-  parentId: z.string().nullable(),
-  status: TaskStatus$zodSchema,
-  text: z.string().nullable(),
-  title: z.string(),
-  updatedAt: z.string().datetime({ offset: true }),
-  workspaceId: z.string(),
+export const Task$zodSchema: z.ZodType<Task> = z.object({
+  actorType: ActorType$zodSchema.describe("The type of the actor"),
+  createdAt: z.iso.datetime({ offset: true }).describe(
+    "The date and time of the creation for the task. ISO-8601 format (YYYY-MM-DDTHH:MM:SSZ).",
+  ),
+  createdById: z.string().nullable().describe("The ID of the creator"),
+  destinationFolderId: z.string().nullable().describe(
+    "The ID of the destination folder where assigned files will be stored",
+  ),
+  dueDate: z.iso.datetime({ offset: true }).nullable().describe(
+    "The due date of a task. ISO-8601 format (YYYY-MM-DDTHH:MM:SSZ).",
+  ),
+  id: z.string().describe("The ID of the task"),
+  parentId: z.string().nullable().describe("The ID of the parent task"),
+  status: TaskStatus$zodSchema.describe("The status of the task"),
+  text: z.string().nullable().describe("The text of the task"),
+  title: z.string().describe("The title of the task"),
+  updatedAt: z.iso.datetime({ offset: true }).describe(
+    "The date and time of the last update for the task. ISO-8601 format (YYYY-MM-DDTHH:MM:SSZ).",
+  ),
+  workspaceId: z.string().describe("The ID of the workspace"),
 });

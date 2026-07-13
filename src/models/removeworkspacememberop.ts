@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { DeleteResponse, DeleteResponse$zodSchema } from "./deleteresponse.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
@@ -18,11 +19,11 @@ export type RemoveWorkspaceMemberRequest = {
 };
 
 export const RemoveWorkspaceMemberRequest$zodSchema: z.ZodType<
-  RemoveWorkspaceMemberRequest,
-  z.ZodTypeDef,
-  unknown
+  RemoveWorkspaceMemberRequest
 > = z.object({
-  WorkspaceMemberRemove: WorkspaceMemberRemove$zodSchema,
+  WorkspaceMemberRemove: WorkspaceMemberRemove$zodSchema.describe(
+    "Workspace member remove",
+  ),
   id: z.string(),
   xClientId: z.string(),
 });
@@ -30,9 +31,7 @@ export const RemoveWorkspaceMemberRequest$zodSchema: z.ZodType<
 export type RemoveWorkspaceMemberPath = string | number;
 
 export const RemoveWorkspaceMemberPath$zodSchema: z.ZodType<
-  RemoveWorkspaceMemberPath,
-  z.ZodTypeDef,
-  unknown
+  RemoveWorkspaceMemberPath
 > = z.union([
   z.string(),
   z.number(),
@@ -45,9 +44,7 @@ export type RemoveWorkspaceMemberIssue = {
 };
 
 export const RemoveWorkspaceMemberIssue$zodSchema: z.ZodType<
-  RemoveWorkspaceMemberIssue,
-  z.ZodTypeDef,
-  unknown
+  RemoveWorkspaceMemberIssue
 > = z.object({
   code: z.string(),
   message: z.string().optional(),
@@ -63,9 +60,7 @@ export type RemoveWorkspaceMemberError = {
 };
 
 export const RemoveWorkspaceMemberError$zodSchema: z.ZodType<
-  RemoveWorkspaceMemberError,
-  z.ZodTypeDef,
-  unknown
+  RemoveWorkspaceMemberError
 > = z.object({
   issues: z.array(z.lazy(() => RemoveWorkspaceMemberIssue$zodSchema)),
   name: z.string(),
@@ -80,38 +75,43 @@ export type RemoveWorkspaceMemberUnprocessableEntityResponseBody = {
 };
 
 export const RemoveWorkspaceMemberUnprocessableEntityResponseBody$zodSchema:
-  z.ZodType<
-    RemoveWorkspaceMemberUnprocessableEntityResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
+  z.ZodType<RemoveWorkspaceMemberUnprocessableEntityResponseBody> = z.object({
     error: z.lazy(() => RemoveWorkspaceMemberError$zodSchema),
     success: z.boolean(),
   }).describe("Invalid id error");
+
+export const RemoveWorkspaceMemberForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type RemoveWorkspaceMemberForbiddenStatusCode = ClosedEnum<
+  typeof RemoveWorkspaceMemberForbiddenStatusCode
+>;
 
 export const RemoveWorkspaceMemberForbiddenStatusCode$zodSchema = z.literal(
   403,
 );
 
-export type RemoveWorkspaceMemberForbiddenStatusCode = z.infer<
-  typeof RemoveWorkspaceMemberForbiddenStatusCode$zodSchema
+export const RemoveWorkspaceMemberForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type RemoveWorkspaceMemberForbiddenType = ClosedEnum<
+  typeof RemoveWorkspaceMemberForbiddenType
 >;
 
 export const RemoveWorkspaceMemberForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type RemoveWorkspaceMemberForbiddenType = z.infer<
-  typeof RemoveWorkspaceMemberForbiddenType$zodSchema
+export const RemoveWorkspaceMemberForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type RemoveWorkspaceMemberForbiddenCode = ClosedEnum<
+  typeof RemoveWorkspaceMemberForbiddenCode
 >;
 
 export const RemoveWorkspaceMemberForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
-
-export type RemoveWorkspaceMemberForbiddenCode = z.infer<
-  typeof RemoveWorkspaceMemberForbiddenCode$zodSchema
->;
 
 /**
  * Missing scope
@@ -124,9 +124,7 @@ export type RemoveWorkspaceMemberForbiddenResponseBody = {
 };
 
 export const RemoveWorkspaceMemberForbiddenResponseBody$zodSchema: z.ZodType<
-  RemoveWorkspaceMemberForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  RemoveWorkspaceMemberForbiddenResponseBody
 > = z.object({
   code: RemoveWorkspaceMemberForbiddenCode$zodSchema,
   message: z.string(),
@@ -134,27 +132,36 @@ export const RemoveWorkspaceMemberForbiddenResponseBody$zodSchema: z.ZodType<
   type: RemoveWorkspaceMemberForbiddenType$zodSchema,
 }).describe("Missing scope");
 
+export const RemoveWorkspaceMemberStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type RemoveWorkspaceMemberStatusCode400 = ClosedEnum<
+  typeof RemoveWorkspaceMemberStatusCode400
+>;
+
 export const RemoveWorkspaceMemberStatusCode400$zodSchema = z.literal(400);
 
-export type RemoveWorkspaceMemberStatusCode400 = z.infer<
-  typeof RemoveWorkspaceMemberStatusCode400$zodSchema
+export const RemoveWorkspaceMemberBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type RemoveWorkspaceMemberBadRequestType = ClosedEnum<
+  typeof RemoveWorkspaceMemberBadRequestType
 >;
 
 export const RemoveWorkspaceMemberBadRequestType$zodSchema = z.enum([
   "bad_request",
 ]);
 
-export type RemoveWorkspaceMemberBadRequestType = z.infer<
-  typeof RemoveWorkspaceMemberBadRequestType$zodSchema
+export const RemoveWorkspaceMemberCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type RemoveWorkspaceMemberCodeMissingClientID = ClosedEnum<
+  typeof RemoveWorkspaceMemberCodeMissingClientID
 >;
 
 export const RemoveWorkspaceMemberCodeMissingClientID$zodSchema = z.enum([
   "missing_client_id",
 ]);
-
-export type RemoveWorkspaceMemberCodeMissingClientID = z.infer<
-  typeof RemoveWorkspaceMemberCodeMissingClientID$zodSchema
->;
 
 /**
  * Missing client ID
@@ -167,9 +174,7 @@ export type RemoveWorkspaceMemberBadRequestResponseBody = {
 };
 
 export const RemoveWorkspaceMemberBadRequestResponseBody$zodSchema: z.ZodType<
-  RemoveWorkspaceMemberBadRequestResponseBody,
-  z.ZodTypeDef,
-  unknown
+  RemoveWorkspaceMemberBadRequestResponseBody
 > = z.object({
   code: RemoveWorkspaceMemberCodeMissingClientID$zodSchema,
   message: z.string(),
@@ -186,9 +191,7 @@ export type RemoveWorkspaceMemberResponse =
   | RemoveWorkspaceMemberUnprocessableEntityResponseBody;
 
 export const RemoveWorkspaceMemberResponse$zodSchema: z.ZodType<
-  RemoveWorkspaceMemberResponse,
-  z.ZodTypeDef,
-  unknown
+  RemoveWorkspaceMemberResponse
 > = z.union([
   z.lazy(() => RemoveWorkspaceMemberBadRequestResponseBody$zodSchema),
   AuthError$zodSchema,

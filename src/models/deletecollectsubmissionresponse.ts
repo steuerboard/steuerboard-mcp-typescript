@@ -7,9 +7,7 @@ import * as z from "zod";
 export type DeleteCollectSubmissionResponse = { deleted: boolean };
 
 export const DeleteCollectSubmissionResponse$zodSchema: z.ZodType<
-  DeleteCollectSubmissionResponse,
-  z.ZodTypeDef,
-  unknown
+  DeleteCollectSubmissionResponse
 > = z.object({
-  deleted: z.boolean(),
+  deleted: z.boolean().describe("Whether the submission was deleted"),
 });

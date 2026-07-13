@@ -14,11 +14,9 @@ export type CollectBulkSubmissionSubmission = {
 };
 
 export const CollectBulkSubmissionSubmission$zodSchema: z.ZodType<
-  CollectBulkSubmissionSubmission,
-  z.ZodTypeDef,
-  unknown
+  CollectBulkSubmissionSubmission
 > = z.object({
-  createdAt: z.string().datetime({ offset: true }),
+  createdAt: z.iso.datetime({ offset: true }),
   fileMimeType: z.string().nullable(),
   fileName: z.string().nullable(),
   fileSize: z.number().nullable(),
@@ -30,10 +28,9 @@ export type CollectBulkSubmission = {
   submissions: Array<CollectBulkSubmissionSubmission>;
 };
 
-export const CollectBulkSubmission$zodSchema: z.ZodType<
-  CollectBulkSubmission,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  submissions: z.array(z.lazy(() => CollectBulkSubmissionSubmission$zodSchema)),
-});
+export const CollectBulkSubmission$zodSchema: z.ZodType<CollectBulkSubmission> =
+  z.object({
+    submissions: z.array(
+      z.lazy(() => CollectBulkSubmissionSubmission$zodSchema),
+    ),
+  });

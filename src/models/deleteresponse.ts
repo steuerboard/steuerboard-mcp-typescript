@@ -6,12 +6,8 @@ import * as z from "zod";
 
 export type DeleteResponse = { object: string; deleted: boolean; id: string };
 
-export const DeleteResponse$zodSchema: z.ZodType<
-  DeleteResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  deleted: z.boolean(),
-  id: z.string(),
-  object: z.string(),
+export const DeleteResponse$zodSchema: z.ZodType<DeleteResponse> = z.object({
+  deleted: z.boolean().describe("Whether the object was deleted"),
+  id: z.string().describe("The ID of the deleted object"),
+  object: z.string().describe("The type of the deleted object"),
 });

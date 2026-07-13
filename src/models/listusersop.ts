@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { PaginatedUsers, PaginatedUsers$zodSchema } from "./paginatedusers.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
@@ -13,23 +14,17 @@ export type ListUsersRequest = {
   xClientId: string;
 };
 
-export const ListUsersRequest$zodSchema: z.ZodType<
-  ListUsersRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  cursor: z.string().optional(),
-  limit: z.number().default(20),
-  xClientId: z.string(),
-});
+export const ListUsersRequest$zodSchema: z.ZodType<ListUsersRequest> = z.object(
+  {
+    cursor: z.string().optional(),
+    limit: z.number().default(20),
+    xClientId: z.string(),
+  },
+);
 
 export type ListUsersPath = string | number;
 
-export const ListUsersPath$zodSchema: z.ZodType<
-  ListUsersPath,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
+export const ListUsersPath$zodSchema: z.ZodType<ListUsersPath> = z.union([
   z.string(),
   z.number(),
 ]);
@@ -40,11 +35,7 @@ export type ListUsersIssue = {
   message?: string | undefined;
 };
 
-export const ListUsersIssue$zodSchema: z.ZodType<
-  ListUsersIssue,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const ListUsersIssue$zodSchema: z.ZodType<ListUsersIssue> = z.object({
   code: z.string(),
   message: z.string().optional(),
   path: z.array(z.union([
@@ -55,11 +46,7 @@ export const ListUsersIssue$zodSchema: z.ZodType<
 
 export type ListUsersError = { issues: Array<ListUsersIssue>; name: string };
 
-export const ListUsersError$zodSchema: z.ZodType<
-  ListUsersError,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const ListUsersError$zodSchema: z.ZodType<ListUsersError> = z.object({
   issues: z.array(z.lazy(() => ListUsersIssue$zodSchema)),
   name: z.string(),
 });
@@ -73,35 +60,38 @@ export type ListUsersUnprocessableEntityResponseBody = {
 };
 
 export const ListUsersUnprocessableEntityResponseBody$zodSchema: z.ZodType<
-  ListUsersUnprocessableEntityResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListUsersUnprocessableEntityResponseBody
 > = z.object({
   error: z.lazy(() => ListUsersError$zodSchema),
   success: z.boolean(),
 }).describe("The validation error(s)");
 
+export const ListUsersForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type ListUsersForbiddenStatusCode = ClosedEnum<
+  typeof ListUsersForbiddenStatusCode
+>;
+
 export const ListUsersForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type ListUsersForbiddenStatusCode = z.infer<
-  typeof ListUsersForbiddenStatusCode$zodSchema
->;
+export const ListUsersForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type ListUsersForbiddenType = ClosedEnum<typeof ListUsersForbiddenType>;
 
 export const ListUsersForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type ListUsersForbiddenType = z.infer<
-  typeof ListUsersForbiddenType$zodSchema
->;
+export const ListUsersForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type ListUsersForbiddenCode = ClosedEnum<typeof ListUsersForbiddenCode>;
 
 export const ListUsersForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
-
-export type ListUsersForbiddenCode = z.infer<
-  typeof ListUsersForbiddenCode$zodSchema
->;
 
 /**
  * Missing scope
@@ -114,9 +104,7 @@ export type ListUsersForbiddenResponseBody = {
 };
 
 export const ListUsersForbiddenResponseBody$zodSchema: z.ZodType<
-  ListUsersForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListUsersForbiddenResponseBody
 > = z.object({
   code: ListUsersForbiddenCode$zodSchema,
   message: z.string(),
@@ -124,27 +112,34 @@ export const ListUsersForbiddenResponseBody$zodSchema: z.ZodType<
   type: ListUsersForbiddenType$zodSchema,
 }).describe("Missing scope");
 
+export const ListUsersStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type ListUsersStatusCode400 = ClosedEnum<typeof ListUsersStatusCode400>;
+
 export const ListUsersStatusCode400$zodSchema = z.literal(400);
 
-export type ListUsersStatusCode400 = z.infer<
-  typeof ListUsersStatusCode400$zodSchema
+export const ListUsersBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type ListUsersBadRequestType = ClosedEnum<
+  typeof ListUsersBadRequestType
 >;
 
 export const ListUsersBadRequestType$zodSchema = z.enum([
   "bad_request",
 ]);
 
-export type ListUsersBadRequestType = z.infer<
-  typeof ListUsersBadRequestType$zodSchema
+export const ListUsersCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type ListUsersCodeMissingClientID = ClosedEnum<
+  typeof ListUsersCodeMissingClientID
 >;
 
 export const ListUsersCodeMissingClientID$zodSchema = z.enum([
   "missing_client_id",
 ]);
-
-export type ListUsersCodeMissingClientID = z.infer<
-  typeof ListUsersCodeMissingClientID$zodSchema
->;
 
 /**
  * Missing client ID
@@ -157,9 +152,7 @@ export type ListUsersBadRequestResponseBody = {
 };
 
 export const ListUsersBadRequestResponseBody$zodSchema: z.ZodType<
-  ListUsersBadRequestResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListUsersBadRequestResponseBody
 > = z.object({
   code: ListUsersCodeMissingClientID$zodSchema,
   message: z.string(),
@@ -175,15 +168,12 @@ export type ListUsersResponse =
   | PaginatedUsers
   | ListUsersUnprocessableEntityResponseBody;
 
-export const ListUsersResponse$zodSchema: z.ZodType<
-  ListUsersResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => ListUsersBadRequestResponseBody$zodSchema),
-  AuthError$zodSchema,
-  z.lazy(() => ListUsersForbiddenResponseBody$zodSchema),
-  RateLimit$zodSchema,
-  PaginatedUsers$zodSchema,
-  z.lazy(() => ListUsersUnprocessableEntityResponseBody$zodSchema),
-]);
+export const ListUsersResponse$zodSchema: z.ZodType<ListUsersResponse> = z
+  .union([
+    z.lazy(() => ListUsersBadRequestResponseBody$zodSchema),
+    AuthError$zodSchema,
+    z.lazy(() => ListUsersForbiddenResponseBody$zodSchema),
+    RateLimit$zodSchema,
+    PaginatedUsers$zodSchema,
+    z.lazy(() => ListUsersUnprocessableEntityResponseBody$zodSchema),
+  ]);

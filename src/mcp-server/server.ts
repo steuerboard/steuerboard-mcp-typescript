@@ -12,7 +12,11 @@ import {
   createRegisterResourceTemplate,
 } from "./resources.js";
 import { MCPScope } from "./scopes.js";
-import { createRegisterTool } from "./tools.js";
+import {
+  createRegisterTool,
+  MCPToolAnnotationFilter,
+  registerDynamicTools,
+} from "./tools.js";
 import { tool$adminClientsCreateClient } from "./tools/adminClientsCreateClient.js";
 import { tool$adminClientsGetClient } from "./tools/adminClientsGetClient.js";
 import { tool$adminClientsListClients } from "./tools/adminClientsListClients.js";
@@ -61,7 +65,9 @@ import { tool$workspacesUpdateWorkspace } from "./tools/workspacesUpdateWorkspac
 export function createMCPServer(deps: {
   logger: ConsoleLogger;
   allowedTools?: string[] | undefined;
+  dynamic?: boolean | undefined;
   scopes?: MCPScope[] | undefined;
+  annotationFilter?: MCPToolAnnotationFilter | undefined;
   getSDK?: () => SteuerboardCore;
   serverURL?: string | undefined;
   security?: SDKOptions["security"] | undefined;
@@ -69,7 +75,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Steuerboard",
-    version: "0.3.4",
+    version: "0.4.0",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -89,12 +95,14 @@ export function createMCPServer(deps: {
   const scopes = new Set(deps.scopes);
 
   const allowedTools = deps.allowedTools && new Set(deps.allowedTools);
-  const tool = createRegisterTool(
+  const [tool, tools, toolMap] = createRegisterTool(
     deps.logger,
     server,
     getClient,
     scopes,
     allowedTools,
+    deps.dynamic,
+    deps.annotationFilter,
   );
   const resource = createRegisterResource(
     deps.logger,
@@ -123,8 +131,8 @@ export function createMCPServer(deps: {
   tool(tool$adminUsersListAccountantUsers);
   tool(tool$adminUsersInviteAccountantUser);
   tool(tool$adminUsersGetAccountantUser);
-  tool(tool$adminUsersUpdateAccountantUser);
   tool(tool$adminUsersDeleteAccountantUser);
+  tool(tool$adminUsersUpdateAccountantUser);
   tool(tool$collectSessionsGetcollectSessionByToken);
   tool(tool$collectSessionsPingCollectSession);
   tool(tool$collectSessionsCompleteCollectSession);
@@ -143,19 +151,23 @@ export function createMCPServer(deps: {
   tool(tool$filesListFiles);
   tool(tool$filesCreateFile);
   tool(tool$filesGetFile);
-  tool(tool$filesUpdateFile);
   tool(tool$filesDeleteFile);
+  tool(tool$filesUpdateFile);
   tool(tool$filesDownloadFileContent);
   tool(tool$tasksListTasks);
   tool(tool$tasksCreateTask);
   tool(tool$tasksGetTask);
-  tool(tool$tasksUpdateTask);
   tool(tool$tasksDeleteTask);
+  tool(tool$tasksUpdateTask);
   tool(tool$usersListUsers);
   tool(tool$usersInviteUser);
   tool(tool$usersGetUser);
-  tool(tool$usersUpdateUser);
   tool(tool$usersDeleteUser);
+  tool(tool$usersUpdateUser);
 
-  return server;
+  if (deps.dynamic) {
+    registerDynamicTools(deps.logger, server, getClient, toolMap, scopes);
+  }
+
+  return { server, tools };
 }

@@ -3,24 +3,34 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
+export const MeStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type MeStatusCode = ClosedEnum<typeof MeStatusCode>;
+
 export const MeStatusCode$zodSchema = z.literal(403);
 
-export type MeStatusCode = z.infer<typeof MeStatusCode$zodSchema>;
+export const MeType = {
+  AuthError: "auth_error",
+} as const;
+export type MeType = ClosedEnum<typeof MeType>;
 
 export const MeType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type MeType = z.infer<typeof MeType$zodSchema>;
+export const MeCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type MeCode = ClosedEnum<typeof MeCode>;
 
 export const MeCode$zodSchema = z.enum([
   "missing_scope",
 ]);
-
-export type MeCode = z.infer<typeof MeCode$zodSchema>;
 
 /**
  * Missing scope
@@ -33,9 +43,7 @@ export type MeForbiddenResponseBody = {
 };
 
 export const MeForbiddenResponseBody$zodSchema: z.ZodType<
-  MeForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  MeForbiddenResponseBody
 > = z.object({
   code: MeCode$zodSchema,
   message: z.string(),
@@ -56,11 +64,7 @@ export type MeResponseBody = {
   permissions: Array<string>;
 };
 
-export const MeResponseBody$zodSchema: z.ZodType<
-  MeResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const MeResponseBody$zodSchema: z.ZodType<MeResponseBody> = z.object({
   accountantId: z.string(),
   apiKeyId: z.string(),
   clientId: z.string().nullable(),
@@ -76,11 +80,7 @@ export type MeResponse =
   | MeForbiddenResponseBody
   | RateLimit;
 
-export const MeResponse$zodSchema: z.ZodType<
-  MeResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
+export const MeResponse$zodSchema: z.ZodType<MeResponse> = z.union([
   z.lazy(() => MeResponseBody$zodSchema),
   AuthError$zodSchema,
   z.lazy(() => MeForbiddenResponseBody$zodSchema),

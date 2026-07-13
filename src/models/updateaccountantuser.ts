@@ -3,15 +3,20 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
+
+export const UpdateAccountantUserRoleEnum = {
+  Admin: "admin",
+  User: "user",
+} as const;
+export type UpdateAccountantUserRoleEnum = ClosedEnum<
+  typeof UpdateAccountantUserRoleEnum
+>;
 
 export const UpdateAccountantUserRoleEnum$zodSchema = z.enum([
   "admin",
   "user",
 ]);
-
-export type UpdateAccountantUserRoleEnum = z.infer<
-  typeof UpdateAccountantUserRoleEnum$zodSchema
->;
 
 /**
  * Role to assign to the user. Can be 'admin', 'user', or a custom role ID.
@@ -21,9 +26,7 @@ export type UpdateAccountantUserRoleUnion =
   | string;
 
 export const UpdateAccountantUserRoleUnion$zodSchema: z.ZodType<
-  UpdateAccountantUserRoleUnion,
-  z.ZodTypeDef,
-  unknown
+  UpdateAccountantUserRoleUnion
 > = z.union([
   UpdateAccountantUserRoleEnum$zodSchema,
   z.string(),
@@ -35,13 +38,12 @@ export type UpdateAccountantUser = {
   role: UpdateAccountantUserRoleEnum | string;
 };
 
-export const UpdateAccountantUser$zodSchema: z.ZodType<
-  UpdateAccountantUser,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.union([
-    UpdateAccountantUserRoleEnum$zodSchema,
-    z.string(),
-  ]),
-});
+export const UpdateAccountantUser$zodSchema: z.ZodType<UpdateAccountantUser> = z
+  .object({
+    role: z.union([
+      UpdateAccountantUserRoleEnum$zodSchema,
+      z.string(),
+    ]).describe(
+      "Role to assign to the user. Can be 'admin', 'user', or a custom role ID.",
+    ),
+  });

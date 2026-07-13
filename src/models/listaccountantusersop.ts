@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { AccountantUser, AccountantUser$zodSchema } from "./accountantuser.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { Pagination, Pagination$zodSchema } from "./pagination.js";
@@ -11,6 +12,20 @@ import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 /**
  * The sort field of the results
  */
+export const ListAccountantUsersSort = {
+  CreatedAt: "createdAt",
+  UpdatedAt: "updatedAt",
+  Email: "email",
+  FirstName: "firstName",
+  LastName: "lastName",
+} as const;
+/**
+ * The sort field of the results
+ */
+export type ListAccountantUsersSort = ClosedEnum<
+  typeof ListAccountantUsersSort
+>;
+
 export const ListAccountantUsersSort$zodSchema = z.enum([
   "createdAt",
   "updatedAt",
@@ -19,21 +34,24 @@ export const ListAccountantUsersSort$zodSchema = z.enum([
   "lastName",
 ]).describe("The sort field of the results");
 
-export type ListAccountantUsersSort = z.infer<
-  typeof ListAccountantUsersSort$zodSchema
->;
-
 /**
  * The order of the results based on the sort field
  */
+export const ListAccountantUsersOrder = {
+  Asc: "asc",
+  Desc: "desc",
+} as const;
+/**
+ * The order of the results based on the sort field
+ */
+export type ListAccountantUsersOrder = ClosedEnum<
+  typeof ListAccountantUsersOrder
+>;
+
 export const ListAccountantUsersOrder$zodSchema = z.enum([
   "asc",
   "desc",
 ]).describe("The order of the results based on the sort field");
-
-export type ListAccountantUsersOrder = z.infer<
-  typeof ListAccountantUsersOrder$zodSchema
->;
 
 export type ListAccountantUsersRequest = {
   limit?: number | undefined;
@@ -43,22 +61,22 @@ export type ListAccountantUsersRequest = {
 };
 
 export const ListAccountantUsersRequest$zodSchema: z.ZodType<
-  ListAccountantUsersRequest,
-  z.ZodTypeDef,
-  unknown
+  ListAccountantUsersRequest
 > = z.object({
   cursor: z.string().optional(),
   limit: z.number().default(20),
-  order: ListAccountantUsersOrder$zodSchema.default("desc"),
-  sort: ListAccountantUsersSort$zodSchema.default("createdAt"),
+  order: ListAccountantUsersOrder$zodSchema.default("desc").describe(
+    "The order of the results based on the sort field",
+  ),
+  sort: ListAccountantUsersSort$zodSchema.default("createdAt").describe(
+    "The sort field of the results",
+  ),
 });
 
 export type ListAccountantUsersPath = string | number;
 
 export const ListAccountantUsersPath$zodSchema: z.ZodType<
-  ListAccountantUsersPath,
-  z.ZodTypeDef,
-  unknown
+  ListAccountantUsersPath
 > = z.union([
   z.string(),
   z.number(),
@@ -71,9 +89,7 @@ export type ListAccountantUsersIssue = {
 };
 
 export const ListAccountantUsersIssue$zodSchema: z.ZodType<
-  ListAccountantUsersIssue,
-  z.ZodTypeDef,
-  unknown
+  ListAccountantUsersIssue
 > = z.object({
   code: z.string(),
   message: z.string().optional(),
@@ -89,9 +105,7 @@ export type ListAccountantUsersError = {
 };
 
 export const ListAccountantUsersError$zodSchema: z.ZodType<
-  ListAccountantUsersError,
-  z.ZodTypeDef,
-  unknown
+  ListAccountantUsersError
 > = z.object({
   issues: z.array(z.lazy(() => ListAccountantUsersIssue$zodSchema)),
   name: z.string(),
@@ -106,36 +120,41 @@ export type ListAccountantUsersUnprocessableEntityResponseBody = {
 };
 
 export const ListAccountantUsersUnprocessableEntityResponseBody$zodSchema:
-  z.ZodType<
-    ListAccountantUsersUnprocessableEntityResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
+  z.ZodType<ListAccountantUsersUnprocessableEntityResponseBody> = z.object({
     error: z.lazy(() => ListAccountantUsersError$zodSchema),
     success: z.boolean(),
   }).describe("The validation error(s)");
 
+export const ListAccountantUsersStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type ListAccountantUsersStatusCode = ClosedEnum<
+  typeof ListAccountantUsersStatusCode
+>;
+
 export const ListAccountantUsersStatusCode$zodSchema = z.literal(403);
 
-export type ListAccountantUsersStatusCode = z.infer<
-  typeof ListAccountantUsersStatusCode$zodSchema
+export const ListAccountantUsersType = {
+  AuthError: "auth_error",
+} as const;
+export type ListAccountantUsersType = ClosedEnum<
+  typeof ListAccountantUsersType
 >;
 
 export const ListAccountantUsersType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type ListAccountantUsersType = z.infer<
-  typeof ListAccountantUsersType$zodSchema
+export const ListAccountantUsersCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type ListAccountantUsersCode = ClosedEnum<
+  typeof ListAccountantUsersCode
 >;
 
 export const ListAccountantUsersCode$zodSchema = z.enum([
   "missing_scope",
 ]);
-
-export type ListAccountantUsersCode = z.infer<
-  typeof ListAccountantUsersCode$zodSchema
->;
 
 /**
  * Missing scope
@@ -148,9 +167,7 @@ export type ListAccountantUsersForbiddenResponseBody = {
 };
 
 export const ListAccountantUsersForbiddenResponseBody$zodSchema: z.ZodType<
-  ListAccountantUsersForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListAccountantUsersForbiddenResponseBody
 > = z.object({
   code: ListAccountantUsersCode$zodSchema,
   message: z.string(),
@@ -167,9 +184,7 @@ export type ListAccountantUsersResponseBody = {
 };
 
 export const ListAccountantUsersResponseBody$zodSchema: z.ZodType<
-  ListAccountantUsersResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListAccountantUsersResponseBody
 > = z.object({
   data: z.array(AccountantUser$zodSchema),
   pagination: Pagination$zodSchema,
@@ -183,9 +198,7 @@ export type ListAccountantUsersResponse =
   | ListAccountantUsersUnprocessableEntityResponseBody;
 
 export const ListAccountantUsersResponse$zodSchema: z.ZodType<
-  ListAccountantUsersResponse,
-  z.ZodTypeDef,
-  unknown
+  ListAccountantUsersResponse
 > = z.union([
   AuthError$zodSchema,
   z.lazy(() => ListAccountantUsersForbiddenResponseBody$zodSchema),

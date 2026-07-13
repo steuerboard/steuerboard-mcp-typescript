@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { AccountantUser, AccountantUser$zodSchema } from "./accountantuser.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { Conflict, Conflict$zodSchema } from "./conflict.js";
@@ -12,9 +13,7 @@ import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 export type InviteAccountantUserPath = string | number;
 
 export const InviteAccountantUserPath$zodSchema: z.ZodType<
-  InviteAccountantUserPath,
-  z.ZodTypeDef,
-  unknown
+  InviteAccountantUserPath
 > = z.union([
   z.string(),
   z.number(),
@@ -27,9 +26,7 @@ export type InviteAccountantUserIssue = {
 };
 
 export const InviteAccountantUserIssue$zodSchema: z.ZodType<
-  InviteAccountantUserIssue,
-  z.ZodTypeDef,
-  unknown
+  InviteAccountantUserIssue
 > = z.object({
   code: z.string(),
   message: z.string().optional(),
@@ -45,9 +42,7 @@ export type InviteAccountantUserError = {
 };
 
 export const InviteAccountantUserError$zodSchema: z.ZodType<
-  InviteAccountantUserError,
-  z.ZodTypeDef,
-  unknown
+  InviteAccountantUserError
 > = z.object({
   issues: z.array(z.lazy(() => InviteAccountantUserIssue$zodSchema)),
   name: z.string(),
@@ -62,36 +57,41 @@ export type InviteAccountantUserUnprocessableEntityResponseBody = {
 };
 
 export const InviteAccountantUserUnprocessableEntityResponseBody$zodSchema:
-  z.ZodType<
-    InviteAccountantUserUnprocessableEntityResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
+  z.ZodType<InviteAccountantUserUnprocessableEntityResponseBody> = z.object({
     error: z.lazy(() => InviteAccountantUserError$zodSchema),
     success: z.boolean(),
   }).describe("The validation error(s)");
 
+export const InviteAccountantUserStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type InviteAccountantUserStatusCode = ClosedEnum<
+  typeof InviteAccountantUserStatusCode
+>;
+
 export const InviteAccountantUserStatusCode$zodSchema = z.literal(403);
 
-export type InviteAccountantUserStatusCode = z.infer<
-  typeof InviteAccountantUserStatusCode$zodSchema
+export const InviteAccountantUserType = {
+  AuthError: "auth_error",
+} as const;
+export type InviteAccountantUserType = ClosedEnum<
+  typeof InviteAccountantUserType
 >;
 
 export const InviteAccountantUserType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type InviteAccountantUserType = z.infer<
-  typeof InviteAccountantUserType$zodSchema
+export const InviteAccountantUserCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type InviteAccountantUserCode = ClosedEnum<
+  typeof InviteAccountantUserCode
 >;
 
 export const InviteAccountantUserCode$zodSchema = z.enum([
   "missing_scope",
 ]);
-
-export type InviteAccountantUserCode = z.infer<
-  typeof InviteAccountantUserCode$zodSchema
->;
 
 /**
  * Missing scope
@@ -104,9 +104,7 @@ export type InviteAccountantUserForbiddenResponseBody = {
 };
 
 export const InviteAccountantUserForbiddenResponseBody$zodSchema: z.ZodType<
-  InviteAccountantUserForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  InviteAccountantUserForbiddenResponseBody
 > = z.object({
   code: InviteAccountantUserCode$zodSchema,
   message: z.string(),
@@ -124,9 +122,7 @@ export type InviteAccountantUserResponse =
   | InviteAccountantUserUnprocessableEntityResponseBody;
 
 export const InviteAccountantUserResponse$zodSchema: z.ZodType<
-  InviteAccountantUserResponse,
-  z.ZodTypeDef,
-  unknown
+  InviteAccountantUserResponse
 > = z.union([
   AccountantUser$zodSchema,
   AuthError$zodSchema,

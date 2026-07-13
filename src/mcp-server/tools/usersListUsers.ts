@@ -16,6 +16,7 @@ export const tool$usersListUsers: ToolDefinition<typeof args> = {
 
 Returns a paginated list of client users.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

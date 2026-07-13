@@ -10,12 +10,15 @@ export type AccountantUserRole = {
   customName: string | null;
 };
 
-export const AccountantUserRole$zodSchema: z.ZodType<
-  AccountantUserRole,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  customName: z.string().nullable(),
-  id: z.string(),
-  name: z.string().nullable(),
-});
+export const AccountantUserRole$zodSchema: z.ZodType<AccountantUserRole> = z
+  .object({
+    customName: z.string().nullable().describe(
+      "Custom label for the role, if defined.",
+    ),
+    id: z.string().describe(
+      "Identifier of the role assigned to the accountant user.",
+    ),
+    name: z.string().nullable().describe(
+      "Internal identifier of the role. Null when the role is custom only.",
+    ),
+  });

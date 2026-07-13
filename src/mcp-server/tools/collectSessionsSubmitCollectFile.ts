@@ -18,6 +18,7 @@ export const tool$collectSessionsSubmitCollectFile: ToolDefinition<
 
 Uploads a file submission for a collect item via a public token.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

@@ -12,14 +12,12 @@ export type TaskCreate = {
   parentId?: string | undefined;
 };
 
-export const TaskCreate$zodSchema: z.ZodType<
-  TaskCreate,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  dueDate: z.string().datetime({ offset: true }).optional(),
-  parentId: z.string().optional(),
-  text: z.string().optional(),
-  title: z.string(),
-  workspaceId: z.string(),
+export const TaskCreate$zodSchema: z.ZodType<TaskCreate> = z.object({
+  dueDate: z.iso.datetime({ offset: true }).optional().describe(
+    "The due date of a task. ISO-8601 format (YYYY-MM-DDTHH:MM:SSZ).",
+  ),
+  parentId: z.string().optional().describe("The ID of the parent task"),
+  text: z.string().optional().describe("The text of the task"),
+  title: z.string().describe("The title of the task"),
+  workspaceId: z.string().describe("The ID of the workspace"),
 });

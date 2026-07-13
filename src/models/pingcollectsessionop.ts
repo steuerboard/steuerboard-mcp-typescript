@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
 import {
   PingSessionResponse,
@@ -13,34 +14,37 @@ import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 export type PingCollectSessionRequest = { token: string };
 
 export const PingCollectSessionRequest$zodSchema: z.ZodType<
-  PingCollectSessionRequest,
-  z.ZodTypeDef,
-  unknown
+  PingCollectSessionRequest
 > = z.object({
   token: z.string(),
 });
 
+export const PingCollectSessionStatusCode = {
+  FourHundredAndFour: 404,
+} as const;
+export type PingCollectSessionStatusCode = ClosedEnum<
+  typeof PingCollectSessionStatusCode
+>;
+
 export const PingCollectSessionStatusCode$zodSchema = z.literal(404);
 
-export type PingCollectSessionStatusCode = z.infer<
-  typeof PingCollectSessionStatusCode$zodSchema
->;
+export const PingCollectSessionType = {
+  NotFound: "not_found",
+} as const;
+export type PingCollectSessionType = ClosedEnum<typeof PingCollectSessionType>;
 
 export const PingCollectSessionType$zodSchema = z.enum([
   "not_found",
 ]);
 
-export type PingCollectSessionType = z.infer<
-  typeof PingCollectSessionType$zodSchema
->;
+export const PingCollectSessionCode = {
+  CollectTokenNotFound: "collect_token_not_found",
+} as const;
+export type PingCollectSessionCode = ClosedEnum<typeof PingCollectSessionCode>;
 
 export const PingCollectSessionCode$zodSchema = z.enum([
   "collect_token_not_found",
 ]);
-
-export type PingCollectSessionCode = z.infer<
-  typeof PingCollectSessionCode$zodSchema
->;
 
 /**
  * Collect session not found. The token may be invalid or revoked.
@@ -53,9 +57,7 @@ export type PingCollectSessionResponseBody = {
 };
 
 export const PingCollectSessionResponseBody$zodSchema: z.ZodType<
-  PingCollectSessionResponseBody,
-  z.ZodTypeDef,
-  unknown
+  PingCollectSessionResponseBody
 > = z.object({
   code: PingCollectSessionCode$zodSchema,
   message: z.string(),
@@ -70,9 +72,7 @@ export type PingCollectSessionResponse =
   | PingSessionResponse;
 
 export const PingCollectSessionResponse$zodSchema: z.ZodType<
-  PingCollectSessionResponse,
-  z.ZodTypeDef,
-  unknown
+  PingCollectSessionResponse
 > = z.union([
   z.lazy(() => PingCollectSessionResponseBody$zodSchema),
   BadRequest$zodSchema,

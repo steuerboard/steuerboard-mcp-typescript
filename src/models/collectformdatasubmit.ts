@@ -6,11 +6,10 @@ import * as z from "zod";
 
 export type CollectFormDataSubmit = { collectItemId: string; value: string };
 
-export const CollectFormDataSubmit$zodSchema: z.ZodType<
-  CollectFormDataSubmit,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  collectItemId: z.string(),
-  value: z.string(),
-});
+export const CollectFormDataSubmit$zodSchema: z.ZodType<CollectFormDataSubmit> =
+  z.object({
+    collectItemId: z.string().describe(
+      "The ID of the collect item to submit against",
+    ),
+    value: z.string().describe("The form field value"),
+  });

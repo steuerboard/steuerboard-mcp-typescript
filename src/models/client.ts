@@ -3,10 +3,21 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 
 /**
  * The type of the client. 'natural_person' for individuals, 'legal_person' for companies like UG, GmbH, AG, Ltd., Inc., etc. and 'individual_enterprise' for sole proprietorships.
  */
+export const ClientClientType = {
+  NaturalPerson: "natural_person",
+  IndividualEnterprise: "individual_enterprise",
+  LegalPerson: "legal_person",
+} as const;
+/**
+ * The type of the client. 'natural_person' for individuals, 'legal_person' for companies like UG, GmbH, AG, Ltd., Inc., etc. and 'individual_enterprise' for sole proprietorships.
+ */
+export type ClientClientType = ClosedEnum<typeof ClientClientType>;
+
 export const ClientClientType$zodSchema = z.enum([
   "natural_person",
   "individual_enterprise",
@@ -14,8 +25,6 @@ export const ClientClientType$zodSchema = z.enum([
 ]).describe(
   "The type of the client. 'natural_person' for individuals, 'legal_person' for companies like UG, GmbH, AG, Ltd., Inc., etc. and 'individual_enterprise' for sole proprietorships.",
 );
-
-export type ClientClientType = z.infer<typeof ClientClientType$zodSchema>;
 
 export type Client = {
   id: string;
@@ -30,16 +39,25 @@ export type Client = {
   updatedAt: string;
 };
 
-export const Client$zodSchema: z.ZodType<Client, z.ZodTypeDef, unknown> = z
-  .object({
-    archivedAt: z.string().datetime({ offset: true }).nullable(),
-    createdAt: z.string().datetime({ offset: true }),
-    customId: z.string().nullable(),
-    datevClientId: z.string().nullable(),
-    id: z.string(),
-    legalName: z.string().nullable(),
-    name: z.string(),
-    slug: z.string(),
-    type: ClientClientType$zodSchema,
-    updatedAt: z.string().datetime({ offset: true }),
-  });
+export const Client$zodSchema: z.ZodType<Client> = z.object({
+  archivedAt: z.iso.datetime({ offset: true }).nullable().describe(
+    "The date and time the client was archived. ISO-8601 format (YYYY-MM-DDTHH:MM:SSZ).",
+  ),
+  createdAt: z.iso.datetime({ offset: true }).describe(
+    "The date and time of the creation for the client. ISO-8601 format (YYYY-MM-DDTHH:MM:SSZ).",
+  ),
+  customId: z.string().nullable().describe(
+    "The client's custom ID can be defined by the accountant",
+  ),
+  datevClientId: z.string().nullable().describe("The client's ID in DATEV"),
+  id: z.string().describe("The ID of the client"),
+  legalName: z.string().nullable().describe("The legal name of the client"),
+  name: z.string().describe("The name of the client"),
+  slug: z.string().describe("The slug of the client"),
+  type: ClientClientType$zodSchema.describe(
+    "The type of the client. 'natural_person' for individuals, 'legal_person' for companies like UG, GmbH, AG, Ltd., Inc., etc. and 'individual_enterprise' for sole proprietorships.",
+  ),
+  updatedAt: z.iso.datetime({ offset: true }).describe(
+    "The date and time of the last update for the client. ISO-8601 format (YYYY-MM-DDTHH:MM:SSZ).",
+  ),
+});

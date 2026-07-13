@@ -19,20 +19,18 @@ export type RequestLinkCollectTokenRequest = {
 };
 
 export const RequestLinkCollectTokenRequest$zodSchema: z.ZodType<
-  RequestLinkCollectTokenRequest,
-  z.ZodTypeDef,
-  unknown
+  RequestLinkCollectTokenRequest
 > = z.object({
-  RequestLinkBody: RequestLinkBody$zodSchema.optional(),
+  RequestLinkBody: RequestLinkBody$zodSchema.optional().describe(
+    "Email address",
+  ),
   token: z.string(),
 });
 
 export type RequestLinkCollectTokenPath2 = string | number;
 
 export const RequestLinkCollectTokenPath2$zodSchema: z.ZodType<
-  RequestLinkCollectTokenPath2,
-  z.ZodTypeDef,
-  unknown
+  RequestLinkCollectTokenPath2
 > = z.union([
   z.string(),
   z.number(),
@@ -45,9 +43,7 @@ export type RequestLinkCollectTokenIssue2 = {
 };
 
 export const RequestLinkCollectTokenIssue2$zodSchema: z.ZodType<
-  RequestLinkCollectTokenIssue2,
-  z.ZodTypeDef,
-  unknown
+  RequestLinkCollectTokenIssue2
 > = z.object({
   code: z.string(),
   message: z.string().optional(),
@@ -63,9 +59,7 @@ export type RequestLinkCollectTokenError2 = {
 };
 
 export const RequestLinkCollectTokenError2$zodSchema: z.ZodType<
-  RequestLinkCollectTokenError2,
-  z.ZodTypeDef,
-  unknown
+  RequestLinkCollectTokenError2
 > = z.object({
   issues: z.array(z.lazy(() => RequestLinkCollectTokenIssue2$zodSchema)),
   name: z.string(),
@@ -77,9 +71,7 @@ export type RequestLinkCollectTokenResponseBody2 = {
 };
 
 export const RequestLinkCollectTokenResponseBody2$zodSchema: z.ZodType<
-  RequestLinkCollectTokenResponseBody2,
-  z.ZodTypeDef,
-  unknown
+  RequestLinkCollectTokenResponseBody2
 > = z.object({
   error: z.lazy(() => RequestLinkCollectTokenError2$zodSchema),
   success: z.boolean(),
@@ -88,9 +80,7 @@ export const RequestLinkCollectTokenResponseBody2$zodSchema: z.ZodType<
 export type RequestLinkCollectTokenPath1 = string | number;
 
 export const RequestLinkCollectTokenPath1$zodSchema: z.ZodType<
-  RequestLinkCollectTokenPath1,
-  z.ZodTypeDef,
-  unknown
+  RequestLinkCollectTokenPath1
 > = z.union([
   z.string(),
   z.number(),
@@ -103,9 +93,7 @@ export type RequestLinkCollectTokenIssue1 = {
 };
 
 export const RequestLinkCollectTokenIssue1$zodSchema: z.ZodType<
-  RequestLinkCollectTokenIssue1,
-  z.ZodTypeDef,
-  unknown
+  RequestLinkCollectTokenIssue1
 > = z.object({
   code: z.string(),
   message: z.string().optional(),
@@ -121,9 +109,7 @@ export type RequestLinkCollectTokenError1 = {
 };
 
 export const RequestLinkCollectTokenError1$zodSchema: z.ZodType<
-  RequestLinkCollectTokenError1,
-  z.ZodTypeDef,
-  unknown
+  RequestLinkCollectTokenError1
 > = z.object({
   issues: z.array(z.lazy(() => RequestLinkCollectTokenIssue1$zodSchema)),
   name: z.string(),
@@ -135,9 +121,7 @@ export type RequestLinkCollectTokenResponseBody1 = {
 };
 
 export const RequestLinkCollectTokenResponseBody1$zodSchema: z.ZodType<
-  RequestLinkCollectTokenResponseBody1,
-  z.ZodTypeDef,
-  unknown
+  RequestLinkCollectTokenResponseBody1
 > = z.object({
   error: z.lazy(() => RequestLinkCollectTokenError1$zodSchema),
   success: z.boolean(),
@@ -151,9 +135,7 @@ export type RequestLinkCollectTokenResponseBody =
   | RequestLinkCollectTokenResponseBody2;
 
 export const RequestLinkCollectTokenResponseBody$zodSchema: z.ZodType<
-  RequestLinkCollectTokenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  RequestLinkCollectTokenResponseBody
 > = z.union([
   z.lazy(() => RequestLinkCollectTokenResponseBody1$zodSchema),
   z.lazy(() => RequestLinkCollectTokenResponseBody2$zodSchema),
@@ -166,9 +148,7 @@ export type RequestLinkCollectTokenResponse =
   | RequestLinkCollectTokenResponseBody2;
 
 export const RequestLinkCollectTokenResponse$zodSchema: z.ZodType<
-  RequestLinkCollectTokenResponse,
-  z.ZodTypeDef,
-  unknown
+  RequestLinkCollectTokenResponse
 > = z.union([
   RateLimit$zodSchema,
   RequestLinkResponse$zodSchema,

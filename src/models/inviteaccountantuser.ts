@@ -3,15 +3,20 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
+
+export const InviteAccountantUserRoleEnum = {
+  Admin: "admin",
+  User: "user",
+} as const;
+export type InviteAccountantUserRoleEnum = ClosedEnum<
+  typeof InviteAccountantUserRoleEnum
+>;
 
 export const InviteAccountantUserRoleEnum$zodSchema = z.enum([
   "admin",
   "user",
 ]);
-
-export type InviteAccountantUserRoleEnum = z.infer<
-  typeof InviteAccountantUserRoleEnum$zodSchema
->;
 
 /**
  * Role to assign to the invited user. Can be 'admin', 'user', or a custom role ID.
@@ -21,9 +26,7 @@ export type InviteAccountantUserRoleUnion =
   | string;
 
 export const InviteAccountantUserRoleUnion$zodSchema: z.ZodType<
-  InviteAccountantUserRoleUnion,
-  z.ZodTypeDef,
-  unknown
+  InviteAccountantUserRoleUnion
 > = z.union([
   InviteAccountantUserRoleEnum$zodSchema,
   z.string(),
@@ -36,14 +39,15 @@ export type InviteAccountantUser = {
   role: InviteAccountantUserRoleEnum | string;
 };
 
-export const InviteAccountantUser$zodSchema: z.ZodType<
-  InviteAccountantUser,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  email: z.string(),
-  role: z.union([
-    InviteAccountantUserRoleEnum$zodSchema,
-    z.string(),
-  ]),
-});
+export const InviteAccountantUser$zodSchema: z.ZodType<InviteAccountantUser> = z
+  .object({
+    email: z.string().describe(
+      "Email address that should receive the invitation.",
+    ),
+    role: z.union([
+      InviteAccountantUserRoleEnum$zodSchema,
+      z.string(),
+    ]).describe(
+      "Role to assign to the invited user. Can be 'admin', 'user', or a custom role ID.",
+    ),
+  });

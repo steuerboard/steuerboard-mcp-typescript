@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import * as b64$ from "../lib/base64.js";
 
 export type CollectBulkSubmitFormFile = {
   fileName: string;
@@ -10,11 +11,11 @@ export type CollectBulkSubmitFormFile = {
 };
 
 export const CollectBulkSubmitFormFile$zodSchema: z.ZodType<
-  CollectBulkSubmitFormFile,
-  z.ZodTypeDef,
-  unknown
+  CollectBulkSubmitFormFile
 > = z.object({
-  content: z.string().base64(),
+  content: z.string().describe("Base64-encoded binary content").transform(
+    b64$.bytesFromBase64,
+  ),
   fileName: z.string(),
 });
 
@@ -23,11 +24,12 @@ export type CollectBulkSubmitForm = {
   groupId: string;
 };
 
-export const CollectBulkSubmitForm$zodSchema: z.ZodType<
-  CollectBulkSubmitForm,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  files: z.array(z.lazy(() => CollectBulkSubmitFormFile$zodSchema)),
-  groupId: z.string(),
-});
+export const CollectBulkSubmitForm$zodSchema: z.ZodType<CollectBulkSubmitForm> =
+  z.object({
+    files: z.array(z.lazy(() => CollectBulkSubmitFormFile$zodSchema)).describe(
+      "The files to upload",
+    ),
+    groupId: z.string().describe(
+      "The ID of the BULK_MATCH group to submit against",
+    ),
+  });

@@ -11,11 +11,7 @@ export type PaginatedUsers = {
   pagination: Pagination;
 };
 
-export const PaginatedUsers$zodSchema: z.ZodType<
-  PaginatedUsers,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const PaginatedUsers$zodSchema: z.ZodType<PaginatedUsers> = z.object({
   data: z.array(ClientUser$zodSchema),
   pagination: Pagination$zodSchema,
 });

@@ -16,6 +16,7 @@ export const tool$usersGetUser: ToolDefinition<typeof args> = {
 
 Returns a single client user by ID.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

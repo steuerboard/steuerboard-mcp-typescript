@@ -3,17 +3,14 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { Client, Client$zodSchema } from "./client.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
 export type CreateClientPath = string | number;
 
-export const CreateClientPath$zodSchema: z.ZodType<
-  CreateClientPath,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
+export const CreateClientPath$zodSchema: z.ZodType<CreateClientPath> = z.union([
   z.string(),
   z.number(),
 ]);
@@ -24,32 +21,26 @@ export type CreateClientIssue = {
   message?: string | undefined;
 };
 
-export const CreateClientIssue$zodSchema: z.ZodType<
-  CreateClientIssue,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  code: z.string(),
-  message: z.string().optional(),
-  path: z.array(z.union([
-    z.string(),
-    z.number(),
-  ])),
-});
+export const CreateClientIssue$zodSchema: z.ZodType<CreateClientIssue> = z
+  .object({
+    code: z.string(),
+    message: z.string().optional(),
+    path: z.array(z.union([
+      z.string(),
+      z.number(),
+    ])),
+  });
 
 export type CreateClientError = {
   issues: Array<CreateClientIssue>;
   name: string;
 };
 
-export const CreateClientError$zodSchema: z.ZodType<
-  CreateClientError,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  issues: z.array(z.lazy(() => CreateClientIssue$zodSchema)),
-  name: z.string(),
-});
+export const CreateClientError$zodSchema: z.ZodType<CreateClientError> = z
+  .object({
+    issues: z.array(z.lazy(() => CreateClientIssue$zodSchema)),
+    name: z.string(),
+  });
 
 /**
  * The validation error(s)
@@ -60,31 +51,36 @@ export type CreateClientUnprocessableEntityResponseBody = {
 };
 
 export const CreateClientUnprocessableEntityResponseBody$zodSchema: z.ZodType<
-  CreateClientUnprocessableEntityResponseBody,
-  z.ZodTypeDef,
-  unknown
+  CreateClientUnprocessableEntityResponseBody
 > = z.object({
   error: z.lazy(() => CreateClientError$zodSchema),
   success: z.boolean(),
 }).describe("The validation error(s)");
 
+export const CreateClientStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type CreateClientStatusCode = ClosedEnum<typeof CreateClientStatusCode>;
+
 export const CreateClientStatusCode$zodSchema = z.literal(403);
 
-export type CreateClientStatusCode = z.infer<
-  typeof CreateClientStatusCode$zodSchema
->;
+export const CreateClientType = {
+  AuthError: "auth_error",
+} as const;
+export type CreateClientType = ClosedEnum<typeof CreateClientType>;
 
 export const CreateClientType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type CreateClientType = z.infer<typeof CreateClientType$zodSchema>;
+export const CreateClientCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type CreateClientCode = ClosedEnum<typeof CreateClientCode>;
 
 export const CreateClientCode$zodSchema = z.enum([
   "missing_scope",
 ]);
-
-export type CreateClientCode = z.infer<typeof CreateClientCode$zodSchema>;
 
 /**
  * Missing scope
@@ -97,9 +93,7 @@ export type CreateClientForbiddenResponseBody = {
 };
 
 export const CreateClientForbiddenResponseBody$zodSchema: z.ZodType<
-  CreateClientForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  CreateClientForbiddenResponseBody
 > = z.object({
   code: CreateClientCode$zodSchema,
   message: z.string(),
@@ -114,14 +108,11 @@ export type CreateClientResponse =
   | RateLimit
   | CreateClientUnprocessableEntityResponseBody;
 
-export const CreateClientResponse$zodSchema: z.ZodType<
-  CreateClientResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  Client$zodSchema,
-  AuthError$zodSchema,
-  z.lazy(() => CreateClientForbiddenResponseBody$zodSchema),
-  RateLimit$zodSchema,
-  z.lazy(() => CreateClientUnprocessableEntityResponseBody$zodSchema),
-]);
+export const CreateClientResponse$zodSchema: z.ZodType<CreateClientResponse> = z
+  .union([
+    Client$zodSchema,
+    AuthError$zodSchema,
+    z.lazy(() => CreateClientForbiddenResponseBody$zodSchema),
+    RateLimit$zodSchema,
+    z.lazy(() => CreateClientUnprocessableEntityResponseBody$zodSchema),
+  ]);

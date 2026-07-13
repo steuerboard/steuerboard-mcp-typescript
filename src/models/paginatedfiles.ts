@@ -8,11 +8,7 @@ import { Pagination, Pagination$zodSchema } from "./pagination.js";
 
 export type PaginatedFiles = { data: Array<FileT>; pagination: Pagination };
 
-export const PaginatedFiles$zodSchema: z.ZodType<
-  PaginatedFiles,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const PaginatedFiles$zodSchema: z.ZodType<PaginatedFiles> = z.object({
   data: z.array(FileT$zodSchema),
   pagination: Pagination$zodSchema,
 });

@@ -3,28 +3,21 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { FileT, FileT$zodSchema } from "./file.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
 export type GetFileRequest = { id: string; xClientId: string };
 
-export const GetFileRequest$zodSchema: z.ZodType<
-  GetFileRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const GetFileRequest$zodSchema: z.ZodType<GetFileRequest> = z.object({
   id: z.string(),
   xClientId: z.string(),
 });
 
 export type GetFilePath = string | number;
 
-export const GetFilePath$zodSchema: z.ZodType<
-  GetFilePath,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
+export const GetFilePath$zodSchema: z.ZodType<GetFilePath> = z.union([
   z.string(),
   z.number(),
 ]);
@@ -35,11 +28,7 @@ export type GetFileIssue = {
   message?: string | undefined;
 };
 
-export const GetFileIssue$zodSchema: z.ZodType<
-  GetFileIssue,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const GetFileIssue$zodSchema: z.ZodType<GetFileIssue> = z.object({
   code: z.string(),
   message: z.string().optional(),
   path: z.array(z.union([
@@ -50,11 +39,7 @@ export const GetFileIssue$zodSchema: z.ZodType<
 
 export type GetFileError = { issues: Array<GetFileIssue>; name: string };
 
-export const GetFileError$zodSchema: z.ZodType<
-  GetFileError,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const GetFileError$zodSchema: z.ZodType<GetFileError> = z.object({
   issues: z.array(z.lazy(() => GetFileIssue$zodSchema)),
   name: z.string(),
 });
@@ -68,9 +53,7 @@ export type GetFileUnprocessableEntityResponseBody = {
 };
 
 export const GetFileUnprocessableEntityResponseBody$zodSchema: z.ZodType<
-  GetFileUnprocessableEntityResponseBody,
-  z.ZodTypeDef,
-  unknown
+  GetFileUnprocessableEntityResponseBody
 > = z.object({
   error: z.lazy(() => GetFileError$zodSchema),
   success: z.boolean(),
@@ -82,34 +65,37 @@ export const GetFileUnprocessableEntityResponseBody$zodSchema: z.ZodType<
 export type GetFileNotFoundResponseBody = { message: string };
 
 export const GetFileNotFoundResponseBody$zodSchema: z.ZodType<
-  GetFileNotFoundResponseBody,
-  z.ZodTypeDef,
-  unknown
+  GetFileNotFoundResponseBody
 > = z.object({
   message: z.string(),
 }).describe("File not found");
 
+export const GetFileForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type GetFileForbiddenStatusCode = ClosedEnum<
+  typeof GetFileForbiddenStatusCode
+>;
+
 export const GetFileForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type GetFileForbiddenStatusCode = z.infer<
-  typeof GetFileForbiddenStatusCode$zodSchema
->;
+export const GetFileForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type GetFileForbiddenType = ClosedEnum<typeof GetFileForbiddenType>;
 
 export const GetFileForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type GetFileForbiddenType = z.infer<
-  typeof GetFileForbiddenType$zodSchema
->;
+export const GetFileForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type GetFileForbiddenCode = ClosedEnum<typeof GetFileForbiddenCode>;
 
 export const GetFileForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
-
-export type GetFileForbiddenCode = z.infer<
-  typeof GetFileForbiddenCode$zodSchema
->;
 
 /**
  * Missing scope
@@ -122,9 +108,7 @@ export type GetFileForbiddenResponseBody = {
 };
 
 export const GetFileForbiddenResponseBody$zodSchema: z.ZodType<
-  GetFileForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  GetFileForbiddenResponseBody
 > = z.object({
   code: GetFileForbiddenCode$zodSchema,
   message: z.string(),
@@ -132,27 +116,32 @@ export const GetFileForbiddenResponseBody$zodSchema: z.ZodType<
   type: GetFileForbiddenType$zodSchema,
 }).describe("Missing scope");
 
+export const GetFileStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type GetFileStatusCode400 = ClosedEnum<typeof GetFileStatusCode400>;
+
 export const GetFileStatusCode400$zodSchema = z.literal(400);
 
-export type GetFileStatusCode400 = z.infer<
-  typeof GetFileStatusCode400$zodSchema
->;
+export const GetFileBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type GetFileBadRequestType = ClosedEnum<typeof GetFileBadRequestType>;
 
 export const GetFileBadRequestType$zodSchema = z.enum([
   "bad_request",
 ]);
 
-export type GetFileBadRequestType = z.infer<
-  typeof GetFileBadRequestType$zodSchema
+export const GetFileCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type GetFileCodeMissingClientID = ClosedEnum<
+  typeof GetFileCodeMissingClientID
 >;
 
 export const GetFileCodeMissingClientID$zodSchema = z.enum([
   "missing_client_id",
 ]);
-
-export type GetFileCodeMissingClientID = z.infer<
-  typeof GetFileCodeMissingClientID$zodSchema
->;
 
 /**
  * Missing client ID
@@ -165,9 +154,7 @@ export type GetFileBadRequestResponseBody = {
 };
 
 export const GetFileBadRequestResponseBody$zodSchema: z.ZodType<
-  GetFileBadRequestResponseBody,
-  z.ZodTypeDef,
-  unknown
+  GetFileBadRequestResponseBody
 > = z.object({
   code: GetFileCodeMissingClientID$zodSchema,
   message: z.string(),
@@ -184,11 +171,7 @@ export type GetFileResponse =
   | GetFileUnprocessableEntityResponseBody
   | GetFileNotFoundResponseBody;
 
-export const GetFileResponse$zodSchema: z.ZodType<
-  GetFileResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
+export const GetFileResponse$zodSchema: z.ZodType<GetFileResponse> = z.union([
   FileT$zodSchema,
   z.lazy(() => GetFileBadRequestResponseBody$zodSchema),
   AuthError$zodSchema,

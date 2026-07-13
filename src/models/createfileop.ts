@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { FileT, FileT$zodSchema } from "./file.js";
 import { FileCreate, FileCreate$zodSchema } from "./filecreate.js";
@@ -10,22 +11,15 @@ import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
 export type CreateFileRequest = { xClientId: string; FileCreate: FileCreate };
 
-export const CreateFileRequest$zodSchema: z.ZodType<
-  CreateFileRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  FileCreate: FileCreate$zodSchema,
-  xClientId: z.string(),
-});
+export const CreateFileRequest$zodSchema: z.ZodType<CreateFileRequest> = z
+  .object({
+    FileCreate: FileCreate$zodSchema.describe("The file to upload"),
+    xClientId: z.string(),
+  });
 
 export type CreateFilePath = string | number;
 
-export const CreateFilePath$zodSchema: z.ZodType<
-  CreateFilePath,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
+export const CreateFilePath$zodSchema: z.ZodType<CreateFilePath> = z.union([
   z.string(),
   z.number(),
 ]);
@@ -36,11 +30,7 @@ export type CreateFileIssue = {
   message?: string | undefined;
 };
 
-export const CreateFileIssue$zodSchema: z.ZodType<
-  CreateFileIssue,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const CreateFileIssue$zodSchema: z.ZodType<CreateFileIssue> = z.object({
   code: z.string(),
   message: z.string().optional(),
   path: z.array(z.union([
@@ -51,11 +41,7 @@ export const CreateFileIssue$zodSchema: z.ZodType<
 
 export type CreateFileError = { issues: Array<CreateFileIssue>; name: string };
 
-export const CreateFileError$zodSchema: z.ZodType<
-  CreateFileError,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const CreateFileError$zodSchema: z.ZodType<CreateFileError> = z.object({
   issues: z.array(z.lazy(() => CreateFileIssue$zodSchema)),
   name: z.string(),
 });
@@ -69,37 +55,44 @@ export type CreateFileUnprocessableEntityResponseBody = {
 };
 
 export const CreateFileUnprocessableEntityResponseBody$zodSchema: z.ZodType<
-  CreateFileUnprocessableEntityResponseBody,
-  z.ZodTypeDef,
-  unknown
+  CreateFileUnprocessableEntityResponseBody
 > = z.object({
   error: z.lazy(() => CreateFileError$zodSchema),
   success: z.boolean(),
 }).describe("The validation error(s)");
 
+export const CreateFileRequestEntityTooLargeStatusCode = {
+  FourHundredAndThirteen: 413,
+} as const;
+export type CreateFileRequestEntityTooLargeStatusCode = ClosedEnum<
+  typeof CreateFileRequestEntityTooLargeStatusCode
+>;
+
 export const CreateFileRequestEntityTooLargeStatusCode$zodSchema = z.literal(
   413,
 );
 
-export type CreateFileRequestEntityTooLargeStatusCode = z.infer<
-  typeof CreateFileRequestEntityTooLargeStatusCode$zodSchema
+export const CreateFileRequestEntityTooLargeType = {
+  BadRequest: "bad_request",
+} as const;
+export type CreateFileRequestEntityTooLargeType = ClosedEnum<
+  typeof CreateFileRequestEntityTooLargeType
 >;
 
 export const CreateFileRequestEntityTooLargeType$zodSchema = z.enum([
   "bad_request",
 ]);
 
-export type CreateFileRequestEntityTooLargeType = z.infer<
-  typeof CreateFileRequestEntityTooLargeType$zodSchema
+export const CreateFileRequestEntityTooLargeCode = {
+  PayloadTooLarge: "payload_too_large",
+} as const;
+export type CreateFileRequestEntityTooLargeCode = ClosedEnum<
+  typeof CreateFileRequestEntityTooLargeCode
 >;
 
 export const CreateFileRequestEntityTooLargeCode$zodSchema = z.enum([
   "payload_too_large",
 ]);
-
-export type CreateFileRequestEntityTooLargeCode = z.infer<
-  typeof CreateFileRequestEntityTooLargeCode$zodSchema
->;
 
 /**
  * Payload too large
@@ -112,9 +105,7 @@ export type CreateFileRequestEntityTooLargeResponseBody = {
 };
 
 export const CreateFileRequestEntityTooLargeResponseBody$zodSchema: z.ZodType<
-  CreateFileRequestEntityTooLargeResponseBody,
-  z.ZodTypeDef,
-  unknown
+  CreateFileRequestEntityTooLargeResponseBody
 > = z.object({
   code: CreateFileRequestEntityTooLargeCode$zodSchema,
   message: z.string(),
@@ -122,27 +113,36 @@ export const CreateFileRequestEntityTooLargeResponseBody$zodSchema: z.ZodType<
   type: CreateFileRequestEntityTooLargeType$zodSchema,
 }).describe("Payload too large");
 
+export const CreateFileForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type CreateFileForbiddenStatusCode = ClosedEnum<
+  typeof CreateFileForbiddenStatusCode
+>;
+
 export const CreateFileForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type CreateFileForbiddenStatusCode = z.infer<
-  typeof CreateFileForbiddenStatusCode$zodSchema
+export const CreateFileForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type CreateFileForbiddenType = ClosedEnum<
+  typeof CreateFileForbiddenType
 >;
 
 export const CreateFileForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type CreateFileForbiddenType = z.infer<
-  typeof CreateFileForbiddenType$zodSchema
+export const CreateFileForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type CreateFileForbiddenCode = ClosedEnum<
+  typeof CreateFileForbiddenCode
 >;
 
 export const CreateFileForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
-
-export type CreateFileForbiddenCode = z.infer<
-  typeof CreateFileForbiddenCode$zodSchema
->;
 
 /**
  * Missing scope
@@ -155,9 +155,7 @@ export type CreateFileForbiddenResponseBody = {
 };
 
 export const CreateFileForbiddenResponseBody$zodSchema: z.ZodType<
-  CreateFileForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  CreateFileForbiddenResponseBody
 > = z.object({
   code: CreateFileForbiddenCode$zodSchema,
   message: z.string(),
@@ -165,27 +163,36 @@ export const CreateFileForbiddenResponseBody$zodSchema: z.ZodType<
   type: CreateFileForbiddenType$zodSchema,
 }).describe("Missing scope");
 
+export const CreateFileStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type CreateFileStatusCode400 = ClosedEnum<
+  typeof CreateFileStatusCode400
+>;
+
 export const CreateFileStatusCode400$zodSchema = z.literal(400);
 
-export type CreateFileStatusCode400 = z.infer<
-  typeof CreateFileStatusCode400$zodSchema
+export const CreateFileBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type CreateFileBadRequestType = ClosedEnum<
+  typeof CreateFileBadRequestType
 >;
 
 export const CreateFileBadRequestType$zodSchema = z.enum([
   "bad_request",
 ]);
 
-export type CreateFileBadRequestType = z.infer<
-  typeof CreateFileBadRequestType$zodSchema
+export const CreateFileCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type CreateFileCodeMissingClientID = ClosedEnum<
+  typeof CreateFileCodeMissingClientID
 >;
 
 export const CreateFileCodeMissingClientID$zodSchema = z.enum([
   "missing_client_id",
 ]);
-
-export type CreateFileCodeMissingClientID = z.infer<
-  typeof CreateFileCodeMissingClientID$zodSchema
->;
 
 /**
  * Missing client ID
@@ -198,9 +205,7 @@ export type CreateFileResponseBodyMissingClientID = {
 };
 
 export const CreateFileResponseBodyMissingClientID$zodSchema: z.ZodType<
-  CreateFileResponseBodyMissingClientID,
-  z.ZodTypeDef,
-  unknown
+  CreateFileResponseBodyMissingClientID
 > = z.object({
   code: CreateFileCodeMissingClientID$zodSchema,
   message: z.string(),
@@ -217,16 +222,13 @@ export type CreateFileResponse =
   | RateLimit
   | CreateFileUnprocessableEntityResponseBody;
 
-export const CreateFileResponse$zodSchema: z.ZodType<
-  CreateFileResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  FileT$zodSchema,
-  z.lazy(() => CreateFileResponseBodyMissingClientID$zodSchema),
-  AuthError$zodSchema,
-  z.lazy(() => CreateFileForbiddenResponseBody$zodSchema),
-  z.lazy(() => CreateFileRequestEntityTooLargeResponseBody$zodSchema),
-  RateLimit$zodSchema,
-  z.lazy(() => CreateFileUnprocessableEntityResponseBody$zodSchema),
-]);
+export const CreateFileResponse$zodSchema: z.ZodType<CreateFileResponse> = z
+  .union([
+    FileT$zodSchema,
+    z.lazy(() => CreateFileResponseBodyMissingClientID$zodSchema),
+    AuthError$zodSchema,
+    z.lazy(() => CreateFileForbiddenResponseBody$zodSchema),
+    z.lazy(() => CreateFileRequestEntityTooLargeResponseBody$zodSchema),
+    RateLimit$zodSchema,
+    z.lazy(() => CreateFileUnprocessableEntityResponseBody$zodSchema),
+  ]);

@@ -14,16 +14,19 @@ export type CollectFileSubmission = {
   createdAt: string;
 };
 
-export const CollectFileSubmission$zodSchema: z.ZodType<
-  CollectFileSubmission,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  collectItemId: z.string(),
-  createdAt: z.string().datetime({ offset: true }),
-  fileMimeType: z.string().nullable(),
-  fileName: z.string().nullable(),
-  fileSize: z.number().nullable(),
-  id: z.string(),
-  status: z.string(),
-});
+export const CollectFileSubmission$zodSchema: z.ZodType<CollectFileSubmission> =
+  z.object({
+    collectItemId: z.string().describe("The ID of the collect item"),
+    createdAt: z.iso.datetime({ offset: true }).describe(
+      "The date and time the submission was created",
+    ),
+    fileMimeType: z.string().nullable().describe(
+      "The MIME type of the uploaded file",
+    ),
+    fileName: z.string().nullable().describe("The name of the uploaded file"),
+    fileSize: z.number().nullable().describe(
+      "The size of the uploaded file in bytes",
+    ),
+    id: z.string().describe("The ID of the submission"),
+    status: z.string().describe("The status of the submission"),
+  });

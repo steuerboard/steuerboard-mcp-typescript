@@ -3,22 +3,32 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
+
+export const AuthErrorStatusCode = {
+  FourHundredAndOne: 401,
+} as const;
+export type AuthErrorStatusCode = ClosedEnum<typeof AuthErrorStatusCode>;
 
 export const AuthErrorStatusCode$zodSchema = z.literal(401);
 
-export type AuthErrorStatusCode = z.infer<typeof AuthErrorStatusCode$zodSchema>;
+export const AuthErrorType = {
+  AuthError: "auth_error",
+} as const;
+export type AuthErrorType = ClosedEnum<typeof AuthErrorType>;
 
 export const AuthErrorType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type AuthErrorType = z.infer<typeof AuthErrorType$zodSchema>;
+export const AuthErrorCode = {
+  Unauthorized: "unauthorized",
+} as const;
+export type AuthErrorCode = ClosedEnum<typeof AuthErrorCode>;
 
 export const AuthErrorCode$zodSchema = z.enum([
   "unauthorized",
 ]);
-
-export type AuthErrorCode = z.infer<typeof AuthErrorCode$zodSchema>;
 
 export type AuthError = {
   status_code: AuthErrorStatusCode;
@@ -27,10 +37,9 @@ export type AuthError = {
   message: string;
 };
 
-export const AuthError$zodSchema: z.ZodType<AuthError, z.ZodTypeDef, unknown> =
-  z.object({
-    code: AuthErrorCode$zodSchema,
-    message: z.string(),
-    status_code: AuthErrorStatusCode$zodSchema,
-    type: AuthErrorType$zodSchema,
-  });
+export const AuthError$zodSchema: z.ZodType<AuthError> = z.object({
+  code: AuthErrorCode$zodSchema,
+  message: z.string(),
+  status_code: AuthErrorStatusCode$zodSchema,
+  type: AuthErrorType$zodSchema,
+});

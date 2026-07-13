@@ -6,10 +6,9 @@ import * as z from "zod";
 
 export type WorkspaceMemberRemove = { userId: string };
 
-export const WorkspaceMemberRemove$zodSchema: z.ZodType<
-  WorkspaceMemberRemove,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  userId: z.string(),
-});
+export const WorkspaceMemberRemove$zodSchema: z.ZodType<WorkspaceMemberRemove> =
+  z.object({
+    userId: z.string().describe(
+      "Identifier of the user that should be removed from the workspace.",
+    ),
+  });

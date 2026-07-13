@@ -10,12 +10,12 @@ export type FileUpdate = {
   folderId?: string | undefined;
 };
 
-export const FileUpdate$zodSchema: z.ZodType<
-  FileUpdate,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  documentDate: z.string().datetime({ offset: true }).optional(),
-  folderId: z.string().optional(),
-  name: z.string().optional(),
+export const FileUpdate$zodSchema: z.ZodType<FileUpdate> = z.object({
+  documentDate: z.iso.datetime({ offset: true }).optional().describe(
+    "The date of the document (not the upload date). ISO-8601 format (YYYY-MM-DDTHH:MM:SSZ).",
+  ),
+  folderId: z.string().optional().describe(
+    "The ID of the folder to place the file in",
+  ),
+  name: z.string().optional().describe("The name of the file"),
 });

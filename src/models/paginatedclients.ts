@@ -8,11 +8,9 @@ import { Pagination, Pagination$zodSchema } from "./pagination.js";
 
 export type PaginatedClients = { data: Array<Client>; pagination: Pagination };
 
-export const PaginatedClients$zodSchema: z.ZodType<
-  PaginatedClients,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  data: z.array(Client$zodSchema),
-  pagination: Pagination$zodSchema,
-});
+export const PaginatedClients$zodSchema: z.ZodType<PaginatedClients> = z.object(
+  {
+    data: z.array(Client$zodSchema),
+    pagination: Pagination$zodSchema,
+  },
+);

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
 import {
   CollectBulkSubmission,
@@ -20,20 +21,18 @@ export type SubmitCollectBulkRequest = {
 };
 
 export const SubmitCollectBulkRequest$zodSchema: z.ZodType<
-  SubmitCollectBulkRequest,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectBulkRequest
 > = z.object({
-  CollectBulkSubmitForm: CollectBulkSubmitForm$zodSchema,
+  CollectBulkSubmitForm: CollectBulkSubmitForm$zodSchema.describe(
+    "Files to bulk upload",
+  ),
   token: z.string(),
 });
 
 export type SubmitCollectBulkPath2 = string | number;
 
 export const SubmitCollectBulkPath2$zodSchema: z.ZodType<
-  SubmitCollectBulkPath2,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectBulkPath2
 > = z.union([
   z.string(),
   z.number(),
@@ -46,9 +45,7 @@ export type SubmitCollectBulkIssue2 = {
 };
 
 export const SubmitCollectBulkIssue2$zodSchema: z.ZodType<
-  SubmitCollectBulkIssue2,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectBulkIssue2
 > = z.object({
   code: z.string(),
   message: z.string().optional(),
@@ -64,9 +61,7 @@ export type SubmitCollectBulkError2 = {
 };
 
 export const SubmitCollectBulkError2$zodSchema: z.ZodType<
-  SubmitCollectBulkError2,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectBulkError2
 > = z.object({
   issues: z.array(z.lazy(() => SubmitCollectBulkIssue2$zodSchema)),
   name: z.string(),
@@ -78,9 +73,7 @@ export type SubmitCollectBulkResponseBody2 = {
 };
 
 export const SubmitCollectBulkResponseBody2$zodSchema: z.ZodType<
-  SubmitCollectBulkResponseBody2,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectBulkResponseBody2
 > = z.object({
   error: z.lazy(() => SubmitCollectBulkError2$zodSchema),
   success: z.boolean(),
@@ -89,9 +82,7 @@ export const SubmitCollectBulkResponseBody2$zodSchema: z.ZodType<
 export type SubmitCollectBulkPath1 = string | number;
 
 export const SubmitCollectBulkPath1$zodSchema: z.ZodType<
-  SubmitCollectBulkPath1,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectBulkPath1
 > = z.union([
   z.string(),
   z.number(),
@@ -104,9 +95,7 @@ export type SubmitCollectBulkIssue1 = {
 };
 
 export const SubmitCollectBulkIssue1$zodSchema: z.ZodType<
-  SubmitCollectBulkIssue1,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectBulkIssue1
 > = z.object({
   code: z.string(),
   message: z.string().optional(),
@@ -122,9 +111,7 @@ export type SubmitCollectBulkError1 = {
 };
 
 export const SubmitCollectBulkError1$zodSchema: z.ZodType<
-  SubmitCollectBulkError1,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectBulkError1
 > = z.object({
   issues: z.array(z.lazy(() => SubmitCollectBulkIssue1$zodSchema)),
   name: z.string(),
@@ -136,9 +123,7 @@ export type SubmitCollectBulkResponseBody1 = {
 };
 
 export const SubmitCollectBulkResponseBody1$zodSchema: z.ZodType<
-  SubmitCollectBulkResponseBody1,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectBulkResponseBody1
 > = z.object({
   error: z.lazy(() => SubmitCollectBulkError1$zodSchema),
   success: z.boolean(),
@@ -152,36 +137,43 @@ export type SubmitCollectBulkResponseBody =
   | SubmitCollectBulkResponseBody2;
 
 export const SubmitCollectBulkResponseBody$zodSchema: z.ZodType<
-  SubmitCollectBulkResponseBody,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectBulkResponseBody
 > = z.union([
   z.lazy(() => SubmitCollectBulkResponseBody1$zodSchema),
   z.lazy(() => SubmitCollectBulkResponseBody2$zodSchema),
 ]).describe("The validation error(s)");
 
+export const SubmitCollectBulkRequestEntityTooLargeStatusCode = {
+  FourHundredAndThirteen: 413,
+} as const;
+export type SubmitCollectBulkRequestEntityTooLargeStatusCode = ClosedEnum<
+  typeof SubmitCollectBulkRequestEntityTooLargeStatusCode
+>;
+
 export const SubmitCollectBulkRequestEntityTooLargeStatusCode$zodSchema = z
   .literal(413);
 
-export type SubmitCollectBulkRequestEntityTooLargeStatusCode = z.infer<
-  typeof SubmitCollectBulkRequestEntityTooLargeStatusCode$zodSchema
+export const SubmitCollectBulkRequestEntityTooLargeType = {
+  BadRequest: "bad_request",
+} as const;
+export type SubmitCollectBulkRequestEntityTooLargeType = ClosedEnum<
+  typeof SubmitCollectBulkRequestEntityTooLargeType
 >;
 
 export const SubmitCollectBulkRequestEntityTooLargeType$zodSchema = z.enum([
   "bad_request",
 ]);
 
-export type SubmitCollectBulkRequestEntityTooLargeType = z.infer<
-  typeof SubmitCollectBulkRequestEntityTooLargeType$zodSchema
+export const SubmitCollectBulkRequestEntityTooLargeCode = {
+  PayloadTooLarge: "payload_too_large",
+} as const;
+export type SubmitCollectBulkRequestEntityTooLargeCode = ClosedEnum<
+  typeof SubmitCollectBulkRequestEntityTooLargeCode
 >;
 
 export const SubmitCollectBulkRequestEntityTooLargeCode$zodSchema = z.enum([
   "payload_too_large",
 ]);
-
-export type SubmitCollectBulkRequestEntityTooLargeCode = z.infer<
-  typeof SubmitCollectBulkRequestEntityTooLargeCode$zodSchema
->;
 
 /**
  * Payload too large
@@ -194,38 +186,43 @@ export type SubmitCollectBulkRequestEntityTooLargeResponseBody = {
 };
 
 export const SubmitCollectBulkRequestEntityTooLargeResponseBody$zodSchema:
-  z.ZodType<
-    SubmitCollectBulkRequestEntityTooLargeResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
+  z.ZodType<SubmitCollectBulkRequestEntityTooLargeResponseBody> = z.object({
     code: SubmitCollectBulkRequestEntityTooLargeCode$zodSchema,
     message: z.string(),
     status_code: SubmitCollectBulkRequestEntityTooLargeStatusCode$zodSchema,
     type: SubmitCollectBulkRequestEntityTooLargeType$zodSchema,
   }).describe("Payload too large");
 
+export const SubmitCollectBulkNotFoundStatusCode = {
+  FourHundredAndFour: 404,
+} as const;
+export type SubmitCollectBulkNotFoundStatusCode = ClosedEnum<
+  typeof SubmitCollectBulkNotFoundStatusCode
+>;
+
 export const SubmitCollectBulkNotFoundStatusCode$zodSchema = z.literal(404);
 
-export type SubmitCollectBulkNotFoundStatusCode = z.infer<
-  typeof SubmitCollectBulkNotFoundStatusCode$zodSchema
+export const SubmitCollectBulkNotFoundType = {
+  NotFound: "not_found",
+} as const;
+export type SubmitCollectBulkNotFoundType = ClosedEnum<
+  typeof SubmitCollectBulkNotFoundType
 >;
 
 export const SubmitCollectBulkNotFoundType$zodSchema = z.enum([
   "not_found",
 ]);
 
-export type SubmitCollectBulkNotFoundType = z.infer<
-  typeof SubmitCollectBulkNotFoundType$zodSchema
+export const SubmitCollectBulkNotFoundCode = {
+  CollectTokenNotFound: "collect_token_not_found",
+} as const;
+export type SubmitCollectBulkNotFoundCode = ClosedEnum<
+  typeof SubmitCollectBulkNotFoundCode
 >;
 
 export const SubmitCollectBulkNotFoundCode$zodSchema = z.enum([
   "collect_token_not_found",
 ]);
-
-export type SubmitCollectBulkNotFoundCode = z.infer<
-  typeof SubmitCollectBulkNotFoundCode$zodSchema
->;
 
 /**
  * Collect session not found. The token may be invalid or revoked.
@@ -238,9 +235,7 @@ export type SubmitCollectBulkNotFoundResponseBody = {
 };
 
 export const SubmitCollectBulkNotFoundResponseBody$zodSchema: z.ZodType<
-  SubmitCollectBulkNotFoundResponseBody,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectBulkNotFoundResponseBody
 > = z.object({
   code: SubmitCollectBulkNotFoundCode$zodSchema,
   message: z.string(),
@@ -258,9 +253,7 @@ export type SubmitCollectBulkResponse =
   | SubmitCollectBulkResponseBody2;
 
 export const SubmitCollectBulkResponse$zodSchema: z.ZodType<
-  SubmitCollectBulkResponse,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectBulkResponse
 > = z.union([
   z.lazy(() => SubmitCollectBulkNotFoundResponseBody$zodSchema),
   BadRequest$zodSchema,

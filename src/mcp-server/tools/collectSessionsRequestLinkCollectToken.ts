@@ -18,6 +18,7 @@ export const tool$collectSessionsRequestLinkCollectToken: ToolDefinition<
 
 Sends the current active link when possible, or creates a new session for an expired token. Always returns 202 to prevent enumeration.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

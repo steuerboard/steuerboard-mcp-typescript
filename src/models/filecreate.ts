@@ -3,15 +3,14 @@
  */
 
 import * as z from "zod";
+import * as b64$ from "../lib/base64.js";
 
 export type FileCreateFile = { fileName: string; content: Uint8Array | string };
 
-export const FileCreateFile$zodSchema: z.ZodType<
-  FileCreateFile,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  content: z.string().base64(),
+export const FileCreateFile$zodSchema: z.ZodType<FileCreateFile> = z.object({
+  content: z.string().describe("Base64-encoded binary content").transform(
+    b64$.bytesFromBase64,
+  ),
   fileName: z.string(),
 });
 
@@ -24,15 +23,17 @@ export type FileCreate = {
   taskId?: string | undefined;
 };
 
-export const FileCreate$zodSchema: z.ZodType<
-  FileCreate,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  file: z.lazy(() => FileCreateFile$zodSchema),
-  folderId: z.string().optional(),
-  labelIds: z.array(z.string()).optional(),
-  name: z.string().optional(),
-  taskId: z.string().optional(),
-  workspaceId: z.string(),
+export const FileCreate$zodSchema: z.ZodType<FileCreate> = z.object({
+  file: z.lazy(() => FileCreateFile$zodSchema).describe("The file to upload"),
+  folderId: z.string().optional().describe(
+    "The ID of the folder to upload the file to",
+  ),
+  labelIds: z.array(z.string()).optional().describe(
+    "The IDs of the labels to add to the file",
+  ),
+  name: z.string().optional().describe("The name of the file"),
+  taskId: z.string().optional().describe(
+    "The ID of the task to upload this file to.",
+  ),
+  workspaceId: z.string().describe("The ID of the workspace"),
 });

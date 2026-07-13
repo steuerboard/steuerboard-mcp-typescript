@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { FileT, FileT$zodSchema } from "./file.js";
 import { FileUpdate, FileUpdate$zodSchema } from "./fileupdate.js";
@@ -14,23 +15,16 @@ export type UpdateFileRequest = {
   FileUpdate: FileUpdate;
 };
 
-export const UpdateFileRequest$zodSchema: z.ZodType<
-  UpdateFileRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  FileUpdate: FileUpdate$zodSchema,
-  id: z.string(),
-  xClientId: z.string(),
-});
+export const UpdateFileRequest$zodSchema: z.ZodType<UpdateFileRequest> = z
+  .object({
+    FileUpdate: FileUpdate$zodSchema.describe("File update"),
+    id: z.string(),
+    xClientId: z.string(),
+  });
 
 export type UpdateFilePath2 = string | number;
 
-export const UpdateFilePath2$zodSchema: z.ZodType<
-  UpdateFilePath2,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
+export const UpdateFilePath2$zodSchema: z.ZodType<UpdateFilePath2> = z.union([
   z.string(),
   z.number(),
 ]);
@@ -41,32 +35,28 @@ export type UpdateFileIssue2 = {
   message?: string | undefined;
 };
 
-export const UpdateFileIssue2$zodSchema: z.ZodType<
-  UpdateFileIssue2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  code: z.string(),
-  message: z.string().optional(),
-  path: z.array(z.union([
-    z.string(),
-    z.number(),
-  ])),
-});
+export const UpdateFileIssue2$zodSchema: z.ZodType<UpdateFileIssue2> = z.object(
+  {
+    code: z.string(),
+    message: z.string().optional(),
+    path: z.array(z.union([
+      z.string(),
+      z.number(),
+    ])),
+  },
+);
 
 export type UpdateFileError2 = {
   issues: Array<UpdateFileIssue2>;
   name: string;
 };
 
-export const UpdateFileError2$zodSchema: z.ZodType<
-  UpdateFileError2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  issues: z.array(z.lazy(() => UpdateFileIssue2$zodSchema)),
-  name: z.string(),
-});
+export const UpdateFileError2$zodSchema: z.ZodType<UpdateFileError2> = z.object(
+  {
+    issues: z.array(z.lazy(() => UpdateFileIssue2$zodSchema)),
+    name: z.string(),
+  },
+);
 
 export type UpdateFileResponseBody2 = {
   success: boolean;
@@ -74,9 +64,7 @@ export type UpdateFileResponseBody2 = {
 };
 
 export const UpdateFileResponseBody2$zodSchema: z.ZodType<
-  UpdateFileResponseBody2,
-  z.ZodTypeDef,
-  unknown
+  UpdateFileResponseBody2
 > = z.object({
   error: z.lazy(() => UpdateFileError2$zodSchema),
   success: z.boolean(),
@@ -84,11 +72,7 @@ export const UpdateFileResponseBody2$zodSchema: z.ZodType<
 
 export type UpdateFilePath1 = string | number;
 
-export const UpdateFilePath1$zodSchema: z.ZodType<
-  UpdateFilePath1,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
+export const UpdateFilePath1$zodSchema: z.ZodType<UpdateFilePath1> = z.union([
   z.string(),
   z.number(),
 ]);
@@ -99,32 +83,28 @@ export type UpdateFileIssue1 = {
   message?: string | undefined;
 };
 
-export const UpdateFileIssue1$zodSchema: z.ZodType<
-  UpdateFileIssue1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  code: z.string(),
-  message: z.string().optional(),
-  path: z.array(z.union([
-    z.string(),
-    z.number(),
-  ])),
-});
+export const UpdateFileIssue1$zodSchema: z.ZodType<UpdateFileIssue1> = z.object(
+  {
+    code: z.string(),
+    message: z.string().optional(),
+    path: z.array(z.union([
+      z.string(),
+      z.number(),
+    ])),
+  },
+);
 
 export type UpdateFileError1 = {
   issues: Array<UpdateFileIssue1>;
   name: string;
 };
 
-export const UpdateFileError1$zodSchema: z.ZodType<
-  UpdateFileError1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  issues: z.array(z.lazy(() => UpdateFileIssue1$zodSchema)),
-  name: z.string(),
-});
+export const UpdateFileError1$zodSchema: z.ZodType<UpdateFileError1> = z.object(
+  {
+    issues: z.array(z.lazy(() => UpdateFileIssue1$zodSchema)),
+    name: z.string(),
+  },
+);
 
 export type UpdateFileResponseBody1 = {
   success: boolean;
@@ -132,9 +112,7 @@ export type UpdateFileResponseBody1 = {
 };
 
 export const UpdateFileResponseBody1$zodSchema: z.ZodType<
-  UpdateFileResponseBody1,
-  z.ZodTypeDef,
-  unknown
+  UpdateFileResponseBody1
 > = z.object({
   error: z.lazy(() => UpdateFileError1$zodSchema),
   success: z.boolean(),
@@ -148,9 +126,7 @@ export type UpdateFileResponseBody =
   | UpdateFileResponseBody2;
 
 export const UpdateFileResponseBody$zodSchema: z.ZodType<
-  UpdateFileResponseBody,
-  z.ZodTypeDef,
-  unknown
+  UpdateFileResponseBody
 > = z.union([
   z.lazy(() => UpdateFileResponseBody1$zodSchema),
   z.lazy(() => UpdateFileResponseBody2$zodSchema),
@@ -162,34 +138,41 @@ export const UpdateFileResponseBody$zodSchema: z.ZodType<
 export type UpdateFileNotFoundResponseBody = { message: string };
 
 export const UpdateFileNotFoundResponseBody$zodSchema: z.ZodType<
-  UpdateFileNotFoundResponseBody,
-  z.ZodTypeDef,
-  unknown
+  UpdateFileNotFoundResponseBody
 > = z.object({
   message: z.string(),
 }).describe("File not found");
 
+export const UpdateFileForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type UpdateFileForbiddenStatusCode = ClosedEnum<
+  typeof UpdateFileForbiddenStatusCode
+>;
+
 export const UpdateFileForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type UpdateFileForbiddenStatusCode = z.infer<
-  typeof UpdateFileForbiddenStatusCode$zodSchema
+export const UpdateFileForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type UpdateFileForbiddenType = ClosedEnum<
+  typeof UpdateFileForbiddenType
 >;
 
 export const UpdateFileForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type UpdateFileForbiddenType = z.infer<
-  typeof UpdateFileForbiddenType$zodSchema
+export const UpdateFileForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type UpdateFileForbiddenCode = ClosedEnum<
+  typeof UpdateFileForbiddenCode
 >;
 
 export const UpdateFileForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
-
-export type UpdateFileForbiddenCode = z.infer<
-  typeof UpdateFileForbiddenCode$zodSchema
->;
 
 /**
  * Missing scope
@@ -202,9 +185,7 @@ export type UpdateFileForbiddenResponseBody = {
 };
 
 export const UpdateFileForbiddenResponseBody$zodSchema: z.ZodType<
-  UpdateFileForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  UpdateFileForbiddenResponseBody
 > = z.object({
   code: UpdateFileForbiddenCode$zodSchema,
   message: z.string(),
@@ -212,27 +193,36 @@ export const UpdateFileForbiddenResponseBody$zodSchema: z.ZodType<
   type: UpdateFileForbiddenType$zodSchema,
 }).describe("Missing scope");
 
+export const UpdateFileStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type UpdateFileStatusCode400 = ClosedEnum<
+  typeof UpdateFileStatusCode400
+>;
+
 export const UpdateFileStatusCode400$zodSchema = z.literal(400);
 
-export type UpdateFileStatusCode400 = z.infer<
-  typeof UpdateFileStatusCode400$zodSchema
+export const UpdateFileBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type UpdateFileBadRequestType = ClosedEnum<
+  typeof UpdateFileBadRequestType
 >;
 
 export const UpdateFileBadRequestType$zodSchema = z.enum([
   "bad_request",
 ]);
 
-export type UpdateFileBadRequestType = z.infer<
-  typeof UpdateFileBadRequestType$zodSchema
+export const UpdateFileCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type UpdateFileCodeMissingClientID = ClosedEnum<
+  typeof UpdateFileCodeMissingClientID
 >;
 
 export const UpdateFileCodeMissingClientID$zodSchema = z.enum([
   "missing_client_id",
 ]);
-
-export type UpdateFileCodeMissingClientID = z.infer<
-  typeof UpdateFileCodeMissingClientID$zodSchema
->;
 
 /**
  * Missing client ID
@@ -245,9 +235,7 @@ export type UpdateFileBadRequestResponseBody = {
 };
 
 export const UpdateFileBadRequestResponseBody$zodSchema: z.ZodType<
-  UpdateFileBadRequestResponseBody,
-  z.ZodTypeDef,
-  unknown
+  UpdateFileBadRequestResponseBody
 > = z.object({
   code: UpdateFileCodeMissingClientID$zodSchema,
   message: z.string(),
@@ -265,19 +253,16 @@ export type UpdateFileResponse =
   | UpdateFileResponseBody1
   | UpdateFileResponseBody2;
 
-export const UpdateFileResponse$zodSchema: z.ZodType<
-  UpdateFileResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  FileT$zodSchema,
-  z.lazy(() => UpdateFileBadRequestResponseBody$zodSchema),
-  AuthError$zodSchema,
-  z.lazy(() => UpdateFileForbiddenResponseBody$zodSchema),
-  RateLimit$zodSchema,
-  z.lazy(() => UpdateFileNotFoundResponseBody$zodSchema),
-  z.union([
-    z.lazy(() => UpdateFileResponseBody1$zodSchema),
-    z.lazy(() => UpdateFileResponseBody2$zodSchema),
-  ]),
-]);
+export const UpdateFileResponse$zodSchema: z.ZodType<UpdateFileResponse> = z
+  .union([
+    FileT$zodSchema,
+    z.lazy(() => UpdateFileBadRequestResponseBody$zodSchema),
+    AuthError$zodSchema,
+    z.lazy(() => UpdateFileForbiddenResponseBody$zodSchema),
+    RateLimit$zodSchema,
+    z.lazy(() => UpdateFileNotFoundResponseBody$zodSchema),
+    z.union([
+      z.lazy(() => UpdateFileResponseBody1$zodSchema),
+      z.lazy(() => UpdateFileResponseBody2$zodSchema),
+    ]),
+  ]);

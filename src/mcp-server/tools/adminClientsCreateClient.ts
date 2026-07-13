@@ -7,7 +7,7 @@ import { ClientCreate$zodSchema } from "../../models/clientcreate.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
-  request: ClientCreate$zodSchema,
+  request: ClientCreate$zodSchema.describe(`Client create`),
 };
 
 export const tool$adminClientsCreateClient: ToolDefinition<typeof args> = {
@@ -16,6 +16,7 @@ export const tool$adminClientsCreateClient: ToolDefinition<typeof args> = {
 
 Creates a new client for the accountant and returns the created client.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

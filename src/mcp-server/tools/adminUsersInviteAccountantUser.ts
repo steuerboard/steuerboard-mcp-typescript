@@ -7,7 +7,7 @@ import { InviteAccountantUser$zodSchema } from "../../models/inviteaccountantuse
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
-  request: InviteAccountantUser$zodSchema,
+  request: InviteAccountantUser$zodSchema.describe(`Invite accountant user`),
 };
 
 export const tool$adminUsersInviteAccountantUser: ToolDefinition<typeof args> =
@@ -17,6 +17,7 @@ export const tool$adminUsersInviteAccountantUser: ToolDefinition<typeof args> =
 
 Invites a new accountant user and returns the created record.`,
     annotations: {
+      "title": "",
       "destructiveHint": false,
       "idempotentHint": false,
       "openWorldHint": false,

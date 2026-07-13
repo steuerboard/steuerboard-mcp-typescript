@@ -3,6 +3,18 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
+
+export const CollectSessionByTokenStatus = {
+  Created: "created",
+  Active: "active",
+  PendingReview: "pending_review",
+  Completed: "completed",
+  Cancelled: "cancelled",
+} as const;
+export type CollectSessionByTokenStatus = ClosedEnum<
+  typeof CollectSessionByTokenStatus
+>;
 
 export const CollectSessionByTokenStatus$zodSchema = z.enum([
   "created",
@@ -12,15 +24,14 @@ export const CollectSessionByTokenStatus$zodSchema = z.enum([
   "cancelled",
 ]);
 
-export type CollectSessionByTokenStatus = z.infer<
-  typeof CollectSessionByTokenStatus$zodSchema
->;
+export const Channel = {
+  CollectUi: "collectUi",
+} as const;
+export type Channel = ClosedEnum<typeof Channel>;
 
 export const Channel$zodSchema = z.enum([
   "collectUi",
 ]);
-
-export type Channel = z.infer<typeof Channel$zodSchema>;
 
 export type ChannelConfig = {
   channel: Channel;
@@ -31,11 +42,7 @@ export type ChannelConfig = {
   locale?: string | undefined;
 };
 
-export const ChannelConfig$zodSchema: z.ZodType<
-  ChannelConfig,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const ChannelConfig$zodSchema: z.ZodType<ChannelConfig> = z.object({
   brandingColor: z.string().optional(),
   channel: Channel$zodSchema,
   locale: z.string().default("de"),
@@ -44,13 +51,28 @@ export const ChannelConfig$zodSchema: z.ZodType<
   submitButtonLabel: z.string().default("Submit"),
 });
 
+export const EvaluationMode = {
+  Individual: "individual",
+  Batch: "batch",
+  BulkMatch: "bulk_match",
+} as const;
+export type EvaluationMode = ClosedEnum<typeof EvaluationMode>;
+
 export const EvaluationMode$zodSchema = z.enum([
   "individual",
   "batch",
   "bulk_match",
 ]);
 
-export type EvaluationMode = z.infer<typeof EvaluationMode$zodSchema>;
+export const CollectSessionByTokenType = {
+  FileUpload: "file_upload",
+  FormField: "form_field",
+  Signature: "signature",
+  Confirmation: "confirmation",
+} as const;
+export type CollectSessionByTokenType = ClosedEnum<
+  typeof CollectSessionByTokenType
+>;
 
 export const CollectSessionByTokenType$zodSchema = z.enum([
   "file_upload",
@@ -59,9 +81,13 @@ export const CollectSessionByTokenType$zodSchema = z.enum([
   "confirmation",
 ]);
 
-export type CollectSessionByTokenType = z.infer<
-  typeof CollectSessionByTokenType$zodSchema
->;
+export const ItemStatus = {
+  Pending: "pending",
+  Submitted: "submitted",
+  Fulfilled: "fulfilled",
+  Rejected: "rejected",
+} as const;
+export type ItemStatus = ClosedEnum<typeof ItemStatus>;
 
 export const ItemStatus$zodSchema = z.enum([
   "pending",
@@ -70,13 +96,14 @@ export const ItemStatus$zodSchema = z.enum([
   "rejected",
 ]);
 
-export type ItemStatus = z.infer<typeof ItemStatus$zodSchema>;
+export const TypeConfirmation = {
+  Confirmation: "confirmation",
+} as const;
+export type TypeConfirmation = ClosedEnum<typeof TypeConfirmation>;
 
 export const TypeConfirmation$zodSchema = z.enum([
   "confirmation",
 ]);
-
-export type TypeConfirmation = z.infer<typeof TypeConfirmation$zodSchema>;
 
 export type ConfigConfirmation = {
   type: TypeConfirmation;
@@ -84,21 +111,21 @@ export type ConfigConfirmation = {
   requiresExplicitConsent?: boolean | undefined;
 };
 
-export const ConfigConfirmation$zodSchema: z.ZodType<
-  ConfigConfirmation,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  confirmationText: z.string(),
-  requiresExplicitConsent: z.boolean().default(true),
-  type: TypeConfirmation$zodSchema,
-});
+export const ConfigConfirmation$zodSchema: z.ZodType<ConfigConfirmation> = z
+  .object({
+    confirmationText: z.string(),
+    requiresExplicitConsent: z.boolean().default(true),
+    type: TypeConfirmation$zodSchema,
+  });
+
+export const TypeSignature = {
+  Signature: "signature",
+} as const;
+export type TypeSignature = ClosedEnum<typeof TypeSignature>;
 
 export const TypeSignature$zodSchema = z.enum([
   "signature",
 ]);
-
-export type TypeSignature = z.infer<typeof TypeSignature$zodSchema>;
 
 export type ConfigSignature = {
   type: TypeSignature;
@@ -107,38 +134,32 @@ export type ConfigSignature = {
   documentRef?: string | undefined;
 };
 
-export const ConfigSignature$zodSchema: z.ZodType<
-  ConfigSignature,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const ConfigSignature$zodSchema: z.ZodType<ConfigSignature> = z.object({
   documentRef: z.string().optional(),
   signerEmail: z.string().optional(),
   signerName: z.string(),
   type: TypeSignature$zodSchema,
 });
 
+export const TypeFileUpload = {
+  FileUpload: "fileUpload",
+} as const;
+export type TypeFileUpload = ClosedEnum<typeof TypeFileUpload>;
+
 export const TypeFileUpload$zodSchema = z.enum([
   "fileUpload",
 ]);
 
-export type TypeFileUpload = z.infer<typeof TypeFileUpload$zodSchema>;
-
 export type FileCount = { min?: number | undefined; max?: number | undefined };
 
-export const FileCount$zodSchema: z.ZodType<FileCount, z.ZodTypeDef, unknown> =
-  z.object({
-    max: z.number().int().optional(),
-    min: z.number().int().default(1),
-  });
+export const FileCount$zodSchema: z.ZodType<FileCount> = z.object({
+  max: z.int().optional(),
+  min: z.int().default(1),
+});
 
 export type MatchingHints = string | number;
 
-export const MatchingHints$zodSchema: z.ZodType<
-  MatchingHints,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
+export const MatchingHints$zodSchema: z.ZodType<MatchingHints> = z.union([
   z.string(),
   z.number(),
 ]);
@@ -151,26 +172,44 @@ export type ConfigFileUpload = {
   matchingHints?: { [k: string]: string | number } | undefined;
 };
 
-export const ConfigFileUpload$zodSchema: z.ZodType<
-  ConfigFileUpload,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  acceptedFileTypes: z.array(z.string()).optional(),
-  fileCount: z.lazy(() => FileCount$zodSchema).optional(),
-  matchingHints: z.record(z.union([
-    z.string(),
-    z.number(),
-  ])).optional(),
-  maxFileSizeMb: z.number().default(25),
-  type: TypeFileUpload$zodSchema,
-});
+export const ConfigFileUpload$zodSchema: z.ZodType<ConfigFileUpload> = z.object(
+  {
+    acceptedFileTypes: z.array(z.string()).optional(),
+    fileCount: z.lazy(() => FileCount$zodSchema).optional(),
+    matchingHints: z.record(
+      z.string(),
+      z.union([
+        z.string(),
+        z.number(),
+      ]),
+    ).optional(),
+    maxFileSizeMb: z.number().default(25),
+    type: TypeFileUpload$zodSchema,
+  },
+);
+
+export const TypeFormField = {
+  FormField: "formField",
+} as const;
+export type TypeFormField = ClosedEnum<typeof TypeFormField>;
 
 export const TypeFormField$zodSchema = z.enum([
   "formField",
 ]);
 
-export type TypeFormField = z.infer<typeof TypeFormField$zodSchema>;
+export const FieldType = {
+  Text: "text",
+  Number: "number",
+  Date: "date",
+  Select: "select",
+  MultiSelect: "multiSelect",
+  Address: "address",
+  Phone: "phone",
+  Email: "email",
+  TaxId: "taxId",
+  Iban: "iban",
+} as const;
+export type FieldType = ClosedEnum<typeof FieldType>;
 
 export const FieldType$zodSchema = z.enum([
   "text",
@@ -185,7 +224,15 @@ export const FieldType$zodSchema = z.enum([
   "iban",
 ]);
 
-export type FieldType = z.infer<typeof FieldType$zodSchema>;
+export const FieldValidationType = {
+  Regex: "regex",
+  Min: "min",
+  Max: "max",
+  MinLength: "minLength",
+  MaxLength: "maxLength",
+  Custom: "custom",
+} as const;
+export type FieldValidationType = ClosedEnum<typeof FieldValidationType>;
 
 export const FieldValidationType$zodSchema = z.enum([
   "regex",
@@ -196,16 +243,12 @@ export const FieldValidationType$zodSchema = z.enum([
   "custom",
 ]);
 
-export type FieldValidationType = z.infer<typeof FieldValidationType$zodSchema>;
-
 export type Value = string | number;
 
-export const Value$zodSchema: z.ZodType<Value, z.ZodTypeDef, unknown> = z.union(
-  [
-    z.string(),
-    z.number(),
-  ],
-);
+export const Value$zodSchema: z.ZodType<Value> = z.union([
+  z.string(),
+  z.number(),
+]);
 
 export type FieldValidation = {
   type: FieldValidationType;
@@ -213,11 +256,7 @@ export type FieldValidation = {
   message?: string | undefined;
 };
 
-export const FieldValidation$zodSchema: z.ZodType<
-  FieldValidation,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const FieldValidation$zodSchema: z.ZodType<FieldValidation> = z.object({
   message: z.string().optional(),
   type: FieldValidationType$zodSchema,
   value: z.union([
@@ -226,13 +265,18 @@ export const FieldValidation$zodSchema: z.ZodType<
   ]),
 });
 
+export const Condition = {
+  Equals: "equals",
+  NotEmpty: "notEmpty",
+  NotEquals: "notEquals",
+} as const;
+export type Condition = ClosedEnum<typeof Condition>;
+
 export const Condition$zodSchema = z.enum([
   "equals",
   "notEmpty",
   "notEquals",
 ]);
-
-export type Condition = z.infer<typeof Condition$zodSchema>;
 
 export type FieldDependsOn = {
   collectItemId: string;
@@ -240,11 +284,7 @@ export type FieldDependsOn = {
   value?: string | undefined;
 };
 
-export const FieldDependsOn$zodSchema: z.ZodType<
-  FieldDependsOn,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const FieldDependsOn$zodSchema: z.ZodType<FieldDependsOn> = z.object({
   collectItemId: z.string(),
   condition: Condition$zodSchema,
   value: z.string().optional(),
@@ -260,11 +300,7 @@ export type ConfigFormField = {
   fieldDependsOn?: FieldDependsOn | undefined;
 };
 
-export const ConfigFormField$zodSchema: z.ZodType<
-  ConfigFormField,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const ConfigFormField$zodSchema: z.ZodType<ConfigFormField> = z.object({
   fieldDependsOn: z.lazy(() => FieldDependsOn$zodSchema).optional(),
   fieldOptions: z.array(z.string()).optional(),
   fieldPlaceholder: z.string().optional(),
@@ -280,13 +316,12 @@ export type Config =
   | ConfigConfirmation
   | ConfigFileUpload;
 
-export const Config$zodSchema: z.ZodType<Config, z.ZodTypeDef, unknown> = z
-  .union([
-    z.lazy(() => ConfigFormField$zodSchema),
-    z.lazy(() => ConfigSignature$zodSchema),
-    z.lazy(() => ConfigConfirmation$zodSchema),
-    z.lazy(() => ConfigFileUpload$zodSchema),
-  ]);
+export const Config$zodSchema: z.ZodType<Config> = z.union([
+  z.lazy(() => ConfigFormField$zodSchema),
+  z.lazy(() => ConfigSignature$zodSchema),
+  z.lazy(() => ConfigConfirmation$zodSchema),
+  z.lazy(() => ConfigFileUpload$zodSchema),
+]);
 
 export type ItemSubmission = {
   id: string;
@@ -296,11 +331,7 @@ export type ItemSubmission = {
   rejectionReason: string | null;
 };
 
-export const ItemSubmission$zodSchema: z.ZodType<
-  ItemSubmission,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const ItemSubmission$zodSchema: z.ZodType<ItemSubmission> = z.object({
   fileName: z.string().nullable(),
   fileSize: z.number().nullable(),
   id: z.string(),
@@ -323,7 +354,7 @@ export type Item = {
   submissions: Array<ItemSubmission>;
 };
 
-export const Item$zodSchema: z.ZodType<Item, z.ZodTypeDef, unknown> = z.object({
+export const Item$zodSchema: z.ZodType<Item> = z.object({
   config: z.union([
     z.lazy(() => ConfigFormField$zodSchema),
     z.lazy(() => ConfigSignature$zodSchema),
@@ -333,7 +364,7 @@ export const Item$zodSchema: z.ZodType<Item, z.ZodTypeDef, unknown> = z.object({
   description: z.string(),
   groupId: z.string().nullable(),
   id: z.string(),
-  sortOrder: z.number().int(),
+  sortOrder: z.int(),
   status: ItemStatus$zodSchema,
   submissions: z.array(z.lazy(() => ItemSubmission$zodSchema)),
   type: CollectSessionByTokenType$zodSchema,
@@ -348,9 +379,7 @@ export type CollectSessionByTokenSubmission = {
 };
 
 export const CollectSessionByTokenSubmission$zodSchema: z.ZodType<
-  CollectSessionByTokenSubmission,
-  z.ZodTypeDef,
-  unknown
+  CollectSessionByTokenSubmission
 > = z.object({
   fileName: z.string().nullable(),
   fileSize: z.number().nullable(),
@@ -367,17 +396,14 @@ export type SubmissionSummary = {
   proposed: number;
 };
 
-export const SubmissionSummary$zodSchema: z.ZodType<
-  SubmissionSummary,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  matched: z.number().int(),
-  pending: z.number().int(),
-  processing: z.number().int(),
-  proposed: z.number().int(),
-  total: z.number().int(),
-});
+export const SubmissionSummary$zodSchema: z.ZodType<SubmissionSummary> = z
+  .object({
+    matched: z.int(),
+    pending: z.int(),
+    processing: z.int(),
+    proposed: z.int(),
+    total: z.int(),
+  });
 
 export type Group = {
   id: string;
@@ -393,22 +419,20 @@ export type Group = {
   submissionSummary?: SubmissionSummary | undefined;
 };
 
-export const Group$zodSchema: z.ZodType<Group, z.ZodTypeDef, unknown> = z
-  .object({
-    description: z.string().nullable(),
-    evaluationMode: EvaluationMode$zodSchema,
-    id: z.string(),
-    items: z.array(z.lazy(() => Item$zodSchema)),
-    label: z.string(),
-    maxInstances: z.number().int().nullable(),
-    minInstances: z.number().int(),
-    repeatable: z.boolean(),
-    sortOrder: z.number().int(),
-    submissionSummary: z.lazy(() => SubmissionSummary$zodSchema).optional(),
-    submissions: z.array(
-      z.lazy(() => CollectSessionByTokenSubmission$zodSchema),
-    ).optional(),
-  });
+export const Group$zodSchema: z.ZodType<Group> = z.object({
+  description: z.string().nullable(),
+  evaluationMode: EvaluationMode$zodSchema,
+  id: z.string(),
+  items: z.array(z.lazy(() => Item$zodSchema)),
+  label: z.string(),
+  maxInstances: z.int().nullable(),
+  minInstances: z.int(),
+  repeatable: z.boolean(),
+  sortOrder: z.int(),
+  submissionSummary: z.lazy(() => SubmissionSummary$zodSchema).optional(),
+  submissions: z.array(z.lazy(() => CollectSessionByTokenSubmission$zodSchema))
+    .optional(),
+});
 
 export type CollectSessionByToken = {
   id: string;
@@ -418,14 +442,11 @@ export type CollectSessionByToken = {
   groups: Array<Group>;
 };
 
-export const CollectSessionByToken$zodSchema: z.ZodType<
-  CollectSessionByToken,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  channelConfig: z.lazy(() => ChannelConfig$zodSchema),
-  description: z.string(),
-  groups: z.array(z.lazy(() => Group$zodSchema)),
-  id: z.string(),
-  status: CollectSessionByTokenStatus$zodSchema,
-});
+export const CollectSessionByToken$zodSchema: z.ZodType<CollectSessionByToken> =
+  z.object({
+    channelConfig: z.lazy(() => ChannelConfig$zodSchema),
+    description: z.string(),
+    groups: z.array(z.lazy(() => Group$zodSchema)),
+    id: z.string(),
+    status: CollectSessionByTokenStatus$zodSchema,
+  });

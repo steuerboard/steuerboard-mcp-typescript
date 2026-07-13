@@ -13,12 +13,17 @@ export type Workspace = {
   clientId: string;
 };
 
-export const Workspace$zodSchema: z.ZodType<Workspace, z.ZodTypeDef, unknown> =
-  z.object({
-    archivedAt: z.string().datetime({ offset: true }).nullable(),
-    clientId: z.string(),
-    createdAt: z.string().datetime({ offset: true }),
-    id: z.string(),
-    name: z.string(),
-    updatedAt: z.string().datetime({ offset: true }),
-  });
+export const Workspace$zodSchema: z.ZodType<Workspace> = z.object({
+  archivedAt: z.iso.datetime({ offset: true }).nullable().describe(
+    "The date and time the workspace was archived. ISO-8601 format (YYYY-MM-DDTHH:MM:SSZ).",
+  ),
+  clientId: z.string().describe("The ID of the client"),
+  createdAt: z.iso.datetime({ offset: true }).describe(
+    "The date and time of the creation for the workspace. ISO-8601 format (YYYY-MM-DDTHH:MM:SSZ).",
+  ),
+  id: z.string().describe("The ID of the workspace"),
+  name: z.string().describe("The name of the workspace"),
+  updatedAt: z.iso.datetime({ offset: true }).describe(
+    "The date and time of the last update for the workspace. ISO-8601 format (YYYY-MM-DDTHH:MM:SSZ).",
+  ),
+});

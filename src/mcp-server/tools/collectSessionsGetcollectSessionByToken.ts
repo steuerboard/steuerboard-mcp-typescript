@@ -18,6 +18,7 @@ export const tool$collectSessionsGetcollectSessionByToken: ToolDefinition<
 
 Validates the token and returns the Collect-UI session payload if valid.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

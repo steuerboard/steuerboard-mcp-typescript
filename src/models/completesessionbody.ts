@@ -3,10 +3,21 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 
 /**
  * Explicit completion outcome picked by the client: 'complete' (everything provided), 'incomplete' (will provide the rest later), 'incomplete_finished' (cannot provide the rest; clientNote explains).
  */
+export const Outcome = {
+  Complete: "complete",
+  Incomplete: "incomplete",
+  IncompleteFinished: "incomplete_finished",
+} as const;
+/**
+ * Explicit completion outcome picked by the client: 'complete' (everything provided), 'incomplete' (will provide the rest later), 'incomplete_finished' (cannot provide the rest; clientNote explains).
+ */
+export type Outcome = ClosedEnum<typeof Outcome>;
+
 export const Outcome$zodSchema = z.enum([
   "complete",
   "incomplete",
@@ -15,18 +26,15 @@ export const Outcome$zodSchema = z.enum([
   "Explicit completion outcome picked by the client: 'complete' (everything provided), 'incomplete' (will provide the rest later), 'incomplete_finished' (cannot provide the rest; clientNote explains).",
 );
 
-export type Outcome = z.infer<typeof Outcome$zodSchema>;
-
 export type CompleteSessionBody = {
   clientNote?: string | undefined;
   outcome?: Outcome | undefined;
 };
 
-export const CompleteSessionBody$zodSchema: z.ZodType<
-  CompleteSessionBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  clientNote: z.string().optional(),
-  outcome: Outcome$zodSchema.optional(),
-});
+export const CompleteSessionBody$zodSchema: z.ZodType<CompleteSessionBody> = z
+  .object({
+    clientNote: z.string().optional(),
+    outcome: Outcome$zodSchema.optional().describe(
+      "Explicit completion outcome picked by the client: 'complete' (everything provided), 'incomplete' (will provide the rest later), 'incomplete_finished' (cannot provide the rest; clientNote explains).",
+    ),
+  });

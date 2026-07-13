@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 import { Workspace, Workspace$zodSchema } from "./workspace.js";
@@ -17,24 +18,19 @@ export type CreateWorkspaceRequest = {
 };
 
 export const CreateWorkspaceRequest$zodSchema: z.ZodType<
-  CreateWorkspaceRequest,
-  z.ZodTypeDef,
-  unknown
+  CreateWorkspaceRequest
 > = z.object({
-  WorkspaceCreate: WorkspaceCreate$zodSchema,
+  WorkspaceCreate: WorkspaceCreate$zodSchema.describe("Workspace create"),
   xClientId: z.string(),
 });
 
 export type CreateWorkspacePath = string | number;
 
-export const CreateWorkspacePath$zodSchema: z.ZodType<
-  CreateWorkspacePath,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.string(),
-  z.number(),
-]);
+export const CreateWorkspacePath$zodSchema: z.ZodType<CreateWorkspacePath> = z
+  .union([
+    z.string(),
+    z.number(),
+  ]);
 
 export type CreateWorkspaceIssue = {
   code: string;
@@ -42,32 +38,26 @@ export type CreateWorkspaceIssue = {
   message?: string | undefined;
 };
 
-export const CreateWorkspaceIssue$zodSchema: z.ZodType<
-  CreateWorkspaceIssue,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  code: z.string(),
-  message: z.string().optional(),
-  path: z.array(z.union([
-    z.string(),
-    z.number(),
-  ])),
-});
+export const CreateWorkspaceIssue$zodSchema: z.ZodType<CreateWorkspaceIssue> = z
+  .object({
+    code: z.string(),
+    message: z.string().optional(),
+    path: z.array(z.union([
+      z.string(),
+      z.number(),
+    ])),
+  });
 
 export type CreateWorkspaceError = {
   issues: Array<CreateWorkspaceIssue>;
   name: string;
 };
 
-export const CreateWorkspaceError$zodSchema: z.ZodType<
-  CreateWorkspaceError,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  issues: z.array(z.lazy(() => CreateWorkspaceIssue$zodSchema)),
-  name: z.string(),
-});
+export const CreateWorkspaceError$zodSchema: z.ZodType<CreateWorkspaceError> = z
+  .object({
+    issues: z.array(z.lazy(() => CreateWorkspaceIssue$zodSchema)),
+    name: z.string(),
+  });
 
 /**
  * The validation error(s)
@@ -78,36 +68,41 @@ export type CreateWorkspaceUnprocessableEntityResponseBody = {
 };
 
 export const CreateWorkspaceUnprocessableEntityResponseBody$zodSchema:
-  z.ZodType<
-    CreateWorkspaceUnprocessableEntityResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
+  z.ZodType<CreateWorkspaceUnprocessableEntityResponseBody> = z.object({
     error: z.lazy(() => CreateWorkspaceError$zodSchema),
     success: z.boolean(),
   }).describe("The validation error(s)");
 
+export const CreateWorkspaceForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type CreateWorkspaceForbiddenStatusCode = ClosedEnum<
+  typeof CreateWorkspaceForbiddenStatusCode
+>;
+
 export const CreateWorkspaceForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type CreateWorkspaceForbiddenStatusCode = z.infer<
-  typeof CreateWorkspaceForbiddenStatusCode$zodSchema
+export const CreateWorkspaceForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type CreateWorkspaceForbiddenType = ClosedEnum<
+  typeof CreateWorkspaceForbiddenType
 >;
 
 export const CreateWorkspaceForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type CreateWorkspaceForbiddenType = z.infer<
-  typeof CreateWorkspaceForbiddenType$zodSchema
+export const CreateWorkspaceForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type CreateWorkspaceForbiddenCode = ClosedEnum<
+  typeof CreateWorkspaceForbiddenCode
 >;
 
 export const CreateWorkspaceForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
-
-export type CreateWorkspaceForbiddenCode = z.infer<
-  typeof CreateWorkspaceForbiddenCode$zodSchema
->;
 
 /**
  * Missing scope
@@ -120,9 +115,7 @@ export type CreateWorkspaceForbiddenResponseBody = {
 };
 
 export const CreateWorkspaceForbiddenResponseBody$zodSchema: z.ZodType<
-  CreateWorkspaceForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  CreateWorkspaceForbiddenResponseBody
 > = z.object({
   code: CreateWorkspaceForbiddenCode$zodSchema,
   message: z.string(),
@@ -130,27 +123,36 @@ export const CreateWorkspaceForbiddenResponseBody$zodSchema: z.ZodType<
   type: CreateWorkspaceForbiddenType$zodSchema,
 }).describe("Missing scope");
 
+export const CreateWorkspaceStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type CreateWorkspaceStatusCode400 = ClosedEnum<
+  typeof CreateWorkspaceStatusCode400
+>;
+
 export const CreateWorkspaceStatusCode400$zodSchema = z.literal(400);
 
-export type CreateWorkspaceStatusCode400 = z.infer<
-  typeof CreateWorkspaceStatusCode400$zodSchema
+export const CreateWorkspaceBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type CreateWorkspaceBadRequestType = ClosedEnum<
+  typeof CreateWorkspaceBadRequestType
 >;
 
 export const CreateWorkspaceBadRequestType$zodSchema = z.enum([
   "bad_request",
 ]);
 
-export type CreateWorkspaceBadRequestType = z.infer<
-  typeof CreateWorkspaceBadRequestType$zodSchema
+export const CreateWorkspaceCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type CreateWorkspaceCodeMissingClientID = ClosedEnum<
+  typeof CreateWorkspaceCodeMissingClientID
 >;
 
 export const CreateWorkspaceCodeMissingClientID$zodSchema = z.enum([
   "missing_client_id",
 ]);
-
-export type CreateWorkspaceCodeMissingClientID = z.infer<
-  typeof CreateWorkspaceCodeMissingClientID$zodSchema
->;
 
 /**
  * Missing client ID
@@ -163,9 +165,7 @@ export type CreateWorkspaceBadRequestResponseBody = {
 };
 
 export const CreateWorkspaceBadRequestResponseBody$zodSchema: z.ZodType<
-  CreateWorkspaceBadRequestResponseBody,
-  z.ZodTypeDef,
-  unknown
+  CreateWorkspaceBadRequestResponseBody
 > = z.object({
   code: CreateWorkspaceCodeMissingClientID$zodSchema,
   message: z.string(),
@@ -182,9 +182,7 @@ export type CreateWorkspaceResponse =
   | CreateWorkspaceUnprocessableEntityResponseBody;
 
 export const CreateWorkspaceResponse$zodSchema: z.ZodType<
-  CreateWorkspaceResponse,
-  z.ZodTypeDef,
-  unknown
+  CreateWorkspaceResponse
 > = z.union([
   Workspace$zodSchema,
   z.lazy(() => CreateWorkspaceBadRequestResponseBody$zodSchema),
