@@ -3,22 +3,32 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
+
+export const RateLimitStatusCode = {
+  FourHundredAndTwentyNine: 429,
+} as const;
+export type RateLimitStatusCode = ClosedEnum<typeof RateLimitStatusCode>;
 
 export const RateLimitStatusCode$zodSchema = z.literal(429);
 
-export type RateLimitStatusCode = z.infer<typeof RateLimitStatusCode$zodSchema>;
+export const RateLimitType = {
+  RateLimit: "rate_limit",
+} as const;
+export type RateLimitType = ClosedEnum<typeof RateLimitType>;
 
 export const RateLimitType$zodSchema = z.enum([
   "rate_limit",
 ]);
 
-export type RateLimitType = z.infer<typeof RateLimitType$zodSchema>;
+export const RateLimitCode = {
+  TooManyRequests: "too_many_requests",
+} as const;
+export type RateLimitCode = ClosedEnum<typeof RateLimitCode>;
 
 export const RateLimitCode$zodSchema = z.enum([
   "too_many_requests",
 ]);
-
-export type RateLimitCode = z.infer<typeof RateLimitCode$zodSchema>;
 
 export type RateLimit = {
   status_code: RateLimitStatusCode;
@@ -27,10 +37,9 @@ export type RateLimit = {
   message: string;
 };
 
-export const RateLimit$zodSchema: z.ZodType<RateLimit, z.ZodTypeDef, unknown> =
-  z.object({
-    code: RateLimitCode$zodSchema,
-    message: z.string(),
-    status_code: RateLimitStatusCode$zodSchema,
-    type: RateLimitType$zodSchema,
-  });
+export const RateLimit$zodSchema: z.ZodType<RateLimit> = z.object({
+  code: RateLimitCode$zodSchema,
+  message: z.string(),
+  status_code: RateLimitStatusCode$zodSchema,
+  type: RateLimitType$zodSchema,
+});

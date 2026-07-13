@@ -3,24 +3,32 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
+
+export const BadRequestStatusCode = {
+  FourHundredAndTen: 410,
+} as const;
+export type BadRequestStatusCode = ClosedEnum<typeof BadRequestStatusCode>;
 
 export const BadRequestStatusCode$zodSchema = z.literal(410);
 
-export type BadRequestStatusCode = z.infer<
-  typeof BadRequestStatusCode$zodSchema
->;
+export const BadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type BadRequestType = ClosedEnum<typeof BadRequestType>;
 
 export const BadRequestType$zodSchema = z.enum([
   "bad_request",
 ]);
 
-export type BadRequestType = z.infer<typeof BadRequestType$zodSchema>;
+export const BadRequestCode = {
+  CollectTokenExpired: "collect_token_expired",
+} as const;
+export type BadRequestCode = ClosedEnum<typeof BadRequestCode>;
 
 export const BadRequestCode$zodSchema = z.enum([
   "collect_token_expired",
 ]);
-
-export type BadRequestCode = z.infer<typeof BadRequestCode$zodSchema>;
 
 export type BadRequest = {
   status_code: BadRequestStatusCode;
@@ -29,11 +37,7 @@ export type BadRequest = {
   message: string;
 };
 
-export const BadRequest$zodSchema: z.ZodType<
-  BadRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const BadRequest$zodSchema: z.ZodType<BadRequest> = z.object({
   code: BadRequestCode$zodSchema,
   message: z.string(),
   status_code: BadRequestStatusCode$zodSchema,

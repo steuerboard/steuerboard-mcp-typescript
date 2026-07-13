@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
@@ -19,25 +20,20 @@ export type UpdateWorkspaceRequest = {
 };
 
 export const UpdateWorkspaceRequest$zodSchema: z.ZodType<
-  UpdateWorkspaceRequest,
-  z.ZodTypeDef,
-  unknown
+  UpdateWorkspaceRequest
 > = z.object({
-  WorkspaceUpdate: WorkspaceUpdate$zodSchema,
+  WorkspaceUpdate: WorkspaceUpdate$zodSchema.describe("Workspace update"),
   id: z.string(),
   xClientId: z.string(),
 });
 
 export type UpdateWorkspacePath2 = string | number;
 
-export const UpdateWorkspacePath2$zodSchema: z.ZodType<
-  UpdateWorkspacePath2,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.string(),
-  z.number(),
-]);
+export const UpdateWorkspacePath2$zodSchema: z.ZodType<UpdateWorkspacePath2> = z
+  .union([
+    z.string(),
+    z.number(),
+  ]);
 
 export type UpdateWorkspaceIssue2 = {
   code: string;
@@ -45,32 +41,26 @@ export type UpdateWorkspaceIssue2 = {
   message?: string | undefined;
 };
 
-export const UpdateWorkspaceIssue2$zodSchema: z.ZodType<
-  UpdateWorkspaceIssue2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  code: z.string(),
-  message: z.string().optional(),
-  path: z.array(z.union([
-    z.string(),
-    z.number(),
-  ])),
-});
+export const UpdateWorkspaceIssue2$zodSchema: z.ZodType<UpdateWorkspaceIssue2> =
+  z.object({
+    code: z.string(),
+    message: z.string().optional(),
+    path: z.array(z.union([
+      z.string(),
+      z.number(),
+    ])),
+  });
 
 export type UpdateWorkspaceError2 = {
   issues: Array<UpdateWorkspaceIssue2>;
   name: string;
 };
 
-export const UpdateWorkspaceError2$zodSchema: z.ZodType<
-  UpdateWorkspaceError2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  issues: z.array(z.lazy(() => UpdateWorkspaceIssue2$zodSchema)),
-  name: z.string(),
-});
+export const UpdateWorkspaceError2$zodSchema: z.ZodType<UpdateWorkspaceError2> =
+  z.object({
+    issues: z.array(z.lazy(() => UpdateWorkspaceIssue2$zodSchema)),
+    name: z.string(),
+  });
 
 export type UpdateWorkspaceResponseBody2 = {
   success: boolean;
@@ -78,9 +68,7 @@ export type UpdateWorkspaceResponseBody2 = {
 };
 
 export const UpdateWorkspaceResponseBody2$zodSchema: z.ZodType<
-  UpdateWorkspaceResponseBody2,
-  z.ZodTypeDef,
-  unknown
+  UpdateWorkspaceResponseBody2
 > = z.object({
   error: z.lazy(() => UpdateWorkspaceError2$zodSchema),
   success: z.boolean(),
@@ -88,14 +76,11 @@ export const UpdateWorkspaceResponseBody2$zodSchema: z.ZodType<
 
 export type UpdateWorkspacePath1 = string | number;
 
-export const UpdateWorkspacePath1$zodSchema: z.ZodType<
-  UpdateWorkspacePath1,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.string(),
-  z.number(),
-]);
+export const UpdateWorkspacePath1$zodSchema: z.ZodType<UpdateWorkspacePath1> = z
+  .union([
+    z.string(),
+    z.number(),
+  ]);
 
 export type UpdateWorkspaceIssue1 = {
   code: string;
@@ -103,32 +88,26 @@ export type UpdateWorkspaceIssue1 = {
   message?: string | undefined;
 };
 
-export const UpdateWorkspaceIssue1$zodSchema: z.ZodType<
-  UpdateWorkspaceIssue1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  code: z.string(),
-  message: z.string().optional(),
-  path: z.array(z.union([
-    z.string(),
-    z.number(),
-  ])),
-});
+export const UpdateWorkspaceIssue1$zodSchema: z.ZodType<UpdateWorkspaceIssue1> =
+  z.object({
+    code: z.string(),
+    message: z.string().optional(),
+    path: z.array(z.union([
+      z.string(),
+      z.number(),
+    ])),
+  });
 
 export type UpdateWorkspaceError1 = {
   issues: Array<UpdateWorkspaceIssue1>;
   name: string;
 };
 
-export const UpdateWorkspaceError1$zodSchema: z.ZodType<
-  UpdateWorkspaceError1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  issues: z.array(z.lazy(() => UpdateWorkspaceIssue1$zodSchema)),
-  name: z.string(),
-});
+export const UpdateWorkspaceError1$zodSchema: z.ZodType<UpdateWorkspaceError1> =
+  z.object({
+    issues: z.array(z.lazy(() => UpdateWorkspaceIssue1$zodSchema)),
+    name: z.string(),
+  });
 
 export type UpdateWorkspaceResponseBody1 = {
   success: boolean;
@@ -136,9 +115,7 @@ export type UpdateWorkspaceResponseBody1 = {
 };
 
 export const UpdateWorkspaceResponseBody1$zodSchema: z.ZodType<
-  UpdateWorkspaceResponseBody1,
-  z.ZodTypeDef,
-  unknown
+  UpdateWorkspaceResponseBody1
 > = z.object({
   error: z.lazy(() => UpdateWorkspaceError1$zodSchema),
   success: z.boolean(),
@@ -152,35 +129,42 @@ export type UpdateWorkspaceResponseBody =
   | UpdateWorkspaceResponseBody2;
 
 export const UpdateWorkspaceResponseBody$zodSchema: z.ZodType<
-  UpdateWorkspaceResponseBody,
-  z.ZodTypeDef,
-  unknown
+  UpdateWorkspaceResponseBody
 > = z.union([
   z.lazy(() => UpdateWorkspaceResponseBody1$zodSchema),
   z.lazy(() => UpdateWorkspaceResponseBody2$zodSchema),
 ]).describe("The validation error(s)");
 
+export const UpdateWorkspaceForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type UpdateWorkspaceForbiddenStatusCode = ClosedEnum<
+  typeof UpdateWorkspaceForbiddenStatusCode
+>;
+
 export const UpdateWorkspaceForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type UpdateWorkspaceForbiddenStatusCode = z.infer<
-  typeof UpdateWorkspaceForbiddenStatusCode$zodSchema
+export const UpdateWorkspaceForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type UpdateWorkspaceForbiddenType = ClosedEnum<
+  typeof UpdateWorkspaceForbiddenType
 >;
 
 export const UpdateWorkspaceForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type UpdateWorkspaceForbiddenType = z.infer<
-  typeof UpdateWorkspaceForbiddenType$zodSchema
+export const UpdateWorkspaceForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type UpdateWorkspaceForbiddenCode = ClosedEnum<
+  typeof UpdateWorkspaceForbiddenCode
 >;
 
 export const UpdateWorkspaceForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
-
-export type UpdateWorkspaceForbiddenCode = z.infer<
-  typeof UpdateWorkspaceForbiddenCode$zodSchema
->;
 
 /**
  * Missing scope
@@ -193,9 +177,7 @@ export type UpdateWorkspaceForbiddenResponseBody = {
 };
 
 export const UpdateWorkspaceForbiddenResponseBody$zodSchema: z.ZodType<
-  UpdateWorkspaceForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  UpdateWorkspaceForbiddenResponseBody
 > = z.object({
   code: UpdateWorkspaceForbiddenCode$zodSchema,
   message: z.string(),
@@ -203,27 +185,36 @@ export const UpdateWorkspaceForbiddenResponseBody$zodSchema: z.ZodType<
   type: UpdateWorkspaceForbiddenType$zodSchema,
 }).describe("Missing scope");
 
+export const UpdateWorkspaceStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type UpdateWorkspaceStatusCode400 = ClosedEnum<
+  typeof UpdateWorkspaceStatusCode400
+>;
+
 export const UpdateWorkspaceStatusCode400$zodSchema = z.literal(400);
 
-export type UpdateWorkspaceStatusCode400 = z.infer<
-  typeof UpdateWorkspaceStatusCode400$zodSchema
+export const UpdateWorkspaceBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type UpdateWorkspaceBadRequestType = ClosedEnum<
+  typeof UpdateWorkspaceBadRequestType
 >;
 
 export const UpdateWorkspaceBadRequestType$zodSchema = z.enum([
   "bad_request",
 ]);
 
-export type UpdateWorkspaceBadRequestType = z.infer<
-  typeof UpdateWorkspaceBadRequestType$zodSchema
+export const UpdateWorkspaceCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type UpdateWorkspaceCodeMissingClientID = ClosedEnum<
+  typeof UpdateWorkspaceCodeMissingClientID
 >;
 
 export const UpdateWorkspaceCodeMissingClientID$zodSchema = z.enum([
   "missing_client_id",
 ]);
-
-export type UpdateWorkspaceCodeMissingClientID = z.infer<
-  typeof UpdateWorkspaceCodeMissingClientID$zodSchema
->;
 
 /**
  * Missing client ID
@@ -236,9 +227,7 @@ export type UpdateWorkspaceBadRequestResponseBody = {
 };
 
 export const UpdateWorkspaceBadRequestResponseBody$zodSchema: z.ZodType<
-  UpdateWorkspaceBadRequestResponseBody,
-  z.ZodTypeDef,
-  unknown
+  UpdateWorkspaceBadRequestResponseBody
 > = z.object({
   code: UpdateWorkspaceCodeMissingClientID$zodSchema,
   message: z.string(),
@@ -257,9 +246,7 @@ export type UpdateWorkspaceResponse =
   | UpdateWorkspaceResponseBody2;
 
 export const UpdateWorkspaceResponse$zodSchema: z.ZodType<
-  UpdateWorkspaceResponse,
-  z.ZodTypeDef,
-  unknown
+  UpdateWorkspaceResponse
 > = z.union([
   Workspace$zodSchema,
   z.lazy(() => UpdateWorkspaceBadRequestResponseBody$zodSchema),

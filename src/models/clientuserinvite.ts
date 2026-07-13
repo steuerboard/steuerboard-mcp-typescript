@@ -3,18 +3,26 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 
 /**
  * Role to assign to the invited user. Can be 'admin', 'user'.
  */
+export const ClientUserInviteUserRole = {
+  Admin: "admin",
+  User: "user",
+} as const;
+/**
+ * Role to assign to the invited user. Can be 'admin', 'user'.
+ */
+export type ClientUserInviteUserRole = ClosedEnum<
+  typeof ClientUserInviteUserRole
+>;
+
 export const ClientUserInviteUserRole$zodSchema = z.enum([
   "admin",
   "user",
 ]).describe("Role to assign to the invited user. Can be 'admin', 'user'.");
-
-export type ClientUserInviteUserRole = z.infer<
-  typeof ClientUserInviteUserRole$zodSchema
->;
 
 export type ClientUserInvite = {
   email: string;
@@ -22,12 +30,16 @@ export type ClientUserInvite = {
   workspaceIds?: Array<string> | undefined;
 };
 
-export const ClientUserInvite$zodSchema: z.ZodType<
-  ClientUserInvite,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  email: z.string(),
-  role: ClientUserInviteUserRole$zodSchema,
-  workspaceIds: z.array(z.string()).optional(),
-});
+export const ClientUserInvite$zodSchema: z.ZodType<ClientUserInvite> = z.object(
+  {
+    email: z.string().describe(
+      "Email address that should receive the invitation.",
+    ),
+    role: ClientUserInviteUserRole$zodSchema.describe(
+      "Role to assign to the invited user. Can be 'admin', 'user'.",
+    ),
+    workspaceIds: z.array(z.string()).optional().describe(
+      "Optional list of workspace IDs the user should join immediately.",
+    ),
+  },
+);

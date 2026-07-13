@@ -6,10 +6,7 @@ import * as z from "zod";
 
 export type RequestLinkResponse = { success: boolean };
 
-export const RequestLinkResponse$zodSchema: z.ZodType<
-  RequestLinkResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  success: z.boolean(),
-});
+export const RequestLinkResponse$zodSchema: z.ZodType<RequestLinkResponse> = z
+  .object({
+    success: z.boolean(),
+  });

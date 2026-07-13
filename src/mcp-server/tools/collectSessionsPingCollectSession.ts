@@ -18,6 +18,7 @@ export const tool$collectSessionsPingCollectSession: ToolDefinition<
 
 Fires a session-opened tracking event. Thin, fire-and-forget.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

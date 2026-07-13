@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
 import {
   DeleteCollectSubmissionResponse,
@@ -16,37 +17,44 @@ export type DeleteCollectSubmissionRequest = {
 };
 
 export const DeleteCollectSubmissionRequest$zodSchema: z.ZodType<
-  DeleteCollectSubmissionRequest,
-  z.ZodTypeDef,
-  unknown
+  DeleteCollectSubmissionRequest
 > = z.object({
   submissionId: z.string(),
   token: z.string(),
 });
 
+export const DeleteCollectSubmissionNotFoundStatusCode = {
+  FourHundredAndFour: 404,
+} as const;
+export type DeleteCollectSubmissionNotFoundStatusCode = ClosedEnum<
+  typeof DeleteCollectSubmissionNotFoundStatusCode
+>;
+
 export const DeleteCollectSubmissionNotFoundStatusCode$zodSchema = z.literal(
   404,
 );
 
-export type DeleteCollectSubmissionNotFoundStatusCode = z.infer<
-  typeof DeleteCollectSubmissionNotFoundStatusCode$zodSchema
+export const DeleteCollectSubmissionNotFoundType = {
+  NotFound: "not_found",
+} as const;
+export type DeleteCollectSubmissionNotFoundType = ClosedEnum<
+  typeof DeleteCollectSubmissionNotFoundType
 >;
 
 export const DeleteCollectSubmissionNotFoundType$zodSchema = z.enum([
   "not_found",
 ]);
 
-export type DeleteCollectSubmissionNotFoundType = z.infer<
-  typeof DeleteCollectSubmissionNotFoundType$zodSchema
+export const DeleteCollectSubmissionNotFoundCode = {
+  CollectTokenNotFound: "collect_token_not_found",
+} as const;
+export type DeleteCollectSubmissionNotFoundCode = ClosedEnum<
+  typeof DeleteCollectSubmissionNotFoundCode
 >;
 
 export const DeleteCollectSubmissionNotFoundCode$zodSchema = z.enum([
   "collect_token_not_found",
 ]);
-
-export type DeleteCollectSubmissionNotFoundCode = z.infer<
-  typeof DeleteCollectSubmissionNotFoundCode$zodSchema
->;
 
 /**
  * Collect session not found. The token may be invalid or revoked.
@@ -59,9 +67,7 @@ export type DeleteCollectSubmissionNotFoundResponseBody = {
 };
 
 export const DeleteCollectSubmissionNotFoundResponseBody$zodSchema: z.ZodType<
-  DeleteCollectSubmissionNotFoundResponseBody,
-  z.ZodTypeDef,
-  unknown
+  DeleteCollectSubmissionNotFoundResponseBody
 > = z.object({
   code: DeleteCollectSubmissionNotFoundCode$zodSchema,
   message: z.string(),
@@ -69,25 +75,34 @@ export const DeleteCollectSubmissionNotFoundResponseBody$zodSchema: z.ZodType<
   type: DeleteCollectSubmissionNotFoundType$zodSchema,
 }).describe("Collect session not found. The token may be invalid or revoked.");
 
+export const DeleteCollectSubmissionStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type DeleteCollectSubmissionStatusCode400 = ClosedEnum<
+  typeof DeleteCollectSubmissionStatusCode400
+>;
+
 export const DeleteCollectSubmissionStatusCode400$zodSchema = z.literal(400);
 
-export type DeleteCollectSubmissionStatusCode400 = z.infer<
-  typeof DeleteCollectSubmissionStatusCode400$zodSchema
+export const DeleteCollectSubmissionBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type DeleteCollectSubmissionBadRequestType = ClosedEnum<
+  typeof DeleteCollectSubmissionBadRequestType
 >;
 
 export const DeleteCollectSubmissionBadRequestType$zodSchema = z.enum([
   "bad_request",
 ]);
 
-export type DeleteCollectSubmissionBadRequestType = z.infer<
-  typeof DeleteCollectSubmissionBadRequestType$zodSchema
->;
+export const CodeInvalidInput = {
+  InvalidInput: "invalid_input",
+} as const;
+export type CodeInvalidInput = ClosedEnum<typeof CodeInvalidInput>;
 
 export const CodeInvalidInput$zodSchema = z.enum([
   "invalid_input",
 ]);
-
-export type CodeInvalidInput = z.infer<typeof CodeInvalidInput$zodSchema>;
 
 /**
  * Cannot delete a non-pending submission
@@ -100,9 +115,7 @@ export type DeleteCollectSubmissionBadRequestResponseBody = {
 };
 
 export const DeleteCollectSubmissionBadRequestResponseBody$zodSchema: z.ZodType<
-  DeleteCollectSubmissionBadRequestResponseBody,
-  z.ZodTypeDef,
-  unknown
+  DeleteCollectSubmissionBadRequestResponseBody
 > = z.object({
   code: CodeInvalidInput$zodSchema,
   message: z.string(),
@@ -118,9 +131,7 @@ export type DeleteCollectSubmissionResponseResponse =
   | DeleteCollectSubmissionResponse;
 
 export const DeleteCollectSubmissionResponseResponse$zodSchema: z.ZodType<
-  DeleteCollectSubmissionResponseResponse,
-  z.ZodTypeDef,
-  unknown
+  DeleteCollectSubmissionResponseResponse
 > = z.union([
   z.lazy(() => DeleteCollectSubmissionBadRequestResponseBody$zodSchema),
   z.lazy(() => DeleteCollectSubmissionNotFoundResponseBody$zodSchema),

@@ -19,18 +19,29 @@ export type FileT = {
   labelIds: Array<string> | null;
 };
 
-export const FileT$zodSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
-  .object({
-    createdAt: z.string().datetime({ offset: true }),
-    createdById: z.string().nullable(),
-    documentDate: z.string().datetime({ offset: true }).nullable(),
-    folderId: z.string().nullable(),
-    id: z.string(),
-    labelIds: z.array(z.string()).nullable(),
-    mimetype: z.string(),
-    name: z.string(),
-    size: z.number(),
-    taskId: z.string().nullable(),
-    updatedAt: z.string().datetime({ offset: true }),
-    workspaceId: z.string(),
-  });
+export const FileT$zodSchema: z.ZodType<FileT> = z.object({
+  createdAt: z.iso.datetime({ offset: true }).describe(
+    "The date and time of the creation for the file. ISO-8601 format (YYYY-MM-DDTHH:MM:SSZ).",
+  ),
+  createdById: z.string().nullable().describe("The ID of the creator"),
+  documentDate: z.iso.datetime({ offset: true }).nullable().describe(
+    "The date of the document (not the upload date)",
+  ),
+  folderId: z.string().nullable().describe(
+    "The ID of the folder this file was uploaded to.",
+  ),
+  id: z.string().describe("The ID of the file"),
+  labelIds: z.array(z.string()).nullable().describe(
+    "The IDs of the assigned labels",
+  ),
+  mimetype: z.string().describe("The mime type of the file"),
+  name: z.string().describe("The name of the file"),
+  size: z.number().describe("The size of the file in bytes"),
+  taskId: z.string().nullable().describe(
+    "The ID of the task this file was uploaded to.",
+  ),
+  updatedAt: z.iso.datetime({ offset: true }).describe(
+    "The date and time of the last update for the file. ISO-8601 format (YYYY-MM-DDTHH:MM:SSZ).",
+  ),
+  workspaceId: z.string().describe("The ID of the workspace"),
+});

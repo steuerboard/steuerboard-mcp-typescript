@@ -3,8 +3,9 @@
  */
 
 import { SteuerboardCore } from "../core.js";
-import { appendForm, encodeSimple } from "../lib/encodings.js";
+import { appendForm, encodeSimple, normalizeBlob } from "../lib/encodings.js";
 import {
+  bytesToBlob,
   getContentTypeFromFileName,
   readableStreamToArrayBuffer,
 } from "../lib/files.js";
@@ -93,7 +94,10 @@ async function $do(
   const payload$ = parsed$.value;
   const body$ = new FormData();
   if (isBlobLike(payload$.FileCreate.file)) {
-    appendForm(body$, "file", payload$.FileCreate.file);
+    const file = payload$.FileCreate.file;
+    const blob = await normalizeBlob(file);
+    const name = "name" in file ? (file.name as string) : undefined;
+    appendForm(body$, "file", blob, name);
   } else if (isReadableStream(payload$.FileCreate.file.content)) {
     const buffer = await readableStreamToArrayBuffer(
       payload$.FileCreate.file.content,
@@ -101,8 +105,12 @@ async function $do(
     const contentType =
       getContentTypeFromFileName(payload$.FileCreate.file.fileName)
       || "application/octet-stream";
-    const blob = new Blob([buffer], { type: contentType });
-    appendForm(body$, "file", blob, payload$.FileCreate.file.fileName);
+    appendForm(
+      body$,
+      "file",
+      bytesToBlob(buffer, contentType),
+      payload$.FileCreate.file.fileName,
+    );
   } else {
     const contentType =
       getContentTypeFromFileName(payload$.FileCreate.file.fileName)
@@ -110,7 +118,7 @@ async function $do(
     appendForm(
       body$,
       "file",
-      new Blob([payload$.FileCreate.file.content], { type: contentType }),
+      bytesToBlob(payload$.FileCreate.file.content, contentType),
       payload$.FileCreate.file.fileName,
     );
   }
@@ -143,7 +151,7 @@ async function $do(
     options: client$._options,
     baseURL: options?.serverURL ?? client$._baseURL ?? "",
     operationID: "createFile",
-    oAuth2Scopes: [],
+    oAuth2Scopes: null,
     resolvedSecurity: requestSecurity,
     securitySource: client$._options.security,
     retryConfig: options?.retries

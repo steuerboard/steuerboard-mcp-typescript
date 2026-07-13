@@ -10,21 +10,14 @@ import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
  */
 export type IndexResponseBody = { message: string };
 
-export const IndexResponseBody$zodSchema: z.ZodType<
-  IndexResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  message: z.string(),
-}).describe("Steuerboard API Index");
+export const IndexResponseBody$zodSchema: z.ZodType<IndexResponseBody> = z
+  .object({
+    message: z.string(),
+  }).describe("Steuerboard API Index");
 
 export type IndexResponse = RateLimit | IndexResponseBody;
 
-export const IndexResponse$zodSchema: z.ZodType<
-  IndexResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
+export const IndexResponse$zodSchema: z.ZodType<IndexResponse> = z.union([
   RateLimit$zodSchema,
   z.lazy(() => IndexResponseBody$zodSchema),
 ]);

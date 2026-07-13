@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { FileContent, FileContent$zodSchema } from "./filecontent.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
@@ -10,9 +11,7 @@ import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 export type DownloadFileContentRequest = { id: string; xClientId: string };
 
 export const DownloadFileContentRequest$zodSchema: z.ZodType<
-  DownloadFileContentRequest,
-  z.ZodTypeDef,
-  unknown
+  DownloadFileContentRequest
 > = z.object({
   id: z.string(),
   xClientId: z.string(),
@@ -21,9 +20,7 @@ export const DownloadFileContentRequest$zodSchema: z.ZodType<
 export type DownloadFileContentPath = string | number;
 
 export const DownloadFileContentPath$zodSchema: z.ZodType<
-  DownloadFileContentPath,
-  z.ZodTypeDef,
-  unknown
+  DownloadFileContentPath
 > = z.union([
   z.string(),
   z.number(),
@@ -36,9 +33,7 @@ export type DownloadFileContentIssue = {
 };
 
 export const DownloadFileContentIssue$zodSchema: z.ZodType<
-  DownloadFileContentIssue,
-  z.ZodTypeDef,
-  unknown
+  DownloadFileContentIssue
 > = z.object({
   code: z.string(),
   message: z.string().optional(),
@@ -54,9 +49,7 @@ export type DownloadFileContentError = {
 };
 
 export const DownloadFileContentError$zodSchema: z.ZodType<
-  DownloadFileContentError,
-  z.ZodTypeDef,
-  unknown
+  DownloadFileContentError
 > = z.object({
   issues: z.array(z.lazy(() => DownloadFileContentIssue$zodSchema)),
   name: z.string(),
@@ -71,11 +64,7 @@ export type DownloadFileContentUnprocessableEntityResponseBody = {
 };
 
 export const DownloadFileContentUnprocessableEntityResponseBody$zodSchema:
-  z.ZodType<
-    DownloadFileContentUnprocessableEntityResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
+  z.ZodType<DownloadFileContentUnprocessableEntityResponseBody> = z.object({
     error: z.lazy(() => DownloadFileContentError$zodSchema),
     success: z.boolean(),
   }).describe("Invalid id error");
@@ -86,34 +75,41 @@ export const DownloadFileContentUnprocessableEntityResponseBody$zodSchema:
 export type DownloadFileContentNotFoundResponseBody = { message: string };
 
 export const DownloadFileContentNotFoundResponseBody$zodSchema: z.ZodType<
-  DownloadFileContentNotFoundResponseBody,
-  z.ZodTypeDef,
-  unknown
+  DownloadFileContentNotFoundResponseBody
 > = z.object({
   message: z.string(),
 }).describe("File not found");
 
+export const DownloadFileContentForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type DownloadFileContentForbiddenStatusCode = ClosedEnum<
+  typeof DownloadFileContentForbiddenStatusCode
+>;
+
 export const DownloadFileContentForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type DownloadFileContentForbiddenStatusCode = z.infer<
-  typeof DownloadFileContentForbiddenStatusCode$zodSchema
+export const DownloadFileContentForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type DownloadFileContentForbiddenType = ClosedEnum<
+  typeof DownloadFileContentForbiddenType
 >;
 
 export const DownloadFileContentForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type DownloadFileContentForbiddenType = z.infer<
-  typeof DownloadFileContentForbiddenType$zodSchema
+export const DownloadFileContentForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type DownloadFileContentForbiddenCode = ClosedEnum<
+  typeof DownloadFileContentForbiddenCode
 >;
 
 export const DownloadFileContentForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
-
-export type DownloadFileContentForbiddenCode = z.infer<
-  typeof DownloadFileContentForbiddenCode$zodSchema
->;
 
 /**
  * Missing scope
@@ -126,9 +122,7 @@ export type DownloadFileContentForbiddenResponseBody = {
 };
 
 export const DownloadFileContentForbiddenResponseBody$zodSchema: z.ZodType<
-  DownloadFileContentForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  DownloadFileContentForbiddenResponseBody
 > = z.object({
   code: DownloadFileContentForbiddenCode$zodSchema,
   message: z.string(),
@@ -136,27 +130,36 @@ export const DownloadFileContentForbiddenResponseBody$zodSchema: z.ZodType<
   type: DownloadFileContentForbiddenType$zodSchema,
 }).describe("Missing scope");
 
+export const DownloadFileContentStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type DownloadFileContentStatusCode400 = ClosedEnum<
+  typeof DownloadFileContentStatusCode400
+>;
+
 export const DownloadFileContentStatusCode400$zodSchema = z.literal(400);
 
-export type DownloadFileContentStatusCode400 = z.infer<
-  typeof DownloadFileContentStatusCode400$zodSchema
+export const DownloadFileContentBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type DownloadFileContentBadRequestType = ClosedEnum<
+  typeof DownloadFileContentBadRequestType
 >;
 
 export const DownloadFileContentBadRequestType$zodSchema = z.enum([
   "bad_request",
 ]);
 
-export type DownloadFileContentBadRequestType = z.infer<
-  typeof DownloadFileContentBadRequestType$zodSchema
+export const DownloadFileContentCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type DownloadFileContentCodeMissingClientID = ClosedEnum<
+  typeof DownloadFileContentCodeMissingClientID
 >;
 
 export const DownloadFileContentCodeMissingClientID$zodSchema = z.enum([
   "missing_client_id",
 ]);
-
-export type DownloadFileContentCodeMissingClientID = z.infer<
-  typeof DownloadFileContentCodeMissingClientID$zodSchema
->;
 
 /**
  * Missing client ID
@@ -169,9 +172,7 @@ export type DownloadFileContentBadRequestResponseBody = {
 };
 
 export const DownloadFileContentBadRequestResponseBody$zodSchema: z.ZodType<
-  DownloadFileContentBadRequestResponseBody,
-  z.ZodTypeDef,
-  unknown
+  DownloadFileContentBadRequestResponseBody
 > = z.object({
   code: DownloadFileContentCodeMissingClientID$zodSchema,
   message: z.string(),
@@ -189,9 +190,7 @@ export type DownloadFileContentResponse =
   | DownloadFileContentNotFoundResponseBody;
 
 export const DownloadFileContentResponse$zodSchema: z.ZodType<
-  DownloadFileContentResponse,
-  z.ZodTypeDef,
-  unknown
+  DownloadFileContentResponse
 > = z.union([
   z.lazy(() => DownloadFileContentBadRequestResponseBody$zodSchema),
   AuthError$zodSchema,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import {
   PaginatedClients,
@@ -13,16 +14,33 @@ import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 /**
  * Include archived clients
  */
+export const Archived = {
+  True: "true",
+  False: "false",
+} as const;
+/**
+ * Include archived clients
+ */
+export type Archived = ClosedEnum<typeof Archived>;
+
 export const Archived$zodSchema = z.enum([
   "true",
   "false",
 ]).describe("Include archived clients");
 
-export type Archived = z.infer<typeof Archived$zodSchema>;
-
 /**
  * The type of the client. 'natural_person' for individuals, 'legal_person' for companies like UG, GmbH, AG, Ltd., Inc., etc. and 'individual_enterprise' for sole proprietorships.
  */
+export const ListClientsClientType = {
+  NaturalPerson: "natural_person",
+  IndividualEnterprise: "individual_enterprise",
+  LegalPerson: "legal_person",
+} as const;
+/**
+ * The type of the client. 'natural_person' for individuals, 'legal_person' for companies like UG, GmbH, AG, Ltd., Inc., etc. and 'individual_enterprise' for sole proprietorships.
+ */
+export type ListClientsClientType = ClosedEnum<typeof ListClientsClientType>;
+
 export const ListClientsClientType$zodSchema = z.enum([
   "natural_person",
   "individual_enterprise",
@@ -31,13 +49,21 @@ export const ListClientsClientType$zodSchema = z.enum([
   "The type of the client. 'natural_person' for individuals, 'legal_person' for companies like UG, GmbH, AG, Ltd., Inc., etc. and 'individual_enterprise' for sole proprietorships.",
 );
 
-export type ListClientsClientType = z.infer<
-  typeof ListClientsClientType$zodSchema
->;
-
 /**
  * The sort field of the results
  */
+export const ListClientsSort = {
+  CreatedAt: "createdAt",
+  UpdatedAt: "updatedAt",
+  ArchivedAt: "archivedAt",
+  Name: "name",
+  CustomId: "customId",
+} as const;
+/**
+ * The sort field of the results
+ */
+export type ListClientsSort = ClosedEnum<typeof ListClientsSort>;
+
 export const ListClientsSort$zodSchema = z.enum([
   "createdAt",
   "updatedAt",
@@ -46,17 +72,22 @@ export const ListClientsSort$zodSchema = z.enum([
   "customId",
 ]).describe("The sort field of the results");
 
-export type ListClientsSort = z.infer<typeof ListClientsSort$zodSchema>;
-
 /**
  * The order of the results based on the sort field
  */
+export const ListClientsOrder = {
+  Asc: "asc",
+  Desc: "desc",
+} as const;
+/**
+ * The order of the results based on the sort field
+ */
+export type ListClientsOrder = ClosedEnum<typeof ListClientsOrder>;
+
 export const ListClientsOrder$zodSchema = z.enum([
   "asc",
   "desc",
 ]).describe("The order of the results based on the sort field");
-
-export type ListClientsOrder = z.infer<typeof ListClientsOrder$zodSchema>;
 
 export type ListClientsRequest = {
   limit?: number | undefined;
@@ -69,28 +100,29 @@ export type ListClientsRequest = {
   order?: ListClientsOrder | undefined;
 };
 
-export const ListClientsRequest$zodSchema: z.ZodType<
-  ListClientsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  archived: Archived$zodSchema.default("false"),
-  cursor: z.string().optional(),
-  customId: z.string().optional(),
-  limit: z.number().default(20),
-  order: ListClientsOrder$zodSchema.default("desc"),
-  slug: z.string().optional(),
-  sort: ListClientsSort$zodSchema.default("createdAt"),
-  type: ListClientsClientType$zodSchema.optional(),
-});
+export const ListClientsRequest$zodSchema: z.ZodType<ListClientsRequest> = z
+  .object({
+    archived: Archived$zodSchema.default("false").describe(
+      "Include archived clients",
+    ),
+    cursor: z.string().optional(),
+    customId: z.string().optional(),
+    limit: z.number().default(20),
+    order: ListClientsOrder$zodSchema.default("desc").describe(
+      "The order of the results based on the sort field",
+    ),
+    slug: z.string().optional(),
+    sort: ListClientsSort$zodSchema.default("createdAt").describe(
+      "The sort field of the results",
+    ),
+    type: ListClientsClientType$zodSchema.optional().describe(
+      "The type of the client. 'natural_person' for individuals, 'legal_person' for companies like UG, GmbH, AG, Ltd., Inc., etc. and 'individual_enterprise' for sole proprietorships.",
+    ),
+  });
 
 export type ListClientsPath = string | number;
 
-export const ListClientsPath$zodSchema: z.ZodType<
-  ListClientsPath,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
+export const ListClientsPath$zodSchema: z.ZodType<ListClientsPath> = z.union([
   z.string(),
   z.number(),
 ]);
@@ -101,32 +133,28 @@ export type ListClientsIssue = {
   message?: string | undefined;
 };
 
-export const ListClientsIssue$zodSchema: z.ZodType<
-  ListClientsIssue,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  code: z.string(),
-  message: z.string().optional(),
-  path: z.array(z.union([
-    z.string(),
-    z.number(),
-  ])),
-});
+export const ListClientsIssue$zodSchema: z.ZodType<ListClientsIssue> = z.object(
+  {
+    code: z.string(),
+    message: z.string().optional(),
+    path: z.array(z.union([
+      z.string(),
+      z.number(),
+    ])),
+  },
+);
 
 export type ListClientsError = {
   issues: Array<ListClientsIssue>;
   name: string;
 };
 
-export const ListClientsError$zodSchema: z.ZodType<
-  ListClientsError,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  issues: z.array(z.lazy(() => ListClientsIssue$zodSchema)),
-  name: z.string(),
-});
+export const ListClientsError$zodSchema: z.ZodType<ListClientsError> = z.object(
+  {
+    issues: z.array(z.lazy(() => ListClientsIssue$zodSchema)),
+    name: z.string(),
+  },
+);
 
 /**
  * The validation error(s)
@@ -137,31 +165,36 @@ export type ListClientsUnprocessableEntityResponseBody = {
 };
 
 export const ListClientsUnprocessableEntityResponseBody$zodSchema: z.ZodType<
-  ListClientsUnprocessableEntityResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListClientsUnprocessableEntityResponseBody
 > = z.object({
   error: z.lazy(() => ListClientsError$zodSchema),
   success: z.boolean(),
 }).describe("The validation error(s)");
 
+export const ListClientsStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type ListClientsStatusCode = ClosedEnum<typeof ListClientsStatusCode>;
+
 export const ListClientsStatusCode$zodSchema = z.literal(403);
 
-export type ListClientsStatusCode = z.infer<
-  typeof ListClientsStatusCode$zodSchema
->;
+export const ListClientsType = {
+  AuthError: "auth_error",
+} as const;
+export type ListClientsType = ClosedEnum<typeof ListClientsType>;
 
 export const ListClientsType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type ListClientsType = z.infer<typeof ListClientsType$zodSchema>;
+export const ListClientsCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type ListClientsCode = ClosedEnum<typeof ListClientsCode>;
 
 export const ListClientsCode$zodSchema = z.enum([
   "missing_scope",
 ]);
-
-export type ListClientsCode = z.infer<typeof ListClientsCode$zodSchema>;
 
 /**
  * Missing scope
@@ -174,9 +207,7 @@ export type ListClientsForbiddenResponseBody = {
 };
 
 export const ListClientsForbiddenResponseBody$zodSchema: z.ZodType<
-  ListClientsForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListClientsForbiddenResponseBody
 > = z.object({
   code: ListClientsCode$zodSchema,
   message: z.string(),
@@ -191,14 +222,11 @@ export type ListClientsResponse =
   | PaginatedClients
   | ListClientsUnprocessableEntityResponseBody;
 
-export const ListClientsResponse$zodSchema: z.ZodType<
-  ListClientsResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  AuthError$zodSchema,
-  z.lazy(() => ListClientsForbiddenResponseBody$zodSchema),
-  RateLimit$zodSchema,
-  PaginatedClients$zodSchema,
-  z.lazy(() => ListClientsUnprocessableEntityResponseBody$zodSchema),
-]);
+export const ListClientsResponse$zodSchema: z.ZodType<ListClientsResponse> = z
+  .union([
+    AuthError$zodSchema,
+    z.lazy(() => ListClientsForbiddenResponseBody$zodSchema),
+    RateLimit$zodSchema,
+    PaginatedClients$zodSchema,
+    z.lazy(() => ListClientsUnprocessableEntityResponseBody$zodSchema),
+  ]);

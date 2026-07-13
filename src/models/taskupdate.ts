@@ -3,10 +3,23 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 
 /**
  * The status of the task
  */
+export const TaskUpdateStatus = {
+  InProgress: "IN_PROGRESS",
+  Accepted: "ACCEPTED",
+  Open: "OPEN",
+  InReview: "IN_REVIEW",
+  Declined: "DECLINED",
+} as const;
+/**
+ * The status of the task
+ */
+export type TaskUpdateStatus = ClosedEnum<typeof TaskUpdateStatus>;
+
 export const TaskUpdateStatus$zodSchema = z.enum([
   "IN_PROGRESS",
   "ACCEPTED",
@@ -14,8 +27,6 @@ export const TaskUpdateStatus$zodSchema = z.enum([
   "IN_REVIEW",
   "DECLINED",
 ]).describe("The status of the task");
-
-export type TaskUpdateStatus = z.infer<typeof TaskUpdateStatus$zodSchema>;
 
 export type TaskUpdate = {
   title?: string | undefined;
@@ -27,16 +38,20 @@ export type TaskUpdate = {
   parentId?: string | null | undefined;
 };
 
-export const TaskUpdate$zodSchema: z.ZodType<
-  TaskUpdate,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  assetFileIds: z.array(z.string()).optional(),
-  destinationFolderId: z.string().nullable().optional(),
-  dueDate: z.string().nullable().optional(),
-  parentId: z.string().nullable().optional(),
-  status: TaskUpdateStatus$zodSchema.optional(),
-  text: z.string().optional(),
-  title: z.string().optional(),
+export const TaskUpdate$zodSchema: z.ZodType<TaskUpdate> = z.object({
+  assetFileIds: z.array(z.string()).optional().describe(
+    "The IDs of the files that should be attachement of this task. For example to give extra context to the user who works on this task.",
+  ),
+  destinationFolderId: z.string().nullable().optional().describe(
+    "The ID of the destination folder",
+  ),
+  dueDate: z.string().nullable().optional().describe("The due date of a task"),
+  parentId: z.string().nullable().optional().describe(
+    "The ID of the parent task",
+  ),
+  status: TaskUpdateStatus$zodSchema.optional().describe(
+    "The status of the task",
+  ),
+  text: z.string().optional().describe("The text of the task"),
+  title: z.string().optional().describe("The title of the task"),
 });

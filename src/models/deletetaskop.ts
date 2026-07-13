@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
@@ -10,22 +11,15 @@ import { Task, Task$zodSchema } from "./task.js";
 
 export type DeleteTaskRequest = { id: string; xClientId: string };
 
-export const DeleteTaskRequest$zodSchema: z.ZodType<
-  DeleteTaskRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  xClientId: z.string(),
-});
+export const DeleteTaskRequest$zodSchema: z.ZodType<DeleteTaskRequest> = z
+  .object({
+    id: z.string(),
+    xClientId: z.string(),
+  });
 
 export type DeleteTaskPath = string | number;
 
-export const DeleteTaskPath$zodSchema: z.ZodType<
-  DeleteTaskPath,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
+export const DeleteTaskPath$zodSchema: z.ZodType<DeleteTaskPath> = z.union([
   z.string(),
   z.number(),
 ]);
@@ -36,11 +30,7 @@ export type DeleteTaskIssue = {
   message?: string | undefined;
 };
 
-export const DeleteTaskIssue$zodSchema: z.ZodType<
-  DeleteTaskIssue,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const DeleteTaskIssue$zodSchema: z.ZodType<DeleteTaskIssue> = z.object({
   code: z.string(),
   message: z.string().optional(),
   path: z.array(z.union([
@@ -51,11 +41,7 @@ export const DeleteTaskIssue$zodSchema: z.ZodType<
 
 export type DeleteTaskError = { issues: Array<DeleteTaskIssue>; name: string };
 
-export const DeleteTaskError$zodSchema: z.ZodType<
-  DeleteTaskError,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const DeleteTaskError$zodSchema: z.ZodType<DeleteTaskError> = z.object({
   issues: z.array(z.lazy(() => DeleteTaskIssue$zodSchema)),
   name: z.string(),
 });
@@ -69,35 +55,42 @@ export type DeleteTaskUnprocessableEntityResponseBody = {
 };
 
 export const DeleteTaskUnprocessableEntityResponseBody$zodSchema: z.ZodType<
-  DeleteTaskUnprocessableEntityResponseBody,
-  z.ZodTypeDef,
-  unknown
+  DeleteTaskUnprocessableEntityResponseBody
 > = z.object({
   error: z.lazy(() => DeleteTaskError$zodSchema),
   success: z.boolean(),
 }).describe("Invalid id error");
 
+export const DeleteTaskForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type DeleteTaskForbiddenStatusCode = ClosedEnum<
+  typeof DeleteTaskForbiddenStatusCode
+>;
+
 export const DeleteTaskForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type DeleteTaskForbiddenStatusCode = z.infer<
-  typeof DeleteTaskForbiddenStatusCode$zodSchema
+export const DeleteTaskForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type DeleteTaskForbiddenType = ClosedEnum<
+  typeof DeleteTaskForbiddenType
 >;
 
 export const DeleteTaskForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type DeleteTaskForbiddenType = z.infer<
-  typeof DeleteTaskForbiddenType$zodSchema
+export const DeleteTaskForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type DeleteTaskForbiddenCode = ClosedEnum<
+  typeof DeleteTaskForbiddenCode
 >;
 
 export const DeleteTaskForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
-
-export type DeleteTaskForbiddenCode = z.infer<
-  typeof DeleteTaskForbiddenCode$zodSchema
->;
 
 /**
  * Missing scope
@@ -110,9 +103,7 @@ export type DeleteTaskForbiddenResponseBody = {
 };
 
 export const DeleteTaskForbiddenResponseBody$zodSchema: z.ZodType<
-  DeleteTaskForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  DeleteTaskForbiddenResponseBody
 > = z.object({
   code: DeleteTaskForbiddenCode$zodSchema,
   message: z.string(),
@@ -120,27 +111,36 @@ export const DeleteTaskForbiddenResponseBody$zodSchema: z.ZodType<
   type: DeleteTaskForbiddenType$zodSchema,
 }).describe("Missing scope");
 
+export const DeleteTaskStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type DeleteTaskStatusCode400 = ClosedEnum<
+  typeof DeleteTaskStatusCode400
+>;
+
 export const DeleteTaskStatusCode400$zodSchema = z.literal(400);
 
-export type DeleteTaskStatusCode400 = z.infer<
-  typeof DeleteTaskStatusCode400$zodSchema
+export const DeleteTaskBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type DeleteTaskBadRequestType = ClosedEnum<
+  typeof DeleteTaskBadRequestType
 >;
 
 export const DeleteTaskBadRequestType$zodSchema = z.enum([
   "bad_request",
 ]);
 
-export type DeleteTaskBadRequestType = z.infer<
-  typeof DeleteTaskBadRequestType$zodSchema
+export const DeleteTaskCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type DeleteTaskCodeMissingClientID = ClosedEnum<
+  typeof DeleteTaskCodeMissingClientID
 >;
 
 export const DeleteTaskCodeMissingClientID$zodSchema = z.enum([
   "missing_client_id",
 ]);
-
-export type DeleteTaskCodeMissingClientID = z.infer<
-  typeof DeleteTaskCodeMissingClientID$zodSchema
->;
 
 /**
  * Missing client ID
@@ -153,9 +153,7 @@ export type DeleteTaskBadRequestResponseBody = {
 };
 
 export const DeleteTaskBadRequestResponseBody$zodSchema: z.ZodType<
-  DeleteTaskBadRequestResponseBody,
-  z.ZodTypeDef,
-  unknown
+  DeleteTaskBadRequestResponseBody
 > = z.object({
   code: DeleteTaskCodeMissingClientID$zodSchema,
   message: z.string(),
@@ -172,16 +170,13 @@ export type DeleteTaskResponse =
   | RateLimit
   | DeleteTaskUnprocessableEntityResponseBody;
 
-export const DeleteTaskResponse$zodSchema: z.ZodType<
-  DeleteTaskResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  Task$zodSchema,
-  z.lazy(() => DeleteTaskBadRequestResponseBody$zodSchema),
-  AuthError$zodSchema,
-  z.lazy(() => DeleteTaskForbiddenResponseBody$zodSchema),
-  NotFound$zodSchema,
-  RateLimit$zodSchema,
-  z.lazy(() => DeleteTaskUnprocessableEntityResponseBody$zodSchema),
-]);
+export const DeleteTaskResponse$zodSchema: z.ZodType<DeleteTaskResponse> = z
+  .union([
+    Task$zodSchema,
+    z.lazy(() => DeleteTaskBadRequestResponseBody$zodSchema),
+    AuthError$zodSchema,
+    z.lazy(() => DeleteTaskForbiddenResponseBody$zodSchema),
+    NotFound$zodSchema,
+    RateLimit$zodSchema,
+    z.lazy(() => DeleteTaskUnprocessableEntityResponseBody$zodSchema),
+  ]);

@@ -16,6 +16,7 @@ export const tool$filesDownloadFileContent: ToolDefinition<typeof args> = {
 
 Returns a temporary presigned URL to download the file. The URL expires after 10 minutes.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

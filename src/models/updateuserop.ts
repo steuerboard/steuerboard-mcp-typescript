@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { ClientUser, ClientUser$zodSchema } from "./clientuser.js";
 import {
@@ -18,23 +19,16 @@ export type UpdateUserRequest = {
   ClientUserUpdate: ClientUserUpdate;
 };
 
-export const UpdateUserRequest$zodSchema: z.ZodType<
-  UpdateUserRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  ClientUserUpdate: ClientUserUpdate$zodSchema,
-  id: z.string(),
-  xClientId: z.string(),
-});
+export const UpdateUserRequest$zodSchema: z.ZodType<UpdateUserRequest> = z
+  .object({
+    ClientUserUpdate: ClientUserUpdate$zodSchema.describe("User update"),
+    id: z.string(),
+    xClientId: z.string(),
+  });
 
 export type UpdateUserPath2 = string | number;
 
-export const UpdateUserPath2$zodSchema: z.ZodType<
-  UpdateUserPath2,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
+export const UpdateUserPath2$zodSchema: z.ZodType<UpdateUserPath2> = z.union([
   z.string(),
   z.number(),
 ]);
@@ -45,32 +39,28 @@ export type UpdateUserIssue2 = {
   message?: string | undefined;
 };
 
-export const UpdateUserIssue2$zodSchema: z.ZodType<
-  UpdateUserIssue2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  code: z.string(),
-  message: z.string().optional(),
-  path: z.array(z.union([
-    z.string(),
-    z.number(),
-  ])),
-});
+export const UpdateUserIssue2$zodSchema: z.ZodType<UpdateUserIssue2> = z.object(
+  {
+    code: z.string(),
+    message: z.string().optional(),
+    path: z.array(z.union([
+      z.string(),
+      z.number(),
+    ])),
+  },
+);
 
 export type UpdateUserError2 = {
   issues: Array<UpdateUserIssue2>;
   name: string;
 };
 
-export const UpdateUserError2$zodSchema: z.ZodType<
-  UpdateUserError2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  issues: z.array(z.lazy(() => UpdateUserIssue2$zodSchema)),
-  name: z.string(),
-});
+export const UpdateUserError2$zodSchema: z.ZodType<UpdateUserError2> = z.object(
+  {
+    issues: z.array(z.lazy(() => UpdateUserIssue2$zodSchema)),
+    name: z.string(),
+  },
+);
 
 export type UpdateUserResponseBody2 = {
   success: boolean;
@@ -78,9 +68,7 @@ export type UpdateUserResponseBody2 = {
 };
 
 export const UpdateUserResponseBody2$zodSchema: z.ZodType<
-  UpdateUserResponseBody2,
-  z.ZodTypeDef,
-  unknown
+  UpdateUserResponseBody2
 > = z.object({
   error: z.lazy(() => UpdateUserError2$zodSchema),
   success: z.boolean(),
@@ -88,11 +76,7 @@ export const UpdateUserResponseBody2$zodSchema: z.ZodType<
 
 export type UpdateUserPath1 = string | number;
 
-export const UpdateUserPath1$zodSchema: z.ZodType<
-  UpdateUserPath1,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
+export const UpdateUserPath1$zodSchema: z.ZodType<UpdateUserPath1> = z.union([
   z.string(),
   z.number(),
 ]);
@@ -103,32 +87,28 @@ export type UpdateUserIssue1 = {
   message?: string | undefined;
 };
 
-export const UpdateUserIssue1$zodSchema: z.ZodType<
-  UpdateUserIssue1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  code: z.string(),
-  message: z.string().optional(),
-  path: z.array(z.union([
-    z.string(),
-    z.number(),
-  ])),
-});
+export const UpdateUserIssue1$zodSchema: z.ZodType<UpdateUserIssue1> = z.object(
+  {
+    code: z.string(),
+    message: z.string().optional(),
+    path: z.array(z.union([
+      z.string(),
+      z.number(),
+    ])),
+  },
+);
 
 export type UpdateUserError1 = {
   issues: Array<UpdateUserIssue1>;
   name: string;
 };
 
-export const UpdateUserError1$zodSchema: z.ZodType<
-  UpdateUserError1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  issues: z.array(z.lazy(() => UpdateUserIssue1$zodSchema)),
-  name: z.string(),
-});
+export const UpdateUserError1$zodSchema: z.ZodType<UpdateUserError1> = z.object(
+  {
+    issues: z.array(z.lazy(() => UpdateUserIssue1$zodSchema)),
+    name: z.string(),
+  },
+);
 
 export type UpdateUserResponseBody1 = {
   success: boolean;
@@ -136,9 +116,7 @@ export type UpdateUserResponseBody1 = {
 };
 
 export const UpdateUserResponseBody1$zodSchema: z.ZodType<
-  UpdateUserResponseBody1,
-  z.ZodTypeDef,
-  unknown
+  UpdateUserResponseBody1
 > = z.object({
   error: z.lazy(() => UpdateUserError1$zodSchema),
   success: z.boolean(),
@@ -152,35 +130,42 @@ export type UpdateUserResponseBody =
   | UpdateUserResponseBody2;
 
 export const UpdateUserResponseBody$zodSchema: z.ZodType<
-  UpdateUserResponseBody,
-  z.ZodTypeDef,
-  unknown
+  UpdateUserResponseBody
 > = z.union([
   z.lazy(() => UpdateUserResponseBody1$zodSchema),
   z.lazy(() => UpdateUserResponseBody2$zodSchema),
 ]).describe("The validation error(s)");
 
+export const UpdateUserForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type UpdateUserForbiddenStatusCode = ClosedEnum<
+  typeof UpdateUserForbiddenStatusCode
+>;
+
 export const UpdateUserForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type UpdateUserForbiddenStatusCode = z.infer<
-  typeof UpdateUserForbiddenStatusCode$zodSchema
+export const UpdateUserForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type UpdateUserForbiddenType = ClosedEnum<
+  typeof UpdateUserForbiddenType
 >;
 
 export const UpdateUserForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type UpdateUserForbiddenType = z.infer<
-  typeof UpdateUserForbiddenType$zodSchema
+export const UpdateUserForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type UpdateUserForbiddenCode = ClosedEnum<
+  typeof UpdateUserForbiddenCode
 >;
 
 export const UpdateUserForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
-
-export type UpdateUserForbiddenCode = z.infer<
-  typeof UpdateUserForbiddenCode$zodSchema
->;
 
 /**
  * Missing scope
@@ -193,9 +178,7 @@ export type UpdateUserForbiddenResponseBody = {
 };
 
 export const UpdateUserForbiddenResponseBody$zodSchema: z.ZodType<
-  UpdateUserForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  UpdateUserForbiddenResponseBody
 > = z.object({
   code: UpdateUserForbiddenCode$zodSchema,
   message: z.string(),
@@ -203,27 +186,36 @@ export const UpdateUserForbiddenResponseBody$zodSchema: z.ZodType<
   type: UpdateUserForbiddenType$zodSchema,
 }).describe("Missing scope");
 
+export const UpdateUserStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type UpdateUserStatusCode400 = ClosedEnum<
+  typeof UpdateUserStatusCode400
+>;
+
 export const UpdateUserStatusCode400$zodSchema = z.literal(400);
 
-export type UpdateUserStatusCode400 = z.infer<
-  typeof UpdateUserStatusCode400$zodSchema
+export const UpdateUserBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type UpdateUserBadRequestType = ClosedEnum<
+  typeof UpdateUserBadRequestType
 >;
 
 export const UpdateUserBadRequestType$zodSchema = z.enum([
   "bad_request",
 ]);
 
-export type UpdateUserBadRequestType = z.infer<
-  typeof UpdateUserBadRequestType$zodSchema
+export const UpdateUserCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type UpdateUserCodeMissingClientID = ClosedEnum<
+  typeof UpdateUserCodeMissingClientID
 >;
 
 export const UpdateUserCodeMissingClientID$zodSchema = z.enum([
   "missing_client_id",
 ]);
-
-export type UpdateUserCodeMissingClientID = z.infer<
-  typeof UpdateUserCodeMissingClientID$zodSchema
->;
 
 /**
  * Missing client ID
@@ -236,9 +228,7 @@ export type UpdateUserBadRequestResponseBody = {
 };
 
 export const UpdateUserBadRequestResponseBody$zodSchema: z.ZodType<
-  UpdateUserBadRequestResponseBody,
-  z.ZodTypeDef,
-  unknown
+  UpdateUserBadRequestResponseBody
 > = z.object({
   code: UpdateUserCodeMissingClientID$zodSchema,
   message: z.string(),
@@ -256,19 +246,16 @@ export type UpdateUserResponse =
   | UpdateUserResponseBody1
   | UpdateUserResponseBody2;
 
-export const UpdateUserResponse$zodSchema: z.ZodType<
-  UpdateUserResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  ClientUser$zodSchema,
-  z.lazy(() => UpdateUserBadRequestResponseBody$zodSchema),
-  AuthError$zodSchema,
-  z.lazy(() => UpdateUserForbiddenResponseBody$zodSchema),
-  NotFound$zodSchema,
-  RateLimit$zodSchema,
-  z.union([
-    z.lazy(() => UpdateUserResponseBody1$zodSchema),
-    z.lazy(() => UpdateUserResponseBody2$zodSchema),
-  ]),
-]);
+export const UpdateUserResponse$zodSchema: z.ZodType<UpdateUserResponse> = z
+  .union([
+    ClientUser$zodSchema,
+    z.lazy(() => UpdateUserBadRequestResponseBody$zodSchema),
+    AuthError$zodSchema,
+    z.lazy(() => UpdateUserForbiddenResponseBody$zodSchema),
+    NotFound$zodSchema,
+    RateLimit$zodSchema,
+    z.union([
+      z.lazy(() => UpdateUserResponseBody1$zodSchema),
+      z.lazy(() => UpdateUserResponseBody2$zodSchema),
+    ]),
+  ]);

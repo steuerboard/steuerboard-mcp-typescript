@@ -3,22 +3,32 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
+
+export const ConflictStatusCode = {
+  FourHundredAndNine: 409,
+} as const;
+export type ConflictStatusCode = ClosedEnum<typeof ConflictStatusCode>;
 
 export const ConflictStatusCode$zodSchema = z.literal(409);
 
-export type ConflictStatusCode = z.infer<typeof ConflictStatusCode$zodSchema>;
+export const ConflictType = {
+  Conflict: "conflict",
+} as const;
+export type ConflictType = ClosedEnum<typeof ConflictType>;
 
 export const ConflictType$zodSchema = z.enum([
   "conflict",
 ]);
 
-export type ConflictType = z.infer<typeof ConflictType$zodSchema>;
+export const ConflictCode = {
+  Conflict: "conflict",
+} as const;
+export type ConflictCode = ClosedEnum<typeof ConflictCode>;
 
 export const ConflictCode$zodSchema = z.enum([
   "conflict",
 ]);
-
-export type ConflictCode = z.infer<typeof ConflictCode$zodSchema>;
 
 export type Conflict = {
   status_code: ConflictStatusCode;
@@ -27,10 +37,9 @@ export type Conflict = {
   message: string;
 };
 
-export const Conflict$zodSchema: z.ZodType<Conflict, z.ZodTypeDef, unknown> = z
-  .object({
-    code: ConflictCode$zodSchema,
-    message: z.string(),
-    status_code: ConflictStatusCode$zodSchema,
-    type: ConflictType$zodSchema,
-  });
+export const Conflict$zodSchema: z.ZodType<Conflict> = z.object({
+  code: ConflictCode$zodSchema,
+  message: z.string(),
+  status_code: ConflictStatusCode$zodSchema,
+  type: ConflictType$zodSchema,
+});

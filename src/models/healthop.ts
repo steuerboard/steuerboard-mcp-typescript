@@ -10,22 +10,15 @@ import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
  */
 export type HealthResponseBody = { status: string; timestamp: string };
 
-export const HealthResponseBody$zodSchema: z.ZodType<
-  HealthResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  status: z.string(),
-  timestamp: z.string(),
-}).describe("Health Check Response");
+export const HealthResponseBody$zodSchema: z.ZodType<HealthResponseBody> = z
+  .object({
+    status: z.string(),
+    timestamp: z.string(),
+  }).describe("Health Check Response");
 
 export type HealthResponse = RateLimit | HealthResponseBody;
 
-export const HealthResponse$zodSchema: z.ZodType<
-  HealthResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
+export const HealthResponse$zodSchema: z.ZodType<HealthResponse> = z.union([
   RateLimit$zodSchema,
   z.lazy(() => HealthResponseBody$zodSchema),
 ]);

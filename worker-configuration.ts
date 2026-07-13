@@ -7,5 +7,6 @@ export interface Env {
   // For example:
   // MY_KV_NAMESPACE: KVNamespace;
   // MY_DURABLE_OBJECT: DurableObjectNamespace;
+  STEUERBOARD_MCP_MCP: DurableObjectNamespace;
   ASSETS: Fetcher; // For serving static assets
 }

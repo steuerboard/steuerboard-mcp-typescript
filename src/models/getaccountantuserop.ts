@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { AccountantUser, AccountantUser$zodSchema } from "./accountantuser.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
@@ -11,23 +12,18 @@ import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 export type GetAccountantUserRequest = { id: string };
 
 export const GetAccountantUserRequest$zodSchema: z.ZodType<
-  GetAccountantUserRequest,
-  z.ZodTypeDef,
-  unknown
+  GetAccountantUserRequest
 > = z.object({
   id: z.string(),
 });
 
 export type GetAccountantUserPath = string | number;
 
-export const GetAccountantUserPath$zodSchema: z.ZodType<
-  GetAccountantUserPath,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.string(),
-  z.number(),
-]);
+export const GetAccountantUserPath$zodSchema: z.ZodType<GetAccountantUserPath> =
+  z.union([
+    z.string(),
+    z.number(),
+  ]);
 
 export type GetAccountantUserIssue = {
   code: string;
@@ -36,9 +32,7 @@ export type GetAccountantUserIssue = {
 };
 
 export const GetAccountantUserIssue$zodSchema: z.ZodType<
-  GetAccountantUserIssue,
-  z.ZodTypeDef,
-  unknown
+  GetAccountantUserIssue
 > = z.object({
   code: z.string(),
   message: z.string().optional(),
@@ -54,9 +48,7 @@ export type GetAccountantUserError = {
 };
 
 export const GetAccountantUserError$zodSchema: z.ZodType<
-  GetAccountantUserError,
-  z.ZodTypeDef,
-  unknown
+  GetAccountantUserError
 > = z.object({
   issues: z.array(z.lazy(() => GetAccountantUserIssue$zodSchema)),
   name: z.string(),
@@ -71,36 +63,37 @@ export type GetAccountantUserUnprocessableEntityResponseBody = {
 };
 
 export const GetAccountantUserUnprocessableEntityResponseBody$zodSchema:
-  z.ZodType<
-    GetAccountantUserUnprocessableEntityResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
+  z.ZodType<GetAccountantUserUnprocessableEntityResponseBody> = z.object({
     error: z.lazy(() => GetAccountantUserError$zodSchema),
     success: z.boolean(),
   }).describe("The validation error(s)");
 
+export const GetAccountantUserStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type GetAccountantUserStatusCode = ClosedEnum<
+  typeof GetAccountantUserStatusCode
+>;
+
 export const GetAccountantUserStatusCode$zodSchema = z.literal(403);
 
-export type GetAccountantUserStatusCode = z.infer<
-  typeof GetAccountantUserStatusCode$zodSchema
->;
+export const GetAccountantUserType = {
+  AuthError: "auth_error",
+} as const;
+export type GetAccountantUserType = ClosedEnum<typeof GetAccountantUserType>;
 
 export const GetAccountantUserType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type GetAccountantUserType = z.infer<
-  typeof GetAccountantUserType$zodSchema
->;
+export const GetAccountantUserCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type GetAccountantUserCode = ClosedEnum<typeof GetAccountantUserCode>;
 
 export const GetAccountantUserCode$zodSchema = z.enum([
   "missing_scope",
 ]);
-
-export type GetAccountantUserCode = z.infer<
-  typeof GetAccountantUserCode$zodSchema
->;
 
 /**
  * Missing scope
@@ -113,9 +106,7 @@ export type GetAccountantUserForbiddenResponseBody = {
 };
 
 export const GetAccountantUserForbiddenResponseBody$zodSchema: z.ZodType<
-  GetAccountantUserForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  GetAccountantUserForbiddenResponseBody
 > = z.object({
   code: GetAccountantUserCode$zodSchema,
   message: z.string(),
@@ -132,9 +123,7 @@ export type GetAccountantUserResponse =
   | GetAccountantUserUnprocessableEntityResponseBody;
 
 export const GetAccountantUserResponse$zodSchema: z.ZodType<
-  GetAccountantUserResponse,
-  z.ZodTypeDef,
-  unknown
+  GetAccountantUserResponse
 > = z.union([
   AccountantUser$zodSchema,
   AuthError$zodSchema,

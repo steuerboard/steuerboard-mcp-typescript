@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { PaginatedTasks, PaginatedTasks$zodSchema } from "./paginatedtasks.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
@@ -10,6 +11,18 @@ import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 /**
  * The sort field of the results
  */
+export const ListTasksSort = {
+  CreatedAt: "createdAt",
+  UpdatedAt: "updatedAt",
+  DueDate: "dueDate",
+  Status: "status",
+  Title: "title",
+} as const;
+/**
+ * The sort field of the results
+ */
+export type ListTasksSort = ClosedEnum<typeof ListTasksSort>;
+
 export const ListTasksSort$zodSchema = z.enum([
   "createdAt",
   "updatedAt",
@@ -18,17 +31,22 @@ export const ListTasksSort$zodSchema = z.enum([
   "title",
 ]).describe("The sort field of the results");
 
-export type ListTasksSort = z.infer<typeof ListTasksSort$zodSchema>;
-
 /**
  * The order of the results based on the sort field
  */
+export const ListTasksOrder = {
+  Asc: "asc",
+  Desc: "desc",
+} as const;
+/**
+ * The order of the results based on the sort field
+ */
+export type ListTasksOrder = ClosedEnum<typeof ListTasksOrder>;
+
 export const ListTasksOrder$zodSchema = z.enum([
   "asc",
   "desc",
 ]).describe("The order of the results based on the sort field");
-
-export type ListTasksOrder = z.infer<typeof ListTasksOrder$zodSchema>;
 
 export type ListTasksRequest = {
   limit?: number | undefined;
@@ -40,27 +58,25 @@ export type ListTasksRequest = {
   xClientId: string;
 };
 
-export const ListTasksRequest$zodSchema: z.ZodType<
-  ListTasksRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  cursor: z.string().optional(),
-  limit: z.number().default(20),
-  order: ListTasksOrder$zodSchema.default("desc"),
-  parentId: z.string().optional(),
-  sort: ListTasksSort$zodSchema.default("createdAt"),
-  workspaceId: z.string().optional(),
-  xClientId: z.string(),
-});
+export const ListTasksRequest$zodSchema: z.ZodType<ListTasksRequest> = z.object(
+  {
+    cursor: z.string().optional(),
+    limit: z.number().default(20),
+    order: ListTasksOrder$zodSchema.default("desc").describe(
+      "The order of the results based on the sort field",
+    ),
+    parentId: z.string().optional(),
+    sort: ListTasksSort$zodSchema.default("createdAt").describe(
+      "The sort field of the results",
+    ),
+    workspaceId: z.string().optional(),
+    xClientId: z.string(),
+  },
+);
 
 export type ListTasksPath = string | number;
 
-export const ListTasksPath$zodSchema: z.ZodType<
-  ListTasksPath,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
+export const ListTasksPath$zodSchema: z.ZodType<ListTasksPath> = z.union([
   z.string(),
   z.number(),
 ]);
@@ -71,11 +87,7 @@ export type ListTasksIssue = {
   message?: string | undefined;
 };
 
-export const ListTasksIssue$zodSchema: z.ZodType<
-  ListTasksIssue,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const ListTasksIssue$zodSchema: z.ZodType<ListTasksIssue> = z.object({
   code: z.string(),
   message: z.string().optional(),
   path: z.array(z.union([
@@ -86,11 +98,7 @@ export const ListTasksIssue$zodSchema: z.ZodType<
 
 export type ListTasksError = { issues: Array<ListTasksIssue>; name: string };
 
-export const ListTasksError$zodSchema: z.ZodType<
-  ListTasksError,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const ListTasksError$zodSchema: z.ZodType<ListTasksError> = z.object({
   issues: z.array(z.lazy(() => ListTasksIssue$zodSchema)),
   name: z.string(),
 });
@@ -104,35 +112,38 @@ export type ListTasksUnprocessableEntityResponseBody = {
 };
 
 export const ListTasksUnprocessableEntityResponseBody$zodSchema: z.ZodType<
-  ListTasksUnprocessableEntityResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListTasksUnprocessableEntityResponseBody
 > = z.object({
   error: z.lazy(() => ListTasksError$zodSchema),
   success: z.boolean(),
 }).describe("The validation error(s)");
 
+export const ListTasksForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type ListTasksForbiddenStatusCode = ClosedEnum<
+  typeof ListTasksForbiddenStatusCode
+>;
+
 export const ListTasksForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type ListTasksForbiddenStatusCode = z.infer<
-  typeof ListTasksForbiddenStatusCode$zodSchema
->;
+export const ListTasksForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type ListTasksForbiddenType = ClosedEnum<typeof ListTasksForbiddenType>;
 
 export const ListTasksForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type ListTasksForbiddenType = z.infer<
-  typeof ListTasksForbiddenType$zodSchema
->;
+export const ListTasksForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type ListTasksForbiddenCode = ClosedEnum<typeof ListTasksForbiddenCode>;
 
 export const ListTasksForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
-
-export type ListTasksForbiddenCode = z.infer<
-  typeof ListTasksForbiddenCode$zodSchema
->;
 
 /**
  * Missing scope
@@ -145,9 +156,7 @@ export type ListTasksForbiddenResponseBody = {
 };
 
 export const ListTasksForbiddenResponseBody$zodSchema: z.ZodType<
-  ListTasksForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListTasksForbiddenResponseBody
 > = z.object({
   code: ListTasksForbiddenCode$zodSchema,
   message: z.string(),
@@ -155,27 +164,34 @@ export const ListTasksForbiddenResponseBody$zodSchema: z.ZodType<
   type: ListTasksForbiddenType$zodSchema,
 }).describe("Missing scope");
 
+export const ListTasksStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type ListTasksStatusCode400 = ClosedEnum<typeof ListTasksStatusCode400>;
+
 export const ListTasksStatusCode400$zodSchema = z.literal(400);
 
-export type ListTasksStatusCode400 = z.infer<
-  typeof ListTasksStatusCode400$zodSchema
+export const ListTasksBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type ListTasksBadRequestType = ClosedEnum<
+  typeof ListTasksBadRequestType
 >;
 
 export const ListTasksBadRequestType$zodSchema = z.enum([
   "bad_request",
 ]);
 
-export type ListTasksBadRequestType = z.infer<
-  typeof ListTasksBadRequestType$zodSchema
+export const ListTasksCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type ListTasksCodeMissingClientID = ClosedEnum<
+  typeof ListTasksCodeMissingClientID
 >;
 
 export const ListTasksCodeMissingClientID$zodSchema = z.enum([
   "missing_client_id",
 ]);
-
-export type ListTasksCodeMissingClientID = z.infer<
-  typeof ListTasksCodeMissingClientID$zodSchema
->;
 
 /**
  * Missing client ID
@@ -188,9 +204,7 @@ export type ListTasksBadRequestResponseBody = {
 };
 
 export const ListTasksBadRequestResponseBody$zodSchema: z.ZodType<
-  ListTasksBadRequestResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListTasksBadRequestResponseBody
 > = z.object({
   code: ListTasksCodeMissingClientID$zodSchema,
   message: z.string(),
@@ -206,15 +220,12 @@ export type ListTasksResponse =
   | PaginatedTasks
   | ListTasksUnprocessableEntityResponseBody;
 
-export const ListTasksResponse$zodSchema: z.ZodType<
-  ListTasksResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => ListTasksBadRequestResponseBody$zodSchema),
-  AuthError$zodSchema,
-  z.lazy(() => ListTasksForbiddenResponseBody$zodSchema),
-  RateLimit$zodSchema,
-  PaginatedTasks$zodSchema,
-  z.lazy(() => ListTasksUnprocessableEntityResponseBody$zodSchema),
-]);
+export const ListTasksResponse$zodSchema: z.ZodType<ListTasksResponse> = z
+  .union([
+    z.lazy(() => ListTasksBadRequestResponseBody$zodSchema),
+    AuthError$zodSchema,
+    z.lazy(() => ListTasksForbiddenResponseBody$zodSchema),
+    RateLimit$zodSchema,
+    PaginatedTasks$zodSchema,
+    z.lazy(() => ListTasksUnprocessableEntityResponseBody$zodSchema),
+  ]);

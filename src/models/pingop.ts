@@ -10,21 +10,15 @@ import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
  */
 export type PingResponseBody = { ping: string };
 
-export const PingResponseBody$zodSchema: z.ZodType<
-  PingResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  ping: z.string(),
-}).describe("Pong");
+export const PingResponseBody$zodSchema: z.ZodType<PingResponseBody> = z.object(
+  {
+    ping: z.string(),
+  },
+).describe("Pong");
 
 export type PingResponse = RateLimit | PingResponseBody;
 
-export const PingResponse$zodSchema: z.ZodType<
-  PingResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
+export const PingResponse$zodSchema: z.ZodType<PingResponse> = z.union([
   RateLimit$zodSchema,
   z.lazy(() => PingResponseBody$zodSchema),
 ]);

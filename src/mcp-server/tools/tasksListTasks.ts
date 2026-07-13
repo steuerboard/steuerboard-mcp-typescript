@@ -16,6 +16,7 @@ export const tool$tasksListTasks: ToolDefinition<typeof args> = {
 
 Returns a paginated list of tasks with optional client and workspace filters.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

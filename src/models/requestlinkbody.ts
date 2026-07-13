@@ -6,10 +6,6 @@ import * as z from "zod";
 
 export type RequestLinkBody = { email: string };
 
-export const RequestLinkBody$zodSchema: z.ZodType<
-  RequestLinkBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  email: z.string(),
+export const RequestLinkBody$zodSchema: z.ZodType<RequestLinkBody> = z.object({
+  email: z.string().describe("Email to send the new link to"),
 });

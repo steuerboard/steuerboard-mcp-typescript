@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
 import {
   CollectFormDataSubmission,
@@ -20,20 +21,18 @@ export type SubmitCollectFormDataRequest = {
 };
 
 export const SubmitCollectFormDataRequest$zodSchema: z.ZodType<
-  SubmitCollectFormDataRequest,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectFormDataRequest
 > = z.object({
-  CollectFormDataSubmit: CollectFormDataSubmit$zodSchema.optional(),
+  CollectFormDataSubmit: CollectFormDataSubmit$zodSchema.optional().describe(
+    "The form data to submit",
+  ),
   token: z.string(),
 });
 
 export type SubmitCollectFormDataPath2 = string | number;
 
 export const SubmitCollectFormDataPath2$zodSchema: z.ZodType<
-  SubmitCollectFormDataPath2,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectFormDataPath2
 > = z.union([
   z.string(),
   z.number(),
@@ -46,9 +45,7 @@ export type SubmitCollectFormDataIssue2 = {
 };
 
 export const SubmitCollectFormDataIssue2$zodSchema: z.ZodType<
-  SubmitCollectFormDataIssue2,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectFormDataIssue2
 > = z.object({
   code: z.string(),
   message: z.string().optional(),
@@ -64,9 +61,7 @@ export type SubmitCollectFormDataError2 = {
 };
 
 export const SubmitCollectFormDataError2$zodSchema: z.ZodType<
-  SubmitCollectFormDataError2,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectFormDataError2
 > = z.object({
   issues: z.array(z.lazy(() => SubmitCollectFormDataIssue2$zodSchema)),
   name: z.string(),
@@ -78,9 +73,7 @@ export type SubmitCollectFormDataResponseBody2 = {
 };
 
 export const SubmitCollectFormDataResponseBody2$zodSchema: z.ZodType<
-  SubmitCollectFormDataResponseBody2,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectFormDataResponseBody2
 > = z.object({
   error: z.lazy(() => SubmitCollectFormDataError2$zodSchema),
   success: z.boolean(),
@@ -89,9 +82,7 @@ export const SubmitCollectFormDataResponseBody2$zodSchema: z.ZodType<
 export type SubmitCollectFormDataPath1 = string | number;
 
 export const SubmitCollectFormDataPath1$zodSchema: z.ZodType<
-  SubmitCollectFormDataPath1,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectFormDataPath1
 > = z.union([
   z.string(),
   z.number(),
@@ -104,9 +95,7 @@ export type SubmitCollectFormDataIssue1 = {
 };
 
 export const SubmitCollectFormDataIssue1$zodSchema: z.ZodType<
-  SubmitCollectFormDataIssue1,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectFormDataIssue1
 > = z.object({
   code: z.string(),
   message: z.string().optional(),
@@ -122,9 +111,7 @@ export type SubmitCollectFormDataError1 = {
 };
 
 export const SubmitCollectFormDataError1$zodSchema: z.ZodType<
-  SubmitCollectFormDataError1,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectFormDataError1
 > = z.object({
   issues: z.array(z.lazy(() => SubmitCollectFormDataIssue1$zodSchema)),
   name: z.string(),
@@ -136,9 +123,7 @@ export type SubmitCollectFormDataResponseBody1 = {
 };
 
 export const SubmitCollectFormDataResponseBody1$zodSchema: z.ZodType<
-  SubmitCollectFormDataResponseBody1,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectFormDataResponseBody1
 > = z.object({
   error: z.lazy(() => SubmitCollectFormDataError1$zodSchema),
   success: z.boolean(),
@@ -152,35 +137,42 @@ export type SubmitCollectFormDataResponseBody =
   | SubmitCollectFormDataResponseBody2;
 
 export const SubmitCollectFormDataResponseBody$zodSchema: z.ZodType<
-  SubmitCollectFormDataResponseBody,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectFormDataResponseBody
 > = z.union([
   z.lazy(() => SubmitCollectFormDataResponseBody1$zodSchema),
   z.lazy(() => SubmitCollectFormDataResponseBody2$zodSchema),
 ]).describe("The validation error(s)");
 
+export const SubmitCollectFormDataStatusCode = {
+  FourHundredAndFour: 404,
+} as const;
+export type SubmitCollectFormDataStatusCode = ClosedEnum<
+  typeof SubmitCollectFormDataStatusCode
+>;
+
 export const SubmitCollectFormDataStatusCode$zodSchema = z.literal(404);
 
-export type SubmitCollectFormDataStatusCode = z.infer<
-  typeof SubmitCollectFormDataStatusCode$zodSchema
+export const SubmitCollectFormDataType = {
+  NotFound: "not_found",
+} as const;
+export type SubmitCollectFormDataType = ClosedEnum<
+  typeof SubmitCollectFormDataType
 >;
 
 export const SubmitCollectFormDataType$zodSchema = z.enum([
   "not_found",
 ]);
 
-export type SubmitCollectFormDataType = z.infer<
-  typeof SubmitCollectFormDataType$zodSchema
+export const SubmitCollectFormDataCode = {
+  CollectTokenNotFound: "collect_token_not_found",
+} as const;
+export type SubmitCollectFormDataCode = ClosedEnum<
+  typeof SubmitCollectFormDataCode
 >;
 
 export const SubmitCollectFormDataCode$zodSchema = z.enum([
   "collect_token_not_found",
 ]);
-
-export type SubmitCollectFormDataCode = z.infer<
-  typeof SubmitCollectFormDataCode$zodSchema
->;
 
 /**
  * Collect session not found. The token may be invalid or revoked.
@@ -193,9 +185,7 @@ export type SubmitCollectFormDataNotFoundResponseBody = {
 };
 
 export const SubmitCollectFormDataNotFoundResponseBody$zodSchema: z.ZodType<
-  SubmitCollectFormDataNotFoundResponseBody,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectFormDataNotFoundResponseBody
 > = z.object({
   code: SubmitCollectFormDataCode$zodSchema,
   message: z.string(),
@@ -212,9 +202,7 @@ export type SubmitCollectFormDataResponse =
   | SubmitCollectFormDataResponseBody2;
 
 export const SubmitCollectFormDataResponse$zodSchema: z.ZodType<
-  SubmitCollectFormDataResponse,
-  z.ZodTypeDef,
-  unknown
+  SubmitCollectFormDataResponse
 > = z.union([
   CollectFormDataSubmission$zodSchema,
   z.lazy(() => SubmitCollectFormDataNotFoundResponseBody$zodSchema),

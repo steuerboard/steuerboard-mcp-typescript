@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { ClientUser, ClientUser$zodSchema } from "./clientuser.js";
 import {
@@ -18,22 +19,15 @@ export type InviteUserRequest = {
   ClientUserInvite: ClientUserInvite;
 };
 
-export const InviteUserRequest$zodSchema: z.ZodType<
-  InviteUserRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  ClientUserInvite: ClientUserInvite$zodSchema,
-  xClientId: z.string(),
-});
+export const InviteUserRequest$zodSchema: z.ZodType<InviteUserRequest> = z
+  .object({
+    ClientUserInvite: ClientUserInvite$zodSchema.describe("User invite"),
+    xClientId: z.string(),
+  });
 
 export type InviteUserPath = string | number;
 
-export const InviteUserPath$zodSchema: z.ZodType<
-  InviteUserPath,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
+export const InviteUserPath$zodSchema: z.ZodType<InviteUserPath> = z.union([
   z.string(),
   z.number(),
 ]);
@@ -44,11 +38,7 @@ export type InviteUserIssue = {
   message?: string | undefined;
 };
 
-export const InviteUserIssue$zodSchema: z.ZodType<
-  InviteUserIssue,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const InviteUserIssue$zodSchema: z.ZodType<InviteUserIssue> = z.object({
   code: z.string(),
   message: z.string().optional(),
   path: z.array(z.union([
@@ -59,11 +49,7 @@ export const InviteUserIssue$zodSchema: z.ZodType<
 
 export type InviteUserError = { issues: Array<InviteUserIssue>; name: string };
 
-export const InviteUserError$zodSchema: z.ZodType<
-  InviteUserError,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const InviteUserError$zodSchema: z.ZodType<InviteUserError> = z.object({
   issues: z.array(z.lazy(() => InviteUserIssue$zodSchema)),
   name: z.string(),
 });
@@ -77,35 +63,42 @@ export type InviteUserUnprocessableEntityResponseBody = {
 };
 
 export const InviteUserUnprocessableEntityResponseBody$zodSchema: z.ZodType<
-  InviteUserUnprocessableEntityResponseBody,
-  z.ZodTypeDef,
-  unknown
+  InviteUserUnprocessableEntityResponseBody
 > = z.object({
   error: z.lazy(() => InviteUserError$zodSchema),
   success: z.boolean(),
 }).describe("The validation error(s)");
 
+export const InviteUserForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type InviteUserForbiddenStatusCode = ClosedEnum<
+  typeof InviteUserForbiddenStatusCode
+>;
+
 export const InviteUserForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type InviteUserForbiddenStatusCode = z.infer<
-  typeof InviteUserForbiddenStatusCode$zodSchema
+export const InviteUserForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type InviteUserForbiddenType = ClosedEnum<
+  typeof InviteUserForbiddenType
 >;
 
 export const InviteUserForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type InviteUserForbiddenType = z.infer<
-  typeof InviteUserForbiddenType$zodSchema
+export const InviteUserForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type InviteUserForbiddenCode = ClosedEnum<
+  typeof InviteUserForbiddenCode
 >;
 
 export const InviteUserForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
-
-export type InviteUserForbiddenCode = z.infer<
-  typeof InviteUserForbiddenCode$zodSchema
->;
 
 /**
  * Missing scope
@@ -118,9 +111,7 @@ export type InviteUserForbiddenResponseBody = {
 };
 
 export const InviteUserForbiddenResponseBody$zodSchema: z.ZodType<
-  InviteUserForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  InviteUserForbiddenResponseBody
 > = z.object({
   code: InviteUserForbiddenCode$zodSchema,
   message: z.string(),
@@ -128,27 +119,36 @@ export const InviteUserForbiddenResponseBody$zodSchema: z.ZodType<
   type: InviteUserForbiddenType$zodSchema,
 }).describe("Missing scope");
 
+export const InviteUserStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type InviteUserStatusCode400 = ClosedEnum<
+  typeof InviteUserStatusCode400
+>;
+
 export const InviteUserStatusCode400$zodSchema = z.literal(400);
 
-export type InviteUserStatusCode400 = z.infer<
-  typeof InviteUserStatusCode400$zodSchema
+export const InviteUserBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type InviteUserBadRequestType = ClosedEnum<
+  typeof InviteUserBadRequestType
 >;
 
 export const InviteUserBadRequestType$zodSchema = z.enum([
   "bad_request",
 ]);
 
-export type InviteUserBadRequestType = z.infer<
-  typeof InviteUserBadRequestType$zodSchema
+export const InviteUserCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type InviteUserCodeMissingClientID = ClosedEnum<
+  typeof InviteUserCodeMissingClientID
 >;
 
 export const InviteUserCodeMissingClientID$zodSchema = z.enum([
   "missing_client_id",
 ]);
-
-export type InviteUserCodeMissingClientID = z.infer<
-  typeof InviteUserCodeMissingClientID$zodSchema
->;
 
 /**
  * Missing client ID
@@ -161,9 +161,7 @@ export type InviteUserBadRequestResponseBody = {
 };
 
 export const InviteUserBadRequestResponseBody$zodSchema: z.ZodType<
-  InviteUserBadRequestResponseBody,
-  z.ZodTypeDef,
-  unknown
+  InviteUserBadRequestResponseBody
 > = z.object({
   code: InviteUserCodeMissingClientID$zodSchema,
   message: z.string(),
@@ -181,17 +179,14 @@ export type InviteUserResponse =
   | RateLimit
   | InviteUserUnprocessableEntityResponseBody;
 
-export const InviteUserResponse$zodSchema: z.ZodType<
-  InviteUserResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  ClientUser$zodSchema,
-  z.lazy(() => InviteUserBadRequestResponseBody$zodSchema),
-  AuthError$zodSchema,
-  z.lazy(() => InviteUserForbiddenResponseBody$zodSchema),
-  NotFound$zodSchema,
-  Conflict$zodSchema,
-  RateLimit$zodSchema,
-  z.lazy(() => InviteUserUnprocessableEntityResponseBody$zodSchema),
-]);
+export const InviteUserResponse$zodSchema: z.ZodType<InviteUserResponse> = z
+  .union([
+    ClientUser$zodSchema,
+    z.lazy(() => InviteUserBadRequestResponseBody$zodSchema),
+    AuthError$zodSchema,
+    z.lazy(() => InviteUserForbiddenResponseBody$zodSchema),
+    NotFound$zodSchema,
+    Conflict$zodSchema,
+    RateLimit$zodSchema,
+    z.lazy(() => InviteUserUnprocessableEntityResponseBody$zodSchema),
+  ]);

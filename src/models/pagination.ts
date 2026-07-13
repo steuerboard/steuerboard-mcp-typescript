@@ -11,13 +11,13 @@ export type Pagination = {
   total: number;
 };
 
-export const Pagination$zodSchema: z.ZodType<
-  Pagination,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  limit: z.number().int(),
-  nextCursor: z.string().optional(),
-  previousCursor: z.string().optional(),
-  total: z.number().int(),
+export const Pagination$zodSchema: z.ZodType<Pagination> = z.object({
+  limit: z.int().describe("The number of items to return"),
+  nextCursor: z.string().optional().describe(
+    "The cursor to return the next page of items",
+  ),
+  previousCursor: z.string().optional().describe(
+    "The cursor to return the previous page of items",
+  ),
+  total: z.int().describe("The total number of items"),
 });

@@ -3,10 +3,21 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 
 /**
  * The type of the client. 'natural_person' for individuals, 'legal_person' for companies like UG, GmbH, AG, Ltd., Inc., etc. and 'individual_enterprise' for sole proprietorships.
  */
+export const ClientCreateClientType = {
+  NaturalPerson: "natural_person",
+  IndividualEnterprise: "individual_enterprise",
+  LegalPerson: "legal_person",
+} as const;
+/**
+ * The type of the client. 'natural_person' for individuals, 'legal_person' for companies like UG, GmbH, AG, Ltd., Inc., etc. and 'individual_enterprise' for sole proprietorships.
+ */
+export type ClientCreateClientType = ClosedEnum<typeof ClientCreateClientType>;
+
 export const ClientCreateClientType$zodSchema = z.enum([
   "natural_person",
   "individual_enterprise",
@@ -14,10 +25,6 @@ export const ClientCreateClientType$zodSchema = z.enum([
 ]).describe(
   "The type of the client. 'natural_person' for individuals, 'legal_person' for companies like UG, GmbH, AG, Ltd., Inc., etc. and 'individual_enterprise' for sole proprietorships.",
 );
-
-export type ClientCreateClientType = z.infer<
-  typeof ClientCreateClientType$zodSchema
->;
 
 /**
  * The address of the client
@@ -30,17 +37,14 @@ export type ClientCreateAddress = {
   countryCode?: string | undefined;
 };
 
-export const ClientCreateAddress$zodSchema: z.ZodType<
-  ClientCreateAddress,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  city: z.string(),
-  countryCode: z.string().default("DE"),
-  line1: z.string(),
-  line2: z.string().optional(),
-  postalCode: z.string(),
-}).describe("The address of the client");
+export const ClientCreateAddress$zodSchema: z.ZodType<ClientCreateAddress> = z
+  .object({
+    city: z.string(),
+    countryCode: z.string().default("DE"),
+    line1: z.string(),
+    line2: z.string().optional(),
+    postalCode: z.string(),
+  }).describe("The address of the client");
 
 export type ClientCreate = {
   name: string;
@@ -49,13 +53,15 @@ export type ClientCreate = {
   address?: ClientCreateAddress | undefined;
 };
 
-export const ClientCreate$zodSchema: z.ZodType<
-  ClientCreate,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  address: z.lazy(() => ClientCreateAddress$zodSchema).optional(),
-  customId: z.string().optional(),
-  name: z.string(),
-  type: ClientCreateClientType$zodSchema,
+export const ClientCreate$zodSchema: z.ZodType<ClientCreate> = z.object({
+  address: z.lazy(() => ClientCreateAddress$zodSchema).optional().describe(
+    "The address of the client",
+  ),
+  customId: z.string().optional().describe(
+    "The client's custom ID can be defined by the accountant",
+  ),
+  name: z.string().describe("The name of the client"),
+  type: ClientCreateClientType$zodSchema.describe(
+    "The type of the client. 'natural_person' for individuals, 'legal_person' for companies like UG, GmbH, AG, Ltd., Inc., etc. and 'individual_enterprise' for sole proprietorships.",
+  ),
 });

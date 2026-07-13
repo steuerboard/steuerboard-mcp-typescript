@@ -18,6 +18,7 @@ export const tool$collectSessionsSubmitCollectBulk: ToolDefinition<
 
 Uploads multiple files for a BULK_MATCH group. Files are stored without item assignment — server-side matching happens asynchronously.`,
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

@@ -17,15 +17,19 @@ export type AccountantUser = {
   roles: Array<AccountantUserRole>;
 };
 
-export const AccountantUser$zodSchema: z.ZodType<
-  AccountantUser,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  createdAt: z.string().datetime({ offset: true }),
-  email: z.string(),
-  firstName: z.string().nullable(),
-  id: z.string(),
-  lastName: z.string().nullable(),
-  roles: z.array(AccountantUserRole$zodSchema),
+export const AccountantUser$zodSchema: z.ZodType<AccountantUser> = z.object({
+  createdAt: z.iso.datetime({ offset: true }).describe(
+    "ISO 8601 timestamp when the accountant user record was created.",
+  ),
+  email: z.string().describe("Email address of the accountant user."),
+  firstName: z.string().nullable().describe(
+    "First name of the accountant user, if provided.",
+  ),
+  id: z.string().describe("Identifier of the accountant user."),
+  lastName: z.string().nullable().describe(
+    "Last name of the accountant user, if provided.",
+  ),
+  roles: z.array(AccountantUserRole$zodSchema).describe(
+    "Roles assigned to the accountant user.",
+  ),
 });

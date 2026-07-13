@@ -13,13 +13,13 @@ export type CollectFormDataSubmission = {
 };
 
 export const CollectFormDataSubmission$zodSchema: z.ZodType<
-  CollectFormDataSubmission,
-  z.ZodTypeDef,
-  unknown
+  CollectFormDataSubmission
 > = z.object({
-  collectItemId: z.string(),
-  createdAt: z.string().datetime({ offset: true }),
-  id: z.string(),
-  status: z.string(),
-  value: z.string().nullable(),
+  collectItemId: z.string().describe("The ID of the collect item"),
+  createdAt: z.iso.datetime({ offset: true }).describe(
+    "The date and time the submission was created",
+  ),
+  id: z.string().describe("The ID of the submission"),
+  status: z.string().describe("The status of the submission"),
+  value: z.string().nullable().describe("The submitted form field value"),
 });

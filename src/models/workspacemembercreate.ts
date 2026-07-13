@@ -6,10 +6,9 @@ import * as z from "zod";
 
 export type WorkspaceMemberCreate = { userId: string };
 
-export const WorkspaceMemberCreate$zodSchema: z.ZodType<
-  WorkspaceMemberCreate,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  userId: z.string(),
-});
+export const WorkspaceMemberCreate$zodSchema: z.ZodType<WorkspaceMemberCreate> =
+  z.object({
+    userId: z.string().describe(
+      "Identifier of the user that should be added to the workspace.",
+    ),
+  });

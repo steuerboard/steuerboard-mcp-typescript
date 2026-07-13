@@ -7,9 +7,7 @@ import * as z from "zod";
 export type CompleteSessionResponse = { success: boolean };
 
 export const CompleteSessionResponse$zodSchema: z.ZodType<
-  CompleteSessionResponse,
-  z.ZodTypeDef,
-  unknown
+  CompleteSessionResponse
 > = z.object({
   success: z.boolean(),
 });

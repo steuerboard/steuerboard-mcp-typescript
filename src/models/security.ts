@@ -6,7 +6,6 @@ import * as z from "zod";
 
 export type Security = { bearerAuth?: string | undefined };
 
-export const Security$zodSchema: z.ZodType<Security, z.ZodTypeDef, unknown> = z
-  .object({
-    bearerAuth: z.string().describe("Bearer token authentication").optional(),
-  });
+export const Security$zodSchema: z.ZodType<Security> = z.object({
+  bearerAuth: z.string().describe("Bearer token authentication").optional(),
+});

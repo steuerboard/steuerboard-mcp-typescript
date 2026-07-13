@@ -3,8 +3,9 @@
  */
 
 import { SteuerboardCore } from "../core.js";
-import { appendForm, encodeSimple } from "../lib/encodings.js";
+import { appendForm, encodeSimple, normalizeBlob } from "../lib/encodings.js";
 import {
+  bytesToBlob,
   getContentTypeFromFileName,
   readableStreamToArrayBuffer,
 } from "../lib/files.js";
@@ -97,7 +98,10 @@ async function $do(
     payload$.CollectFileSubmitForm.collectItemId,
   );
   if (isBlobLike(payload$.CollectFileSubmitForm.file)) {
-    appendForm(body$, "file", payload$.CollectFileSubmitForm.file);
+    const file = payload$.CollectFileSubmitForm.file;
+    const blob = await normalizeBlob(file);
+    const name = "name" in file ? (file.name as string) : undefined;
+    appendForm(body$, "file", blob, name);
   } else if (isReadableStream(payload$.CollectFileSubmitForm.file.content)) {
     const buffer = await readableStreamToArrayBuffer(
       payload$.CollectFileSubmitForm.file.content,
@@ -105,11 +109,10 @@ async function $do(
     const contentType =
       getContentTypeFromFileName(payload$.CollectFileSubmitForm.file.fileName)
       || "application/octet-stream";
-    const blob = new Blob([buffer], { type: contentType });
     appendForm(
       body$,
       "file",
-      blob,
+      bytesToBlob(buffer, contentType),
       payload$.CollectFileSubmitForm.file.fileName,
     );
   } else {
@@ -119,9 +122,7 @@ async function $do(
     appendForm(
       body$,
       "file",
-      new Blob([payload$.CollectFileSubmitForm.file.content], {
-        type: contentType,
-      }),
+      bytesToBlob(payload$.CollectFileSubmitForm.file.content, contentType),
       payload$.CollectFileSubmitForm.file.fileName,
     );
   }
@@ -144,7 +145,7 @@ async function $do(
     options: client$._options,
     baseURL: options?.serverURL ?? client$._baseURL ?? "",
     operationID: "submitCollectFile",
-    oAuth2Scopes: [],
+    oAuth2Scopes: null,
     resolvedSecurity: null,
     securitySource: null,
     retryConfig: options?.retries

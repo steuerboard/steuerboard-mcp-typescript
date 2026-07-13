@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
 import {
   CollectSessionByToken,
@@ -13,9 +14,7 @@ import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 export type GetcollectSessionByTokenRequest = { token: string };
 
 export const GetcollectSessionByTokenRequest$zodSchema: z.ZodType<
-  GetcollectSessionByTokenRequest,
-  z.ZodTypeDef,
-  unknown
+  GetcollectSessionByTokenRequest
 > = z.object({
   token: z.string(),
 });
@@ -23,9 +22,7 @@ export const GetcollectSessionByTokenRequest$zodSchema: z.ZodType<
 export type GetcollectSessionByTokenPath = string | number;
 
 export const GetcollectSessionByTokenPath$zodSchema: z.ZodType<
-  GetcollectSessionByTokenPath,
-  z.ZodTypeDef,
-  unknown
+  GetcollectSessionByTokenPath
 > = z.union([
   z.string(),
   z.number(),
@@ -38,9 +35,7 @@ export type GetcollectSessionByTokenIssue = {
 };
 
 export const GetcollectSessionByTokenIssue$zodSchema: z.ZodType<
-  GetcollectSessionByTokenIssue,
-  z.ZodTypeDef,
-  unknown
+  GetcollectSessionByTokenIssue
 > = z.object({
   code: z.string(),
   message: z.string().optional(),
@@ -56,9 +51,7 @@ export type GetcollectSessionByTokenError = {
 };
 
 export const GetcollectSessionByTokenError$zodSchema: z.ZodType<
-  GetcollectSessionByTokenError,
-  z.ZodTypeDef,
-  unknown
+  GetcollectSessionByTokenError
 > = z.object({
   issues: z.array(z.lazy(() => GetcollectSessionByTokenIssue$zodSchema)),
   name: z.string(),
@@ -73,36 +66,43 @@ export type GetcollectSessionByTokenUnprocessableEntityResponseBody = {
 };
 
 export const GetcollectSessionByTokenUnprocessableEntityResponseBody$zodSchema:
-  z.ZodType<
-    GetcollectSessionByTokenUnprocessableEntityResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    error: z.lazy(() => GetcollectSessionByTokenError$zodSchema),
-    success: z.boolean(),
-  }).describe("The validation error(s)");
+  z.ZodType<GetcollectSessionByTokenUnprocessableEntityResponseBody> = z.object(
+    {
+      error: z.lazy(() => GetcollectSessionByTokenError$zodSchema),
+      success: z.boolean(),
+    },
+  ).describe("The validation error(s)");
+
+export const GetcollectSessionByTokenStatusCode = {
+  FourHundredAndFour: 404,
+} as const;
+export type GetcollectSessionByTokenStatusCode = ClosedEnum<
+  typeof GetcollectSessionByTokenStatusCode
+>;
 
 export const GetcollectSessionByTokenStatusCode$zodSchema = z.literal(404);
 
-export type GetcollectSessionByTokenStatusCode = z.infer<
-  typeof GetcollectSessionByTokenStatusCode$zodSchema
+export const GetcollectSessionByTokenType = {
+  NotFound: "not_found",
+} as const;
+export type GetcollectSessionByTokenType = ClosedEnum<
+  typeof GetcollectSessionByTokenType
 >;
 
 export const GetcollectSessionByTokenType$zodSchema = z.enum([
   "not_found",
 ]);
 
-export type GetcollectSessionByTokenType = z.infer<
-  typeof GetcollectSessionByTokenType$zodSchema
+export const GetcollectSessionByTokenCode = {
+  CollectTokenNotFound: "collect_token_not_found",
+} as const;
+export type GetcollectSessionByTokenCode = ClosedEnum<
+  typeof GetcollectSessionByTokenCode
 >;
 
 export const GetcollectSessionByTokenCode$zodSchema = z.enum([
   "collect_token_not_found",
 ]);
-
-export type GetcollectSessionByTokenCode = z.infer<
-  typeof GetcollectSessionByTokenCode$zodSchema
->;
 
 /**
  * Collect session not found. The token may be invalid or revoked.
@@ -115,9 +115,7 @@ export type GetcollectSessionByTokenNotFoundResponseBody = {
 };
 
 export const GetcollectSessionByTokenNotFoundResponseBody$zodSchema: z.ZodType<
-  GetcollectSessionByTokenNotFoundResponseBody,
-  z.ZodTypeDef,
-  unknown
+  GetcollectSessionByTokenNotFoundResponseBody
 > = z.object({
   code: GetcollectSessionByTokenCode$zodSchema,
   message: z.string(),
@@ -133,9 +131,7 @@ export type GetcollectSessionByTokenResponse =
   | GetcollectSessionByTokenUnprocessableEntityResponseBody;
 
 export const GetcollectSessionByTokenResponse$zodSchema: z.ZodType<
-  GetcollectSessionByTokenResponse,
-  z.ZodTypeDef,
-  unknown
+  GetcollectSessionByTokenResponse
 > = z.union([
   CollectSessionByToken$zodSchema,
   z.lazy(() => GetcollectSessionByTokenNotFoundResponseBody$zodSchema),

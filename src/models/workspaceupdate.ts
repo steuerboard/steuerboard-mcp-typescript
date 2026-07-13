@@ -6,10 +6,6 @@ import * as z from "zod";
 
 export type WorkspaceUpdate = { name: string };
 
-export const WorkspaceUpdate$zodSchema: z.ZodType<
-  WorkspaceUpdate,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string(),
+export const WorkspaceUpdate$zodSchema: z.ZodType<WorkspaceUpdate> = z.object({
+  name: z.string().describe("The new name of the workspace"),
 });

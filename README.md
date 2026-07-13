@@ -33,23 +33,23 @@ For more information about the API: [Find out more about Steuerboard API](https:
 
 Deployed at https://mcp.steuerboard.com
 <details>
-<summary>DXT (Desktop Extension)</summary>
+<summary>Claude Desktop</summary>
 
-Install the MCP server as a Desktop Extension using the pre-built [`mcp-server.dxt`](./mcp-server.dxt) file:
+Install the MCP server as a Desktop Extension using the pre-built [`mcp-server.mcpb`](https://github.com/steuerboard/steuerboard-mcp-typescript/releases/download/v0.4.0/mcp-server.mcpb) file:
 
-Simply drag and drop the [`mcp-server.dxt`](./mcp-server.dxt) file onto Claude Desktop to install the extension.
+Simply drag and drop the [`mcp-server.mcpb`](https://github.com/steuerboard/steuerboard-mcp-typescript/releases/download/v0.4.0/mcp-server.mcpb) file onto Claude Desktop to install the extension.
 
-The DXT package includes the MCP server and all necessary configuration. Once installed, the server will be available without additional setup.
+The MCP bundle package includes the MCP server and all necessary configuration. Once installed, the server will be available without additional setup.
 
 > [!NOTE]
-> DXT (Desktop Extensions) provide a streamlined way to package and distribute MCP servers. Learn more about [Desktop Extensions](https://www.anthropic.com/engineering/desktop-extensions).
+> MCP bundles provide a streamlined way to package and distribute MCP servers. Learn more about [Desktop Extensions](https://www.anthropic.com/engineering/desktop-extensions).
 
 </details>
 
 <details>
 <summary>Cursor</summary>
 
-[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=Steuerboard&config=eyJtY3BTZXJ2ZXJzIjp7IlN0ZXVlcmJvYXJkIjp7InR5cGUiOiJtY3AiLCJ1cmwiOiJodHRwczovL21jcC5zdGV1ZXJib2FyZC5jb20vbWNwIiwiaGVhZGVycyI6eyJhdXRob3JpemF0aW9uIjoiJHtAU1RFVUVSQk9BUkQvTUNQX0JFQVJFUl9BVVRIfSJ9fX19)
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=Steuerboard&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIm1jcC1yZW1vdGVAMC4xLjI1IiwiaHR0cHM6Ly9tY3Auc3RldWVyYm9hcmQuY29tL3NzZSIsIi0taGVhZGVyIiwiYmVhcmVyLWF1dGg6JHtCRUFSRVJfQVVUSH0iXX0=)
 
 Or manually:
 
@@ -60,15 +60,13 @@ Or manually:
 
 ```json
 {
-  "mcpServers": {
-    "Steuerboard": {
-      "type": "mcp",
-      "url": "https://mcp.steuerboard.com/mcp",
-      "headers": {
-        "authorization": "${@STEUERBOARD/MCP_BEARER_AUTH}"
-      }
-    }
-  }
+  "command": "npx",
+  "args": [
+    "@steuerboard/mcp",
+    "start",
+    "--bearer-auth",
+    ""
+  ]
 }
 ```
 
@@ -78,7 +76,15 @@ Or manually:
 <summary>Claude Code CLI</summary>
 
 ```bash
-claude mcp add --transport sse Steuerboard https://mcp.steuerboard.com/sse --header "authorization: ..."
+claude mcp add Steuerboard -- npx -y @steuerboard/mcp start --bearer-auth 
+```
+
+</details>
+<details>
+<summary>Gemini</summary>
+
+```bash
+gemini mcp add Steuerboard -- npx -y @steuerboard/mcp start --bearer-auth 
 ```
 
 </details>
@@ -92,51 +98,51 @@ Refer to [Official Windsurf documentation](https://docs.windsurf.com/windsurf/ca
 3. Click on `Manage MCPs`. (To Manage MCPs you should be signed in with a Windsurf Account)
 4. Click on `View raw config` to open up the mcp configuration file.
 5. If the configuration file is empty paste the full json
-```
+
+```bash
 {
-  "mcpServers": {
-    "Steuerboard": {
-      "type": "mcp",
-      "url": "https://mcp.steuerboard.com/mcp",
-      "headers": {
-        "authorization": "${@STEUERBOARD/MCP_BEARER_AUTH}"
-      }
-    }
-  }
+  "command": "npx",
+  "args": [
+    "@steuerboard/mcp",
+    "start",
+    "--bearer-auth",
+    ""
+  ]
 }
 ```
 </details>
 <details>
 <summary>VS Code</summary>
 
+[![Install in VS Code](https://img.shields.io/badge/VS_Code-VS_Code?style=flat-square&label=Install%20Steuerboard%20MCP&color=0098FF)](vscode://ms-vscode.vscode-mcp/install?name=Steuerboard&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIm1jcC1yZW1vdGVAMC4xLjI1IiwiaHR0cHM6Ly9tY3Auc3RldWVyYm9hcmQuY29tL3NzZSIsIi0taGVhZGVyIiwiYmVhcmVyLWF1dGg6JHtCRUFSRVJfQVVUSH0iXX0=)
+
+Or manually:
+
 Refer to [Official VS Code documentation](https://code.visualstudio.com/api/extension-guides/ai/mcp) for latest information
 
 1. Open [Command Palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette)
 1. Search and open `MCP: Open User Configuration`. This should open mcp.json file
 2. If the configuration file is empty paste the full json
-```
+
+```bash
 {
-  "servers": {
-    "Steuerboard": {
-      "type": "mcp",
-      "url": "https://mcp.steuerboard.com/mcp",
-      "headers": {
-        "authorization": "${env:@STEUERBOARD/MCP_BEARER_AUTH}"
-      }
-    }
-  }
+  "command": "npx",
+  "args": [
+    "@steuerboard/mcp",
+    "start",
+    "--bearer-auth",
+    ""
+  ]
 }
 ```
 
 </details>
-
-
 <details>
 <summary> Stdio installation via npm </summary>
 To start the MCP server, run:
 
 ```bash
-npx @steuerboard/mcp start --bearer-auth ...
+npx @steuerboard/mcp start --bearer-auth 
 ```
 
 For a full list of server arguments, run:

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { Conflict, Conflict$zodSchema } from "./conflict.js";
 import { DeleteResponse, DeleteResponse$zodSchema } from "./deleteresponse.js";
@@ -12,34 +13,41 @@ import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 export type DeleteAccountantUserRequest = { id: string };
 
 export const DeleteAccountantUserRequest$zodSchema: z.ZodType<
-  DeleteAccountantUserRequest,
-  z.ZodTypeDef,
-  unknown
+  DeleteAccountantUserRequest
 > = z.object({
   id: z.string(),
 });
 
+export const DeleteAccountantUserStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type DeleteAccountantUserStatusCode = ClosedEnum<
+  typeof DeleteAccountantUserStatusCode
+>;
+
 export const DeleteAccountantUserStatusCode$zodSchema = z.literal(403);
 
-export type DeleteAccountantUserStatusCode = z.infer<
-  typeof DeleteAccountantUserStatusCode$zodSchema
+export const DeleteAccountantUserType = {
+  AuthError: "auth_error",
+} as const;
+export type DeleteAccountantUserType = ClosedEnum<
+  typeof DeleteAccountantUserType
 >;
 
 export const DeleteAccountantUserType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type DeleteAccountantUserType = z.infer<
-  typeof DeleteAccountantUserType$zodSchema
+export const DeleteAccountantUserCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type DeleteAccountantUserCode = ClosedEnum<
+  typeof DeleteAccountantUserCode
 >;
 
 export const DeleteAccountantUserCode$zodSchema = z.enum([
   "missing_scope",
 ]);
-
-export type DeleteAccountantUserCode = z.infer<
-  typeof DeleteAccountantUserCode$zodSchema
->;
 
 /**
  * Missing scope
@@ -52,9 +60,7 @@ export type DeleteAccountantUserResponseBody = {
 };
 
 export const DeleteAccountantUserResponseBody$zodSchema: z.ZodType<
-  DeleteAccountantUserResponseBody,
-  z.ZodTypeDef,
-  unknown
+  DeleteAccountantUserResponseBody
 > = z.object({
   code: DeleteAccountantUserCode$zodSchema,
   message: z.string(),
@@ -71,9 +77,7 @@ export type DeleteAccountantUserResponse =
   | DeleteResponse;
 
 export const DeleteAccountantUserResponse$zodSchema: z.ZodType<
-  DeleteAccountantUserResponse,
-  z.ZodTypeDef,
-  unknown
+  DeleteAccountantUserResponse
 > = z.union([
   AuthError$zodSchema,
   z.lazy(() => DeleteAccountantUserResponseBody$zodSchema),

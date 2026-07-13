@@ -11,11 +11,8 @@ export type PaginatedWorkspaces = {
   pagination: Pagination;
 };
 
-export const PaginatedWorkspaces$zodSchema: z.ZodType<
-  PaginatedWorkspaces,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  data: z.array(Workspace$zodSchema),
-  pagination: Pagination$zodSchema,
-});
+export const PaginatedWorkspaces$zodSchema: z.ZodType<PaginatedWorkspaces> = z
+  .object({
+    data: z.array(Workspace$zodSchema),
+    pagination: Pagination$zodSchema,
+  });
