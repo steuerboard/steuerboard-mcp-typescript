@@ -33,9 +33,7 @@ generation:
 mcp-typescript:
   version: 0.3.4
   additionalDependencies:
-    dependencies:
-      ai: ^6.0.0
-      react: ^19.0.0
+    dependencies: {}
     devDependencies: {}
     peerDependencies: {}
   advancedFlags: []
