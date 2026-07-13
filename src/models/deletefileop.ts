@@ -4,7 +4,6 @@
 
 import * as z from "zod";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
-import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
 import { DeleteResponse, DeleteResponse$zodSchema } from "./deleteresponse.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
@@ -78,31 +77,35 @@ export const DeleteFileUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("Invalid id error");
 
-export const DeleteFileStatusCode$zodSchema = z.literal(403);
+export const DeleteFileForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type DeleteFileStatusCode = z.infer<
-  typeof DeleteFileStatusCode$zodSchema
+export type DeleteFileForbiddenStatusCode = z.infer<
+  typeof DeleteFileForbiddenStatusCode$zodSchema
 >;
 
-export const DeleteFileType$zodSchema = z.enum([
+export const DeleteFileForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type DeleteFileType = z.infer<typeof DeleteFileType$zodSchema>;
+export type DeleteFileForbiddenType = z.infer<
+  typeof DeleteFileForbiddenType$zodSchema
+>;
 
-export const DeleteFileCode$zodSchema = z.enum([
+export const DeleteFileForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
 
-export type DeleteFileCode = z.infer<typeof DeleteFileCode$zodSchema>;
+export type DeleteFileForbiddenCode = z.infer<
+  typeof DeleteFileForbiddenCode$zodSchema
+>;
 
 /**
  * Missing scope
  */
 export type DeleteFileForbiddenResponseBody = {
-  status_code: DeleteFileStatusCode;
-  type: DeleteFileType;
-  code: DeleteFileCode;
+  status_code: DeleteFileForbiddenStatusCode;
+  type: DeleteFileForbiddenType;
+  code: DeleteFileForbiddenCode;
   message: string;
 };
 
@@ -111,46 +114,74 @@ export const DeleteFileForbiddenResponseBody$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  code: DeleteFileCode$zodSchema,
+  code: DeleteFileForbiddenCode$zodSchema,
   message: z.string(),
-  status_code: DeleteFileStatusCode$zodSchema,
-  type: DeleteFileType$zodSchema,
+  status_code: DeleteFileForbiddenStatusCode$zodSchema,
+  type: DeleteFileForbiddenType$zodSchema,
 }).describe("Missing scope");
 
-export type DeleteFileResponse = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: Response;
-  DeleteResponse?: DeleteResponse | undefined;
-  bad_request?: BadRequest | undefined;
-  auth_error?: AuthError | undefined;
-  fourHundredAndThreeApplicationJsonObject?:
-    | DeleteFileForbiddenResponseBody
-    | undefined;
-  not_found?: NotFound | undefined;
-  fourHundredAndTwentyTwoApplicationJsonObject?:
-    | DeleteFileUnprocessableEntityResponseBody
-    | undefined;
-  rate_limit?: RateLimit | undefined;
+export const DeleteFileStatusCode400$zodSchema = z.literal(400);
+
+export type DeleteFileStatusCode400 = z.infer<
+  typeof DeleteFileStatusCode400$zodSchema
+>;
+
+export const DeleteFileBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export type DeleteFileBadRequestType = z.infer<
+  typeof DeleteFileBadRequestType$zodSchema
+>;
+
+export const DeleteFileCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
+
+export type DeleteFileCodeMissingClientID = z.infer<
+  typeof DeleteFileCodeMissingClientID$zodSchema
+>;
+
+/**
+ * Missing client ID
+ */
+export type DeleteFileBadRequestResponseBody = {
+  status_code: DeleteFileStatusCode400;
+  type: DeleteFileBadRequestType;
+  code: DeleteFileCodeMissingClientID;
+  message: string;
 };
+
+export const DeleteFileBadRequestResponseBody$zodSchema: z.ZodType<
+  DeleteFileBadRequestResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  code: DeleteFileCodeMissingClientID$zodSchema,
+  message: z.string(),
+  status_code: DeleteFileStatusCode400$zodSchema,
+  type: DeleteFileBadRequestType$zodSchema,
+}).describe("Missing client ID");
+
+export type DeleteFileResponse =
+  | DeleteFileBadRequestResponseBody
+  | AuthError
+  | DeleteFileForbiddenResponseBody
+  | NotFound
+  | RateLimit
+  | DeleteResponse
+  | DeleteFileUnprocessableEntityResponseBody;
 
 export const DeleteFileResponse$zodSchema: z.ZodType<
   DeleteFileResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  DeleteResponse: DeleteResponse$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  auth_error: AuthError$zodSchema.optional(),
-  bad_request: BadRequest$zodSchema.optional(),
-  fourHundredAndThreeApplicationJsonObject: z.lazy(() =>
-    DeleteFileForbiddenResponseBody$zodSchema
-  ).optional(),
-  fourHundredAndTwentyTwoApplicationJsonObject: z.lazy(() =>
-    DeleteFileUnprocessableEntityResponseBody$zodSchema
-  ).optional(),
-  not_found: NotFound$zodSchema.optional(),
-  rate_limit: RateLimit$zodSchema.optional(),
-});
+> = z.union([
+  z.lazy(() => DeleteFileBadRequestResponseBody$zodSchema),
+  AuthError$zodSchema,
+  z.lazy(() => DeleteFileForbiddenResponseBody$zodSchema),
+  NotFound$zodSchema,
+  RateLimit$zodSchema,
+  DeleteResponse$zodSchema,
+  z.lazy(() => DeleteFileUnprocessableEntityResponseBody$zodSchema),
+]);

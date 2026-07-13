@@ -175,38 +175,21 @@ export const ListAccountantUsersResponseBody$zodSchema: z.ZodType<
   pagination: Pagination$zodSchema,
 }).describe("Accountant users");
 
-export type ListAccountantUsersResponse = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: Response;
-  twoHundredApplicationJsonObject?: ListAccountantUsersResponseBody | undefined;
-  auth_error?: AuthError | undefined;
-  fourHundredAndThreeApplicationJsonObject?:
-    | ListAccountantUsersForbiddenResponseBody
-    | undefined;
-  fourHundredAndTwentyTwoApplicationJsonObject?:
-    | ListAccountantUsersUnprocessableEntityResponseBody
-    | undefined;
-  rate_limit?: RateLimit | undefined;
-};
+export type ListAccountantUsersResponse =
+  | AuthError
+  | ListAccountantUsersForbiddenResponseBody
+  | RateLimit
+  | ListAccountantUsersResponseBody
+  | ListAccountantUsersUnprocessableEntityResponseBody;
 
 export const ListAccountantUsersResponse$zodSchema: z.ZodType<
   ListAccountantUsersResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  auth_error: AuthError$zodSchema.optional(),
-  fourHundredAndThreeApplicationJsonObject: z.lazy(() =>
-    ListAccountantUsersForbiddenResponseBody$zodSchema
-  ).optional(),
-  fourHundredAndTwentyTwoApplicationJsonObject: z.lazy(() =>
-    ListAccountantUsersUnprocessableEntityResponseBody$zodSchema
-  ).optional(),
-  rate_limit: RateLimit$zodSchema.optional(),
-  twoHundredApplicationJsonObject: z.lazy(() =>
-    ListAccountantUsersResponseBody$zodSchema
-  ).optional(),
-});
+> = z.union([
+  AuthError$zodSchema,
+  z.lazy(() => ListAccountantUsersForbiddenResponseBody$zodSchema),
+  RateLimit$zodSchema,
+  z.lazy(() => ListAccountantUsersResponseBody$zodSchema),
+  z.lazy(() => ListAccountantUsersUnprocessableEntityResponseBody$zodSchema),
+]);

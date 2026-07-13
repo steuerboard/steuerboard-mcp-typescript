@@ -167,7 +167,9 @@ async function $do(
     | ConnectionError
   >(
     M.json(200, GetTaskResponse$zodSchema, { key: "Task" }),
-    M.json(400, GetTaskResponse$zodSchema, { key: "bad_request" }),
+    M.json(400, GetTaskResponse$zodSchema, {
+      key: "fourHundredApplicationJsonObject",
+    }),
     M.json(401, GetTaskResponse$zodSchema, { key: "auth_error" }),
     M.json(403, GetTaskResponse$zodSchema, {
       key: "fourHundredAndThreeApplicationJsonObject",

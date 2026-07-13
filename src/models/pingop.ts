@@ -18,22 +18,13 @@ export const PingResponseBody$zodSchema: z.ZodType<
   ping: z.string(),
 }).describe("Pong");
 
-export type PingResponse = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: Response;
-  object?: PingResponseBody | undefined;
-  rate_limit?: RateLimit | undefined;
-};
+export type PingResponse = RateLimit | PingResponseBody;
 
 export const PingResponse$zodSchema: z.ZodType<
   PingResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  object: z.lazy(() => PingResponseBody$zodSchema).optional(),
-  rate_limit: RateLimit$zodSchema.optional(),
-});
+> = z.union([
+  RateLimit$zodSchema,
+  z.lazy(() => PingResponseBody$zodSchema),
+]);

@@ -18,22 +18,13 @@ export const IndexResponseBody$zodSchema: z.ZodType<
   message: z.string(),
 }).describe("Steuerboard API Index");
 
-export type IndexResponse = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: Response;
-  object?: IndexResponseBody | undefined;
-  rate_limit?: RateLimit | undefined;
-};
+export type IndexResponse = RateLimit | IndexResponseBody;
 
 export const IndexResponse$zodSchema: z.ZodType<
   IndexResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  object: z.lazy(() => IndexResponseBody$zodSchema).optional(),
-  rate_limit: RateLimit$zodSchema.optional(),
-});
+> = z.union([
+  RateLimit$zodSchema,
+  z.lazy(() => IndexResponseBody$zodSchema),
+]);

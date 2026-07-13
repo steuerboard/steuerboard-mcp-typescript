@@ -167,7 +167,9 @@ async function $do(
     | ConnectionError
   >(
     M.json(200, DeleteFileResponse$zodSchema, { key: "DeleteResponse" }),
-    M.json(400, DeleteFileResponse$zodSchema, { key: "bad_request" }),
+    M.json(400, DeleteFileResponse$zodSchema, {
+      key: "fourHundredApplicationJsonObject",
+    }),
     M.json(401, DeleteFileResponse$zodSchema, { key: "auth_error" }),
     M.json(403, DeleteFileResponse$zodSchema, {
       key: "fourHundredAndThreeApplicationJsonObject",

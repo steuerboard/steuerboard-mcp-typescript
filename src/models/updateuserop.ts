@@ -4,7 +4,6 @@
 
 import * as z from "zod";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
-import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
 import { ClientUser, ClientUser$zodSchema } from "./clientuser.js";
 import {
   ClientUserUpdate,
@@ -161,31 +160,35 @@ export const UpdateUserResponseBody$zodSchema: z.ZodType<
   z.lazy(() => UpdateUserResponseBody2$zodSchema),
 ]).describe("The validation error(s)");
 
-export const UpdateUserStatusCode$zodSchema = z.literal(403);
+export const UpdateUserForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type UpdateUserStatusCode = z.infer<
-  typeof UpdateUserStatusCode$zodSchema
+export type UpdateUserForbiddenStatusCode = z.infer<
+  typeof UpdateUserForbiddenStatusCode$zodSchema
 >;
 
-export const UpdateUserType$zodSchema = z.enum([
+export const UpdateUserForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type UpdateUserType = z.infer<typeof UpdateUserType$zodSchema>;
+export type UpdateUserForbiddenType = z.infer<
+  typeof UpdateUserForbiddenType$zodSchema
+>;
 
-export const UpdateUserCode$zodSchema = z.enum([
+export const UpdateUserForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
 
-export type UpdateUserCode = z.infer<typeof UpdateUserCode$zodSchema>;
+export type UpdateUserForbiddenCode = z.infer<
+  typeof UpdateUserForbiddenCode$zodSchema
+>;
 
 /**
  * Missing scope
  */
 export type UpdateUserForbiddenResponseBody = {
-  status_code: UpdateUserStatusCode;
-  type: UpdateUserType;
-  code: UpdateUserCode;
+  status_code: UpdateUserForbiddenStatusCode;
+  type: UpdateUserForbiddenType;
+  code: UpdateUserForbiddenCode;
   message: string;
 };
 
@@ -194,41 +197,78 @@ export const UpdateUserForbiddenResponseBody$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  code: UpdateUserCode$zodSchema,
+  code: UpdateUserForbiddenCode$zodSchema,
   message: z.string(),
-  status_code: UpdateUserStatusCode$zodSchema,
-  type: UpdateUserType$zodSchema,
+  status_code: UpdateUserForbiddenStatusCode$zodSchema,
+  type: UpdateUserForbiddenType$zodSchema,
 }).describe("Missing scope");
 
-export type UpdateUserResponse = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: Response;
-  ClientUser?: ClientUser | undefined;
-  bad_request?: BadRequest | undefined;
-  auth_error?: AuthError | undefined;
-  object?: UpdateUserForbiddenResponseBody | undefined;
-  not_found?: NotFound | undefined;
-  oneOf?: UpdateUserResponseBody1 | UpdateUserResponseBody2 | undefined;
-  rate_limit?: RateLimit | undefined;
+export const UpdateUserStatusCode400$zodSchema = z.literal(400);
+
+export type UpdateUserStatusCode400 = z.infer<
+  typeof UpdateUserStatusCode400$zodSchema
+>;
+
+export const UpdateUserBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export type UpdateUserBadRequestType = z.infer<
+  typeof UpdateUserBadRequestType$zodSchema
+>;
+
+export const UpdateUserCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
+
+export type UpdateUserCodeMissingClientID = z.infer<
+  typeof UpdateUserCodeMissingClientID$zodSchema
+>;
+
+/**
+ * Missing client ID
+ */
+export type UpdateUserBadRequestResponseBody = {
+  status_code: UpdateUserStatusCode400;
+  type: UpdateUserBadRequestType;
+  code: UpdateUserCodeMissingClientID;
+  message: string;
 };
+
+export const UpdateUserBadRequestResponseBody$zodSchema: z.ZodType<
+  UpdateUserBadRequestResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  code: UpdateUserCodeMissingClientID$zodSchema,
+  message: z.string(),
+  status_code: UpdateUserStatusCode400$zodSchema,
+  type: UpdateUserBadRequestType$zodSchema,
+}).describe("Missing client ID");
+
+export type UpdateUserResponse =
+  | ClientUser
+  | UpdateUserBadRequestResponseBody
+  | AuthError
+  | UpdateUserForbiddenResponseBody
+  | NotFound
+  | RateLimit
+  | UpdateUserResponseBody1
+  | UpdateUserResponseBody2;
 
 export const UpdateUserResponse$zodSchema: z.ZodType<
   UpdateUserResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ClientUser: ClientUser$zodSchema.optional(),
-  ContentType: z.string(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  auth_error: AuthError$zodSchema.optional(),
-  bad_request: BadRequest$zodSchema.optional(),
-  not_found: NotFound$zodSchema.optional(),
-  object: z.lazy(() => UpdateUserForbiddenResponseBody$zodSchema).optional(),
-  oneOf: z.union([
+> = z.union([
+  ClientUser$zodSchema,
+  z.lazy(() => UpdateUserBadRequestResponseBody$zodSchema),
+  AuthError$zodSchema,
+  z.lazy(() => UpdateUserForbiddenResponseBody$zodSchema),
+  NotFound$zodSchema,
+  RateLimit$zodSchema,
+  z.union([
     z.lazy(() => UpdateUserResponseBody1$zodSchema),
     z.lazy(() => UpdateUserResponseBody2$zodSchema),
-  ]).optional(),
-  rate_limit: RateLimit$zodSchema.optional(),
-});
+  ]),
+]);

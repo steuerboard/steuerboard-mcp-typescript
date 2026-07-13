@@ -173,7 +173,7 @@ async function $do(
       key: "DeleteResponse",
     }),
     M.json(400, RemoveWorkspaceMemberResponse$zodSchema, {
-      key: "bad_request",
+      key: "fourHundredApplicationJsonObject",
     }),
     M.json(401, RemoveWorkspaceMemberResponse$zodSchema, { key: "auth_error" }),
     M.json(403, RemoveWorkspaceMemberResponse$zodSchema, {

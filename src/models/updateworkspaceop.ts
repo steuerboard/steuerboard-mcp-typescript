@@ -4,7 +4,6 @@
 
 import * as z from "zod";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
-import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 import { Workspace, Workspace$zodSchema } from "./workspace.js";
@@ -161,31 +160,35 @@ export const UpdateWorkspaceResponseBody$zodSchema: z.ZodType<
   z.lazy(() => UpdateWorkspaceResponseBody2$zodSchema),
 ]).describe("The validation error(s)");
 
-export const UpdateWorkspaceStatusCode$zodSchema = z.literal(403);
+export const UpdateWorkspaceForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type UpdateWorkspaceStatusCode = z.infer<
-  typeof UpdateWorkspaceStatusCode$zodSchema
+export type UpdateWorkspaceForbiddenStatusCode = z.infer<
+  typeof UpdateWorkspaceForbiddenStatusCode$zodSchema
 >;
 
-export const UpdateWorkspaceType$zodSchema = z.enum([
+export const UpdateWorkspaceForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type UpdateWorkspaceType = z.infer<typeof UpdateWorkspaceType$zodSchema>;
+export type UpdateWorkspaceForbiddenType = z.infer<
+  typeof UpdateWorkspaceForbiddenType$zodSchema
+>;
 
-export const UpdateWorkspaceCode$zodSchema = z.enum([
+export const UpdateWorkspaceForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
 
-export type UpdateWorkspaceCode = z.infer<typeof UpdateWorkspaceCode$zodSchema>;
+export type UpdateWorkspaceForbiddenCode = z.infer<
+  typeof UpdateWorkspaceForbiddenCode$zodSchema
+>;
 
 /**
  * Missing scope
  */
 export type UpdateWorkspaceForbiddenResponseBody = {
-  status_code: UpdateWorkspaceStatusCode;
-  type: UpdateWorkspaceType;
-  code: UpdateWorkspaceCode;
+  status_code: UpdateWorkspaceForbiddenStatusCode;
+  type: UpdateWorkspaceForbiddenType;
+  code: UpdateWorkspaceForbiddenCode;
   message: string;
 };
 
@@ -194,45 +197,78 @@ export const UpdateWorkspaceForbiddenResponseBody$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  code: UpdateWorkspaceCode$zodSchema,
+  code: UpdateWorkspaceForbiddenCode$zodSchema,
   message: z.string(),
-  status_code: UpdateWorkspaceStatusCode$zodSchema,
-  type: UpdateWorkspaceType$zodSchema,
+  status_code: UpdateWorkspaceForbiddenStatusCode$zodSchema,
+  type: UpdateWorkspaceForbiddenType$zodSchema,
 }).describe("Missing scope");
 
-export type UpdateWorkspaceResponse = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: Response;
-  Workspace?: Workspace | undefined;
-  bad_request?: BadRequest | undefined;
-  auth_error?: AuthError | undefined;
-  object?: UpdateWorkspaceForbiddenResponseBody | undefined;
-  not_found?: NotFound | undefined;
-  oneOf?:
-    | UpdateWorkspaceResponseBody1
-    | UpdateWorkspaceResponseBody2
-    | undefined;
-  rate_limit?: RateLimit | undefined;
+export const UpdateWorkspaceStatusCode400$zodSchema = z.literal(400);
+
+export type UpdateWorkspaceStatusCode400 = z.infer<
+  typeof UpdateWorkspaceStatusCode400$zodSchema
+>;
+
+export const UpdateWorkspaceBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export type UpdateWorkspaceBadRequestType = z.infer<
+  typeof UpdateWorkspaceBadRequestType$zodSchema
+>;
+
+export const UpdateWorkspaceCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
+
+export type UpdateWorkspaceCodeMissingClientID = z.infer<
+  typeof UpdateWorkspaceCodeMissingClientID$zodSchema
+>;
+
+/**
+ * Missing client ID
+ */
+export type UpdateWorkspaceBadRequestResponseBody = {
+  status_code: UpdateWorkspaceStatusCode400;
+  type: UpdateWorkspaceBadRequestType;
+  code: UpdateWorkspaceCodeMissingClientID;
+  message: string;
 };
+
+export const UpdateWorkspaceBadRequestResponseBody$zodSchema: z.ZodType<
+  UpdateWorkspaceBadRequestResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  code: UpdateWorkspaceCodeMissingClientID$zodSchema,
+  message: z.string(),
+  status_code: UpdateWorkspaceStatusCode400$zodSchema,
+  type: UpdateWorkspaceBadRequestType$zodSchema,
+}).describe("Missing client ID");
+
+export type UpdateWorkspaceResponse =
+  | Workspace
+  | UpdateWorkspaceBadRequestResponseBody
+  | AuthError
+  | UpdateWorkspaceForbiddenResponseBody
+  | NotFound
+  | RateLimit
+  | UpdateWorkspaceResponseBody1
+  | UpdateWorkspaceResponseBody2;
 
 export const UpdateWorkspaceResponse$zodSchema: z.ZodType<
   UpdateWorkspaceResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  Workspace: Workspace$zodSchema.optional(),
-  auth_error: AuthError$zodSchema.optional(),
-  bad_request: BadRequest$zodSchema.optional(),
-  not_found: NotFound$zodSchema.optional(),
-  object: z.lazy(() => UpdateWorkspaceForbiddenResponseBody$zodSchema)
-    .optional(),
-  oneOf: z.union([
+> = z.union([
+  Workspace$zodSchema,
+  z.lazy(() => UpdateWorkspaceBadRequestResponseBody$zodSchema),
+  AuthError$zodSchema,
+  z.lazy(() => UpdateWorkspaceForbiddenResponseBody$zodSchema),
+  NotFound$zodSchema,
+  RateLimit$zodSchema,
+  z.union([
     z.lazy(() => UpdateWorkspaceResponseBody1$zodSchema),
     z.lazy(() => UpdateWorkspaceResponseBody2$zodSchema),
-  ]).optional(),
-  rate_limit: RateLimit$zodSchema.optional(),
-});
+  ]),
+]);

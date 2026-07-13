@@ -159,7 +159,9 @@ async function $do(
     | ConnectionError
   >(
     M.json(201, CreateWorkspaceResponse$zodSchema, { key: "Workspace" }),
-    M.json(400, CreateWorkspaceResponse$zodSchema, { key: "bad_request" }),
+    M.json(400, CreateWorkspaceResponse$zodSchema, {
+      key: "fourHundredApplicationJsonObject",
+    }),
     M.json(401, CreateWorkspaceResponse$zodSchema, { key: "auth_error" }),
     M.json(403, CreateWorkspaceResponse$zodSchema, {
       key: "fourHundredAndThreeApplicationJsonObject",

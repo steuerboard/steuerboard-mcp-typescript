@@ -1,7 +1,7 @@
 {
   "dxt_version": "0.1",
   "name": "@steuerboard/mcp",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "",
   "long_description": "",
   "author": {
@@ -25,6 +25,10 @@
     {
       "name": "health-index",
       "description": "Get API index\n\nReturns API information."
+    },
+    {
+      "name": "health-health",
+      "description": "Health Check\n\nReturns service health status for monitoring and container orchestration."
     },
     {
       "name": "health-ping",
@@ -69,6 +73,38 @@
     {
       "name": "admin-users-delete-accountant-user",
       "description": "Delete an accountant user\n\nDeletes an accountant user by ID."
+    },
+    {
+      "name": "collect-sessions-getcollect-session-by-token",
+      "description": "Get collect session by token\n\nValidates the token and returns the Collect-UI session payload if valid."
+    },
+    {
+      "name": "collect-sessions-ping-collect-session",
+      "description": "Ping collect session\n\nFires a session-opened tracking event. Thin, fire-and-forget."
+    },
+    {
+      "name": "collect-sessions-complete-collect-session",
+      "description": "Complete collect session\n\nMarks the session as completed by the client, optionally with a note about missing documents."
+    },
+    {
+      "name": "collect-sessions-request-link-collect-token",
+      "description": "Request a new collect session link\n\nSends the current active link when possible, or creates a new session for an expired token. Always returns 202 to prevent enumeration."
+    },
+    {
+      "name": "collect-sessions-submit-collect-file",
+      "description": "Submit a file to a collect session\n\nUploads a file submission for a collect item via a public token."
+    },
+    {
+      "name": "collect-sessions-submit-collect-form-data",
+      "description": "Submit form data to a collect session\n\nSubmits a form field value for a collect item via a public token."
+    },
+    {
+      "name": "collect-sessions-submit-collect-bulk",
+      "description": "Bulk upload files to a BULK_MATCH group\n\nUploads multiple files for a BULK_MATCH group. Files are stored without item assignment — server-side matching happens asynchronously."
+    },
+    {
+      "name": "collect-sessions-delete-collect-submission",
+      "description": "Delete a collect submission\n\nDeletes a pending submission and its associated file from storage."
     },
     {
       "name": "workspaces-list-workspaces",
@@ -117,6 +153,10 @@
     {
       "name": "files-delete-file",
       "description": "Delete a file\n\nDeletes a file by ID."
+    },
+    {
+      "name": "files-download-file-content",
+      "description": "Download file content\n\nReturns a temporary presigned URL to download the file. The URL expires after 10 minutes."
     },
     {
       "name": "tasks-list-tasks",

@@ -4,7 +4,6 @@
 
 import * as z from "zod";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
-import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
 import { FileT, FileT$zodSchema } from "./file.js";
 import { FileUpdate, FileUpdate$zodSchema } from "./fileupdate.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
@@ -170,31 +169,35 @@ export const UpdateFileNotFoundResponseBody$zodSchema: z.ZodType<
   message: z.string(),
 }).describe("File not found");
 
-export const UpdateFileStatusCode$zodSchema = z.literal(403);
+export const UpdateFileForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type UpdateFileStatusCode = z.infer<
-  typeof UpdateFileStatusCode$zodSchema
+export type UpdateFileForbiddenStatusCode = z.infer<
+  typeof UpdateFileForbiddenStatusCode$zodSchema
 >;
 
-export const UpdateFileType$zodSchema = z.enum([
+export const UpdateFileForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type UpdateFileType = z.infer<typeof UpdateFileType$zodSchema>;
+export type UpdateFileForbiddenType = z.infer<
+  typeof UpdateFileForbiddenType$zodSchema
+>;
 
-export const UpdateFileCode$zodSchema = z.enum([
+export const UpdateFileForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
 
-export type UpdateFileCode = z.infer<typeof UpdateFileCode$zodSchema>;
+export type UpdateFileForbiddenCode = z.infer<
+  typeof UpdateFileForbiddenCode$zodSchema
+>;
 
 /**
  * Missing scope
  */
 export type UpdateFileForbiddenResponseBody = {
-  status_code: UpdateFileStatusCode;
-  type: UpdateFileType;
-  code: UpdateFileCode;
+  status_code: UpdateFileForbiddenStatusCode;
+  type: UpdateFileForbiddenType;
+  code: UpdateFileForbiddenCode;
   message: string;
 };
 
@@ -203,52 +206,78 @@ export const UpdateFileForbiddenResponseBody$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  code: UpdateFileCode$zodSchema,
+  code: UpdateFileForbiddenCode$zodSchema,
   message: z.string(),
-  status_code: UpdateFileStatusCode$zodSchema,
-  type: UpdateFileType$zodSchema,
+  status_code: UpdateFileForbiddenStatusCode$zodSchema,
+  type: UpdateFileForbiddenType$zodSchema,
 }).describe("Missing scope");
 
-export type UpdateFileResponse = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: Response;
-  FileT?: FileT | undefined;
-  bad_request?: BadRequest | undefined;
-  auth_error?: AuthError | undefined;
-  fourHundredAndThreeApplicationJsonObject?:
-    | UpdateFileForbiddenResponseBody
-    | undefined;
-  fourHundredAndFourApplicationJsonObject?:
-    | UpdateFileNotFoundResponseBody
-    | undefined;
-  fourHundredAndTwentyTwoApplicationJsonOneOf?:
-    | UpdateFileResponseBody1
-    | UpdateFileResponseBody2
-    | undefined;
-  rate_limit?: RateLimit | undefined;
+export const UpdateFileStatusCode400$zodSchema = z.literal(400);
+
+export type UpdateFileStatusCode400 = z.infer<
+  typeof UpdateFileStatusCode400$zodSchema
+>;
+
+export const UpdateFileBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export type UpdateFileBadRequestType = z.infer<
+  typeof UpdateFileBadRequestType$zodSchema
+>;
+
+export const UpdateFileCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
+
+export type UpdateFileCodeMissingClientID = z.infer<
+  typeof UpdateFileCodeMissingClientID$zodSchema
+>;
+
+/**
+ * Missing client ID
+ */
+export type UpdateFileBadRequestResponseBody = {
+  status_code: UpdateFileStatusCode400;
+  type: UpdateFileBadRequestType;
+  code: UpdateFileCodeMissingClientID;
+  message: string;
 };
+
+export const UpdateFileBadRequestResponseBody$zodSchema: z.ZodType<
+  UpdateFileBadRequestResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  code: UpdateFileCodeMissingClientID$zodSchema,
+  message: z.string(),
+  status_code: UpdateFileStatusCode400$zodSchema,
+  type: UpdateFileBadRequestType$zodSchema,
+}).describe("Missing client ID");
+
+export type UpdateFileResponse =
+  | FileT
+  | UpdateFileBadRequestResponseBody
+  | AuthError
+  | UpdateFileForbiddenResponseBody
+  | RateLimit
+  | UpdateFileNotFoundResponseBody
+  | UpdateFileResponseBody1
+  | UpdateFileResponseBody2;
 
 export const UpdateFileResponse$zodSchema: z.ZodType<
   UpdateFileResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  FileT: FileT$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  auth_error: AuthError$zodSchema.optional(),
-  bad_request: BadRequest$zodSchema.optional(),
-  fourHundredAndFourApplicationJsonObject: z.lazy(() =>
-    UpdateFileNotFoundResponseBody$zodSchema
-  ).optional(),
-  fourHundredAndThreeApplicationJsonObject: z.lazy(() =>
-    UpdateFileForbiddenResponseBody$zodSchema
-  ).optional(),
-  fourHundredAndTwentyTwoApplicationJsonOneOf: z.union([
+> = z.union([
+  FileT$zodSchema,
+  z.lazy(() => UpdateFileBadRequestResponseBody$zodSchema),
+  AuthError$zodSchema,
+  z.lazy(() => UpdateFileForbiddenResponseBody$zodSchema),
+  RateLimit$zodSchema,
+  z.lazy(() => UpdateFileNotFoundResponseBody$zodSchema),
+  z.union([
     z.lazy(() => UpdateFileResponseBody1$zodSchema),
     z.lazy(() => UpdateFileResponseBody2$zodSchema),
-  ]).optional(),
-  rate_limit: RateLimit$zodSchema.optional(),
-});
+  ]),
+]);

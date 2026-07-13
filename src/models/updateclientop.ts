@@ -191,33 +191,27 @@ export const UpdateClientForbiddenResponseBody$zodSchema: z.ZodType<
   type: UpdateClientType$zodSchema,
 }).describe("Missing scope");
 
-export type UpdateClientResponse = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: Response;
-  Client?: Client | undefined;
-  auth_error?: AuthError | undefined;
-  object?: UpdateClientForbiddenResponseBody | undefined;
-  not_found?: NotFound | undefined;
-  oneOf?: UpdateClientResponseBody1 | UpdateClientResponseBody2 | undefined;
-  rate_limit?: RateLimit | undefined;
-};
+export type UpdateClientResponse =
+  | Client
+  | AuthError
+  | UpdateClientForbiddenResponseBody
+  | NotFound
+  | RateLimit
+  | UpdateClientResponseBody1
+  | UpdateClientResponseBody2;
 
 export const UpdateClientResponse$zodSchema: z.ZodType<
   UpdateClientResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Client: Client$zodSchema.optional(),
-  ContentType: z.string(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  auth_error: AuthError$zodSchema.optional(),
-  not_found: NotFound$zodSchema.optional(),
-  object: z.lazy(() => UpdateClientForbiddenResponseBody$zodSchema).optional(),
-  oneOf: z.union([
+> = z.union([
+  Client$zodSchema,
+  AuthError$zodSchema,
+  z.lazy(() => UpdateClientForbiddenResponseBody$zodSchema),
+  NotFound$zodSchema,
+  RateLimit$zodSchema,
+  z.union([
     z.lazy(() => UpdateClientResponseBody1$zodSchema),
     z.lazy(() => UpdateClientResponseBody2$zodSchema),
-  ]).optional(),
-  rate_limit: RateLimit$zodSchema.optional(),
-});
+  ]),
+]);

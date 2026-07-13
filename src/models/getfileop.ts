@@ -4,7 +4,6 @@
 
 import * as z from "zod";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
-import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
 import { FileT, FileT$zodSchema } from "./file.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
@@ -90,29 +89,35 @@ export const GetFileNotFoundResponseBody$zodSchema: z.ZodType<
   message: z.string(),
 }).describe("File not found");
 
-export const GetFileStatusCode$zodSchema = z.literal(403);
+export const GetFileForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type GetFileStatusCode = z.infer<typeof GetFileStatusCode$zodSchema>;
+export type GetFileForbiddenStatusCode = z.infer<
+  typeof GetFileForbiddenStatusCode$zodSchema
+>;
 
-export const GetFileType$zodSchema = z.enum([
+export const GetFileForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type GetFileType = z.infer<typeof GetFileType$zodSchema>;
+export type GetFileForbiddenType = z.infer<
+  typeof GetFileForbiddenType$zodSchema
+>;
 
-export const GetFileCode$zodSchema = z.enum([
+export const GetFileForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
 
-export type GetFileCode = z.infer<typeof GetFileCode$zodSchema>;
+export type GetFileForbiddenCode = z.infer<
+  typeof GetFileForbiddenCode$zodSchema
+>;
 
 /**
  * Missing scope
  */
 export type GetFileForbiddenResponseBody = {
-  status_code: GetFileStatusCode;
-  type: GetFileType;
-  code: GetFileCode;
+  status_code: GetFileForbiddenStatusCode;
+  type: GetFileForbiddenType;
+  code: GetFileForbiddenCode;
   message: string;
 };
 
@@ -121,50 +126,74 @@ export const GetFileForbiddenResponseBody$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  code: GetFileCode$zodSchema,
+  code: GetFileForbiddenCode$zodSchema,
   message: z.string(),
-  status_code: GetFileStatusCode$zodSchema,
-  type: GetFileType$zodSchema,
+  status_code: GetFileForbiddenStatusCode$zodSchema,
+  type: GetFileForbiddenType$zodSchema,
 }).describe("Missing scope");
 
-export type GetFileResponse = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: Response;
-  FileT?: FileT | undefined;
-  bad_request?: BadRequest | undefined;
-  auth_error?: AuthError | undefined;
-  fourHundredAndThreeApplicationJsonObject?:
-    | GetFileForbiddenResponseBody
-    | undefined;
-  fourHundredAndFourApplicationJsonObject?:
-    | GetFileNotFoundResponseBody
-    | undefined;
-  fourHundredAndTwentyTwoApplicationJsonObject?:
-    | GetFileUnprocessableEntityResponseBody
-    | undefined;
-  rate_limit?: RateLimit | undefined;
+export const GetFileStatusCode400$zodSchema = z.literal(400);
+
+export type GetFileStatusCode400 = z.infer<
+  typeof GetFileStatusCode400$zodSchema
+>;
+
+export const GetFileBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export type GetFileBadRequestType = z.infer<
+  typeof GetFileBadRequestType$zodSchema
+>;
+
+export const GetFileCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
+
+export type GetFileCodeMissingClientID = z.infer<
+  typeof GetFileCodeMissingClientID$zodSchema
+>;
+
+/**
+ * Missing client ID
+ */
+export type GetFileBadRequestResponseBody = {
+  status_code: GetFileStatusCode400;
+  type: GetFileBadRequestType;
+  code: GetFileCodeMissingClientID;
+  message: string;
 };
+
+export const GetFileBadRequestResponseBody$zodSchema: z.ZodType<
+  GetFileBadRequestResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  code: GetFileCodeMissingClientID$zodSchema,
+  message: z.string(),
+  status_code: GetFileStatusCode400$zodSchema,
+  type: GetFileBadRequestType$zodSchema,
+}).describe("Missing client ID");
+
+export type GetFileResponse =
+  | FileT
+  | GetFileBadRequestResponseBody
+  | AuthError
+  | GetFileForbiddenResponseBody
+  | RateLimit
+  | GetFileUnprocessableEntityResponseBody
+  | GetFileNotFoundResponseBody;
 
 export const GetFileResponse$zodSchema: z.ZodType<
   GetFileResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  FileT: FileT$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  auth_error: AuthError$zodSchema.optional(),
-  bad_request: BadRequest$zodSchema.optional(),
-  fourHundredAndFourApplicationJsonObject: z.lazy(() =>
-    GetFileNotFoundResponseBody$zodSchema
-  ).optional(),
-  fourHundredAndThreeApplicationJsonObject: z.lazy(() =>
-    GetFileForbiddenResponseBody$zodSchema
-  ).optional(),
-  fourHundredAndTwentyTwoApplicationJsonObject: z.lazy(() =>
-    GetFileUnprocessableEntityResponseBody$zodSchema
-  ).optional(),
-  rate_limit: RateLimit$zodSchema.optional(),
-});
+> = z.union([
+  FileT$zodSchema,
+  z.lazy(() => GetFileBadRequestResponseBody$zodSchema),
+  AuthError$zodSchema,
+  z.lazy(() => GetFileForbiddenResponseBody$zodSchema),
+  RateLimit$zodSchema,
+  z.lazy(() => GetFileUnprocessableEntityResponseBody$zodSchema),
+  z.lazy(() => GetFileNotFoundResponseBody$zodSchema),
+]);

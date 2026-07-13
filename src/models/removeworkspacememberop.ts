@@ -4,7 +4,6 @@
 
 import * as z from "zod";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
-import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
 import { DeleteResponse, DeleteResponse$zodSchema } from "./deleteresponse.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 import {
@@ -90,35 +89,37 @@ export const RemoveWorkspaceMemberUnprocessableEntityResponseBody$zodSchema:
     success: z.boolean(),
   }).describe("Invalid id error");
 
-export const RemoveWorkspaceMemberStatusCode$zodSchema = z.literal(403);
+export const RemoveWorkspaceMemberForbiddenStatusCode$zodSchema = z.literal(
+  403,
+);
 
-export type RemoveWorkspaceMemberStatusCode = z.infer<
-  typeof RemoveWorkspaceMemberStatusCode$zodSchema
+export type RemoveWorkspaceMemberForbiddenStatusCode = z.infer<
+  typeof RemoveWorkspaceMemberForbiddenStatusCode$zodSchema
 >;
 
-export const RemoveWorkspaceMemberType$zodSchema = z.enum([
+export const RemoveWorkspaceMemberForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type RemoveWorkspaceMemberType = z.infer<
-  typeof RemoveWorkspaceMemberType$zodSchema
+export type RemoveWorkspaceMemberForbiddenType = z.infer<
+  typeof RemoveWorkspaceMemberForbiddenType$zodSchema
 >;
 
-export const RemoveWorkspaceMemberCode$zodSchema = z.enum([
+export const RemoveWorkspaceMemberForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
 
-export type RemoveWorkspaceMemberCode = z.infer<
-  typeof RemoveWorkspaceMemberCode$zodSchema
+export type RemoveWorkspaceMemberForbiddenCode = z.infer<
+  typeof RemoveWorkspaceMemberForbiddenCode$zodSchema
 >;
 
 /**
  * Missing scope
  */
 export type RemoveWorkspaceMemberForbiddenResponseBody = {
-  status_code: RemoveWorkspaceMemberStatusCode;
-  type: RemoveWorkspaceMemberType;
-  code: RemoveWorkspaceMemberCode;
+  status_code: RemoveWorkspaceMemberForbiddenStatusCode;
+  type: RemoveWorkspaceMemberForbiddenType;
+  code: RemoveWorkspaceMemberForbiddenCode;
   message: string;
 };
 
@@ -127,44 +128,72 @@ export const RemoveWorkspaceMemberForbiddenResponseBody$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  code: RemoveWorkspaceMemberCode$zodSchema,
+  code: RemoveWorkspaceMemberForbiddenCode$zodSchema,
   message: z.string(),
-  status_code: RemoveWorkspaceMemberStatusCode$zodSchema,
-  type: RemoveWorkspaceMemberType$zodSchema,
+  status_code: RemoveWorkspaceMemberForbiddenStatusCode$zodSchema,
+  type: RemoveWorkspaceMemberForbiddenType$zodSchema,
 }).describe("Missing scope");
 
-export type RemoveWorkspaceMemberResponse = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: Response;
-  DeleteResponse?: DeleteResponse | undefined;
-  bad_request?: BadRequest | undefined;
-  auth_error?: AuthError | undefined;
-  fourHundredAndThreeApplicationJsonObject?:
-    | RemoveWorkspaceMemberForbiddenResponseBody
-    | undefined;
-  fourHundredAndTwentyTwoApplicationJsonObject?:
-    | RemoveWorkspaceMemberUnprocessableEntityResponseBody
-    | undefined;
-  rate_limit?: RateLimit | undefined;
+export const RemoveWorkspaceMemberStatusCode400$zodSchema = z.literal(400);
+
+export type RemoveWorkspaceMemberStatusCode400 = z.infer<
+  typeof RemoveWorkspaceMemberStatusCode400$zodSchema
+>;
+
+export const RemoveWorkspaceMemberBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export type RemoveWorkspaceMemberBadRequestType = z.infer<
+  typeof RemoveWorkspaceMemberBadRequestType$zodSchema
+>;
+
+export const RemoveWorkspaceMemberCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
+
+export type RemoveWorkspaceMemberCodeMissingClientID = z.infer<
+  typeof RemoveWorkspaceMemberCodeMissingClientID$zodSchema
+>;
+
+/**
+ * Missing client ID
+ */
+export type RemoveWorkspaceMemberBadRequestResponseBody = {
+  status_code: RemoveWorkspaceMemberStatusCode400;
+  type: RemoveWorkspaceMemberBadRequestType;
+  code: RemoveWorkspaceMemberCodeMissingClientID;
+  message: string;
 };
+
+export const RemoveWorkspaceMemberBadRequestResponseBody$zodSchema: z.ZodType<
+  RemoveWorkspaceMemberBadRequestResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  code: RemoveWorkspaceMemberCodeMissingClientID$zodSchema,
+  message: z.string(),
+  status_code: RemoveWorkspaceMemberStatusCode400$zodSchema,
+  type: RemoveWorkspaceMemberBadRequestType$zodSchema,
+}).describe("Missing client ID");
+
+export type RemoveWorkspaceMemberResponse =
+  | RemoveWorkspaceMemberBadRequestResponseBody
+  | AuthError
+  | RemoveWorkspaceMemberForbiddenResponseBody
+  | RateLimit
+  | DeleteResponse
+  | RemoveWorkspaceMemberUnprocessableEntityResponseBody;
 
 export const RemoveWorkspaceMemberResponse$zodSchema: z.ZodType<
   RemoveWorkspaceMemberResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  DeleteResponse: DeleteResponse$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  auth_error: AuthError$zodSchema.optional(),
-  bad_request: BadRequest$zodSchema.optional(),
-  fourHundredAndThreeApplicationJsonObject: z.lazy(() =>
-    RemoveWorkspaceMemberForbiddenResponseBody$zodSchema
-  ).optional(),
-  fourHundredAndTwentyTwoApplicationJsonObject: z.lazy(() =>
-    RemoveWorkspaceMemberUnprocessableEntityResponseBody$zodSchema
-  ).optional(),
-  rate_limit: RateLimit$zodSchema.optional(),
-});
+> = z.union([
+  z.lazy(() => RemoveWorkspaceMemberBadRequestResponseBody$zodSchema),
+  AuthError$zodSchema,
+  z.lazy(() => RemoveWorkspaceMemberForbiddenResponseBody$zodSchema),
+  RateLimit$zodSchema,
+  DeleteResponse$zodSchema,
+  z.lazy(() => RemoveWorkspaceMemberUnprocessableEntityResponseBody$zodSchema),
+]);

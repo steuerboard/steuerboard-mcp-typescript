@@ -4,7 +4,6 @@
 
 import * as z from "zod";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
-import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 import { Task, Task$zodSchema } from "./task.js";
@@ -158,31 +157,35 @@ export const UpdateTaskResponseBody$zodSchema: z.ZodType<
   z.lazy(() => UpdateTaskResponseBody2$zodSchema),
 ]).describe("The validation error(s)");
 
-export const UpdateTaskStatusCode$zodSchema = z.literal(403);
+export const UpdateTaskForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type UpdateTaskStatusCode = z.infer<
-  typeof UpdateTaskStatusCode$zodSchema
+export type UpdateTaskForbiddenStatusCode = z.infer<
+  typeof UpdateTaskForbiddenStatusCode$zodSchema
 >;
 
-export const UpdateTaskType$zodSchema = z.enum([
+export const UpdateTaskForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type UpdateTaskType = z.infer<typeof UpdateTaskType$zodSchema>;
+export type UpdateTaskForbiddenType = z.infer<
+  typeof UpdateTaskForbiddenType$zodSchema
+>;
 
-export const UpdateTaskCode$zodSchema = z.enum([
+export const UpdateTaskForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
 
-export type UpdateTaskCode = z.infer<typeof UpdateTaskCode$zodSchema>;
+export type UpdateTaskForbiddenCode = z.infer<
+  typeof UpdateTaskForbiddenCode$zodSchema
+>;
 
 /**
  * Missing scope
  */
 export type UpdateTaskForbiddenResponseBody = {
-  status_code: UpdateTaskStatusCode;
-  type: UpdateTaskType;
-  code: UpdateTaskCode;
+  status_code: UpdateTaskForbiddenStatusCode;
+  type: UpdateTaskForbiddenType;
+  code: UpdateTaskForbiddenCode;
   message: string;
 };
 
@@ -191,41 +194,78 @@ export const UpdateTaskForbiddenResponseBody$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  code: UpdateTaskCode$zodSchema,
+  code: UpdateTaskForbiddenCode$zodSchema,
   message: z.string(),
-  status_code: UpdateTaskStatusCode$zodSchema,
-  type: UpdateTaskType$zodSchema,
+  status_code: UpdateTaskForbiddenStatusCode$zodSchema,
+  type: UpdateTaskForbiddenType$zodSchema,
 }).describe("Missing scope");
 
-export type UpdateTaskResponse = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: Response;
-  Task?: Task | undefined;
-  bad_request?: BadRequest | undefined;
-  auth_error?: AuthError | undefined;
-  object?: UpdateTaskForbiddenResponseBody | undefined;
-  not_found?: NotFound | undefined;
-  oneOf?: UpdateTaskResponseBody1 | UpdateTaskResponseBody2 | undefined;
-  rate_limit?: RateLimit | undefined;
+export const UpdateTaskStatusCode400$zodSchema = z.literal(400);
+
+export type UpdateTaskStatusCode400 = z.infer<
+  typeof UpdateTaskStatusCode400$zodSchema
+>;
+
+export const UpdateTaskBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export type UpdateTaskBadRequestType = z.infer<
+  typeof UpdateTaskBadRequestType$zodSchema
+>;
+
+export const UpdateTaskCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
+
+export type UpdateTaskCodeMissingClientID = z.infer<
+  typeof UpdateTaskCodeMissingClientID$zodSchema
+>;
+
+/**
+ * Missing client ID
+ */
+export type UpdateTaskBadRequestResponseBody = {
+  status_code: UpdateTaskStatusCode400;
+  type: UpdateTaskBadRequestType;
+  code: UpdateTaskCodeMissingClientID;
+  message: string;
 };
+
+export const UpdateTaskBadRequestResponseBody$zodSchema: z.ZodType<
+  UpdateTaskBadRequestResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  code: UpdateTaskCodeMissingClientID$zodSchema,
+  message: z.string(),
+  status_code: UpdateTaskStatusCode400$zodSchema,
+  type: UpdateTaskBadRequestType$zodSchema,
+}).describe("Missing client ID");
+
+export type UpdateTaskResponse =
+  | Task
+  | UpdateTaskBadRequestResponseBody
+  | AuthError
+  | UpdateTaskForbiddenResponseBody
+  | NotFound
+  | RateLimit
+  | UpdateTaskResponseBody1
+  | UpdateTaskResponseBody2;
 
 export const UpdateTaskResponse$zodSchema: z.ZodType<
   UpdateTaskResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  Task: Task$zodSchema.optional(),
-  auth_error: AuthError$zodSchema.optional(),
-  bad_request: BadRequest$zodSchema.optional(),
-  not_found: NotFound$zodSchema.optional(),
-  object: z.lazy(() => UpdateTaskForbiddenResponseBody$zodSchema).optional(),
-  oneOf: z.union([
+> = z.union([
+  Task$zodSchema,
+  z.lazy(() => UpdateTaskBadRequestResponseBody$zodSchema),
+  AuthError$zodSchema,
+  z.lazy(() => UpdateTaskForbiddenResponseBody$zodSchema),
+  NotFound$zodSchema,
+  RateLimit$zodSchema,
+  z.union([
     z.lazy(() => UpdateTaskResponseBody1$zodSchema),
     z.lazy(() => UpdateTaskResponseBody2$zodSchema),
-  ]).optional(),
-  rate_limit: RateLimit$zodSchema.optional(),
-});
+  ]),
+]);

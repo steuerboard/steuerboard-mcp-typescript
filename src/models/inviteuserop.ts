@@ -4,7 +4,6 @@
 
 import * as z from "zod";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
-import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
 import { ClientUser, ClientUser$zodSchema } from "./clientuser.js";
 import {
   ClientUserInvite,
@@ -86,31 +85,35 @@ export const InviteUserUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("The validation error(s)");
 
-export const InviteUserStatusCode$zodSchema = z.literal(403);
+export const InviteUserForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type InviteUserStatusCode = z.infer<
-  typeof InviteUserStatusCode$zodSchema
+export type InviteUserForbiddenStatusCode = z.infer<
+  typeof InviteUserForbiddenStatusCode$zodSchema
 >;
 
-export const InviteUserType$zodSchema = z.enum([
+export const InviteUserForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type InviteUserType = z.infer<typeof InviteUserType$zodSchema>;
+export type InviteUserForbiddenType = z.infer<
+  typeof InviteUserForbiddenType$zodSchema
+>;
 
-export const InviteUserCode$zodSchema = z.enum([
+export const InviteUserForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
 
-export type InviteUserCode = z.infer<typeof InviteUserCode$zodSchema>;
+export type InviteUserForbiddenCode = z.infer<
+  typeof InviteUserForbiddenCode$zodSchema
+>;
 
 /**
  * Missing scope
  */
 export type InviteUserForbiddenResponseBody = {
-  status_code: InviteUserStatusCode;
-  type: InviteUserType;
-  code: InviteUserCode;
+  status_code: InviteUserForbiddenStatusCode;
+  type: InviteUserForbiddenType;
+  code: InviteUserForbiddenCode;
   message: string;
 };
 
@@ -119,48 +122,76 @@ export const InviteUserForbiddenResponseBody$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  code: InviteUserCode$zodSchema,
+  code: InviteUserForbiddenCode$zodSchema,
   message: z.string(),
-  status_code: InviteUserStatusCode$zodSchema,
-  type: InviteUserType$zodSchema,
+  status_code: InviteUserForbiddenStatusCode$zodSchema,
+  type: InviteUserForbiddenType$zodSchema,
 }).describe("Missing scope");
 
-export type InviteUserResponse = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: Response;
-  ClientUser?: ClientUser | undefined;
-  bad_request?: BadRequest | undefined;
-  auth_error?: AuthError | undefined;
-  fourHundredAndThreeApplicationJsonObject?:
-    | InviteUserForbiddenResponseBody
-    | undefined;
-  not_found?: NotFound | undefined;
-  conflict?: Conflict | undefined;
-  fourHundredAndTwentyTwoApplicationJsonObject?:
-    | InviteUserUnprocessableEntityResponseBody
-    | undefined;
-  rate_limit?: RateLimit | undefined;
+export const InviteUserStatusCode400$zodSchema = z.literal(400);
+
+export type InviteUserStatusCode400 = z.infer<
+  typeof InviteUserStatusCode400$zodSchema
+>;
+
+export const InviteUserBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export type InviteUserBadRequestType = z.infer<
+  typeof InviteUserBadRequestType$zodSchema
+>;
+
+export const InviteUserCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
+
+export type InviteUserCodeMissingClientID = z.infer<
+  typeof InviteUserCodeMissingClientID$zodSchema
+>;
+
+/**
+ * Missing client ID
+ */
+export type InviteUserBadRequestResponseBody = {
+  status_code: InviteUserStatusCode400;
+  type: InviteUserBadRequestType;
+  code: InviteUserCodeMissingClientID;
+  message: string;
 };
+
+export const InviteUserBadRequestResponseBody$zodSchema: z.ZodType<
+  InviteUserBadRequestResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  code: InviteUserCodeMissingClientID$zodSchema,
+  message: z.string(),
+  status_code: InviteUserStatusCode400$zodSchema,
+  type: InviteUserBadRequestType$zodSchema,
+}).describe("Missing client ID");
+
+export type InviteUserResponse =
+  | ClientUser
+  | InviteUserBadRequestResponseBody
+  | AuthError
+  | InviteUserForbiddenResponseBody
+  | NotFound
+  | Conflict
+  | RateLimit
+  | InviteUserUnprocessableEntityResponseBody;
 
 export const InviteUserResponse$zodSchema: z.ZodType<
   InviteUserResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ClientUser: ClientUser$zodSchema.optional(),
-  ContentType: z.string(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  auth_error: AuthError$zodSchema.optional(),
-  bad_request: BadRequest$zodSchema.optional(),
-  conflict: Conflict$zodSchema.optional(),
-  fourHundredAndThreeApplicationJsonObject: z.lazy(() =>
-    InviteUserForbiddenResponseBody$zodSchema
-  ).optional(),
-  fourHundredAndTwentyTwoApplicationJsonObject: z.lazy(() =>
-    InviteUserUnprocessableEntityResponseBody$zodSchema
-  ).optional(),
-  not_found: NotFound$zodSchema.optional(),
-  rate_limit: RateLimit$zodSchema.optional(),
-});
+> = z.union([
+  ClientUser$zodSchema,
+  z.lazy(() => InviteUserBadRequestResponseBody$zodSchema),
+  AuthError$zodSchema,
+  z.lazy(() => InviteUserForbiddenResponseBody$zodSchema),
+  NotFound$zodSchema,
+  Conflict$zodSchema,
+  RateLimit$zodSchema,
+  z.lazy(() => InviteUserUnprocessableEntityResponseBody$zodSchema),
+]);

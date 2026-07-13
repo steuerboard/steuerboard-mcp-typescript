@@ -12,12 +12,14 @@ export type User = {
   email: string;
   firstName: string | null;
   lastName: string | null;
+  image: string | null;
 };
 
 export const User$zodSchema: z.ZodType<User, z.ZodTypeDef, unknown> = z.object({
   email: z.string(),
   firstName: z.string().nullable(),
   id: z.string(),
+  image: z.string().nullable(),
   lastName: z.string().nullable(),
 }).describe(
   "Optional user object with denormalised information for convenience.",

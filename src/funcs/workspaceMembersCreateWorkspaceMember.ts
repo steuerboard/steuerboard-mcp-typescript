@@ -173,7 +173,7 @@ async function $do(
       key: "WorkspaceMember",
     }),
     M.json(400, CreateWorkspaceMemberResponse$zodSchema, {
-      key: "bad_request",
+      key: "fourHundredApplicationJsonObject",
     }),
     M.json(401, CreateWorkspaceMemberResponse$zodSchema, { key: "auth_error" }),
     M.json(403, CreateWorkspaceMemberResponse$zodSchema, {

@@ -4,7 +4,6 @@
 
 import * as z from "zod";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
-import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
 import { ClientUser, ClientUser$zodSchema } from "./clientuser.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
@@ -138,29 +137,35 @@ export const GetUserResponseBody$zodSchema: z.ZodType<
   z.lazy(() => GetUserResponseBody2$zodSchema),
 ]).describe("The validation error(s)");
 
-export const GetUserStatusCode$zodSchema = z.literal(403);
+export const GetUserForbiddenStatusCode$zodSchema = z.literal(403);
 
-export type GetUserStatusCode = z.infer<typeof GetUserStatusCode$zodSchema>;
+export type GetUserForbiddenStatusCode = z.infer<
+  typeof GetUserForbiddenStatusCode$zodSchema
+>;
 
-export const GetUserType$zodSchema = z.enum([
+export const GetUserForbiddenType$zodSchema = z.enum([
   "auth_error",
 ]);
 
-export type GetUserType = z.infer<typeof GetUserType$zodSchema>;
+export type GetUserForbiddenType = z.infer<
+  typeof GetUserForbiddenType$zodSchema
+>;
 
-export const GetUserCode$zodSchema = z.enum([
+export const GetUserForbiddenCode$zodSchema = z.enum([
   "missing_scope",
 ]);
 
-export type GetUserCode = z.infer<typeof GetUserCode$zodSchema>;
+export type GetUserForbiddenCode = z.infer<
+  typeof GetUserForbiddenCode$zodSchema
+>;
 
 /**
  * Missing scope
  */
 export type GetUserForbiddenResponseBody = {
-  status_code: GetUserStatusCode;
-  type: GetUserType;
-  code: GetUserCode;
+  status_code: GetUserForbiddenStatusCode;
+  type: GetUserForbiddenType;
+  code: GetUserForbiddenCode;
   message: string;
 };
 
@@ -169,41 +174,78 @@ export const GetUserForbiddenResponseBody$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  code: GetUserCode$zodSchema,
+  code: GetUserForbiddenCode$zodSchema,
   message: z.string(),
-  status_code: GetUserStatusCode$zodSchema,
-  type: GetUserType$zodSchema,
+  status_code: GetUserForbiddenStatusCode$zodSchema,
+  type: GetUserForbiddenType$zodSchema,
 }).describe("Missing scope");
 
-export type GetUserResponse = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: Response;
-  ClientUser?: ClientUser | undefined;
-  bad_request?: BadRequest | undefined;
-  auth_error?: AuthError | undefined;
-  object?: GetUserForbiddenResponseBody | undefined;
-  not_found?: NotFound | undefined;
-  oneOf?: GetUserResponseBody1 | GetUserResponseBody2 | undefined;
-  rate_limit?: RateLimit | undefined;
+export const GetUserStatusCode400$zodSchema = z.literal(400);
+
+export type GetUserStatusCode400 = z.infer<
+  typeof GetUserStatusCode400$zodSchema
+>;
+
+export const GetUserBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export type GetUserBadRequestType = z.infer<
+  typeof GetUserBadRequestType$zodSchema
+>;
+
+export const GetUserCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
+
+export type GetUserCodeMissingClientID = z.infer<
+  typeof GetUserCodeMissingClientID$zodSchema
+>;
+
+/**
+ * Missing client ID
+ */
+export type GetUserBadRequestResponseBody = {
+  status_code: GetUserStatusCode400;
+  type: GetUserBadRequestType;
+  code: GetUserCodeMissingClientID;
+  message: string;
 };
+
+export const GetUserBadRequestResponseBody$zodSchema: z.ZodType<
+  GetUserBadRequestResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  code: GetUserCodeMissingClientID$zodSchema,
+  message: z.string(),
+  status_code: GetUserStatusCode400$zodSchema,
+  type: GetUserBadRequestType$zodSchema,
+}).describe("Missing client ID");
+
+export type GetUserResponse =
+  | ClientUser
+  | GetUserBadRequestResponseBody
+  | AuthError
+  | GetUserForbiddenResponseBody
+  | NotFound
+  | RateLimit
+  | GetUserResponseBody1
+  | GetUserResponseBody2;
 
 export const GetUserResponse$zodSchema: z.ZodType<
   GetUserResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ClientUser: ClientUser$zodSchema.optional(),
-  ContentType: z.string(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  auth_error: AuthError$zodSchema.optional(),
-  bad_request: BadRequest$zodSchema.optional(),
-  not_found: NotFound$zodSchema.optional(),
-  object: z.lazy(() => GetUserForbiddenResponseBody$zodSchema).optional(),
-  oneOf: z.union([
+> = z.union([
+  ClientUser$zodSchema,
+  z.lazy(() => GetUserBadRequestResponseBody$zodSchema),
+  AuthError$zodSchema,
+  z.lazy(() => GetUserForbiddenResponseBody$zodSchema),
+  NotFound$zodSchema,
+  RateLimit$zodSchema,
+  z.union([
     z.lazy(() => GetUserResponseBody1$zodSchema),
     z.lazy(() => GetUserResponseBody2$zodSchema),
-  ]).optional(),
-  rate_limit: RateLimit$zodSchema.optional(),
-});
+  ]),
+]);
