@@ -5,11 +5,74 @@
 import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import {
   PaginatedWorkspaces,
   PaginatedWorkspaces$zodSchema,
 } from "./paginatedworkspaces.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
+
+export const ListWorkspacesForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type ListWorkspacesForbiddenStatusCode = ClosedEnum<
+  typeof ListWorkspacesForbiddenStatusCode
+>;
+
+export const ListWorkspacesForbiddenStatusCode$zodSchema = z.literal(403);
+
+export const ListWorkspacesForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type ListWorkspacesForbiddenType = ClosedEnum<
+  typeof ListWorkspacesForbiddenType
+>;
+
+export const ListWorkspacesForbiddenType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const ListWorkspacesForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type ListWorkspacesForbiddenCode = ClosedEnum<
+  typeof ListWorkspacesForbiddenCode
+>;
+
+export const ListWorkspacesForbiddenCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export const ListWorkspacesStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type ListWorkspacesStatusCode400 = ClosedEnum<
+  typeof ListWorkspacesStatusCode400
+>;
+
+export const ListWorkspacesStatusCode400$zodSchema = z.literal(400);
+
+export const ListWorkspacesBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type ListWorkspacesBadRequestType = ClosedEnum<
+  typeof ListWorkspacesBadRequestType
+>;
+
+export const ListWorkspacesBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export const ListWorkspacesCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type ListWorkspacesCodeMissingClientID = ClosedEnum<
+  typeof ListWorkspacesCodeMissingClientID
+>;
+
+export const ListWorkspacesCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
 
 export type ListWorkspacesRequest = {
   limit?: number | undefined;
@@ -74,37 +137,6 @@ export const ListWorkspacesUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("The validation error(s)");
 
-export const ListWorkspacesForbiddenStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type ListWorkspacesForbiddenStatusCode = ClosedEnum<
-  typeof ListWorkspacesForbiddenStatusCode
->;
-
-export const ListWorkspacesForbiddenStatusCode$zodSchema = z.literal(403);
-
-export const ListWorkspacesForbiddenType = {
-  AuthError: "auth_error",
-} as const;
-export type ListWorkspacesForbiddenType = ClosedEnum<
-  typeof ListWorkspacesForbiddenType
->;
-
-export const ListWorkspacesForbiddenType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const ListWorkspacesForbiddenCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type ListWorkspacesForbiddenCode = ClosedEnum<
-  typeof ListWorkspacesForbiddenCode
->;
-
-export const ListWorkspacesForbiddenCode$zodSchema = z.enum([
-  "missing_scope",
-]);
-
 /**
  * Missing scope
  */
@@ -123,37 +155,6 @@ export const ListWorkspacesForbiddenResponseBody$zodSchema: z.ZodType<
   status_code: ListWorkspacesForbiddenStatusCode$zodSchema,
   type: ListWorkspacesForbiddenType$zodSchema,
 }).describe("Missing scope");
-
-export const ListWorkspacesStatusCode400 = {
-  FourHundred: 400,
-} as const;
-export type ListWorkspacesStatusCode400 = ClosedEnum<
-  typeof ListWorkspacesStatusCode400
->;
-
-export const ListWorkspacesStatusCode400$zodSchema = z.literal(400);
-
-export const ListWorkspacesBadRequestType = {
-  BadRequest: "bad_request",
-} as const;
-export type ListWorkspacesBadRequestType = ClosedEnum<
-  typeof ListWorkspacesBadRequestType
->;
-
-export const ListWorkspacesBadRequestType$zodSchema = z.enum([
-  "bad_request",
-]);
-
-export const ListWorkspacesCodeMissingClientID = {
-  MissingClientId: "missing_client_id",
-} as const;
-export type ListWorkspacesCodeMissingClientID = ClosedEnum<
-  typeof ListWorkspacesCodeMissingClientID
->;
-
-export const ListWorkspacesCodeMissingClientID$zodSchema = z.enum([
-  "missing_client_id",
-]);
 
 /**
  * Missing client ID
@@ -179,6 +180,7 @@ export type ListWorkspacesResponse =
   | AuthError
   | ListWorkspacesForbiddenResponseBody
   | RateLimit
+  | InternalError
   | PaginatedWorkspaces
   | ListWorkspacesUnprocessableEntityResponseBody;
 
@@ -189,6 +191,7 @@ export const ListWorkspacesResponse$zodSchema: z.ZodType<
   AuthError$zodSchema,
   z.lazy(() => ListWorkspacesForbiddenResponseBody$zodSchema),
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   PaginatedWorkspaces$zodSchema,
   z.lazy(() => ListWorkspacesUnprocessableEntityResponseBody$zodSchema),
 ]);

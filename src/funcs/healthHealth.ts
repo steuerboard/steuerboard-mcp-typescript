@@ -133,7 +133,7 @@ async function $do(
   >(
     M.json(200, HealthResponse$zodSchema, { key: "object" }),
     M.json(429, HealthResponse$zodSchema, { key: "rate_limit" }),
-    M.nil(500, HealthResponse$zodSchema),
+    M.json(500, HealthResponse$zodSchema, { key: "internal_error" }),
   )(response, req$, { extraFields: responseFields$ });
 
   return [result$, { status: "complete", request: req$, response }];

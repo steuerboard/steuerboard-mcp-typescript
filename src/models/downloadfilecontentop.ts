@@ -6,7 +6,70 @@ import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { FileContent, FileContent$zodSchema } from "./filecontent.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
+
+export const DownloadFileContentForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type DownloadFileContentForbiddenStatusCode = ClosedEnum<
+  typeof DownloadFileContentForbiddenStatusCode
+>;
+
+export const DownloadFileContentForbiddenStatusCode$zodSchema = z.literal(403);
+
+export const DownloadFileContentForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type DownloadFileContentForbiddenType = ClosedEnum<
+  typeof DownloadFileContentForbiddenType
+>;
+
+export const DownloadFileContentForbiddenType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const DownloadFileContentForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type DownloadFileContentForbiddenCode = ClosedEnum<
+  typeof DownloadFileContentForbiddenCode
+>;
+
+export const DownloadFileContentForbiddenCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export const DownloadFileContentStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type DownloadFileContentStatusCode400 = ClosedEnum<
+  typeof DownloadFileContentStatusCode400
+>;
+
+export const DownloadFileContentStatusCode400$zodSchema = z.literal(400);
+
+export const DownloadFileContentBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type DownloadFileContentBadRequestType = ClosedEnum<
+  typeof DownloadFileContentBadRequestType
+>;
+
+export const DownloadFileContentBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export const DownloadFileContentCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type DownloadFileContentCodeMissingClientID = ClosedEnum<
+  typeof DownloadFileContentCodeMissingClientID
+>;
+
+export const DownloadFileContentCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
 
 export type DownloadFileContentRequest = { id: string; xClientId: string };
 
@@ -80,37 +143,6 @@ export const DownloadFileContentNotFoundResponseBody$zodSchema: z.ZodType<
   message: z.string(),
 }).describe("File not found");
 
-export const DownloadFileContentForbiddenStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type DownloadFileContentForbiddenStatusCode = ClosedEnum<
-  typeof DownloadFileContentForbiddenStatusCode
->;
-
-export const DownloadFileContentForbiddenStatusCode$zodSchema = z.literal(403);
-
-export const DownloadFileContentForbiddenType = {
-  AuthError: "auth_error",
-} as const;
-export type DownloadFileContentForbiddenType = ClosedEnum<
-  typeof DownloadFileContentForbiddenType
->;
-
-export const DownloadFileContentForbiddenType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const DownloadFileContentForbiddenCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type DownloadFileContentForbiddenCode = ClosedEnum<
-  typeof DownloadFileContentForbiddenCode
->;
-
-export const DownloadFileContentForbiddenCode$zodSchema = z.enum([
-  "missing_scope",
-]);
-
 /**
  * Missing scope
  */
@@ -129,37 +161,6 @@ export const DownloadFileContentForbiddenResponseBody$zodSchema: z.ZodType<
   status_code: DownloadFileContentForbiddenStatusCode$zodSchema,
   type: DownloadFileContentForbiddenType$zodSchema,
 }).describe("Missing scope");
-
-export const DownloadFileContentStatusCode400 = {
-  FourHundred: 400,
-} as const;
-export type DownloadFileContentStatusCode400 = ClosedEnum<
-  typeof DownloadFileContentStatusCode400
->;
-
-export const DownloadFileContentStatusCode400$zodSchema = z.literal(400);
-
-export const DownloadFileContentBadRequestType = {
-  BadRequest: "bad_request",
-} as const;
-export type DownloadFileContentBadRequestType = ClosedEnum<
-  typeof DownloadFileContentBadRequestType
->;
-
-export const DownloadFileContentBadRequestType$zodSchema = z.enum([
-  "bad_request",
-]);
-
-export const DownloadFileContentCodeMissingClientID = {
-  MissingClientId: "missing_client_id",
-} as const;
-export type DownloadFileContentCodeMissingClientID = ClosedEnum<
-  typeof DownloadFileContentCodeMissingClientID
->;
-
-export const DownloadFileContentCodeMissingClientID$zodSchema = z.enum([
-  "missing_client_id",
-]);
 
 /**
  * Missing client ID
@@ -185,6 +186,7 @@ export type DownloadFileContentResponse =
   | AuthError
   | DownloadFileContentForbiddenResponseBody
   | RateLimit
+  | InternalError
   | FileContent
   | DownloadFileContentUnprocessableEntityResponseBody
   | DownloadFileContentNotFoundResponseBody;
@@ -196,6 +198,7 @@ export const DownloadFileContentResponse$zodSchema: z.ZodType<
   AuthError$zodSchema,
   z.lazy(() => DownloadFileContentForbiddenResponseBody$zodSchema),
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   FileContent$zodSchema,
   z.lazy(() => DownloadFileContentUnprocessableEntityResponseBody$zodSchema),
   z.lazy(() => DownloadFileContentNotFoundResponseBody$zodSchema),

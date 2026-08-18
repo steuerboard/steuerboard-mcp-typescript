@@ -170,7 +170,9 @@ async function $do(
     M.json(404, DeleteAccountantUserResponse$zodSchema, { key: "not_found" }),
     M.json(409, DeleteAccountantUserResponse$zodSchema, { key: "conflict" }),
     M.json(429, DeleteAccountantUserResponse$zodSchema, { key: "rate_limit" }),
-    M.nil(500, DeleteAccountantUserResponse$zodSchema),
+    M.json(500, DeleteAccountantUserResponse$zodSchema, {
+      key: "internal_error",
+    }),
   )(response, req$, { extraFields: responseFields$ });
 
   return [result$, { status: "complete", request: req$, response }];

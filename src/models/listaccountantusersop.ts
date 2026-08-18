@@ -6,6 +6,7 @@ import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { AccountantUser, AccountantUser$zodSchema } from "./accountantuser.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { Pagination, Pagination$zodSchema } from "./pagination.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
@@ -52,6 +53,37 @@ export const ListAccountantUsersOrder$zodSchema = z.enum([
   "asc",
   "desc",
 ]).describe("The order of the results based on the sort field");
+
+export const ListAccountantUsersStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type ListAccountantUsersStatusCode = ClosedEnum<
+  typeof ListAccountantUsersStatusCode
+>;
+
+export const ListAccountantUsersStatusCode$zodSchema = z.literal(403);
+
+export const ListAccountantUsersType = {
+  AuthError: "auth_error",
+} as const;
+export type ListAccountantUsersType = ClosedEnum<
+  typeof ListAccountantUsersType
+>;
+
+export const ListAccountantUsersType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const ListAccountantUsersCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type ListAccountantUsersCode = ClosedEnum<
+  typeof ListAccountantUsersCode
+>;
+
+export const ListAccountantUsersCode$zodSchema = z.enum([
+  "missing_scope",
+]);
 
 export type ListAccountantUsersRequest = {
   limit?: number | undefined;
@@ -125,37 +157,6 @@ export const ListAccountantUsersUnprocessableEntityResponseBody$zodSchema:
     success: z.boolean(),
   }).describe("The validation error(s)");
 
-export const ListAccountantUsersStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type ListAccountantUsersStatusCode = ClosedEnum<
-  typeof ListAccountantUsersStatusCode
->;
-
-export const ListAccountantUsersStatusCode$zodSchema = z.literal(403);
-
-export const ListAccountantUsersType = {
-  AuthError: "auth_error",
-} as const;
-export type ListAccountantUsersType = ClosedEnum<
-  typeof ListAccountantUsersType
->;
-
-export const ListAccountantUsersType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const ListAccountantUsersCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type ListAccountantUsersCode = ClosedEnum<
-  typeof ListAccountantUsersCode
->;
-
-export const ListAccountantUsersCode$zodSchema = z.enum([
-  "missing_scope",
-]);
-
 /**
  * Missing scope
  */
@@ -194,6 +195,7 @@ export type ListAccountantUsersResponse =
   | AuthError
   | ListAccountantUsersForbiddenResponseBody
   | RateLimit
+  | InternalError
   | ListAccountantUsersResponseBody
   | ListAccountantUsersUnprocessableEntityResponseBody;
 
@@ -203,6 +205,7 @@ export const ListAccountantUsersResponse$zodSchema: z.ZodType<
   AuthError$zodSchema,
   z.lazy(() => ListAccountantUsersForbiddenResponseBody$zodSchema),
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   z.lazy(() => ListAccountantUsersResponseBody$zodSchema),
   z.lazy(() => ListAccountantUsersUnprocessableEntityResponseBody$zodSchema),
 ]);

@@ -5,9 +5,64 @@
 import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 import { Task, Task$zodSchema } from "./task.js";
+
+export const GetTaskForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type GetTaskForbiddenStatusCode = ClosedEnum<
+  typeof GetTaskForbiddenStatusCode
+>;
+
+export const GetTaskForbiddenStatusCode$zodSchema = z.literal(403);
+
+export const GetTaskForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type GetTaskForbiddenType = ClosedEnum<typeof GetTaskForbiddenType>;
+
+export const GetTaskForbiddenType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const GetTaskForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type GetTaskForbiddenCode = ClosedEnum<typeof GetTaskForbiddenCode>;
+
+export const GetTaskForbiddenCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export const GetTaskStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type GetTaskStatusCode400 = ClosedEnum<typeof GetTaskStatusCode400>;
+
+export const GetTaskStatusCode400$zodSchema = z.literal(400);
+
+export const GetTaskBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type GetTaskBadRequestType = ClosedEnum<typeof GetTaskBadRequestType>;
+
+export const GetTaskBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export const GetTaskCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type GetTaskCodeMissingClientID = ClosedEnum<
+  typeof GetTaskCodeMissingClientID
+>;
+
+export const GetTaskCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
 
 export type GetTaskRequest = { id: string; xClientId: string };
 
@@ -60,33 +115,6 @@ export const GetTaskUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("Invalid id error");
 
-export const GetTaskForbiddenStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type GetTaskForbiddenStatusCode = ClosedEnum<
-  typeof GetTaskForbiddenStatusCode
->;
-
-export const GetTaskForbiddenStatusCode$zodSchema = z.literal(403);
-
-export const GetTaskForbiddenType = {
-  AuthError: "auth_error",
-} as const;
-export type GetTaskForbiddenType = ClosedEnum<typeof GetTaskForbiddenType>;
-
-export const GetTaskForbiddenType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const GetTaskForbiddenCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type GetTaskForbiddenCode = ClosedEnum<typeof GetTaskForbiddenCode>;
-
-export const GetTaskForbiddenCode$zodSchema = z.enum([
-  "missing_scope",
-]);
-
 /**
  * Missing scope
  */
@@ -105,33 +133,6 @@ export const GetTaskForbiddenResponseBody$zodSchema: z.ZodType<
   status_code: GetTaskForbiddenStatusCode$zodSchema,
   type: GetTaskForbiddenType$zodSchema,
 }).describe("Missing scope");
-
-export const GetTaskStatusCode400 = {
-  FourHundred: 400,
-} as const;
-export type GetTaskStatusCode400 = ClosedEnum<typeof GetTaskStatusCode400>;
-
-export const GetTaskStatusCode400$zodSchema = z.literal(400);
-
-export const GetTaskBadRequestType = {
-  BadRequest: "bad_request",
-} as const;
-export type GetTaskBadRequestType = ClosedEnum<typeof GetTaskBadRequestType>;
-
-export const GetTaskBadRequestType$zodSchema = z.enum([
-  "bad_request",
-]);
-
-export const GetTaskCodeMissingClientID = {
-  MissingClientId: "missing_client_id",
-} as const;
-export type GetTaskCodeMissingClientID = ClosedEnum<
-  typeof GetTaskCodeMissingClientID
->;
-
-export const GetTaskCodeMissingClientID$zodSchema = z.enum([
-  "missing_client_id",
-]);
 
 /**
  * Missing client ID
@@ -159,6 +160,7 @@ export type GetTaskResponse =
   | GetTaskForbiddenResponseBody
   | NotFound
   | RateLimit
+  | InternalError
   | GetTaskUnprocessableEntityResponseBody;
 
 export const GetTaskResponse$zodSchema: z.ZodType<GetTaskResponse> = z.union([
@@ -168,5 +170,6 @@ export const GetTaskResponse$zodSchema: z.ZodType<GetTaskResponse> = z.union([
   z.lazy(() => GetTaskForbiddenResponseBody$zodSchema),
   NotFound$zodSchema,
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   z.lazy(() => GetTaskUnprocessableEntityResponseBody$zodSchema),
 ]);

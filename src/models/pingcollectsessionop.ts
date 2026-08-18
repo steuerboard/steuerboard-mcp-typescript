@@ -5,19 +5,12 @@
 import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import {
   PingSessionResponse,
   PingSessionResponse$zodSchema,
 } from "./pingsessionresponse.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
-
-export type PingCollectSessionRequest = { token: string };
-
-export const PingCollectSessionRequest$zodSchema: z.ZodType<
-  PingCollectSessionRequest
-> = z.object({
-  token: z.string(),
-});
 
 export const PingCollectSessionStatusCode = {
   FourHundredAndFour: 404,
@@ -46,6 +39,14 @@ export const PingCollectSessionCode$zodSchema = z.enum([
   "collect_token_not_found",
 ]);
 
+export type PingCollectSessionRequest = { token: string };
+
+export const PingCollectSessionRequest$zodSchema: z.ZodType<
+  PingCollectSessionRequest
+> = z.object({
+  token: z.string(),
+});
+
 /**
  * Collect session not found. The token may be invalid or revoked.
  */
@@ -69,6 +70,7 @@ export type PingCollectSessionResponse =
   | PingCollectSessionResponseBody
   | BadRequest
   | RateLimit
+  | InternalError
   | PingSessionResponse;
 
 export const PingCollectSessionResponse$zodSchema: z.ZodType<
@@ -77,5 +79,6 @@ export const PingCollectSessionResponse$zodSchema: z.ZodType<
   z.lazy(() => PingCollectSessionResponseBody$zodSchema),
   BadRequest$zodSchema,
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   PingSessionResponse$zodSchema,
 ]);

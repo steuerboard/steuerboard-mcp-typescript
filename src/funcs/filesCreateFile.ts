@@ -221,7 +221,7 @@ async function $do(
       key: "fourHundredAndTwentyTwoApplicationJsonObject",
     }),
     M.json(429, CreateFileResponse$zodSchema, { key: "rate_limit" }),
-    M.nil(500, CreateFileResponse$zodSchema),
+    M.json(500, CreateFileResponse$zodSchema, { key: "internal_error" }),
   )(response, req$, { extraFields: responseFields$ });
 
   return [result$, { status: "complete", request: req$, response }];

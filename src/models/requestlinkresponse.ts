@@ -4,9 +4,15 @@
 
 import * as z from "zod";
 
-export type RequestLinkResponse = { success: boolean };
+export type RequestLinkResponse = {
+  success: boolean;
+  maskedEmail: string | null;
+};
 
 export const RequestLinkResponse$zodSchema: z.ZodType<RequestLinkResponse> = z
   .object({
+    maskedEmail: z.string().nullable().describe(
+      "Masked address the new link was sent to, if one was sent",
+    ),
     success: z.boolean(),
   });

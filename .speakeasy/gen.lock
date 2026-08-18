@@ -1,24 +1,24 @@
 lockVersion: 2.0.0
 id: 188da4b7-9881-4ae0-a213-c32e68b13c57
 management:
-  docChecksum: ccc62265b434d4a0d6bec415c0ceaeb0
+  docChecksum: f7a53e5adadbadb2c517be4253590348
   docVersion: 0.1.0
-  speakeasyVersion: 1.790.0
-  generationVersion: 2.917.0
+  speakeasyVersion: 1.794.1
+  generationVersion: 2.931.0
   releaseVersion: 0.4.0
-  configChecksum: 2d7daa13055fb42f3e332df0382aa232
+  configChecksum: d4f0ca795552fea3b98daabb7ab9733f
   repoURL: https://github.com/steuerboard/steuerboard-mcp-typescript.git
   installationURL: https://github.com/steuerboard/steuerboard-mcp-typescript
   published: true
 persistentEdits:
-  generation_id: 421ec8e4-20a1-428a-8003-d2123a1696a8
-  pristine_commit_hash: c71b1d88a1f27e4d0bc7930f3821568124977655
-  pristine_tree_hash: 032e573ca2bc765cf34b61788e4f63b835aae678
+  generation_id: feef76f6-4167-4e09-a1ff-c11dd562da38
+  pristine_commit_hash: 192ad89a4156ae57db2ea63fda8e11e71af43664
+  pristine_tree_hash: bb12adf7aa567833184427a2d56fb6294586f862
 features:
   mcp-typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.2
-    core: 1.3.6
+    core: 1.3.10
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     globalSecurity: 0.1.3
@@ -28,7 +28,7 @@ features:
     responseFormat: 0.1.1
     retries: 0.1.1
     sdkHooks: 0.3.0
-    unions: 0.2.0
+    unions: 0.2.1
 trackedFiles:
   .dxtignore:
     id: 0ee1c4f92736
@@ -49,11 +49,11 @@ trackedFiles:
   manifest.json:
     id: ca642a226869
     last_write_checksum: sha1:c0215a78c2eb762cebe30b85b44274b4db43ca63
-    pristine_git_object: e81d25ef0010df317deddfff6c8f1d3be5e98ad0
+    pristine_git_object: 7c1b983480ffeb5ae2b737f0cca479762443f6d2
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:63c0fd2a59bc8a018bb71ee436b2c02d300dc293
-    pristine_git_object: 7714d14864067be91ff91ee2b8103f09b1314a24
+    last_write_checksum: sha1:08f511ee27b4db1bc1bedaab541423f812bca398
+    pristine_git_object: aec032e0108e23f9fc001015fa3ee8333ed1e403
   src/cloudflare-worker/cloudflare-worker.ts:
     id: b90556be8673
     last_write_checksum: sha1:cb80bd61bf1d7fb116dfd955d8a5987247b487cb
@@ -64,179 +64,179 @@ trackedFiles:
     pristine_git_object: f336f7d4031db979a215c9e3ae2c859ccd6eccee
   src/funcs/adminClientsCreateClient.ts:
     id: dab7f1344fe1
-    last_write_checksum: sha1:5dc402bdb44bdc8aa4b04eec1d92b7c43b23d0b6
+    last_write_checksum: sha1:e353c3197d4eaeb7c385d0ee09b9be64bcb628bb
     pristine_git_object: 04dc59ff894a85e01540fc9d3046dded8662f28e
   src/funcs/adminClientsGetClient.ts:
     id: da19d4c2f5d7
-    last_write_checksum: sha1:dfbd4f24e4483c6729c7030342b3061544acd974
+    last_write_checksum: sha1:7bed931899301a430f1770cf7f5d566a9638d593
     pristine_git_object: 13c40cd15d1f3852ec4b6c4fc65a28d8f2ce564a
   src/funcs/adminClientsListClients.ts:
     id: aea3b44bd6e3
-    last_write_checksum: sha1:75b2d712fca939d04118888e589952e734fd7071
+    last_write_checksum: sha1:198316f5830a08c66745b3988acbf0e2637f612f
     pristine_git_object: 667af42dc4423b0493b21ccda22b3a74a8a8189f
   src/funcs/adminClientsUpdateClient.ts:
     id: 8b56a0b7dde1
-    last_write_checksum: sha1:4051c5ea9a0f44465732f335abfbb4065cdbae7d
+    last_write_checksum: sha1:44cd7a2838926e617aa705f1a7daa7f5b316f198
     pristine_git_object: 061167fea115cc605d818a47ddd982e67f262ea3
   src/funcs/adminUsersDeleteAccountantUser.ts:
     id: 7570928fd349
-    last_write_checksum: sha1:32c1f77e605b77732bcb0c71410190aea4856b87
+    last_write_checksum: sha1:addc5034dc69b8a37807fa7840aaf7647a3d10e2
     pristine_git_object: ae35f903b82ef66e77fe6326fe0f07d24441d228
   src/funcs/adminUsersGetAccountantUser.ts:
     id: 2e3a454291fb
-    last_write_checksum: sha1:947c581a0d6cf2b58775d31b50dd57d2f298f5cb
+    last_write_checksum: sha1:2a115e44a46905d8b052fa00be8c02c0712365eb
     pristine_git_object: 050bfd76c37830cdce671ff567a8a83881e53809
   src/funcs/adminUsersInviteAccountantUser.ts:
     id: f583fbc30560
-    last_write_checksum: sha1:295f3d66e975d4f37d2d446199be20f6e25a2667
+    last_write_checksum: sha1:71d0f45b33076da6d923b5f1d51027eb74daf0fb
     pristine_git_object: 74d3eaa3a528f4ba14887342870b858896db0169
   src/funcs/adminUsersListAccountantUsers.ts:
     id: 8aa1dbda7f09
-    last_write_checksum: sha1:88268dcb8baac00dd2f13ede8bfd634add5de613
+    last_write_checksum: sha1:30ce69344e27629aacc32b69cf8653f00a5716e8
     pristine_git_object: 41522f576a0c2894ad9c7bff2748cbbe9ce35f78
   src/funcs/adminUsersUpdateAccountantUser.ts:
     id: 1e68dd0da1c0
-    last_write_checksum: sha1:6596d5f44486191d7018bf61f846b1f788813d93
+    last_write_checksum: sha1:15fdbce12177878af58904721d349b9a565b6f2f
     pristine_git_object: 5a596db58c41ec513d925fbe342bc4937f6e8e0b
   src/funcs/authMe.ts:
     id: 7c1878afa486
-    last_write_checksum: sha1:6c0b2dd360e8a0fe1b21cc2437af3972295a2742
+    last_write_checksum: sha1:a8cd5bc38afef568cab51f5a3ac525e115a5e09a
     pristine_git_object: 9133ad80dc7fdd344d42f7c56a3b9ce60af1bdb9
   src/funcs/collectSessionsCompleteCollectSession.ts:
     id: 38a70fbc814a
-    last_write_checksum: sha1:cb40f287b2b69caefa515ce6b838114fd5f6869f
+    last_write_checksum: sha1:bd77104cdf6f7f7dcd91ddd6d3046cacc5522e84
     pristine_git_object: 93b39d324dbc955ba1c6b7c82cbbcb7a5f31a550
   src/funcs/collectSessionsDeleteCollectSubmission.ts:
     id: dfb8ca3f0b18
-    last_write_checksum: sha1:1afa068244049c34dae2d1b3585a97c581c659e1
+    last_write_checksum: sha1:45403a93d51aaf9042881175d03a4b3120d14332
     pristine_git_object: 3808ac801d25cb1d6b2c33f38e271f90e2c74341
   src/funcs/collectSessionsGetcollectSessionByToken.ts:
     id: 9cd454d6b612
-    last_write_checksum: sha1:e7bf604ce9803d15955e6c5cd61c9e26c064ff11
+    last_write_checksum: sha1:28b991a8bc35550be8b9f7505081ad55406fb081
     pristine_git_object: 83f0a5f25d89e4efed370aeff2a0a62d52184a75
   src/funcs/collectSessionsPingCollectSession.ts:
     id: bd50cc4176d6
-    last_write_checksum: sha1:92bbbffcb8a0dbaea1b5f207db70556cb3f5ab9a
+    last_write_checksum: sha1:3150ca5a2913b2e670ae6669896af32475b2f44a
     pristine_git_object: b94c340c134544afeee1f4cef9f63415442d0edc
   src/funcs/collectSessionsRequestLinkCollectToken.ts:
     id: f9a499e122d1
-    last_write_checksum: sha1:52b9bf517eacb886f9e705678352bc422d417a77
-    pristine_git_object: 87d6dc476be07c096a0e38c5c3929b676c146d9f
+    last_write_checksum: sha1:f90dfd683edfbdeb3ff5cf2120ed91e59d7b1aba
+    pristine_git_object: c4200dae9163497f3911d9c70f12914e76f46212
   src/funcs/collectSessionsSubmitCollectBulk.ts:
     id: afd583cf061a
-    last_write_checksum: sha1:9d1ef15f85c4c03524cbc8ac9ee48487eb9235a8
+    last_write_checksum: sha1:2ed1f07e7e131593cf0b55df0ddfef642debd17a
     pristine_git_object: 2aa0f575fcaa6ecc7b3caed96895a342342a1407
   src/funcs/collectSessionsSubmitCollectFile.ts:
     id: 634dfb7da73a
-    last_write_checksum: sha1:86ef0cade63ba15c9c391f01eaa6a6a1e4ba36bf
+    last_write_checksum: sha1:d57a3f539a47e7bd4e341ce341ca5c8df29fef30
     pristine_git_object: 4baf0f633b078d86a9e3038e7d8fc7a7817e9606
   src/funcs/collectSessionsSubmitCollectFormData.ts:
     id: 6257de686302
-    last_write_checksum: sha1:e226e41dc57be3c83761f132145c9c3e91b1a4c1
+    last_write_checksum: sha1:bc2f1e0fa4671838fd3ac021760753ae397d038e
     pristine_git_object: c789a4c6c8bb2bfbcd8ceab548cc20cce94819ed
   src/funcs/filesCreateFile.ts:
     id: 7cdc1404d251
-    last_write_checksum: sha1:ecee26bd0a00f887a422c64e9339a982f1f9e445
+    last_write_checksum: sha1:af552d8d4b3ca0e2e240cc1f61bc80a6bf356232
     pristine_git_object: e891953d5c54bc81d59f34048ce2c885bf6cbb7b
   src/funcs/filesDeleteFile.ts:
     id: b0e2ec2fcc74
-    last_write_checksum: sha1:bac023bee3b68dd6735e07fa969dce105d9f0c08
+    last_write_checksum: sha1:08c173b918a649b1742409688f0a9af62a42e877
     pristine_git_object: 91eafe16d49d464f5ea7880623385471c4820b84
   src/funcs/filesDownloadFileContent.ts:
     id: a4e6c4dcab1d
-    last_write_checksum: sha1:d0644fe8a9716dcc15592b8db6d3f25705fcc353
+    last_write_checksum: sha1:88e84dcd4a8da567c996e06fae29a45d468c9a02
     pristine_git_object: 3753401ca711da3faefc74a6e61b8f13dac45582
   src/funcs/filesGetFile.ts:
     id: 69fb0c4c9ee2
-    last_write_checksum: sha1:afde0d55e46c7a5df80dc32eba56b0066d02d9b1
+    last_write_checksum: sha1:65c404a8fca8c13fb0b3ab8404ffdbb6765bfc56
     pristine_git_object: 3ea5dc75fd5727f3ea29f865e9a93ad8717f3929
   src/funcs/filesListFiles.ts:
     id: 23fa6d68e25e
-    last_write_checksum: sha1:22361911e8c35946f2b86baea8fa3a8c2bf74611
+    last_write_checksum: sha1:16d350a9c6619f8be47eb5184e0238e73bed51ee
     pristine_git_object: fff29164fef82cbb2ddd221f03053e33e8d6ac52
   src/funcs/filesUpdateFile.ts:
     id: 7efd3c3e8d03
-    last_write_checksum: sha1:c345c87dbbbe02ef400979e05ae2dae00547efe8
+    last_write_checksum: sha1:ed4617f2babb46ba3e2ee6fd6c4279b7eabed07e
     pristine_git_object: 902fb70ef5a700eaaa4207dad62a93d1e7319917
   src/funcs/healthHealth.ts:
     id: 320a3ded8652
-    last_write_checksum: sha1:c361bd17be49726a0fe0d1c13e17428af23a6bc6
+    last_write_checksum: sha1:6d6e59f1203917a488c4a16f9014ac0983a0ecd8
     pristine_git_object: a2362e757ed007f9a7b632661b5ba067032ba831
   src/funcs/healthIndex.ts:
     id: 0639e57b7844
-    last_write_checksum: sha1:6a86ee442c37b820bf2af330231ff8e1460c8ad2
+    last_write_checksum: sha1:8733abe6c336d2d80df0dca2b3cb118d7a7b4c05
     pristine_git_object: 917beefbe329cd2ec44fb51bc5e518f884f56c55
   src/funcs/healthPing.ts:
     id: 2c77059a2d4b
-    last_write_checksum: sha1:4bb36ed2ade18a78d06d19582c7b615a38b75c0f
+    last_write_checksum: sha1:1c9ab68c8046603e20cc1c44432e551ed15d9143
     pristine_git_object: 8dafab83c20497e76ccba10ec4efbefe31ff100a
   src/funcs/tasksCreateTask.ts:
     id: b757e47fceff
-    last_write_checksum: sha1:8877e860906b6bd0f8daf6f6371d49126704424d
+    last_write_checksum: sha1:96f925c0719b056188d57654351f6c3f0e5f1f0f
     pristine_git_object: 80ba73855e3061cd2d15f2e507652d26e2027c93
   src/funcs/tasksDeleteTask.ts:
     id: 5e0eb9cf13b6
-    last_write_checksum: sha1:f05e497bc33a2edf9e2bdc7ac15ebbc8e30e8449
+    last_write_checksum: sha1:8e60dd08e461583f19cf94c6f57820b2495f12a8
     pristine_git_object: 8897d67cc1598dd46d130f2c1332cf2a681e7d0a
   src/funcs/tasksGetTask.ts:
     id: 73833e1486aa
-    last_write_checksum: sha1:178651c8b2ffa172593dfdf0d71ee283eeb86b8e
+    last_write_checksum: sha1:34441978ce8792828f1cc273a27864aff494901a
     pristine_git_object: a6b207c3fe00fb0ab3497d639716ac110f151b8d
   src/funcs/tasksListTasks.ts:
     id: 84646d5c4247
-    last_write_checksum: sha1:3ee155c6b3d2e6b3e5e3a3e43bf69d945f87cddc
+    last_write_checksum: sha1:1420b24556abd50a6e72615ce62eff8efcc98d58
     pristine_git_object: 0e5bbd2b5a651c4d3c792287844da2aa051869c6
   src/funcs/tasksUpdateTask.ts:
     id: d831a7545020
-    last_write_checksum: sha1:d29eacb854dc76ee72ad102df319aa594e0dbe73
+    last_write_checksum: sha1:b787902279fa601d714087adba3c9a8e09bb9ad2
     pristine_git_object: 17bd16e7a260f545ff7073a032e4cedd7c6a91a4
   src/funcs/usersDeleteUser.ts:
     id: 644ae3450a45
-    last_write_checksum: sha1:9c5d8411b5c146ae253c8bcf30bac9507166a64b
+    last_write_checksum: sha1:683f14fed5c055f4f6ac12c46e2225eb7c0fa04d
     pristine_git_object: dd501c97aa335c0c479d2405bc6a22fea65017ce
   src/funcs/usersGetUser.ts:
     id: 89aa86004b71
-    last_write_checksum: sha1:799bde6be608c51dcd1465e808e95a1ab54cda45
+    last_write_checksum: sha1:41ccde99ce73dcc8c6631cce84f13312c90106bc
     pristine_git_object: 7431cb517a57d99a10c9f7a86e4ebea62aa8d981
   src/funcs/usersInviteUser.ts:
     id: 64df7be8b2ec
-    last_write_checksum: sha1:b7e7516bcd478e459dcaedf47a409fd54ef15dfb
+    last_write_checksum: sha1:4b9fcc31f7653423e47ef2e43e57865d9e51d634
     pristine_git_object: eb005c355f6ed484fd3eef22bfe2baff33043687
   src/funcs/usersListUsers.ts:
     id: 14fdfb7c6fe0
-    last_write_checksum: sha1:3937f593ef80cf2f27e74653f09aa04a4756d727
+    last_write_checksum: sha1:f8936db80760ca41b3f204fe9b3e43a5367b634a
     pristine_git_object: 5a8b370643bb6568160cdb7672486f171f47a370
   src/funcs/usersUpdateUser.ts:
     id: 539aeeea07ba
-    last_write_checksum: sha1:8a672040d03eecb9361d736acf88e9964e736f25
+    last_write_checksum: sha1:1b9bc1c7edec69ed96ef0f785deaa85f3fd16419
     pristine_git_object: 5c076bd30567610956918bb30078ac96259f9d8e
   src/funcs/workspaceMembersCreateWorkspaceMember.ts:
     id: 9861f059b4e2
-    last_write_checksum: sha1:90c33b130027239b6b5eb3746e9743ed87e80ca9
+    last_write_checksum: sha1:ada6a4795af24ac54c80997a08580730e5ad464b
     pristine_git_object: 1c73352a994d274e0b4cf5f285ce82e587623b6f
   src/funcs/workspaceMembersListWorkspaceMembers.ts:
     id: d5c27cb774aa
-    last_write_checksum: sha1:4393dc3f0f512e460f34615893e0e903f82e9146
+    last_write_checksum: sha1:c15ddfbc09a9613117de239240d3def990021e0e
     pristine_git_object: 456e86127488c866095b6562d94668169147d4bb
   src/funcs/workspaceMembersRemoveWorkspaceMember.ts:
     id: f26a5495bfbf
-    last_write_checksum: sha1:f9c2b4a8083b013e4e86b2907513ca4139d1810a
+    last_write_checksum: sha1:516adcf4b39ae2ade4ba201558c2e68970e024d0
     pristine_git_object: f47257ac75d9a41000a3c24e46edfbdb2ed5cd23
   src/funcs/workspacesCreateWorkspace.ts:
     id: ac1d7a1bfea2
-    last_write_checksum: sha1:45229e87ac0c8cf426648db2237d623707aa8a79
+    last_write_checksum: sha1:414e4e810081944e20816a0ac4fb06e2053976ea
     pristine_git_object: fd2adb94b948c21b3de44d1d77dc4c80c9101401
   src/funcs/workspacesGetWorkspace.ts:
     id: 7485dafed535
-    last_write_checksum: sha1:7377efec8c365338bf366c2f17bcf165896c8a24
+    last_write_checksum: sha1:e0f1c3829fd1ebc7858187adc91d453ffac1dafc
     pristine_git_object: c5cc4ad886be7db702ea84db9ed97ed625ddb6e6
   src/funcs/workspacesListWorkspaces.ts:
     id: a09b0a05d1c4
-    last_write_checksum: sha1:01c9b556520f90d82830957128b6da468e26aff4
+    last_write_checksum: sha1:48e8c00eb3212544fa64116e24d9e30e789e8a82
     pristine_git_object: d9989c3d740f839b778fc4dfa988f348bd891c86
   src/funcs/workspacesUpdateWorkspace.ts:
     id: cb746e6e30cf
-    last_write_checksum: sha1:18499f38196208cede9dd47675447a36bc35675e
+    last_write_checksum: sha1:8eaa08bd8b233c1954360933ff33013952159c3b
     pristine_git_object: d36f1f9d58645521350a046ee3885b594bc8f977
   src/hooks/hooks.ts:
     id: a2463fc6f69b
@@ -256,8 +256,8 @@ trackedFiles:
     pristine_git_object: d4bd8b341290e7a828a171d840bd0b0fff7c7cd7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:708b784d466ce9fb13a7ed274eac4b0b6d667d72
-    pristine_git_object: 9166e1f71bc00009154f1d8f6a15a459f2e568e8
+    last_write_checksum: sha1:46895330edd5ab4cebc1345c0ff8bcb0b2471d4c
+    pristine_git_object: ca93e45d7d8e84c44b0212929e4bc5d7b0474238
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:9b859366c917d31f7ee533176f71631872fb05fa
@@ -432,8 +432,8 @@ trackedFiles:
     pristine_git_object: 1828ad991f0b4b0c0c73a1964a10eb46393da26b
   src/mcp-server/tools/collectSessionsRequestLinkCollectToken.ts:
     id: d543e2460566
-    last_write_checksum: sha1:16ddbd5b7e57403597895f7b98365a91934a2f51
-    pristine_git_object: 02c639bf111c21fa8f5df53248ff5b63ab7c8f1b
+    last_write_checksum: sha1:f04224079000a07c9a6ef2be2aced8e7f913dbfc
+    pristine_git_object: 1e9e8d935432e4890475e42ba64124f5e9512da8
   src/mcp-server/tools/collectSessionsSubmitCollectBulk.ts:
     id: 6b6adf6440c1
     last_write_checksum: sha1:b5950ac2e854e91c7e6459a35b27bcba3725f1f2
@@ -616,16 +616,16 @@ trackedFiles:
     pristine_git_object: 90fa0e0776e2eba4e6be57dc0e2063e06b8b3694
   src/models/collectsessionbytoken.ts:
     id: 113b73410fcc
-    last_write_checksum: sha1:5d9d4f9d19a9a7388b6201531476fe68d1798f90
-    pristine_git_object: 0f67c8d7f5fe5e67e3589497e1f052ca35ac1724
+    last_write_checksum: sha1:e7778884737c34b26ba272976239aa8c9f97ef8a
+    pristine_git_object: 5309d72da39f4ec8bc02c1f308c40c56883b48bb
   src/models/completecollectsessionop.ts:
     id: 534e02fc8621
-    last_write_checksum: sha1:e02670a0db8be1cf3dae3438a3b14a3ddb8dbd36
-    pristine_git_object: b0a317862ac0b1e0be10026a88e4fbaf5db6f1b0
+    last_write_checksum: sha1:0657a08f611cd4c3c82a8ae8a89671eb5c80f281
+    pristine_git_object: cf9396b3c470f2e8be73a6d56329de417bfd39ba
   src/models/completesessionbody.ts:
     id: fd60aac41704
-    last_write_checksum: sha1:71ded77af9fd887c47574e85862a6e12cd7cb366
-    pristine_git_object: 47431c58f0d2afd7a963e794d3bea3c9830ccaff
+    last_write_checksum: sha1:88266aba354af4476695fabc879b2b68eb290ee1
+    pristine_git_object: 23dbb8be4d98fdc31dde9a2b9ab0afcd94769ee8
   src/models/completesessionresponse.ts:
     id: 0241e75c6755
     last_write_checksum: sha1:5ab4bc4cd2c697affa3cef74c440e04d650cca18
@@ -636,56 +636,56 @@ trackedFiles:
     pristine_git_object: d7578b389462324f6f517fb891233a1096c86701
   src/models/createclientop.ts:
     id: ebeaef6bbede
-    last_write_checksum: sha1:26148ee49c0ff3c4c2a537af58bc8aa79ae628f3
-    pristine_git_object: bb395428ea3ff754f7c0bbf04a5f8bc0dbcfc882
+    last_write_checksum: sha1:332030198eb1b9eda531c65982d372f0d2c03a78
+    pristine_git_object: a3b3b8338d74dca5c32fc3ac61a0300a6ccb0814
   src/models/createfileop.ts:
     id: f86494dd5686
-    last_write_checksum: sha1:bbfff27ea0e8caa2a7dc46779fff3032d8a9b26f
-    pristine_git_object: 71058b5b420d52b2f7a0d4fda6afc1dfffe80df9
+    last_write_checksum: sha1:3a3f54b418e7c96778e8da4f9d70ea169922ab63
+    pristine_git_object: 85ce23a785e03b9a33956cc2810b20da0b8457b1
   src/models/createtaskop.ts:
     id: 0776bd5c28eb
-    last_write_checksum: sha1:7c83538a979456868144086b0c391046df91ef7b
-    pristine_git_object: 9a58bfca2e4a8d8ee8d9d9bd5300a9773c252703
+    last_write_checksum: sha1:ac315fec13a180f3ab6a9accb343a4eae21ac45a
+    pristine_git_object: 028b0c27a91930748c02ff2d0b839a79bcd82612
   src/models/createworkspacememberop.ts:
     id: 2e390b1383d7
-    last_write_checksum: sha1:aa7ad3a0d9073778ede81e6d41e395edd48044d5
-    pristine_git_object: 44e5ddea5c917b4264214dc919d77a43c1fc1ddd
+    last_write_checksum: sha1:c8be3e5b98bc010009bfed12b68e5726a945ad31
+    pristine_git_object: cc9cf5728d9c7c7b7e07b922e4bd705612d49a7a
   src/models/createworkspaceop.ts:
     id: 92d7ea60e77f
-    last_write_checksum: sha1:89ba20757adfc8ef58c1f6628fe4fe768b5fd162
-    pristine_git_object: ae79b9c82be2d28c4ad7b91d57ed76f4f5d24573
+    last_write_checksum: sha1:9caa81a730e14a2c9c4bc5bf2213c481578d4acc
+    pristine_git_object: 6fb19945767110ab5964b4cce8b59341a6cbf085
   src/models/deleteaccountantuserop.ts:
     id: cb7115ccc603
-    last_write_checksum: sha1:20f4bd1cc351f3131ef4442b7e33f5457d680665
-    pristine_git_object: 15743c1e922d08c42ac05b22927ce739b0d3e09b
+    last_write_checksum: sha1:4825ee8fa58510f467f9ebc8e5e3efb03fe988c8
+    pristine_git_object: 27fd1c09cdb03311fef5ab21400526f324d9f459
   src/models/deletecollectsubmissionop.ts:
     id: "933118880707"
-    last_write_checksum: sha1:d7bdd87b8603aa5d5d5b7068b168ccdaeabfd96b
-    pristine_git_object: 0c123bd034c99756e926366dfe67720883ff4827
+    last_write_checksum: sha1:62771bbfd1785cb8dcd5f8b86b144f1123f5d881
+    pristine_git_object: d719bcd1932abb2e5439d5f12f1020e87fc5b749
   src/models/deletecollectsubmissionresponse.ts:
     id: 0f5bf3c97c04
     last_write_checksum: sha1:296dbbebb0c7ef8ea83d97bebd3dc151ab291e3f
     pristine_git_object: 7067046afa4c42b5e2536b2dc3796d3ab150bbc8
   src/models/deletefileop.ts:
     id: 9ee49dfe2c40
-    last_write_checksum: sha1:a668cede03abb393083789682a20a30bf483f7d6
-    pristine_git_object: f3dadb7061064c96b9a8cc1254b859f2fb574ed8
+    last_write_checksum: sha1:ebed64651da27bcdfec215da934f73de6e41f0e6
+    pristine_git_object: ea9c58fefe7354d7f506afbb9bd5d04bbda4d8b2
   src/models/deleteresponse.ts:
     id: 2daa82fb61f1
     last_write_checksum: sha1:eb75c234b430b8582c1165cb5e5a0e4c378104b8
     pristine_git_object: 1569148416facd0027f21fe7ad7266a55f488f13
   src/models/deletetaskop.ts:
     id: f3ffe81d8e7d
-    last_write_checksum: sha1:032047466196bdb6f7dbc0698449561525c44279
-    pristine_git_object: 227d5013543735da507c4f2c942b6901fb366858
+    last_write_checksum: sha1:567c5df183c08bd66f08961f0c7027a48300d8c3
+    pristine_git_object: 80148b4fe0a4ef58e9cc048fc442aa9d25cbe0bd
   src/models/deleteuserop.ts:
     id: 2edf282facad
-    last_write_checksum: sha1:60ff1d829abe4c8b5d6980c9eee35bee026b48cf
-    pristine_git_object: 2b36eaeff2fa11509ae8e2b3dded46e3ebeb671f
+    last_write_checksum: sha1:3cd5ff957ad086a646de8ebd0e441c25725ec443
+    pristine_git_object: 0b3b2f49ddf91bfadd7b87e5b6a714e97076290f
   src/models/downloadfilecontentop.ts:
     id: a17f0d0855b5
-    last_write_checksum: sha1:7a1b59a0491978ff21841deef3a60c80ad95b384
-    pristine_git_object: 73f981f1a4fe8332c9b33a535c7c04fd84f419bc
+    last_write_checksum: sha1:dd99a251649a7b120d520954a70cc8c5a87b1439
+    pristine_git_object: 298859a4bfe31df149aed3d124f71ad9ac55bc27
   src/models/errors/apierror.ts:
     id: e2280e075454
     last_write_checksum: sha1:1a4199dec47757c19b2e88dbd767d7f24ab9522a
@@ -716,83 +716,85 @@ trackedFiles:
     pristine_git_object: e5acc82008e771e8b2524ed01be5b17b0e8eaf8a
   src/models/getaccountantuserop.ts:
     id: a5b1b254e600
-    last_write_checksum: sha1:b188f7bc1067e505f8087ba3a8fe09768104413e
-    pristine_git_object: c7735126b8eaf248ef63db9d4bfd3a67cd4e7dd2
+    last_write_checksum: sha1:3cc55cf83ce8da1ca04d8738d874d5fe6dace892
+    pristine_git_object: 1a1e401a999a70a635afa4b13b67de568cafa8dd
   src/models/getclientop.ts:
     id: 36906774d696
-    last_write_checksum: sha1:ac640cff6c5167cf755858f9011078573388efca
-    pristine_git_object: da3c219a61a5069ee72d085ea8678df20accdc39
+    last_write_checksum: sha1:cf77aa0b20abff7fd52675472b857afa4b58aa08
+    pristine_git_object: b3968bc6e18cf2a74bcd913d1d1abd554d121152
   src/models/getcollectsessionbytokenop.ts:
     id: dbccf10acb92
-    last_write_checksum: sha1:9bb69e1da987c84455de93f64d2511950aa42836
-    pristine_git_object: c71e50a05071a01c7e102e8c202e2dfc6b529271
+    last_write_checksum: sha1:764de19dc009fe72b1fd5ada052b818748eeb084
+    pristine_git_object: c36da207bc9c166ee59aefb2f764a8f468547963
   src/models/getfileop.ts:
     id: 68203eeed1a0
-    last_write_checksum: sha1:cbc5c685cada3eb9a0a1284674ca17dbf9e90ee0
-    pristine_git_object: 586adbe2b7671c5c47f4e23304c3b783a58c228e
+    last_write_checksum: sha1:2799d57e97774979dd65c1162f15dc24e218ded4
+    pristine_git_object: b1e4bf6768a3408f463343fd77b1b1c215c4a0e7
   src/models/gettaskop.ts:
     id: dc672047b01b
-    last_write_checksum: sha1:869a277a5b6ecfa2c781e0e0d2b7d60a1bd02cb0
-    pristine_git_object: 3134a4fcc0ec68f51951c0a0a42cdbe8df613361
+    last_write_checksum: sha1:276ca1983bf72d51c7c3cf1b7d68eb8531175a5e
+    pristine_git_object: 04980333c340b2342081dc5e52e63af6d6d7a48a
   src/models/getuserop.ts:
     id: 6fe74577b1de
-    last_write_checksum: sha1:cae303e8866cb4e04d1db8e428c1d7a54943ebf9
-    pristine_git_object: 1b2924902df2a872f1994f31d146b79080a3d56d
+    last_write_checksum: sha1:c15a3becfd83c3cb5ba4da69f2b1b24fcb1c5634
+    pristine_git_object: 50830d5a76661422c8e047bdb9e769ba3180b6d7
   src/models/getworkspaceop.ts:
     id: 94f9d161a06f
-    last_write_checksum: sha1:5485b9084e01c8140c8a9a955e7234b0c1fa83a4
-    pristine_git_object: 148af9b9a20863867ac378138ce46c6104c31c25
+    last_write_checksum: sha1:5066ae4bc089e07c68fba2ee6123ba008b766133
+    pristine_git_object: 8a7693ef0977d90b044dff70cb6509744a1ad51d
   src/models/healthop.ts:
     id: c431cfd0a53c
-    last_write_checksum: sha1:7d3030e1c98d703a75a1dac0a807ecc61922f163
+    last_write_checksum: sha1:f2e227ebca20a2d3d4434ecc180a0ec3cc030e18
     pristine_git_object: 5105d8e7e6174e3d93942cabe4c7f014fb953f67
   src/models/indexop.ts:
     id: 00e609ff9565
-    last_write_checksum: sha1:88b040564190e1d671497e9ce9c0a16bd82da221
+    last_write_checksum: sha1:8f9937eadcd4996464f1643ee47f31d29f2c18e0
     pristine_git_object: 866ebd5874573f481cf74dec221550dbb4aa6918
+  src/models/internalerror.ts:
+    last_write_checksum: sha1:98d84169cc4fcac1d57f73eb7754cf5231a7d546
   src/models/inviteaccountantuser.ts:
     id: 551761aeb7d1
     last_write_checksum: sha1:f2b7511fa8013980b4dcc0c768c16f04b4fa5d7d
     pristine_git_object: f2963a739d854b81b63b9b7e55557d1c01665640
   src/models/inviteaccountantuserop.ts:
     id: 94883d871ea4
-    last_write_checksum: sha1:8c1e0136f5c69f6ef2050d1739057308ef549274
-    pristine_git_object: da9057a4d0b49d792e6f8f625fdc094d2f22cd33
+    last_write_checksum: sha1:e1d09ae90bbc4dfc51a693f6df1b808faa42286c
+    pristine_git_object: 46113b024aa1f54c4b81c20f983915325ccdc3c6
   src/models/inviteuserop.ts:
     id: fd180ee45209
-    last_write_checksum: sha1:08a2a945abc2fc237c636ab9a9b50083fafa2b80
-    pristine_git_object: fd6bee670a857be344f5dc7e9928468da105290c
+    last_write_checksum: sha1:495731f38e0b9e3eaa1051594236ca31f9c5fc0b
+    pristine_git_object: 4b42e32b55aa50a1c6201441805dcedef912be07
   src/models/listaccountantusersop.ts:
     id: 4b8bb0363b55
-    last_write_checksum: sha1:16acc1aa1dd7966a3f9fcf7d688b441d69ff68dc
-    pristine_git_object: 2d763d8c700c18370e1d92b16ce4fcd5ad7f12cd
+    last_write_checksum: sha1:7b4fe5f9e24bb89c6b0d9c59881653f175683f5f
+    pristine_git_object: b7ab490373d8fbdc5b5e4a99a3cb70b51f31c249
   src/models/listclientsop.ts:
     id: c581e93c2bc4
-    last_write_checksum: sha1:2cf82631e896ebbccb410e9d507ad094b603cf38
-    pristine_git_object: 48730f23673c34cf0104a995b9b2b5fd40fb82ed
+    last_write_checksum: sha1:a4e84a69bfafac4a989bbbfe58cd6a82bde5c6ef
+    pristine_git_object: 1d90753ac4f109f90e02a20ede3325f605b75017
   src/models/listfilesop.ts:
     id: ad0e89ac07f7
-    last_write_checksum: sha1:a7713f6ffebfedbfa91c67d8b957d1234723c234
-    pristine_git_object: f26bc74d9622b806cf59714fed912e0dd6fee674
+    last_write_checksum: sha1:95f6b99d2c5d6a519976b898bee1f42396fb73a8
+    pristine_git_object: 7f864ecfd6eb82260b3f83fe86283e773148d145
   src/models/listtasksop.ts:
     id: b564cec76ef8
-    last_write_checksum: sha1:568fada1170711f4ea7ce4b884393f12f7e9c3c1
-    pristine_git_object: fecc4275d7e101b8bc8821c16ea7020f5b39bd9b
+    last_write_checksum: sha1:a82274764d10dc0295980d80c4031a027cef2a7c
+    pristine_git_object: 755335360b1182d8fddbef5bb50bfc3461472cbb
   src/models/listusersop.ts:
     id: 4316f0df15d9
-    last_write_checksum: sha1:82225cc3fbe694d735189d994a7e3cf27218f9cf
-    pristine_git_object: a4a73429db28ea4bfbd2d66168c16ac95345f2c4
+    last_write_checksum: sha1:f3ef591e0f0990a5aa76bb962c8ce28ee240cce1
+    pristine_git_object: a497b217b51f79bc01deaf77f55684b9a2f30240
   src/models/listworkspacemembersop.ts:
     id: 5d370a29c587
-    last_write_checksum: sha1:c3dd61ab1210621630397f9d1364a788c746f4de
-    pristine_git_object: cbef4437a0710cbcff53a005104ad1c5400c43c6
+    last_write_checksum: sha1:ace1e6831a2512e055efd5df7a2a5ed8a4c020b2
+    pristine_git_object: 3cc4ede1bf3908f191fc726902cbdf33e101c91f
   src/models/listworkspacesop.ts:
     id: 70bfbd7eb32f
-    last_write_checksum: sha1:7ff82396a1d7efeae69e9e17cc285180eb58c07e
-    pristine_git_object: 38d8b840904e7e8b8b7bf00b09cd8d7805ce2a0e
+    last_write_checksum: sha1:6c976b8d39deae56a13bac16404fa1f3fc3efc6a
+    pristine_git_object: 05d16e1c8c59bcad148677eec6dbf142cdcf5a5e
   src/models/meop.ts:
     id: 2cd102ba354e
-    last_write_checksum: sha1:44121a9023927a9d78a350eadf70f3942da6c3df
+    last_write_checksum: sha1:b604dde05a46fd1f391716b907c97c50d151f760
     pristine_git_object: cd9310d8b88aa6fd481afb3739086fc67d8cee11
   src/models/notfound.ts:
     id: 45af2638be0f
@@ -824,11 +826,11 @@ trackedFiles:
     pristine_git_object: cfea46360568076acdf3e6962a8ec9967a6a9d6f
   src/models/pingcollectsessionop.ts:
     id: f9fb3d64b3c0
-    last_write_checksum: sha1:7ff1161c221da6f2b00a7a62d44a7fbf0bad045d
-    pristine_git_object: dfe2ec5833b6163c49ecd2468f4f1b92f30ee3ab
+    last_write_checksum: sha1:627b5e67648e70d1e5c86a881775cfaeb62ec744
+    pristine_git_object: c6dc41af5f6cf3f3d173d6fc117cbc916113447c
   src/models/pingop.ts:
     id: c1b586efe15a
-    last_write_checksum: sha1:3f3494f932faeeae71ed704628c0ea601e9c30ba
+    last_write_checksum: sha1:8c405f90a6a6bcd19bfdbdad03b795bf3bdf0510
     pristine_git_object: 285559b0ab43e50d303c63fe93769863402bffd2
   src/models/pingsessionresponse.ts:
     id: 335ea85903ea
@@ -840,36 +842,32 @@ trackedFiles:
     pristine_git_object: 9d6cd0873ff7536864cc6374d0623ddafd66c0a2
   src/models/removeworkspacememberop.ts:
     id: c9a6fd2a941e
-    last_write_checksum: sha1:f4361f5198f32e55bbe19cb4f0362875d05967c4
-    pristine_git_object: 9105daada116e34398c468bf23ab3c0d248d7806
-  src/models/requestlinkbody.ts:
-    id: fb1ad1e0acc2
-    last_write_checksum: sha1:d528e30a19dc0b5b398b3b7089d8086ec3b45b7e
-    pristine_git_object: 1800714f2eb74df677bd56799bf0794ff101637d
+    last_write_checksum: sha1:b852441e99660f31fd6a82c4f34ef23a19b39027
+    pristine_git_object: 2083e384b8100a862f6042ed6933753766aa0004
   src/models/requestlinkcollecttokenop.ts:
     id: 5b9232e1309d
-    last_write_checksum: sha1:caf53ed73af1f2511ef2b0d49d6f4c4a0dd504e1
-    pristine_git_object: e03fb68022e3fe6ad6b4f4c8d3e6f5acd3f07634
+    last_write_checksum: sha1:3ac17f7a7817bbf36ea356a8805fa99193af3005
+    pristine_git_object: c827c6da2d961bbdae6ad9916e6e0cc9a2b91c32
   src/models/requestlinkresponse.ts:
     id: 3c954d32855d
-    last_write_checksum: sha1:3bfdfc9fa0e7a43b2b1983a608d17e51153a9ace
-    pristine_git_object: 833b81fdd67a364e8874853863a72c9cc5ddee12
+    last_write_checksum: sha1:e4043f1ac42a3e3e198ef12b6883db69da4ffe20
+    pristine_git_object: ffc1d75b7f74a1a745ad9e67f6a9dc15ad3ec8fa
   src/models/security.ts:
     id: d90c6c784ca5
     last_write_checksum: sha1:c1b8e3bca5eb1dc24eb86c2c385ef8139cdc5cc4
     pristine_git_object: ece1eef8bf10ebbafb2d2b690e1a4e9f1c3f9a0e
   src/models/submitcollectbulkop.ts:
     id: 315b50a58ed9
-    last_write_checksum: sha1:5641afb788be55bd7ebc2e4b9788586b7e19a2eb
-    pristine_git_object: 17f7764edb8d27102b4f47b43d6b951db0bae695
+    last_write_checksum: sha1:82a0de4ec573b24ec5f804e38ed993b17bb74036
+    pristine_git_object: eb3a039d2fac7b6cb9761f205ff55531f25df08b
   src/models/submitcollectfileop.ts:
     id: bfa6163bf87c
-    last_write_checksum: sha1:6cfd6097d8cb650e69cb2085254ec4602486d113
-    pristine_git_object: d817fedb5544bb38672d2c525ff0c85bc44d36bd
+    last_write_checksum: sha1:bc3a7dd927fe36a41041481af0383963a99e8372
+    pristine_git_object: ab441e380b42ecaef34e60cb6678ac85546b5b99
   src/models/submitcollectformdataop.ts:
     id: 1d3f1d9b1b75
-    last_write_checksum: sha1:551bb244304ab01f55f199a783f6a73bba776708
-    pristine_git_object: d9e6a4979c1b9a38f4dca705827aaeb2ffbdf2d8
+    last_write_checksum: sha1:120fc59da9ad1b70cc81abaf1c8ab8ebf26ee31f
+    pristine_git_object: 544f6988a58cadcc534d2a437c5c34dfce34e051
   src/models/task.ts:
     id: 9609f5f4adcb
     last_write_checksum: sha1:ed8814ae944d68476a64e51c8cd5a072ddb296fb
@@ -888,28 +886,28 @@ trackedFiles:
     pristine_git_object: fe1989466339a07403d3e3176453e8533a9941bb
   src/models/updateaccountantuserop.ts:
     id: 2cf003e1c549
-    last_write_checksum: sha1:35673b8c6e25e0acc7d1811284b4f63d7e9c70be
-    pristine_git_object: a3804bf8182aa0effa8b4dc1be654d2b3b251b74
+    last_write_checksum: sha1:ed38d7760bade9f36c1aa76f68cf8e7bf6384d55
+    pristine_git_object: 3be48430ec25db12e7cf0411634754c6b8e46499
   src/models/updateclientop.ts:
     id: a220ddbd0301
-    last_write_checksum: sha1:774daa0f0e69525184f08c28f1f7f652ebb431fa
-    pristine_git_object: 94e080ba0d156284aaa98b1f1e372b9c7bb4cb40
+    last_write_checksum: sha1:3eb7504332c477061888ee866738c08a585d263e
+    pristine_git_object: ebcd7e715b136c05168af23e8faa858afbab33c4
   src/models/updatefileop.ts:
     id: 678d0f6dce90
-    last_write_checksum: sha1:afb01966c0636780958f439bf57f3711b48d39b2
-    pristine_git_object: 37320e031e84e5b42c0b474a1b00e3ee3acff3d6
+    last_write_checksum: sha1:98861028bc183f558a2a8e7bcd9dc8a1dd902bb5
+    pristine_git_object: f9bd8fafa809b4864143c4d723d128f1ec005b97
   src/models/updatetaskop.ts:
     id: 3e03aa9bb86d
-    last_write_checksum: sha1:a9dbee0c09f335de26a0b290abeb9ad4ca79dd32
-    pristine_git_object: f39f7316d90133be0b8c0570ee419773700565c0
+    last_write_checksum: sha1:380679229ba5ba28bbe3d16dd8a007d278766dff
+    pristine_git_object: fbb9db64058be1113e12bb3947e72e1253296815
   src/models/updateuserop.ts:
     id: fde6ead207a0
-    last_write_checksum: sha1:a862af572db1b1c14e4a012066167e3c11c770a8
-    pristine_git_object: 08772441bc40dcc670c9d3f6e34eda1b0c68e1ab
+    last_write_checksum: sha1:79e84f902b8258e8b2cfccfd3a08a03c71a97779
+    pristine_git_object: a11110e807e4f0f2ee2e09a626201e481bdf93c2
   src/models/updateworkspaceop.ts:
     id: 0f912810418d
-    last_write_checksum: sha1:782ac49214a2f4e89db630756c1741465ad16ca5
-    pristine_git_object: ff2a42b8987644875bc23b38f7394b932988e662
+    last_write_checksum: sha1:348bed3fff0fbccb331a3679de299a1abe2b94af
+    pristine_git_object: 495401293f4de304de35beb3193972cfa2062dd6
   src/models/workspace.ts:
     id: f3a6e662c47b
     last_write_checksum: sha1:2ad25ae0e5a6b546bd4648fb82a5560508a4b301
@@ -937,7 +935,7 @@ trackedFiles:
   src/tool-names.ts:
     id: a9977280f9eb
     last_write_checksum: sha1:b00e10deb1becbd69df6f40f268fe68a26ba2d95
-    pristine_git_object: a0bd5c1cb3563f56917b7f44e6cce34dc1b828b1
+    pristine_git_object: d892ce03798e6bf80290eae4d12c4de6c125eed3
   src/types/async.ts:
     id: fac8da972f86
     last_write_checksum: sha1:675d04bb4b4081dc3482f18de98674f9b446e7b4
@@ -990,6 +988,8 @@ examples:
           application/json: {"message": "Steuerboard API"}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   health:
     speakeasy-default-health:
       responses:
@@ -997,6 +997,8 @@ examples:
           application/json: {"status": "<value>", "timestamp": "<value>"}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   ping:
     speakeasy-default-ping:
       responses:
@@ -1004,6 +1006,8 @@ examples:
           application/json: {"ping": "<value>"}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   me:
     speakeasy-default-me:
       responses:
@@ -1015,6 +1019,8 @@ examples:
           application/json: {"status_code": 403, "type": "auth_error", "code": "missing_scope", "message": "<value>"}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   listClients:
     speakeasy-default-list-clients:
       parameters:
@@ -1038,6 +1044,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["fieldName"], "message": "Expected string, received undefined"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   createClient:
     speakeasy-default-create-client:
       requestBody:
@@ -1053,6 +1061,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["name"], "message": "Required"}, {"code": "invalid_type", "path": ["type"], "message": "Required"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   getClient:
     speakeasy-default-get-client:
       parameters:
@@ -1071,6 +1081,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   updateClient:
     speakeasy-default-update-client:
       parameters:
@@ -1091,6 +1103,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["fieldName"], "message": "Expected string, received undefined"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   listAccountantUsers:
     speakeasy-default-list-accountant-users:
       parameters:
@@ -1110,6 +1124,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["fieldName"], "message": "Expected string, received undefined"}], "name": "ZodError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   inviteAccountantUser:
     speakeasy-default-invite-accountant-user:
       requestBody:
@@ -1129,6 +1145,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["email"], "message": "Required"}, {"code": "invalid_union", "path": ["role"], "message": "Invalid input"}], "name": "ZodError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   getAccountantUser:
     speakeasy-default-get-accountant-user:
       parameters:
@@ -1147,6 +1165,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ZodError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   deleteAccountantUser:
     speakeasy-default-delete-accountant-user:
       parameters:
@@ -1165,6 +1185,8 @@ examples:
           application/json: {"status_code": 409, "type": "conflict", "code": "conflict", "message": "<value>"}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   updateAccountantUser:
     speakeasy-default-update-accountant-user:
       parameters:
@@ -1185,6 +1207,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_union", "path": ["role"], "message": "Invalid input"}], "name": "ZodError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   getcollectSessionByToken:
     speakeasy-default-getcollect-session-by-token:
       parameters:
@@ -1201,6 +1225,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["token"], "message": "Required"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   pingCollectSession:
     speakeasy-default-ping-collect-session:
       parameters:
@@ -1215,6 +1241,8 @@ examples:
           application/json: {"status_code": 410, "type": "bad_request", "code": "collect_token_expired", "message": "<value>"}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   completeCollectSession:
     speakeasy-default-complete-collect-session:
       parameters:
@@ -1231,6 +1259,8 @@ examples:
           application/json: {"status_code": 410, "type": "bad_request", "code": "collect_token_expired", "message": "<value>"}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   requestLinkCollectToken:
     speakeasy-default-request-link-collect-token:
       parameters:
@@ -1240,11 +1270,13 @@ examples:
         application/json: {"email": "client@example.com"}
       responses:
         "202":
-          application/json: {"success": true}
+          application/json: {"success": true, "maskedEmail": "c***@example.com"}
         "422":
-          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["email"], "message": "Required"}], "name": "ValidationError"}}
+          application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["token"], "message": "Required"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   submitCollectFile:
     speakeasy-default-submit-collect-file:
       parameters:
@@ -1265,6 +1297,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "custom", "path": ["file"], "message": "Input not instance of File"}, {"code": "invalid_type", "path": ["collectItemId"], "message": "Required"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   submitCollectFormData:
     speakeasy-default-submit-collect-form-data:
       parameters:
@@ -1283,6 +1317,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["token"], "message": "Required"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   submitCollectBulk:
     speakeasy-default-submit-collect-bulk:
       parameters:
@@ -1303,6 +1339,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "too_small", "path": ["files"], "message": "Array must contain at least 1 element(s)"}, {"code": "invalid_type", "path": ["groupId"], "message": "Required"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   deleteCollectSubmission:
     speakeasy-default-delete-collect-submission:
       parameters:
@@ -1320,6 +1358,8 @@ examples:
           application/json: {"status_code": 410, "type": "bad_request", "code": "collect_token_expired", "message": "<value>"}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   listWorkspaces:
     speakeasy-default-list-workspaces:
       parameters:
@@ -1341,6 +1381,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["fieldName"], "message": "Expected string, received undefined"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   createWorkspace:
     speakeasy-default-create-workspace:
       parameters:
@@ -1361,6 +1403,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["name"], "message": "Required"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   getWorkspace:
     speakeasy-default-get-workspace:
       parameters:
@@ -1383,6 +1427,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   updateWorkspace:
     speakeasy-default-update-workspace:
       parameters:
@@ -1407,6 +1453,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["name"], "message": "Required"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   listWorkspaceMembers:
     speakeasy-default-list-workspace-members:
       parameters:
@@ -1427,6 +1475,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   createWorkspaceMember:
     speakeasy-default-create-workspace-member:
       parameters:
@@ -1449,6 +1499,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["userId"], "message": "Required"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   removeWorkspaceMember:
     speakeasy-default-remove-workspace-member:
       parameters:
@@ -1471,6 +1523,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   listFiles:
     speakeasy-default-list-files:
       parameters:
@@ -1492,6 +1546,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["fieldName"], "message": "Expected string, received undefined"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   createFile:
     speakeasy-default-create-file:
       parameters:
@@ -1514,6 +1570,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["workspaceId"], "message": "Required"}, {"code": "custom", "path": ["file"], "message": "Input not instance of File"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   getFile:
     speakeasy-default-get-file:
       parameters:
@@ -1536,6 +1594,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   deleteFile:
     speakeasy-default-delete-file:
       parameters:
@@ -1558,6 +1618,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   updateFile:
     speakeasy-default-update-file:
       parameters:
@@ -1582,6 +1644,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   downloadFileContent:
     speakeasy-default-download-file-content:
       parameters:
@@ -1604,6 +1668,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   listTasks:
     speakeasy-default-list-tasks:
       parameters:
@@ -1629,6 +1695,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["fieldName"], "message": "Expected string, received undefined"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   createTask:
     speakeasy-default-create-task:
       parameters:
@@ -1649,6 +1717,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["title"], "message": "Required"}, {"code": "invalid_type", "path": ["workspaceId"], "message": "Required"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   getTask:
     speakeasy-default-get-task:
       parameters:
@@ -1671,6 +1741,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   deleteTask:
     speakeasy-default-delete-task:
       parameters:
@@ -1693,6 +1765,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   updateTask:
     speakeasy-default-update-task:
       parameters:
@@ -1717,6 +1791,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["fieldName"], "message": "Expected string, received undefined"}], "name": "ValidationError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   listUsers:
     speakeasy-default-list-users:
       parameters:
@@ -1738,6 +1814,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["fieldName"], "message": "Expected string, received undefined"}], "name": "ZodError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   inviteUser:
     speakeasy-default-invite-user:
       parameters:
@@ -1762,6 +1840,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["email"], "message": "Required"}, {"code": "invalid_type", "path": ["role"], "message": "Required"}], "name": "ZodError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   getUser:
     speakeasy-default-get-user:
       parameters:
@@ -1784,6 +1864,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ZodError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   deleteUser:
     speakeasy-default-delete-user:
       parameters:
@@ -1806,6 +1888,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["object"], "message": "Required"}, {"code": "invalid_type", "path": ["deleted"], "message": "Required"}, {"code": "invalid_type", "path": ["id"], "message": "Required"}], "name": "ZodError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
   updateUser:
     speakeasy-default-update-user:
       parameters:
@@ -1830,6 +1914,8 @@ examples:
           application/json: {"success": false, "error": {"issues": [{"code": "invalid_type", "path": ["role"], "message": "Required"}], "name": "ZodError"}}
         "429":
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
+        "500":
+          application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
 examplesVersion: 1.0.2
 generatedFiles:
   - .dxtignore

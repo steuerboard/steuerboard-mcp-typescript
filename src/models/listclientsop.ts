@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import {
   PaginatedClients,
   PaginatedClients$zodSchema,
@@ -89,6 +90,31 @@ export const ListClientsOrder$zodSchema = z.enum([
   "desc",
 ]).describe("The order of the results based on the sort field");
 
+export const ListClientsStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type ListClientsStatusCode = ClosedEnum<typeof ListClientsStatusCode>;
+
+export const ListClientsStatusCode$zodSchema = z.literal(403);
+
+export const ListClientsType = {
+  AuthError: "auth_error",
+} as const;
+export type ListClientsType = ClosedEnum<typeof ListClientsType>;
+
+export const ListClientsType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const ListClientsCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type ListClientsCode = ClosedEnum<typeof ListClientsCode>;
+
+export const ListClientsCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
 export type ListClientsRequest = {
   limit?: number | undefined;
   cursor?: string | undefined;
@@ -171,31 +197,6 @@ export const ListClientsUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("The validation error(s)");
 
-export const ListClientsStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type ListClientsStatusCode = ClosedEnum<typeof ListClientsStatusCode>;
-
-export const ListClientsStatusCode$zodSchema = z.literal(403);
-
-export const ListClientsType = {
-  AuthError: "auth_error",
-} as const;
-export type ListClientsType = ClosedEnum<typeof ListClientsType>;
-
-export const ListClientsType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const ListClientsCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type ListClientsCode = ClosedEnum<typeof ListClientsCode>;
-
-export const ListClientsCode$zodSchema = z.enum([
-  "missing_scope",
-]);
-
 /**
  * Missing scope
  */
@@ -219,6 +220,7 @@ export type ListClientsResponse =
   | AuthError
   | ListClientsForbiddenResponseBody
   | RateLimit
+  | InternalError
   | PaginatedClients
   | ListClientsUnprocessableEntityResponseBody;
 
@@ -227,6 +229,7 @@ export const ListClientsResponse$zodSchema: z.ZodType<ListClientsResponse> = z
     AuthError$zodSchema,
     z.lazy(() => ListClientsForbiddenResponseBody$zodSchema),
     RateLimit$zodSchema,
+    InternalError$zodSchema,
     PaginatedClients$zodSchema,
     z.lazy(() => ListClientsUnprocessableEntityResponseBody$zodSchema),
   ]);

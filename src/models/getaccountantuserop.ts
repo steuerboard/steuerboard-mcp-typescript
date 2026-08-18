@@ -6,8 +6,36 @@ import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { AccountantUser, AccountantUser$zodSchema } from "./accountantuser.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
+
+export const GetAccountantUserStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type GetAccountantUserStatusCode = ClosedEnum<
+  typeof GetAccountantUserStatusCode
+>;
+
+export const GetAccountantUserStatusCode$zodSchema = z.literal(403);
+
+export const GetAccountantUserType = {
+  AuthError: "auth_error",
+} as const;
+export type GetAccountantUserType = ClosedEnum<typeof GetAccountantUserType>;
+
+export const GetAccountantUserType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const GetAccountantUserCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type GetAccountantUserCode = ClosedEnum<typeof GetAccountantUserCode>;
+
+export const GetAccountantUserCode$zodSchema = z.enum([
+  "missing_scope",
+]);
 
 export type GetAccountantUserRequest = { id: string };
 
@@ -68,33 +96,6 @@ export const GetAccountantUserUnprocessableEntityResponseBody$zodSchema:
     success: z.boolean(),
   }).describe("The validation error(s)");
 
-export const GetAccountantUserStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type GetAccountantUserStatusCode = ClosedEnum<
-  typeof GetAccountantUserStatusCode
->;
-
-export const GetAccountantUserStatusCode$zodSchema = z.literal(403);
-
-export const GetAccountantUserType = {
-  AuthError: "auth_error",
-} as const;
-export type GetAccountantUserType = ClosedEnum<typeof GetAccountantUserType>;
-
-export const GetAccountantUserType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const GetAccountantUserCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type GetAccountantUserCode = ClosedEnum<typeof GetAccountantUserCode>;
-
-export const GetAccountantUserCode$zodSchema = z.enum([
-  "missing_scope",
-]);
-
 /**
  * Missing scope
  */
@@ -120,6 +121,7 @@ export type GetAccountantUserResponse =
   | GetAccountantUserForbiddenResponseBody
   | NotFound
   | RateLimit
+  | InternalError
   | GetAccountantUserUnprocessableEntityResponseBody;
 
 export const GetAccountantUserResponse$zodSchema: z.ZodType<
@@ -130,5 +132,6 @@ export const GetAccountantUserResponse$zodSchema: z.ZodType<
   z.lazy(() => GetAccountantUserForbiddenResponseBody$zodSchema),
   NotFound$zodSchema,
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   z.lazy(() => GetAccountantUserUnprocessableEntityResponseBody$zodSchema),
 ]);

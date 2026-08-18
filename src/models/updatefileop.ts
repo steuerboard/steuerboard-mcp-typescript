@@ -7,7 +7,70 @@ import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { FileT, FileT$zodSchema } from "./file.js";
 import { FileUpdate, FileUpdate$zodSchema } from "./fileupdate.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
+
+export const UpdateFileForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type UpdateFileForbiddenStatusCode = ClosedEnum<
+  typeof UpdateFileForbiddenStatusCode
+>;
+
+export const UpdateFileForbiddenStatusCode$zodSchema = z.literal(403);
+
+export const UpdateFileForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type UpdateFileForbiddenType = ClosedEnum<
+  typeof UpdateFileForbiddenType
+>;
+
+export const UpdateFileForbiddenType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const UpdateFileForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type UpdateFileForbiddenCode = ClosedEnum<
+  typeof UpdateFileForbiddenCode
+>;
+
+export const UpdateFileForbiddenCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export const UpdateFileStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type UpdateFileStatusCode400 = ClosedEnum<
+  typeof UpdateFileStatusCode400
+>;
+
+export const UpdateFileStatusCode400$zodSchema = z.literal(400);
+
+export const UpdateFileBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type UpdateFileBadRequestType = ClosedEnum<
+  typeof UpdateFileBadRequestType
+>;
+
+export const UpdateFileBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export const UpdateFileCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type UpdateFileCodeMissingClientID = ClosedEnum<
+  typeof UpdateFileCodeMissingClientID
+>;
+
+export const UpdateFileCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
 
 export type UpdateFileRequest = {
   id: string;
@@ -143,37 +206,6 @@ export const UpdateFileNotFoundResponseBody$zodSchema: z.ZodType<
   message: z.string(),
 }).describe("File not found");
 
-export const UpdateFileForbiddenStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type UpdateFileForbiddenStatusCode = ClosedEnum<
-  typeof UpdateFileForbiddenStatusCode
->;
-
-export const UpdateFileForbiddenStatusCode$zodSchema = z.literal(403);
-
-export const UpdateFileForbiddenType = {
-  AuthError: "auth_error",
-} as const;
-export type UpdateFileForbiddenType = ClosedEnum<
-  typeof UpdateFileForbiddenType
->;
-
-export const UpdateFileForbiddenType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const UpdateFileForbiddenCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type UpdateFileForbiddenCode = ClosedEnum<
-  typeof UpdateFileForbiddenCode
->;
-
-export const UpdateFileForbiddenCode$zodSchema = z.enum([
-  "missing_scope",
-]);
-
 /**
  * Missing scope
  */
@@ -192,37 +224,6 @@ export const UpdateFileForbiddenResponseBody$zodSchema: z.ZodType<
   status_code: UpdateFileForbiddenStatusCode$zodSchema,
   type: UpdateFileForbiddenType$zodSchema,
 }).describe("Missing scope");
-
-export const UpdateFileStatusCode400 = {
-  FourHundred: 400,
-} as const;
-export type UpdateFileStatusCode400 = ClosedEnum<
-  typeof UpdateFileStatusCode400
->;
-
-export const UpdateFileStatusCode400$zodSchema = z.literal(400);
-
-export const UpdateFileBadRequestType = {
-  BadRequest: "bad_request",
-} as const;
-export type UpdateFileBadRequestType = ClosedEnum<
-  typeof UpdateFileBadRequestType
->;
-
-export const UpdateFileBadRequestType$zodSchema = z.enum([
-  "bad_request",
-]);
-
-export const UpdateFileCodeMissingClientID = {
-  MissingClientId: "missing_client_id",
-} as const;
-export type UpdateFileCodeMissingClientID = ClosedEnum<
-  typeof UpdateFileCodeMissingClientID
->;
-
-export const UpdateFileCodeMissingClientID$zodSchema = z.enum([
-  "missing_client_id",
-]);
 
 /**
  * Missing client ID
@@ -249,6 +250,7 @@ export type UpdateFileResponse =
   | AuthError
   | UpdateFileForbiddenResponseBody
   | RateLimit
+  | InternalError
   | UpdateFileNotFoundResponseBody
   | UpdateFileResponseBody1
   | UpdateFileResponseBody2;
@@ -260,6 +262,7 @@ export const UpdateFileResponse$zodSchema: z.ZodType<UpdateFileResponse> = z
     AuthError$zodSchema,
     z.lazy(() => UpdateFileForbiddenResponseBody$zodSchema),
     RateLimit$zodSchema,
+    InternalError$zodSchema,
     z.lazy(() => UpdateFileNotFoundResponseBody$zodSchema),
     z.union([
       z.lazy(() => UpdateFileResponseBody1$zodSchema),

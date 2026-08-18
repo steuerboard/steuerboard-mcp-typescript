@@ -16,7 +16,7 @@ export const tool$collectSessionsRequestLinkCollectToken: ToolDefinition<
   name: "collect-sessions-request-link-collect-token",
   description: `Request a new collect session link
 
-Sends the current active link when possible, or creates a new session for an expired token. Always returns 202 to prevent enumeration.`,
+Sends the current active link when possible, or creates a new session for an expired token. The recipient comes from the session itself, so no body is needed. Always returns 202 to prevent enumeration.`,
   annotations: {
     "title": "",
     "destructiveHint": false,

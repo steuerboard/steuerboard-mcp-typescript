@@ -7,16 +7,9 @@ import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { Conflict, Conflict$zodSchema } from "./conflict.js";
 import { DeleteResponse, DeleteResponse$zodSchema } from "./deleteresponse.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
-
-export type DeleteAccountantUserRequest = { id: string };
-
-export const DeleteAccountantUserRequest$zodSchema: z.ZodType<
-  DeleteAccountantUserRequest
-> = z.object({
-  id: z.string(),
-});
 
 export const DeleteAccountantUserStatusCode = {
   FourHundredAndThree: 403,
@@ -49,6 +42,14 @@ export const DeleteAccountantUserCode$zodSchema = z.enum([
   "missing_scope",
 ]);
 
+export type DeleteAccountantUserRequest = { id: string };
+
+export const DeleteAccountantUserRequest$zodSchema: z.ZodType<
+  DeleteAccountantUserRequest
+> = z.object({
+  id: z.string(),
+});
+
 /**
  * Missing scope
  */
@@ -74,6 +75,7 @@ export type DeleteAccountantUserResponse =
   | NotFound
   | Conflict
   | RateLimit
+  | InternalError
   | DeleteResponse;
 
 export const DeleteAccountantUserResponse$zodSchema: z.ZodType<
@@ -84,5 +86,6 @@ export const DeleteAccountantUserResponse$zodSchema: z.ZodType<
   NotFound$zodSchema,
   Conflict$zodSchema,
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   DeleteResponse$zodSchema,
 ]);

@@ -130,7 +130,7 @@ async function $do(
   >(
     M.json(200, IndexResponse$zodSchema, { key: "object" }),
     M.json(429, IndexResponse$zodSchema, { key: "rate_limit" }),
-    M.nil(500, IndexResponse$zodSchema),
+    M.json(500, IndexResponse$zodSchema, { key: "internal_error" }),
   )(response, req$, { extraFields: responseFields$ });
 
   return [result$, { status: "complete", request: req$, response }];

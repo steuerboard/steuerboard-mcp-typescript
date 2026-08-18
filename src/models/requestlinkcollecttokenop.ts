@@ -3,47 +3,38 @@
  */
 
 import * as z from "zod";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
-import {
-  RequestLinkBody,
-  RequestLinkBody$zodSchema,
-} from "./requestlinkbody.js";
 import {
   RequestLinkResponse,
   RequestLinkResponse$zodSchema,
 } from "./requestlinkresponse.js";
 
-export type RequestLinkCollectTokenRequest = {
-  token: string;
-  RequestLinkBody?: RequestLinkBody | undefined;
-};
+export type RequestLinkCollectTokenRequest = { token: string };
 
 export const RequestLinkCollectTokenRequest$zodSchema: z.ZodType<
   RequestLinkCollectTokenRequest
 > = z.object({
-  RequestLinkBody: RequestLinkBody$zodSchema.optional().describe(
-    "Email address",
-  ),
   token: z.string(),
 });
 
-export type RequestLinkCollectTokenPath2 = string | number;
+export type RequestLinkCollectTokenPath = string | number;
 
-export const RequestLinkCollectTokenPath2$zodSchema: z.ZodType<
-  RequestLinkCollectTokenPath2
+export const RequestLinkCollectTokenPath$zodSchema: z.ZodType<
+  RequestLinkCollectTokenPath
 > = z.union([
   z.string(),
   z.number(),
 ]);
 
-export type RequestLinkCollectTokenIssue2 = {
+export type RequestLinkCollectTokenIssue = {
   code: string;
   path: Array<string | number>;
   message?: string | undefined;
 };
 
-export const RequestLinkCollectTokenIssue2$zodSchema: z.ZodType<
-  RequestLinkCollectTokenIssue2
+export const RequestLinkCollectTokenIssue$zodSchema: z.ZodType<
+  RequestLinkCollectTokenIssue
 > = z.object({
   code: z.string(),
   message: z.string().optional(),
@@ -53,107 +44,44 @@ export const RequestLinkCollectTokenIssue2$zodSchema: z.ZodType<
   ])),
 });
 
-export type RequestLinkCollectTokenError2 = {
-  issues: Array<RequestLinkCollectTokenIssue2>;
+export type RequestLinkCollectTokenError = {
+  issues: Array<RequestLinkCollectTokenIssue>;
   name: string;
 };
 
-export const RequestLinkCollectTokenError2$zodSchema: z.ZodType<
-  RequestLinkCollectTokenError2
+export const RequestLinkCollectTokenError$zodSchema: z.ZodType<
+  RequestLinkCollectTokenError
 > = z.object({
-  issues: z.array(z.lazy(() => RequestLinkCollectTokenIssue2$zodSchema)),
+  issues: z.array(z.lazy(() => RequestLinkCollectTokenIssue$zodSchema)),
   name: z.string(),
-});
-
-export type RequestLinkCollectTokenResponseBody2 = {
-  success: boolean;
-  error: RequestLinkCollectTokenError2;
-};
-
-export const RequestLinkCollectTokenResponseBody2$zodSchema: z.ZodType<
-  RequestLinkCollectTokenResponseBody2
-> = z.object({
-  error: z.lazy(() => RequestLinkCollectTokenError2$zodSchema),
-  success: z.boolean(),
-});
-
-export type RequestLinkCollectTokenPath1 = string | number;
-
-export const RequestLinkCollectTokenPath1$zodSchema: z.ZodType<
-  RequestLinkCollectTokenPath1
-> = z.union([
-  z.string(),
-  z.number(),
-]);
-
-export type RequestLinkCollectTokenIssue1 = {
-  code: string;
-  path: Array<string | number>;
-  message?: string | undefined;
-};
-
-export const RequestLinkCollectTokenIssue1$zodSchema: z.ZodType<
-  RequestLinkCollectTokenIssue1
-> = z.object({
-  code: z.string(),
-  message: z.string().optional(),
-  path: z.array(z.union([
-    z.string(),
-    z.number(),
-  ])),
-});
-
-export type RequestLinkCollectTokenError1 = {
-  issues: Array<RequestLinkCollectTokenIssue1>;
-  name: string;
-};
-
-export const RequestLinkCollectTokenError1$zodSchema: z.ZodType<
-  RequestLinkCollectTokenError1
-> = z.object({
-  issues: z.array(z.lazy(() => RequestLinkCollectTokenIssue1$zodSchema)),
-  name: z.string(),
-});
-
-export type RequestLinkCollectTokenResponseBody1 = {
-  success: boolean;
-  error: RequestLinkCollectTokenError1;
-};
-
-export const RequestLinkCollectTokenResponseBody1$zodSchema: z.ZodType<
-  RequestLinkCollectTokenResponseBody1
-> = z.object({
-  error: z.lazy(() => RequestLinkCollectTokenError1$zodSchema),
-  success: z.boolean(),
 });
 
 /**
  * The validation error(s)
  */
-export type RequestLinkCollectTokenResponseBody =
-  | RequestLinkCollectTokenResponseBody1
-  | RequestLinkCollectTokenResponseBody2;
+export type RequestLinkCollectTokenResponseBody = {
+  success: boolean;
+  error: RequestLinkCollectTokenError;
+};
 
 export const RequestLinkCollectTokenResponseBody$zodSchema: z.ZodType<
   RequestLinkCollectTokenResponseBody
-> = z.union([
-  z.lazy(() => RequestLinkCollectTokenResponseBody1$zodSchema),
-  z.lazy(() => RequestLinkCollectTokenResponseBody2$zodSchema),
-]).describe("The validation error(s)");
+> = z.object({
+  error: z.lazy(() => RequestLinkCollectTokenError$zodSchema),
+  success: z.boolean(),
+}).describe("The validation error(s)");
 
 export type RequestLinkCollectTokenResponse =
   | RateLimit
+  | InternalError
   | RequestLinkResponse
-  | RequestLinkCollectTokenResponseBody1
-  | RequestLinkCollectTokenResponseBody2;
+  | RequestLinkCollectTokenResponseBody;
 
 export const RequestLinkCollectTokenResponse$zodSchema: z.ZodType<
   RequestLinkCollectTokenResponse
 > = z.union([
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   RequestLinkResponse$zodSchema,
-  z.union([
-    z.lazy(() => RequestLinkCollectTokenResponseBody1$zodSchema),
-    z.lazy(() => RequestLinkCollectTokenResponseBody2$zodSchema),
-  ]),
+  z.lazy(() => RequestLinkCollectTokenResponseBody$zodSchema),
 ]);

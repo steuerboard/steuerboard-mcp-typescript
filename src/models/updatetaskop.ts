@@ -5,10 +5,73 @@
 import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 import { Task, Task$zodSchema } from "./task.js";
 import { TaskUpdate, TaskUpdate$zodSchema } from "./taskupdate.js";
+
+export const UpdateTaskForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type UpdateTaskForbiddenStatusCode = ClosedEnum<
+  typeof UpdateTaskForbiddenStatusCode
+>;
+
+export const UpdateTaskForbiddenStatusCode$zodSchema = z.literal(403);
+
+export const UpdateTaskForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type UpdateTaskForbiddenType = ClosedEnum<
+  typeof UpdateTaskForbiddenType
+>;
+
+export const UpdateTaskForbiddenType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const UpdateTaskForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type UpdateTaskForbiddenCode = ClosedEnum<
+  typeof UpdateTaskForbiddenCode
+>;
+
+export const UpdateTaskForbiddenCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export const UpdateTaskStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type UpdateTaskStatusCode400 = ClosedEnum<
+  typeof UpdateTaskStatusCode400
+>;
+
+export const UpdateTaskStatusCode400$zodSchema = z.literal(400);
+
+export const UpdateTaskBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type UpdateTaskBadRequestType = ClosedEnum<
+  typeof UpdateTaskBadRequestType
+>;
+
+export const UpdateTaskBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export const UpdateTaskCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type UpdateTaskCodeMissingClientID = ClosedEnum<
+  typeof UpdateTaskCodeMissingClientID
+>;
+
+export const UpdateTaskCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
 
 export type UpdateTaskRequest = {
   id: string;
@@ -133,37 +196,6 @@ export const UpdateTaskResponseBody$zodSchema: z.ZodType<
   z.lazy(() => UpdateTaskResponseBody2$zodSchema),
 ]).describe("The validation error(s)");
 
-export const UpdateTaskForbiddenStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type UpdateTaskForbiddenStatusCode = ClosedEnum<
-  typeof UpdateTaskForbiddenStatusCode
->;
-
-export const UpdateTaskForbiddenStatusCode$zodSchema = z.literal(403);
-
-export const UpdateTaskForbiddenType = {
-  AuthError: "auth_error",
-} as const;
-export type UpdateTaskForbiddenType = ClosedEnum<
-  typeof UpdateTaskForbiddenType
->;
-
-export const UpdateTaskForbiddenType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const UpdateTaskForbiddenCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type UpdateTaskForbiddenCode = ClosedEnum<
-  typeof UpdateTaskForbiddenCode
->;
-
-export const UpdateTaskForbiddenCode$zodSchema = z.enum([
-  "missing_scope",
-]);
-
 /**
  * Missing scope
  */
@@ -182,37 +214,6 @@ export const UpdateTaskForbiddenResponseBody$zodSchema: z.ZodType<
   status_code: UpdateTaskForbiddenStatusCode$zodSchema,
   type: UpdateTaskForbiddenType$zodSchema,
 }).describe("Missing scope");
-
-export const UpdateTaskStatusCode400 = {
-  FourHundred: 400,
-} as const;
-export type UpdateTaskStatusCode400 = ClosedEnum<
-  typeof UpdateTaskStatusCode400
->;
-
-export const UpdateTaskStatusCode400$zodSchema = z.literal(400);
-
-export const UpdateTaskBadRequestType = {
-  BadRequest: "bad_request",
-} as const;
-export type UpdateTaskBadRequestType = ClosedEnum<
-  typeof UpdateTaskBadRequestType
->;
-
-export const UpdateTaskBadRequestType$zodSchema = z.enum([
-  "bad_request",
-]);
-
-export const UpdateTaskCodeMissingClientID = {
-  MissingClientId: "missing_client_id",
-} as const;
-export type UpdateTaskCodeMissingClientID = ClosedEnum<
-  typeof UpdateTaskCodeMissingClientID
->;
-
-export const UpdateTaskCodeMissingClientID$zodSchema = z.enum([
-  "missing_client_id",
-]);
 
 /**
  * Missing client ID
@@ -240,6 +241,7 @@ export type UpdateTaskResponse =
   | UpdateTaskForbiddenResponseBody
   | NotFound
   | RateLimit
+  | InternalError
   | UpdateTaskResponseBody1
   | UpdateTaskResponseBody2;
 
@@ -251,6 +253,7 @@ export const UpdateTaskResponse$zodSchema: z.ZodType<UpdateTaskResponse> = z
     z.lazy(() => UpdateTaskForbiddenResponseBody$zodSchema),
     NotFound$zodSchema,
     RateLimit$zodSchema,
+    InternalError$zodSchema,
     z.union([
       z.lazy(() => UpdateTaskResponseBody1$zodSchema),
       z.lazy(() => UpdateTaskResponseBody2$zodSchema),

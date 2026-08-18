@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
 export const MeStatusCode = {
@@ -78,11 +79,13 @@ export type MeResponse =
   | MeResponseBody
   | AuthError
   | MeForbiddenResponseBody
-  | RateLimit;
+  | RateLimit
+  | InternalError;
 
 export const MeResponse$zodSchema: z.ZodType<MeResponse> = z.union([
   z.lazy(() => MeResponseBody$zodSchema),
   AuthError$zodSchema,
   z.lazy(() => MeForbiddenResponseBody$zodSchema),
   RateLimit$zodSchema,
+  InternalError$zodSchema,
 ]);

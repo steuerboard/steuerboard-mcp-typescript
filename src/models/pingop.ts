@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
 /**
@@ -16,9 +17,10 @@ export const PingResponseBody$zodSchema: z.ZodType<PingResponseBody> = z.object(
   },
 ).describe("Pong");
 
-export type PingResponse = RateLimit | PingResponseBody;
+export type PingResponse = RateLimit | InternalError | PingResponseBody;
 
 export const PingResponse$zodSchema: z.ZodType<PingResponse> = z.union([
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   z.lazy(() => PingResponseBody$zodSchema),
 ]);

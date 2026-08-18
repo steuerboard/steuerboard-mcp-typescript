@@ -6,7 +6,33 @@ import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { Client, Client$zodSchema } from "./client.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
+
+export const CreateClientStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type CreateClientStatusCode = ClosedEnum<typeof CreateClientStatusCode>;
+
+export const CreateClientStatusCode$zodSchema = z.literal(403);
+
+export const CreateClientType = {
+  AuthError: "auth_error",
+} as const;
+export type CreateClientType = ClosedEnum<typeof CreateClientType>;
+
+export const CreateClientType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const CreateClientCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type CreateClientCode = ClosedEnum<typeof CreateClientCode>;
+
+export const CreateClientCode$zodSchema = z.enum([
+  "missing_scope",
+]);
 
 export type CreateClientPath = string | number;
 
@@ -57,31 +83,6 @@ export const CreateClientUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("The validation error(s)");
 
-export const CreateClientStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type CreateClientStatusCode = ClosedEnum<typeof CreateClientStatusCode>;
-
-export const CreateClientStatusCode$zodSchema = z.literal(403);
-
-export const CreateClientType = {
-  AuthError: "auth_error",
-} as const;
-export type CreateClientType = ClosedEnum<typeof CreateClientType>;
-
-export const CreateClientType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const CreateClientCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type CreateClientCode = ClosedEnum<typeof CreateClientCode>;
-
-export const CreateClientCode$zodSchema = z.enum([
-  "missing_scope",
-]);
-
 /**
  * Missing scope
  */
@@ -106,6 +107,7 @@ export type CreateClientResponse =
   | AuthError
   | CreateClientForbiddenResponseBody
   | RateLimit
+  | InternalError
   | CreateClientUnprocessableEntityResponseBody;
 
 export const CreateClientResponse$zodSchema: z.ZodType<CreateClientResponse> = z
@@ -114,5 +116,6 @@ export const CreateClientResponse$zodSchema: z.ZodType<CreateClientResponse> = z
     AuthError$zodSchema,
     z.lazy(() => CreateClientForbiddenResponseBody$zodSchema),
     RateLimit$zodSchema,
+    InternalError$zodSchema,
     z.lazy(() => CreateClientUnprocessableEntityResponseBody$zodSchema),
   ]);

@@ -6,7 +6,62 @@ import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { FileT, FileT$zodSchema } from "./file.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
+
+export const GetFileForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type GetFileForbiddenStatusCode = ClosedEnum<
+  typeof GetFileForbiddenStatusCode
+>;
+
+export const GetFileForbiddenStatusCode$zodSchema = z.literal(403);
+
+export const GetFileForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type GetFileForbiddenType = ClosedEnum<typeof GetFileForbiddenType>;
+
+export const GetFileForbiddenType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const GetFileForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type GetFileForbiddenCode = ClosedEnum<typeof GetFileForbiddenCode>;
+
+export const GetFileForbiddenCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export const GetFileStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type GetFileStatusCode400 = ClosedEnum<typeof GetFileStatusCode400>;
+
+export const GetFileStatusCode400$zodSchema = z.literal(400);
+
+export const GetFileBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type GetFileBadRequestType = ClosedEnum<typeof GetFileBadRequestType>;
+
+export const GetFileBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export const GetFileCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type GetFileCodeMissingClientID = ClosedEnum<
+  typeof GetFileCodeMissingClientID
+>;
+
+export const GetFileCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
 
 export type GetFileRequest = { id: string; xClientId: string };
 
@@ -70,33 +125,6 @@ export const GetFileNotFoundResponseBody$zodSchema: z.ZodType<
   message: z.string(),
 }).describe("File not found");
 
-export const GetFileForbiddenStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type GetFileForbiddenStatusCode = ClosedEnum<
-  typeof GetFileForbiddenStatusCode
->;
-
-export const GetFileForbiddenStatusCode$zodSchema = z.literal(403);
-
-export const GetFileForbiddenType = {
-  AuthError: "auth_error",
-} as const;
-export type GetFileForbiddenType = ClosedEnum<typeof GetFileForbiddenType>;
-
-export const GetFileForbiddenType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const GetFileForbiddenCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type GetFileForbiddenCode = ClosedEnum<typeof GetFileForbiddenCode>;
-
-export const GetFileForbiddenCode$zodSchema = z.enum([
-  "missing_scope",
-]);
-
 /**
  * Missing scope
  */
@@ -115,33 +143,6 @@ export const GetFileForbiddenResponseBody$zodSchema: z.ZodType<
   status_code: GetFileForbiddenStatusCode$zodSchema,
   type: GetFileForbiddenType$zodSchema,
 }).describe("Missing scope");
-
-export const GetFileStatusCode400 = {
-  FourHundred: 400,
-} as const;
-export type GetFileStatusCode400 = ClosedEnum<typeof GetFileStatusCode400>;
-
-export const GetFileStatusCode400$zodSchema = z.literal(400);
-
-export const GetFileBadRequestType = {
-  BadRequest: "bad_request",
-} as const;
-export type GetFileBadRequestType = ClosedEnum<typeof GetFileBadRequestType>;
-
-export const GetFileBadRequestType$zodSchema = z.enum([
-  "bad_request",
-]);
-
-export const GetFileCodeMissingClientID = {
-  MissingClientId: "missing_client_id",
-} as const;
-export type GetFileCodeMissingClientID = ClosedEnum<
-  typeof GetFileCodeMissingClientID
->;
-
-export const GetFileCodeMissingClientID$zodSchema = z.enum([
-  "missing_client_id",
-]);
 
 /**
  * Missing client ID
@@ -168,6 +169,7 @@ export type GetFileResponse =
   | AuthError
   | GetFileForbiddenResponseBody
   | RateLimit
+  | InternalError
   | GetFileUnprocessableEntityResponseBody
   | GetFileNotFoundResponseBody;
 
@@ -177,6 +179,7 @@ export const GetFileResponse$zodSchema: z.ZodType<GetFileResponse> = z.union([
   AuthError$zodSchema,
   z.lazy(() => GetFileForbiddenResponseBody$zodSchema),
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   z.lazy(() => GetFileUnprocessableEntityResponseBody$zodSchema),
   z.lazy(() => GetFileNotFoundResponseBody$zodSchema),
 ]);

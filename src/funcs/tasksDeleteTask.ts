@@ -179,7 +179,7 @@ async function $do(
       key: "fourHundredAndTwentyTwoApplicationJsonObject",
     }),
     M.json(429, DeleteTaskResponse$zodSchema, { key: "rate_limit" }),
-    M.nil(500, DeleteTaskResponse$zodSchema),
+    M.json(500, DeleteTaskResponse$zodSchema, { key: "internal_error" }),
   )(response, req$, { extraFields: responseFields$ });
 
   return [result$, { status: "complete", request: req$, response }];

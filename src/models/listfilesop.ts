@@ -5,8 +5,65 @@
 import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { PaginatedFiles, PaginatedFiles$zodSchema } from "./paginatedfiles.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
+
+export const ListFilesForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type ListFilesForbiddenStatusCode = ClosedEnum<
+  typeof ListFilesForbiddenStatusCode
+>;
+
+export const ListFilesForbiddenStatusCode$zodSchema = z.literal(403);
+
+export const ListFilesForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type ListFilesForbiddenType = ClosedEnum<typeof ListFilesForbiddenType>;
+
+export const ListFilesForbiddenType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const ListFilesForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type ListFilesForbiddenCode = ClosedEnum<typeof ListFilesForbiddenCode>;
+
+export const ListFilesForbiddenCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export const ListFilesStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type ListFilesStatusCode400 = ClosedEnum<typeof ListFilesStatusCode400>;
+
+export const ListFilesStatusCode400$zodSchema = z.literal(400);
+
+export const ListFilesBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type ListFilesBadRequestType = ClosedEnum<
+  typeof ListFilesBadRequestType
+>;
+
+export const ListFilesBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export const ListFilesCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type ListFilesCodeMissingClientID = ClosedEnum<
+  typeof ListFilesCodeMissingClientID
+>;
+
+export const ListFilesCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
 
 export type ListFilesRequest = {
   limit?: number | undefined;
@@ -68,33 +125,6 @@ export const ListFilesUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("The validation error(s)");
 
-export const ListFilesForbiddenStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type ListFilesForbiddenStatusCode = ClosedEnum<
-  typeof ListFilesForbiddenStatusCode
->;
-
-export const ListFilesForbiddenStatusCode$zodSchema = z.literal(403);
-
-export const ListFilesForbiddenType = {
-  AuthError: "auth_error",
-} as const;
-export type ListFilesForbiddenType = ClosedEnum<typeof ListFilesForbiddenType>;
-
-export const ListFilesForbiddenType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const ListFilesForbiddenCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type ListFilesForbiddenCode = ClosedEnum<typeof ListFilesForbiddenCode>;
-
-export const ListFilesForbiddenCode$zodSchema = z.enum([
-  "missing_scope",
-]);
-
 /**
  * Missing scope
  */
@@ -113,35 +143,6 @@ export const ListFilesForbiddenResponseBody$zodSchema: z.ZodType<
   status_code: ListFilesForbiddenStatusCode$zodSchema,
   type: ListFilesForbiddenType$zodSchema,
 }).describe("Missing scope");
-
-export const ListFilesStatusCode400 = {
-  FourHundred: 400,
-} as const;
-export type ListFilesStatusCode400 = ClosedEnum<typeof ListFilesStatusCode400>;
-
-export const ListFilesStatusCode400$zodSchema = z.literal(400);
-
-export const ListFilesBadRequestType = {
-  BadRequest: "bad_request",
-} as const;
-export type ListFilesBadRequestType = ClosedEnum<
-  typeof ListFilesBadRequestType
->;
-
-export const ListFilesBadRequestType$zodSchema = z.enum([
-  "bad_request",
-]);
-
-export const ListFilesCodeMissingClientID = {
-  MissingClientId: "missing_client_id",
-} as const;
-export type ListFilesCodeMissingClientID = ClosedEnum<
-  typeof ListFilesCodeMissingClientID
->;
-
-export const ListFilesCodeMissingClientID$zodSchema = z.enum([
-  "missing_client_id",
-]);
 
 /**
  * Missing client ID
@@ -167,6 +168,7 @@ export type ListFilesResponse =
   | AuthError
   | ListFilesForbiddenResponseBody
   | RateLimit
+  | InternalError
   | PaginatedFiles
   | ListFilesUnprocessableEntityResponseBody;
 
@@ -176,6 +178,7 @@ export const ListFilesResponse$zodSchema: z.ZodType<ListFilesResponse> = z
     AuthError$zodSchema,
     z.lazy(() => ListFilesForbiddenResponseBody$zodSchema),
     RateLimit$zodSchema,
+    InternalError$zodSchema,
     PaginatedFiles$zodSchema,
     z.lazy(() => ListFilesUnprocessableEntityResponseBody$zodSchema),
   ]);

@@ -164,7 +164,9 @@ async function $do(
     M.json(404, PingCollectSessionResponse$zodSchema, { key: "object" }),
     M.json(410, PingCollectSessionResponse$zodSchema, { key: "bad_request" }),
     M.json(429, PingCollectSessionResponse$zodSchema, { key: "rate_limit" }),
-    M.nil(500, PingCollectSessionResponse$zodSchema),
+    M.json(500, PingCollectSessionResponse$zodSchema, {
+      key: "internal_error",
+    }),
   )(response, req$, { extraFields: responseFields$ });
 
   return [result$, { status: "complete", request: req$, response }];

@@ -13,7 +13,39 @@ import {
   CollectFormDataSubmit,
   CollectFormDataSubmit$zodSchema,
 } from "./collectformdatasubmit.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
+
+export const SubmitCollectFormDataStatusCode = {
+  FourHundredAndFour: 404,
+} as const;
+export type SubmitCollectFormDataStatusCode = ClosedEnum<
+  typeof SubmitCollectFormDataStatusCode
+>;
+
+export const SubmitCollectFormDataStatusCode$zodSchema = z.literal(404);
+
+export const SubmitCollectFormDataType = {
+  NotFound: "not_found",
+} as const;
+export type SubmitCollectFormDataType = ClosedEnum<
+  typeof SubmitCollectFormDataType
+>;
+
+export const SubmitCollectFormDataType$zodSchema = z.enum([
+  "not_found",
+]);
+
+export const SubmitCollectFormDataCode = {
+  CollectTokenNotFound: "collect_token_not_found",
+} as const;
+export type SubmitCollectFormDataCode = ClosedEnum<
+  typeof SubmitCollectFormDataCode
+>;
+
+export const SubmitCollectFormDataCode$zodSchema = z.enum([
+  "collect_token_not_found",
+]);
 
 export type SubmitCollectFormDataRequest = {
   token: string;
@@ -143,37 +175,6 @@ export const SubmitCollectFormDataResponseBody$zodSchema: z.ZodType<
   z.lazy(() => SubmitCollectFormDataResponseBody2$zodSchema),
 ]).describe("The validation error(s)");
 
-export const SubmitCollectFormDataStatusCode = {
-  FourHundredAndFour: 404,
-} as const;
-export type SubmitCollectFormDataStatusCode = ClosedEnum<
-  typeof SubmitCollectFormDataStatusCode
->;
-
-export const SubmitCollectFormDataStatusCode$zodSchema = z.literal(404);
-
-export const SubmitCollectFormDataType = {
-  NotFound: "not_found",
-} as const;
-export type SubmitCollectFormDataType = ClosedEnum<
-  typeof SubmitCollectFormDataType
->;
-
-export const SubmitCollectFormDataType$zodSchema = z.enum([
-  "not_found",
-]);
-
-export const SubmitCollectFormDataCode = {
-  CollectTokenNotFound: "collect_token_not_found",
-} as const;
-export type SubmitCollectFormDataCode = ClosedEnum<
-  typeof SubmitCollectFormDataCode
->;
-
-export const SubmitCollectFormDataCode$zodSchema = z.enum([
-  "collect_token_not_found",
-]);
-
 /**
  * Collect session not found. The token may be invalid or revoked.
  */
@@ -198,6 +199,7 @@ export type SubmitCollectFormDataResponse =
   | SubmitCollectFormDataNotFoundResponseBody
   | BadRequest
   | RateLimit
+  | InternalError
   | SubmitCollectFormDataResponseBody1
   | SubmitCollectFormDataResponseBody2;
 
@@ -208,6 +210,7 @@ export const SubmitCollectFormDataResponse$zodSchema: z.ZodType<
   z.lazy(() => SubmitCollectFormDataNotFoundResponseBody$zodSchema),
   BadRequest$zodSchema,
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   z.union([
     z.lazy(() => SubmitCollectFormDataResponseBody1$zodSchema),
     z.lazy(() => SubmitCollectFormDataResponseBody2$zodSchema),

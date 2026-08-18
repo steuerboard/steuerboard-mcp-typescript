@@ -6,8 +6,63 @@ import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { ClientUser, ClientUser$zodSchema } from "./clientuser.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
+
+export const GetUserForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type GetUserForbiddenStatusCode = ClosedEnum<
+  typeof GetUserForbiddenStatusCode
+>;
+
+export const GetUserForbiddenStatusCode$zodSchema = z.literal(403);
+
+export const GetUserForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type GetUserForbiddenType = ClosedEnum<typeof GetUserForbiddenType>;
+
+export const GetUserForbiddenType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const GetUserForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type GetUserForbiddenCode = ClosedEnum<typeof GetUserForbiddenCode>;
+
+export const GetUserForbiddenCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export const GetUserStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type GetUserStatusCode400 = ClosedEnum<typeof GetUserStatusCode400>;
+
+export const GetUserStatusCode400$zodSchema = z.literal(400);
+
+export const GetUserBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type GetUserBadRequestType = ClosedEnum<typeof GetUserBadRequestType>;
+
+export const GetUserBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export const GetUserCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type GetUserCodeMissingClientID = ClosedEnum<
+  typeof GetUserCodeMissingClientID
+>;
+
+export const GetUserCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
 
 export type GetUserRequest = { id: string; xClientId: string };
 
@@ -101,33 +156,6 @@ export const GetUserResponseBody$zodSchema: z.ZodType<GetUserResponseBody> = z
     z.lazy(() => GetUserResponseBody2$zodSchema),
   ]).describe("The validation error(s)");
 
-export const GetUserForbiddenStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type GetUserForbiddenStatusCode = ClosedEnum<
-  typeof GetUserForbiddenStatusCode
->;
-
-export const GetUserForbiddenStatusCode$zodSchema = z.literal(403);
-
-export const GetUserForbiddenType = {
-  AuthError: "auth_error",
-} as const;
-export type GetUserForbiddenType = ClosedEnum<typeof GetUserForbiddenType>;
-
-export const GetUserForbiddenType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const GetUserForbiddenCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type GetUserForbiddenCode = ClosedEnum<typeof GetUserForbiddenCode>;
-
-export const GetUserForbiddenCode$zodSchema = z.enum([
-  "missing_scope",
-]);
-
 /**
  * Missing scope
  */
@@ -146,33 +174,6 @@ export const GetUserForbiddenResponseBody$zodSchema: z.ZodType<
   status_code: GetUserForbiddenStatusCode$zodSchema,
   type: GetUserForbiddenType$zodSchema,
 }).describe("Missing scope");
-
-export const GetUserStatusCode400 = {
-  FourHundred: 400,
-} as const;
-export type GetUserStatusCode400 = ClosedEnum<typeof GetUserStatusCode400>;
-
-export const GetUserStatusCode400$zodSchema = z.literal(400);
-
-export const GetUserBadRequestType = {
-  BadRequest: "bad_request",
-} as const;
-export type GetUserBadRequestType = ClosedEnum<typeof GetUserBadRequestType>;
-
-export const GetUserBadRequestType$zodSchema = z.enum([
-  "bad_request",
-]);
-
-export const GetUserCodeMissingClientID = {
-  MissingClientId: "missing_client_id",
-} as const;
-export type GetUserCodeMissingClientID = ClosedEnum<
-  typeof GetUserCodeMissingClientID
->;
-
-export const GetUserCodeMissingClientID$zodSchema = z.enum([
-  "missing_client_id",
-]);
 
 /**
  * Missing client ID
@@ -200,6 +201,7 @@ export type GetUserResponse =
   | GetUserForbiddenResponseBody
   | NotFound
   | RateLimit
+  | InternalError
   | GetUserResponseBody1
   | GetUserResponseBody2;
 
@@ -210,6 +212,7 @@ export const GetUserResponse$zodSchema: z.ZodType<GetUserResponse> = z.union([
   z.lazy(() => GetUserForbiddenResponseBody$zodSchema),
   NotFound$zodSchema,
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   z.union([
     z.lazy(() => GetUserResponseBody1$zodSchema),
     z.lazy(() => GetUserResponseBody2$zodSchema),
