@@ -23,3 +23,11 @@ Based on:
 - Speakeasy CLI 1.790.0 (2.917.0) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [mcp-typescript v0.4.0] .
+
+## 2026-08-18 20:38:02
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.795.0 (2.931.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [mcp-typescript v0.4.1] .
