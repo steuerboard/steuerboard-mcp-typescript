@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 import { Workspace, Workspace$zodSchema } from "./workspace.js";
@@ -242,6 +243,7 @@ export type UpdateWorkspaceResponse =
   | UpdateWorkspaceForbiddenResponseBody
   | NotFound
   | RateLimit
+  | InternalError
   | UpdateWorkspaceResponseBody1
   | UpdateWorkspaceResponseBody2;
 
@@ -254,6 +256,7 @@ export const UpdateWorkspaceResponse$zodSchema: z.ZodType<
   z.lazy(() => UpdateWorkspaceForbiddenResponseBody$zodSchema),
   NotFound$zodSchema,
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   z.union([
     z.lazy(() => UpdateWorkspaceResponseBody1$zodSchema),
     z.lazy(() => UpdateWorkspaceResponseBody2$zodSchema),

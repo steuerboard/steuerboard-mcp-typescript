@@ -7,6 +7,7 @@ import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { FileT, FileT$zodSchema } from "./file.js";
 import { FileCreate, FileCreate$zodSchema } from "./filecreate.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
 export const CreateFileRequestEntityTooLargeStatusCode = {
@@ -220,6 +221,7 @@ export type CreateFileResponse =
   | CreateFileForbiddenResponseBody
   | CreateFileRequestEntityTooLargeResponseBody
   | RateLimit
+  | InternalError
   | CreateFileUnprocessableEntityResponseBody;
 
 export const CreateFileResponse$zodSchema: z.ZodType<CreateFileResponse> = z
@@ -230,5 +232,6 @@ export const CreateFileResponse$zodSchema: z.ZodType<CreateFileResponse> = z
     z.lazy(() => CreateFileForbiddenResponseBody$zodSchema),
     z.lazy(() => CreateFileRequestEntityTooLargeResponseBody$zodSchema),
     RateLimit$zodSchema,
+    InternalError$zodSchema,
     z.lazy(() => CreateFileUnprocessableEntityResponseBody$zodSchema),
   ]);

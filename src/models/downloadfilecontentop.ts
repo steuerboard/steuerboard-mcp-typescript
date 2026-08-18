@@ -6,6 +6,7 @@ import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { FileContent, FileContent$zodSchema } from "./filecontent.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
 export const DownloadFileContentForbiddenStatusCode = {
@@ -185,6 +186,7 @@ export type DownloadFileContentResponse =
   | AuthError
   | DownloadFileContentForbiddenResponseBody
   | RateLimit
+  | InternalError
   | FileContent
   | DownloadFileContentUnprocessableEntityResponseBody
   | DownloadFileContentNotFoundResponseBody;
@@ -196,6 +198,7 @@ export const DownloadFileContentResponse$zodSchema: z.ZodType<
   AuthError$zodSchema,
   z.lazy(() => DownloadFileContentForbiddenResponseBody$zodSchema),
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   FileContent$zodSchema,
   z.lazy(() => DownloadFileContentUnprocessableEntityResponseBody$zodSchema),
   z.lazy(() => DownloadFileContentNotFoundResponseBody$zodSchema),

@@ -9,6 +9,7 @@ import {
   DeleteCollectSubmissionResponse,
   DeleteCollectSubmissionResponse$zodSchema,
 } from "./deletecollectsubmissionresponse.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
 export const DeleteCollectSubmissionNotFoundStatusCode = {
@@ -128,6 +129,7 @@ export type DeleteCollectSubmissionResponseResponse =
   | DeleteCollectSubmissionNotFoundResponseBody
   | BadRequest
   | RateLimit
+  | InternalError
   | DeleteCollectSubmissionResponse;
 
 export const DeleteCollectSubmissionResponseResponse$zodSchema: z.ZodType<
@@ -137,5 +139,6 @@ export const DeleteCollectSubmissionResponseResponse$zodSchema: z.ZodType<
   z.lazy(() => DeleteCollectSubmissionNotFoundResponseBody$zodSchema),
   BadRequest$zodSchema,
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   DeleteCollectSubmissionResponse$zodSchema,
 ]);

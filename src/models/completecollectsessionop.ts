@@ -13,6 +13,7 @@ import {
   CompleteSessionResponse,
   CompleteSessionResponse$zodSchema,
 } from "./completesessionresponse.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
 export const CompleteCollectSessionStatusCode = {
@@ -83,6 +84,7 @@ export type CompleteCollectSessionResponse =
   | CompleteCollectSessionResponseBody
   | BadRequest
   | RateLimit
+  | InternalError
   | CompleteSessionResponse;
 
 export const CompleteCollectSessionResponse$zodSchema: z.ZodType<
@@ -91,5 +93,6 @@ export const CompleteCollectSessionResponse$zodSchema: z.ZodType<
   z.lazy(() => CompleteCollectSessionResponseBody$zodSchema),
   BadRequest$zodSchema,
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   CompleteSessionResponse$zodSchema,
 ]);

@@ -6,6 +6,7 @@ import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { AccountantUser, AccountantUser$zodSchema } from "./accountantuser.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 import {
@@ -197,6 +198,7 @@ export type UpdateAccountantUserResponse =
   | UpdateAccountantUserForbiddenResponseBody
   | NotFound
   | RateLimit
+  | InternalError
   | UpdateAccountantUserResponseBody1
   | UpdateAccountantUserResponseBody2;
 
@@ -208,6 +210,7 @@ export const UpdateAccountantUserResponse$zodSchema: z.ZodType<
   z.lazy(() => UpdateAccountantUserForbiddenResponseBody$zodSchema),
   NotFound$zodSchema,
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   z.union([
     z.lazy(() => UpdateAccountantUserResponseBody1$zodSchema),
     z.lazy(() => UpdateAccountantUserResponseBody2$zodSchema),

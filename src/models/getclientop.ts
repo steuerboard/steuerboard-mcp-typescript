@@ -6,6 +6,7 @@ import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { Client, Client$zodSchema } from "./client.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
@@ -111,6 +112,7 @@ export type GetClientResponse =
   | GetClientForbiddenResponseBody
   | NotFound
   | RateLimit
+  | InternalError
   | GetClientUnprocessableEntityResponseBody;
 
 export const GetClientResponse$zodSchema: z.ZodType<GetClientResponse> = z
@@ -120,5 +122,6 @@ export const GetClientResponse$zodSchema: z.ZodType<GetClientResponse> = z
     z.lazy(() => GetClientForbiddenResponseBody$zodSchema),
     NotFound$zodSchema,
     RateLimit$zodSchema,
+    InternalError$zodSchema,
     z.lazy(() => GetClientUnprocessableEntityResponseBody$zodSchema),
   ]);

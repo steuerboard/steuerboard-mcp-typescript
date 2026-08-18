@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 import {
   WorkspaceMember,
@@ -191,6 +192,7 @@ export type CreateWorkspaceMemberResponse =
   | AuthError
   | CreateWorkspaceMemberForbiddenResponseBody
   | RateLimit
+  | InternalError
   | CreateWorkspaceMemberUnprocessableEntityResponseBody;
 
 export const CreateWorkspaceMemberResponse$zodSchema: z.ZodType<
@@ -201,5 +203,6 @@ export const CreateWorkspaceMemberResponse$zodSchema: z.ZodType<
   AuthError$zodSchema,
   z.lazy(() => CreateWorkspaceMemberForbiddenResponseBody$zodSchema),
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   z.lazy(() => CreateWorkspaceMemberUnprocessableEntityResponseBody$zodSchema),
 ]);

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
 /**
@@ -15,9 +16,10 @@ export const IndexResponseBody$zodSchema: z.ZodType<IndexResponseBody> = z
     message: z.string(),
   }).describe("Steuerboard API Index");
 
-export type IndexResponse = RateLimit | IndexResponseBody;
+export type IndexResponse = RateLimit | InternalError | IndexResponseBody;
 
 export const IndexResponse$zodSchema: z.ZodType<IndexResponse> = z.union([
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   z.lazy(() => IndexResponseBody$zodSchema),
 ]);

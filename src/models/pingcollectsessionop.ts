@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { BadRequest, BadRequest$zodSchema } from "./badrequest.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import {
   PingSessionResponse,
   PingSessionResponse$zodSchema,
@@ -69,6 +70,7 @@ export type PingCollectSessionResponse =
   | PingCollectSessionResponseBody
   | BadRequest
   | RateLimit
+  | InternalError
   | PingSessionResponse;
 
 export const PingCollectSessionResponse$zodSchema: z.ZodType<
@@ -77,5 +79,6 @@ export const PingCollectSessionResponse$zodSchema: z.ZodType<
   z.lazy(() => PingCollectSessionResponseBody$zodSchema),
   BadRequest$zodSchema,
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   PingSessionResponse$zodSchema,
 ]);

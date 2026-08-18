@@ -213,7 +213,7 @@ async function $do(
       key: "fourHundredAndTwentyTwoApplicationJsonOneOf",
     }),
     M.json(429, SubmitCollectFileResponse$zodSchema, { key: "rate_limit" }),
-    M.nil(500, SubmitCollectFileResponse$zodSchema),
+    M.json(500, SubmitCollectFileResponse$zodSchema, { key: "internal_error" }),
   )(response, req$, { extraFields: responseFields$ });
 
   return [result$, { status: "complete", request: req$, response }];

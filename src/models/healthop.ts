@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
 /**
@@ -16,9 +17,10 @@ export const HealthResponseBody$zodSchema: z.ZodType<HealthResponseBody> = z
     timestamp: z.string(),
   }).describe("Health Check Response");
 
-export type HealthResponse = RateLimit | HealthResponseBody;
+export type HealthResponse = RateLimit | InternalError | HealthResponseBody;
 
 export const HealthResponse$zodSchema: z.ZodType<HealthResponse> = z.union([
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   z.lazy(() => HealthResponseBody$zodSchema),
 ]);

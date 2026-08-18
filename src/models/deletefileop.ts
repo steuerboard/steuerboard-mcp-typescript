@@ -6,6 +6,7 @@ import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { DeleteResponse, DeleteResponse$zodSchema } from "./deleteresponse.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
@@ -167,6 +168,7 @@ export type DeleteFileResponse =
   | DeleteFileForbiddenResponseBody
   | NotFound
   | RateLimit
+  | InternalError
   | DeleteResponse
   | DeleteFileUnprocessableEntityResponseBody;
 
@@ -177,6 +179,7 @@ export const DeleteFileResponse$zodSchema: z.ZodType<DeleteFileResponse> = z
     z.lazy(() => DeleteFileForbiddenResponseBody$zodSchema),
     NotFound$zodSchema,
     RateLimit$zodSchema,
+    InternalError$zodSchema,
     DeleteResponse$zodSchema,
     z.lazy(() => DeleteFileUnprocessableEntityResponseBody$zodSchema),
   ]);

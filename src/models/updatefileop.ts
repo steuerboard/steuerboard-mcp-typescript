@@ -7,6 +7,7 @@ import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { FileT, FileT$zodSchema } from "./file.js";
 import { FileUpdate, FileUpdate$zodSchema } from "./fileupdate.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
 export const UpdateFileForbiddenStatusCode = {
@@ -249,6 +250,7 @@ export type UpdateFileResponse =
   | AuthError
   | UpdateFileForbiddenResponseBody
   | RateLimit
+  | InternalError
   | UpdateFileNotFoundResponseBody
   | UpdateFileResponseBody1
   | UpdateFileResponseBody2;
@@ -260,6 +262,7 @@ export const UpdateFileResponse$zodSchema: z.ZodType<UpdateFileResponse> = z
     AuthError$zodSchema,
     z.lazy(() => UpdateFileForbiddenResponseBody$zodSchema),
     RateLimit$zodSchema,
+    InternalError$zodSchema,
     z.lazy(() => UpdateFileNotFoundResponseBody$zodSchema),
     z.union([
       z.lazy(() => UpdateFileResponseBody1$zodSchema),

@@ -177,7 +177,9 @@ async function $do(
     M.json(429, DeleteCollectSubmissionResponseResponse$zodSchema, {
       key: "rate_limit",
     }),
-    M.nil(500, DeleteCollectSubmissionResponseResponse$zodSchema),
+    M.json(500, DeleteCollectSubmissionResponseResponse$zodSchema, {
+      key: "internal_error",
+    }),
   )(response, req$, { extraFields: responseFields$ });
 
   return [result$, { status: "complete", request: req$, response }];

@@ -9,6 +9,7 @@ import {
   CollectSessionByToken,
   CollectSessionByToken$zodSchema,
 } from "./collectsessionbytoken.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
 export const GetcollectSessionByTokenStatusCode = {
@@ -128,6 +129,7 @@ export type GetcollectSessionByTokenResponse =
   | GetcollectSessionByTokenNotFoundResponseBody
   | BadRequest
   | RateLimit
+  | InternalError
   | GetcollectSessionByTokenUnprocessableEntityResponseBody;
 
 export const GetcollectSessionByTokenResponse$zodSchema: z.ZodType<
@@ -137,6 +139,7 @@ export const GetcollectSessionByTokenResponse$zodSchema: z.ZodType<
   z.lazy(() => GetcollectSessionByTokenNotFoundResponseBody$zodSchema),
   BadRequest$zodSchema,
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   z.lazy(() =>
     GetcollectSessionByTokenUnprocessableEntityResponseBody$zodSchema
   ),

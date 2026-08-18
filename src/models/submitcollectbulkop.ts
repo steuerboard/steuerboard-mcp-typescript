@@ -13,6 +13,7 @@ import {
   CollectBulkSubmitForm,
   CollectBulkSubmitForm$zodSchema,
 } from "./collectbulksubmitform.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
 export const SubmitCollectBulkRequestEntityTooLargeStatusCode = {
@@ -248,6 +249,7 @@ export type SubmitCollectBulkResponse =
   | BadRequest
   | SubmitCollectBulkRequestEntityTooLargeResponseBody
   | RateLimit
+  | InternalError
   | CollectBulkSubmission
   | SubmitCollectBulkResponseBody1
   | SubmitCollectBulkResponseBody2;
@@ -259,6 +261,7 @@ export const SubmitCollectBulkResponse$zodSchema: z.ZodType<
   BadRequest$zodSchema,
   z.lazy(() => SubmitCollectBulkRequestEntityTooLargeResponseBody$zodSchema),
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   CollectBulkSubmission$zodSchema,
   z.union([
     z.lazy(() => SubmitCollectBulkResponseBody1$zodSchema),

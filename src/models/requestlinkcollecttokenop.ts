@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 import {
   RequestLinkResponse,
@@ -72,6 +73,7 @@ export const RequestLinkCollectTokenResponseBody$zodSchema: z.ZodType<
 
 export type RequestLinkCollectTokenResponse =
   | RateLimit
+  | InternalError
   | RequestLinkResponse
   | RequestLinkCollectTokenResponseBody;
 
@@ -79,6 +81,7 @@ export const RequestLinkCollectTokenResponse$zodSchema: z.ZodType<
   RequestLinkCollectTokenResponse
 > = z.union([
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   RequestLinkResponse$zodSchema,
   z.lazy(() => RequestLinkCollectTokenResponseBody$zodSchema),
 ]);

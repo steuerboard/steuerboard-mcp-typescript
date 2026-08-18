@@ -11,6 +11,7 @@ import {
   ClientUserInvite$zodSchema,
 } from "./clientuserinvite.js";
 import { Conflict, Conflict$zodSchema } from "./conflict.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
@@ -177,6 +178,7 @@ export type InviteUserResponse =
   | NotFound
   | Conflict
   | RateLimit
+  | InternalError
   | InviteUserUnprocessableEntityResponseBody;
 
 export const InviteUserResponse$zodSchema: z.ZodType<InviteUserResponse> = z
@@ -188,5 +190,6 @@ export const InviteUserResponse$zodSchema: z.ZodType<InviteUserResponse> = z
     NotFound$zodSchema,
     Conflict$zodSchema,
     RateLimit$zodSchema,
+    InternalError$zodSchema,
     z.lazy(() => InviteUserUnprocessableEntityResponseBody$zodSchema),
   ]);

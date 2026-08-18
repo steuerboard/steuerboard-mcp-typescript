@@ -10,6 +10,7 @@ import {
   ClientUserUpdate,
   ClientUserUpdate$zodSchema,
 } from "./clientuserupdate.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
@@ -243,6 +244,7 @@ export type UpdateUserResponse =
   | UpdateUserForbiddenResponseBody
   | NotFound
   | RateLimit
+  | InternalError
   | UpdateUserResponseBody1
   | UpdateUserResponseBody2;
 
@@ -254,6 +256,7 @@ export const UpdateUserResponse$zodSchema: z.ZodType<UpdateUserResponse> = z
     z.lazy(() => UpdateUserForbiddenResponseBody$zodSchema),
     NotFound$zodSchema,
     RateLimit$zodSchema,
+    InternalError$zodSchema,
     z.union([
       z.lazy(() => UpdateUserResponseBody1$zodSchema),
       z.lazy(() => UpdateUserResponseBody2$zodSchema),

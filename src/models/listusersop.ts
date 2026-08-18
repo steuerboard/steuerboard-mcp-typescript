@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { PaginatedUsers, PaginatedUsers$zodSchema } from "./paginatedusers.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
@@ -165,6 +166,7 @@ export type ListUsersResponse =
   | AuthError
   | ListUsersForbiddenResponseBody
   | RateLimit
+  | InternalError
   | PaginatedUsers
   | ListUsersUnprocessableEntityResponseBody;
 
@@ -174,6 +176,7 @@ export const ListUsersResponse$zodSchema: z.ZodType<ListUsersResponse> = z
     AuthError$zodSchema,
     z.lazy(() => ListUsersForbiddenResponseBody$zodSchema),
     RateLimit$zodSchema,
+    InternalError$zodSchema,
     PaginatedUsers$zodSchema,
     z.lazy(() => ListUsersUnprocessableEntityResponseBody$zodSchema),
   ]);

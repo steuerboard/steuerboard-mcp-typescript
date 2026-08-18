@@ -7,6 +7,7 @@ import { ClosedEnum } from "../types/enums.js";
 import { AccountantUser, AccountantUser$zodSchema } from "./accountantuser.js";
 import { AuthError, AuthError$zodSchema } from "./autherror.js";
 import { Conflict, Conflict$zodSchema } from "./conflict.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
@@ -119,6 +120,7 @@ export type InviteAccountantUserResponse =
   | NotFound
   | Conflict
   | RateLimit
+  | InternalError
   | InviteAccountantUserUnprocessableEntityResponseBody;
 
 export const InviteAccountantUserResponse$zodSchema: z.ZodType<
@@ -130,5 +132,6 @@ export const InviteAccountantUserResponse$zodSchema: z.ZodType<
   NotFound$zodSchema,
   Conflict$zodSchema,
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   z.lazy(() => InviteAccountantUserUnprocessableEntityResponseBody$zodSchema),
 ]);

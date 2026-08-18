@@ -130,7 +130,7 @@ async function $do(
   >(
     M.json(200, PingResponse$zodSchema, { key: "object" }),
     M.json(429, PingResponse$zodSchema, { key: "rate_limit" }),
-    M.nil(500, PingResponse$zodSchema),
+    M.json(500, PingResponse$zodSchema, { key: "internal_error" }),
   )(response, req$, { extraFields: responseFields$ });
 
   return [result$, { status: "complete", request: req$, response }];

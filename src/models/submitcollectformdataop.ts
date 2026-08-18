@@ -13,6 +13,7 @@ import {
   CollectFormDataSubmit,
   CollectFormDataSubmit$zodSchema,
 } from "./collectformdatasubmit.js";
+import { InternalError, InternalError$zodSchema } from "./internalerror.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
 export const SubmitCollectFormDataStatusCode = {
@@ -198,6 +199,7 @@ export type SubmitCollectFormDataResponse =
   | SubmitCollectFormDataNotFoundResponseBody
   | BadRequest
   | RateLimit
+  | InternalError
   | SubmitCollectFormDataResponseBody1
   | SubmitCollectFormDataResponseBody2;
 
@@ -208,6 +210,7 @@ export const SubmitCollectFormDataResponse$zodSchema: z.ZodType<
   z.lazy(() => SubmitCollectFormDataNotFoundResponseBody$zodSchema),
   BadRequest$zodSchema,
   RateLimit$zodSchema,
+  InternalError$zodSchema,
   z.union([
     z.lazy(() => SubmitCollectFormDataResponseBody1$zodSchema),
     z.lazy(() => SubmitCollectFormDataResponseBody2$zodSchema),
