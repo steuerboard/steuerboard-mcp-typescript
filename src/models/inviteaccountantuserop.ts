@@ -10,6 +10,37 @@ import { Conflict, Conflict$zodSchema } from "./conflict.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
+export const InviteAccountantUserStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type InviteAccountantUserStatusCode = ClosedEnum<
+  typeof InviteAccountantUserStatusCode
+>;
+
+export const InviteAccountantUserStatusCode$zodSchema = z.literal(403);
+
+export const InviteAccountantUserType = {
+  AuthError: "auth_error",
+} as const;
+export type InviteAccountantUserType = ClosedEnum<
+  typeof InviteAccountantUserType
+>;
+
+export const InviteAccountantUserType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const InviteAccountantUserCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type InviteAccountantUserCode = ClosedEnum<
+  typeof InviteAccountantUserCode
+>;
+
+export const InviteAccountantUserCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
 export type InviteAccountantUserPath = string | number;
 
 export const InviteAccountantUserPath$zodSchema: z.ZodType<
@@ -61,37 +92,6 @@ export const InviteAccountantUserUnprocessableEntityResponseBody$zodSchema:
     error: z.lazy(() => InviteAccountantUserError$zodSchema),
     success: z.boolean(),
   }).describe("The validation error(s)");
-
-export const InviteAccountantUserStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type InviteAccountantUserStatusCode = ClosedEnum<
-  typeof InviteAccountantUserStatusCode
->;
-
-export const InviteAccountantUserStatusCode$zodSchema = z.literal(403);
-
-export const InviteAccountantUserType = {
-  AuthError: "auth_error",
-} as const;
-export type InviteAccountantUserType = ClosedEnum<
-  typeof InviteAccountantUserType
->;
-
-export const InviteAccountantUserType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const InviteAccountantUserCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type InviteAccountantUserCode = ClosedEnum<
-  typeof InviteAccountantUserCode
->;
-
-export const InviteAccountantUserCode$zodSchema = z.enum([
-  "missing_scope",
-]);
 
 /**
  * Missing scope

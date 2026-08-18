@@ -11,6 +11,37 @@ import {
 } from "./collectsessionbytoken.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
+export const GetcollectSessionByTokenStatusCode = {
+  FourHundredAndFour: 404,
+} as const;
+export type GetcollectSessionByTokenStatusCode = ClosedEnum<
+  typeof GetcollectSessionByTokenStatusCode
+>;
+
+export const GetcollectSessionByTokenStatusCode$zodSchema = z.literal(404);
+
+export const GetcollectSessionByTokenType = {
+  NotFound: "not_found",
+} as const;
+export type GetcollectSessionByTokenType = ClosedEnum<
+  typeof GetcollectSessionByTokenType
+>;
+
+export const GetcollectSessionByTokenType$zodSchema = z.enum([
+  "not_found",
+]);
+
+export const GetcollectSessionByTokenCode = {
+  CollectTokenNotFound: "collect_token_not_found",
+} as const;
+export type GetcollectSessionByTokenCode = ClosedEnum<
+  typeof GetcollectSessionByTokenCode
+>;
+
+export const GetcollectSessionByTokenCode$zodSchema = z.enum([
+  "collect_token_not_found",
+]);
+
 export type GetcollectSessionByTokenRequest = { token: string };
 
 export const GetcollectSessionByTokenRequest$zodSchema: z.ZodType<
@@ -72,37 +103,6 @@ export const GetcollectSessionByTokenUnprocessableEntityResponseBody$zodSchema:
       success: z.boolean(),
     },
   ).describe("The validation error(s)");
-
-export const GetcollectSessionByTokenStatusCode = {
-  FourHundredAndFour: 404,
-} as const;
-export type GetcollectSessionByTokenStatusCode = ClosedEnum<
-  typeof GetcollectSessionByTokenStatusCode
->;
-
-export const GetcollectSessionByTokenStatusCode$zodSchema = z.literal(404);
-
-export const GetcollectSessionByTokenType = {
-  NotFound: "not_found",
-} as const;
-export type GetcollectSessionByTokenType = ClosedEnum<
-  typeof GetcollectSessionByTokenType
->;
-
-export const GetcollectSessionByTokenType$zodSchema = z.enum([
-  "not_found",
-]);
-
-export const GetcollectSessionByTokenCode = {
-  CollectTokenNotFound: "collect_token_not_found",
-} as const;
-export type GetcollectSessionByTokenCode = ClosedEnum<
-  typeof GetcollectSessionByTokenCode
->;
-
-export const GetcollectSessionByTokenCode$zodSchema = z.enum([
-  "collect_token_not_found",
-]);
 
 /**
  * Collect session not found. The token may be invalid or revoked.

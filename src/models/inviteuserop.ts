@@ -14,6 +14,68 @@ import { Conflict, Conflict$zodSchema } from "./conflict.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
+export const InviteUserForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type InviteUserForbiddenStatusCode = ClosedEnum<
+  typeof InviteUserForbiddenStatusCode
+>;
+
+export const InviteUserForbiddenStatusCode$zodSchema = z.literal(403);
+
+export const InviteUserForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type InviteUserForbiddenType = ClosedEnum<
+  typeof InviteUserForbiddenType
+>;
+
+export const InviteUserForbiddenType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const InviteUserForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type InviteUserForbiddenCode = ClosedEnum<
+  typeof InviteUserForbiddenCode
+>;
+
+export const InviteUserForbiddenCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export const InviteUserStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type InviteUserStatusCode400 = ClosedEnum<
+  typeof InviteUserStatusCode400
+>;
+
+export const InviteUserStatusCode400$zodSchema = z.literal(400);
+
+export const InviteUserBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type InviteUserBadRequestType = ClosedEnum<
+  typeof InviteUserBadRequestType
+>;
+
+export const InviteUserBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export const InviteUserCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type InviteUserCodeMissingClientID = ClosedEnum<
+  typeof InviteUserCodeMissingClientID
+>;
+
+export const InviteUserCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
+
 export type InviteUserRequest = {
   xClientId: string;
   ClientUserInvite: ClientUserInvite;
@@ -69,37 +131,6 @@ export const InviteUserUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("The validation error(s)");
 
-export const InviteUserForbiddenStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type InviteUserForbiddenStatusCode = ClosedEnum<
-  typeof InviteUserForbiddenStatusCode
->;
-
-export const InviteUserForbiddenStatusCode$zodSchema = z.literal(403);
-
-export const InviteUserForbiddenType = {
-  AuthError: "auth_error",
-} as const;
-export type InviteUserForbiddenType = ClosedEnum<
-  typeof InviteUserForbiddenType
->;
-
-export const InviteUserForbiddenType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const InviteUserForbiddenCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type InviteUserForbiddenCode = ClosedEnum<
-  typeof InviteUserForbiddenCode
->;
-
-export const InviteUserForbiddenCode$zodSchema = z.enum([
-  "missing_scope",
-]);
-
 /**
  * Missing scope
  */
@@ -118,37 +149,6 @@ export const InviteUserForbiddenResponseBody$zodSchema: z.ZodType<
   status_code: InviteUserForbiddenStatusCode$zodSchema,
   type: InviteUserForbiddenType$zodSchema,
 }).describe("Missing scope");
-
-export const InviteUserStatusCode400 = {
-  FourHundred: 400,
-} as const;
-export type InviteUserStatusCode400 = ClosedEnum<
-  typeof InviteUserStatusCode400
->;
-
-export const InviteUserStatusCode400$zodSchema = z.literal(400);
-
-export const InviteUserBadRequestType = {
-  BadRequest: "bad_request",
-} as const;
-export type InviteUserBadRequestType = ClosedEnum<
-  typeof InviteUserBadRequestType
->;
-
-export const InviteUserBadRequestType$zodSchema = z.enum([
-  "bad_request",
-]);
-
-export const InviteUserCodeMissingClientID = {
-  MissingClientId: "missing_client_id",
-} as const;
-export type InviteUserCodeMissingClientID = ClosedEnum<
-  typeof InviteUserCodeMissingClientID
->;
-
-export const InviteUserCodeMissingClientID$zodSchema = z.enum([
-  "missing_client_id",
-]);
 
 /**
  * Missing client ID

@@ -28,13 +28,13 @@ export const Outcome$zodSchema = z.enum([
 
 export type CompleteSessionBody = {
   clientNote?: string | undefined;
-  outcome?: Outcome | undefined;
+  outcome: Outcome;
 };
 
 export const CompleteSessionBody$zodSchema: z.ZodType<CompleteSessionBody> = z
   .object({
     clientNote: z.string().optional(),
-    outcome: Outcome$zodSchema.optional().describe(
+    outcome: Outcome$zodSchema.describe(
       "Explicit completion outcome picked by the client: 'complete' (everything provided), 'incomplete' (will provide the rest later), 'incomplete_finished' (cannot provide the rest; clientNote explains).",
     ),
   });

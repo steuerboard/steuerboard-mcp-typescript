@@ -9,6 +9,68 @@ import { DeleteResponse, DeleteResponse$zodSchema } from "./deleteresponse.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
+export const DeleteFileForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type DeleteFileForbiddenStatusCode = ClosedEnum<
+  typeof DeleteFileForbiddenStatusCode
+>;
+
+export const DeleteFileForbiddenStatusCode$zodSchema = z.literal(403);
+
+export const DeleteFileForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type DeleteFileForbiddenType = ClosedEnum<
+  typeof DeleteFileForbiddenType
+>;
+
+export const DeleteFileForbiddenType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const DeleteFileForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type DeleteFileForbiddenCode = ClosedEnum<
+  typeof DeleteFileForbiddenCode
+>;
+
+export const DeleteFileForbiddenCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export const DeleteFileStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type DeleteFileStatusCode400 = ClosedEnum<
+  typeof DeleteFileStatusCode400
+>;
+
+export const DeleteFileStatusCode400$zodSchema = z.literal(400);
+
+export const DeleteFileBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type DeleteFileBadRequestType = ClosedEnum<
+  typeof DeleteFileBadRequestType
+>;
+
+export const DeleteFileBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export const DeleteFileCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type DeleteFileCodeMissingClientID = ClosedEnum<
+  typeof DeleteFileCodeMissingClientID
+>;
+
+export const DeleteFileCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
+
 export type DeleteFileRequest = { id: string; xClientId: string };
 
 export const DeleteFileRequest$zodSchema: z.ZodType<DeleteFileRequest> = z
@@ -61,37 +123,6 @@ export const DeleteFileUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("Invalid id error");
 
-export const DeleteFileForbiddenStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type DeleteFileForbiddenStatusCode = ClosedEnum<
-  typeof DeleteFileForbiddenStatusCode
->;
-
-export const DeleteFileForbiddenStatusCode$zodSchema = z.literal(403);
-
-export const DeleteFileForbiddenType = {
-  AuthError: "auth_error",
-} as const;
-export type DeleteFileForbiddenType = ClosedEnum<
-  typeof DeleteFileForbiddenType
->;
-
-export const DeleteFileForbiddenType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const DeleteFileForbiddenCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type DeleteFileForbiddenCode = ClosedEnum<
-  typeof DeleteFileForbiddenCode
->;
-
-export const DeleteFileForbiddenCode$zodSchema = z.enum([
-  "missing_scope",
-]);
-
 /**
  * Missing scope
  */
@@ -110,37 +141,6 @@ export const DeleteFileForbiddenResponseBody$zodSchema: z.ZodType<
   status_code: DeleteFileForbiddenStatusCode$zodSchema,
   type: DeleteFileForbiddenType$zodSchema,
 }).describe("Missing scope");
-
-export const DeleteFileStatusCode400 = {
-  FourHundred: 400,
-} as const;
-export type DeleteFileStatusCode400 = ClosedEnum<
-  typeof DeleteFileStatusCode400
->;
-
-export const DeleteFileStatusCode400$zodSchema = z.literal(400);
-
-export const DeleteFileBadRequestType = {
-  BadRequest: "bad_request",
-} as const;
-export type DeleteFileBadRequestType = ClosedEnum<
-  typeof DeleteFileBadRequestType
->;
-
-export const DeleteFileBadRequestType$zodSchema = z.enum([
-  "bad_request",
-]);
-
-export const DeleteFileCodeMissingClientID = {
-  MissingClientId: "missing_client_id",
-} as const;
-export type DeleteFileCodeMissingClientID = ClosedEnum<
-  typeof DeleteFileCodeMissingClientID
->;
-
-export const DeleteFileCodeMissingClientID$zodSchema = z.enum([
-  "missing_client_id",
-]);
 
 /**
  * Missing client ID

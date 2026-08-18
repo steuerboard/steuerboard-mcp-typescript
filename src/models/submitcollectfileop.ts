@@ -15,6 +15,69 @@ import {
 } from "./collectfilesubmitform.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
+export const SubmitCollectFileRequestEntityTooLargeStatusCode = {
+  FourHundredAndThirteen: 413,
+} as const;
+export type SubmitCollectFileRequestEntityTooLargeStatusCode = ClosedEnum<
+  typeof SubmitCollectFileRequestEntityTooLargeStatusCode
+>;
+
+export const SubmitCollectFileRequestEntityTooLargeStatusCode$zodSchema = z
+  .literal(413);
+
+export const SubmitCollectFileRequestEntityTooLargeType = {
+  BadRequest: "bad_request",
+} as const;
+export type SubmitCollectFileRequestEntityTooLargeType = ClosedEnum<
+  typeof SubmitCollectFileRequestEntityTooLargeType
+>;
+
+export const SubmitCollectFileRequestEntityTooLargeType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export const SubmitCollectFileRequestEntityTooLargeCode = {
+  PayloadTooLarge: "payload_too_large",
+} as const;
+export type SubmitCollectFileRequestEntityTooLargeCode = ClosedEnum<
+  typeof SubmitCollectFileRequestEntityTooLargeCode
+>;
+
+export const SubmitCollectFileRequestEntityTooLargeCode$zodSchema = z.enum([
+  "payload_too_large",
+]);
+
+export const SubmitCollectFileNotFoundStatusCode = {
+  FourHundredAndFour: 404,
+} as const;
+export type SubmitCollectFileNotFoundStatusCode = ClosedEnum<
+  typeof SubmitCollectFileNotFoundStatusCode
+>;
+
+export const SubmitCollectFileNotFoundStatusCode$zodSchema = z.literal(404);
+
+export const SubmitCollectFileNotFoundType = {
+  NotFound: "not_found",
+} as const;
+export type SubmitCollectFileNotFoundType = ClosedEnum<
+  typeof SubmitCollectFileNotFoundType
+>;
+
+export const SubmitCollectFileNotFoundType$zodSchema = z.enum([
+  "not_found",
+]);
+
+export const SubmitCollectFileNotFoundCode = {
+  CollectTokenNotFound: "collect_token_not_found",
+} as const;
+export type SubmitCollectFileNotFoundCode = ClosedEnum<
+  typeof SubmitCollectFileNotFoundCode
+>;
+
+export const SubmitCollectFileNotFoundCode$zodSchema = z.enum([
+  "collect_token_not_found",
+]);
+
 export type SubmitCollectFileRequest = {
   token: string;
   CollectFileSubmitForm: CollectFileSubmitForm;
@@ -143,38 +206,6 @@ export const SubmitCollectFileResponseBody$zodSchema: z.ZodType<
   z.lazy(() => SubmitCollectFileResponseBody2$zodSchema),
 ]).describe("The validation error(s)");
 
-export const SubmitCollectFileRequestEntityTooLargeStatusCode = {
-  FourHundredAndThirteen: 413,
-} as const;
-export type SubmitCollectFileRequestEntityTooLargeStatusCode = ClosedEnum<
-  typeof SubmitCollectFileRequestEntityTooLargeStatusCode
->;
-
-export const SubmitCollectFileRequestEntityTooLargeStatusCode$zodSchema = z
-  .literal(413);
-
-export const SubmitCollectFileRequestEntityTooLargeType = {
-  BadRequest: "bad_request",
-} as const;
-export type SubmitCollectFileRequestEntityTooLargeType = ClosedEnum<
-  typeof SubmitCollectFileRequestEntityTooLargeType
->;
-
-export const SubmitCollectFileRequestEntityTooLargeType$zodSchema = z.enum([
-  "bad_request",
-]);
-
-export const SubmitCollectFileRequestEntityTooLargeCode = {
-  PayloadTooLarge: "payload_too_large",
-} as const;
-export type SubmitCollectFileRequestEntityTooLargeCode = ClosedEnum<
-  typeof SubmitCollectFileRequestEntityTooLargeCode
->;
-
-export const SubmitCollectFileRequestEntityTooLargeCode$zodSchema = z.enum([
-  "payload_too_large",
-]);
-
 /**
  * Payload too large
  */
@@ -192,37 +223,6 @@ export const SubmitCollectFileRequestEntityTooLargeResponseBody$zodSchema:
     status_code: SubmitCollectFileRequestEntityTooLargeStatusCode$zodSchema,
     type: SubmitCollectFileRequestEntityTooLargeType$zodSchema,
   }).describe("Payload too large");
-
-export const SubmitCollectFileNotFoundStatusCode = {
-  FourHundredAndFour: 404,
-} as const;
-export type SubmitCollectFileNotFoundStatusCode = ClosedEnum<
-  typeof SubmitCollectFileNotFoundStatusCode
->;
-
-export const SubmitCollectFileNotFoundStatusCode$zodSchema = z.literal(404);
-
-export const SubmitCollectFileNotFoundType = {
-  NotFound: "not_found",
-} as const;
-export type SubmitCollectFileNotFoundType = ClosedEnum<
-  typeof SubmitCollectFileNotFoundType
->;
-
-export const SubmitCollectFileNotFoundType$zodSchema = z.enum([
-  "not_found",
-]);
-
-export const SubmitCollectFileNotFoundCode = {
-  CollectTokenNotFound: "collect_token_not_found",
-} as const;
-export type SubmitCollectFileNotFoundCode = ClosedEnum<
-  typeof SubmitCollectFileNotFoundCode
->;
-
-export const SubmitCollectFileNotFoundCode$zodSchema = z.enum([
-  "collect_token_not_found",
-]);
 
 /**
  * Collect session not found. The token may be invalid or revoked.

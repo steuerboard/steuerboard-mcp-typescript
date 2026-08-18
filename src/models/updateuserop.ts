@@ -13,6 +13,68 @@ import {
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
+export const UpdateUserForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type UpdateUserForbiddenStatusCode = ClosedEnum<
+  typeof UpdateUserForbiddenStatusCode
+>;
+
+export const UpdateUserForbiddenStatusCode$zodSchema = z.literal(403);
+
+export const UpdateUserForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type UpdateUserForbiddenType = ClosedEnum<
+  typeof UpdateUserForbiddenType
+>;
+
+export const UpdateUserForbiddenType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const UpdateUserForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type UpdateUserForbiddenCode = ClosedEnum<
+  typeof UpdateUserForbiddenCode
+>;
+
+export const UpdateUserForbiddenCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export const UpdateUserStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type UpdateUserStatusCode400 = ClosedEnum<
+  typeof UpdateUserStatusCode400
+>;
+
+export const UpdateUserStatusCode400$zodSchema = z.literal(400);
+
+export const UpdateUserBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type UpdateUserBadRequestType = ClosedEnum<
+  typeof UpdateUserBadRequestType
+>;
+
+export const UpdateUserBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export const UpdateUserCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type UpdateUserCodeMissingClientID = ClosedEnum<
+  typeof UpdateUserCodeMissingClientID
+>;
+
+export const UpdateUserCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
+
 export type UpdateUserRequest = {
   id: string;
   xClientId: string;
@@ -136,37 +198,6 @@ export const UpdateUserResponseBody$zodSchema: z.ZodType<
   z.lazy(() => UpdateUserResponseBody2$zodSchema),
 ]).describe("The validation error(s)");
 
-export const UpdateUserForbiddenStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type UpdateUserForbiddenStatusCode = ClosedEnum<
-  typeof UpdateUserForbiddenStatusCode
->;
-
-export const UpdateUserForbiddenStatusCode$zodSchema = z.literal(403);
-
-export const UpdateUserForbiddenType = {
-  AuthError: "auth_error",
-} as const;
-export type UpdateUserForbiddenType = ClosedEnum<
-  typeof UpdateUserForbiddenType
->;
-
-export const UpdateUserForbiddenType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const UpdateUserForbiddenCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type UpdateUserForbiddenCode = ClosedEnum<
-  typeof UpdateUserForbiddenCode
->;
-
-export const UpdateUserForbiddenCode$zodSchema = z.enum([
-  "missing_scope",
-]);
-
 /**
  * Missing scope
  */
@@ -185,37 +216,6 @@ export const UpdateUserForbiddenResponseBody$zodSchema: z.ZodType<
   status_code: UpdateUserForbiddenStatusCode$zodSchema,
   type: UpdateUserForbiddenType$zodSchema,
 }).describe("Missing scope");
-
-export const UpdateUserStatusCode400 = {
-  FourHundred: 400,
-} as const;
-export type UpdateUserStatusCode400 = ClosedEnum<
-  typeof UpdateUserStatusCode400
->;
-
-export const UpdateUserStatusCode400$zodSchema = z.literal(400);
-
-export const UpdateUserBadRequestType = {
-  BadRequest: "bad_request",
-} as const;
-export type UpdateUserBadRequestType = ClosedEnum<
-  typeof UpdateUserBadRequestType
->;
-
-export const UpdateUserBadRequestType$zodSchema = z.enum([
-  "bad_request",
-]);
-
-export const UpdateUserCodeMissingClientID = {
-  MissingClientId: "missing_client_id",
-} as const;
-export type UpdateUserCodeMissingClientID = ClosedEnum<
-  typeof UpdateUserCodeMissingClientID
->;
-
-export const UpdateUserCodeMissingClientID$zodSchema = z.enum([
-  "missing_client_id",
-]);
 
 /**
  * Missing client ID

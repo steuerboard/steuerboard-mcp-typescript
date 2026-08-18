@@ -9,6 +9,101 @@ import { FileT, FileT$zodSchema } from "./file.js";
 import { FileCreate, FileCreate$zodSchema } from "./filecreate.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
+export const CreateFileRequestEntityTooLargeStatusCode = {
+  FourHundredAndThirteen: 413,
+} as const;
+export type CreateFileRequestEntityTooLargeStatusCode = ClosedEnum<
+  typeof CreateFileRequestEntityTooLargeStatusCode
+>;
+
+export const CreateFileRequestEntityTooLargeStatusCode$zodSchema = z.literal(
+  413,
+);
+
+export const CreateFileRequestEntityTooLargeType = {
+  BadRequest: "bad_request",
+} as const;
+export type CreateFileRequestEntityTooLargeType = ClosedEnum<
+  typeof CreateFileRequestEntityTooLargeType
+>;
+
+export const CreateFileRequestEntityTooLargeType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export const CreateFileRequestEntityTooLargeCode = {
+  PayloadTooLarge: "payload_too_large",
+} as const;
+export type CreateFileRequestEntityTooLargeCode = ClosedEnum<
+  typeof CreateFileRequestEntityTooLargeCode
+>;
+
+export const CreateFileRequestEntityTooLargeCode$zodSchema = z.enum([
+  "payload_too_large",
+]);
+
+export const CreateFileForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type CreateFileForbiddenStatusCode = ClosedEnum<
+  typeof CreateFileForbiddenStatusCode
+>;
+
+export const CreateFileForbiddenStatusCode$zodSchema = z.literal(403);
+
+export const CreateFileForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type CreateFileForbiddenType = ClosedEnum<
+  typeof CreateFileForbiddenType
+>;
+
+export const CreateFileForbiddenType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const CreateFileForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type CreateFileForbiddenCode = ClosedEnum<
+  typeof CreateFileForbiddenCode
+>;
+
+export const CreateFileForbiddenCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export const CreateFileStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type CreateFileStatusCode400 = ClosedEnum<
+  typeof CreateFileStatusCode400
+>;
+
+export const CreateFileStatusCode400$zodSchema = z.literal(400);
+
+export const CreateFileBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type CreateFileBadRequestType = ClosedEnum<
+  typeof CreateFileBadRequestType
+>;
+
+export const CreateFileBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export const CreateFileCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type CreateFileCodeMissingClientID = ClosedEnum<
+  typeof CreateFileCodeMissingClientID
+>;
+
+export const CreateFileCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
+
 export type CreateFileRequest = { xClientId: string; FileCreate: FileCreate };
 
 export const CreateFileRequest$zodSchema: z.ZodType<CreateFileRequest> = z
@@ -61,39 +156,6 @@ export const CreateFileUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("The validation error(s)");
 
-export const CreateFileRequestEntityTooLargeStatusCode = {
-  FourHundredAndThirteen: 413,
-} as const;
-export type CreateFileRequestEntityTooLargeStatusCode = ClosedEnum<
-  typeof CreateFileRequestEntityTooLargeStatusCode
->;
-
-export const CreateFileRequestEntityTooLargeStatusCode$zodSchema = z.literal(
-  413,
-);
-
-export const CreateFileRequestEntityTooLargeType = {
-  BadRequest: "bad_request",
-} as const;
-export type CreateFileRequestEntityTooLargeType = ClosedEnum<
-  typeof CreateFileRequestEntityTooLargeType
->;
-
-export const CreateFileRequestEntityTooLargeType$zodSchema = z.enum([
-  "bad_request",
-]);
-
-export const CreateFileRequestEntityTooLargeCode = {
-  PayloadTooLarge: "payload_too_large",
-} as const;
-export type CreateFileRequestEntityTooLargeCode = ClosedEnum<
-  typeof CreateFileRequestEntityTooLargeCode
->;
-
-export const CreateFileRequestEntityTooLargeCode$zodSchema = z.enum([
-  "payload_too_large",
-]);
-
 /**
  * Payload too large
  */
@@ -113,37 +175,6 @@ export const CreateFileRequestEntityTooLargeResponseBody$zodSchema: z.ZodType<
   type: CreateFileRequestEntityTooLargeType$zodSchema,
 }).describe("Payload too large");
 
-export const CreateFileForbiddenStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type CreateFileForbiddenStatusCode = ClosedEnum<
-  typeof CreateFileForbiddenStatusCode
->;
-
-export const CreateFileForbiddenStatusCode$zodSchema = z.literal(403);
-
-export const CreateFileForbiddenType = {
-  AuthError: "auth_error",
-} as const;
-export type CreateFileForbiddenType = ClosedEnum<
-  typeof CreateFileForbiddenType
->;
-
-export const CreateFileForbiddenType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const CreateFileForbiddenCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type CreateFileForbiddenCode = ClosedEnum<
-  typeof CreateFileForbiddenCode
->;
-
-export const CreateFileForbiddenCode$zodSchema = z.enum([
-  "missing_scope",
-]);
-
 /**
  * Missing scope
  */
@@ -162,37 +193,6 @@ export const CreateFileForbiddenResponseBody$zodSchema: z.ZodType<
   status_code: CreateFileForbiddenStatusCode$zodSchema,
   type: CreateFileForbiddenType$zodSchema,
 }).describe("Missing scope");
-
-export const CreateFileStatusCode400 = {
-  FourHundred: 400,
-} as const;
-export type CreateFileStatusCode400 = ClosedEnum<
-  typeof CreateFileStatusCode400
->;
-
-export const CreateFileStatusCode400$zodSchema = z.literal(400);
-
-export const CreateFileBadRequestType = {
-  BadRequest: "bad_request",
-} as const;
-export type CreateFileBadRequestType = ClosedEnum<
-  typeof CreateFileBadRequestType
->;
-
-export const CreateFileBadRequestType$zodSchema = z.enum([
-  "bad_request",
-]);
-
-export const CreateFileCodeMissingClientID = {
-  MissingClientId: "missing_client_id",
-} as const;
-export type CreateFileCodeMissingClientID = ClosedEnum<
-  typeof CreateFileCodeMissingClientID
->;
-
-export const CreateFileCodeMissingClientID$zodSchema = z.enum([
-  "missing_client_id",
-]);
 
 /**
  * Missing client ID

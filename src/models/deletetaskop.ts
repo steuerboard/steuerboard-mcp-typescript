@@ -9,6 +9,68 @@ import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 import { Task, Task$zodSchema } from "./task.js";
 
+export const DeleteTaskForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type DeleteTaskForbiddenStatusCode = ClosedEnum<
+  typeof DeleteTaskForbiddenStatusCode
+>;
+
+export const DeleteTaskForbiddenStatusCode$zodSchema = z.literal(403);
+
+export const DeleteTaskForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type DeleteTaskForbiddenType = ClosedEnum<
+  typeof DeleteTaskForbiddenType
+>;
+
+export const DeleteTaskForbiddenType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const DeleteTaskForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type DeleteTaskForbiddenCode = ClosedEnum<
+  typeof DeleteTaskForbiddenCode
+>;
+
+export const DeleteTaskForbiddenCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export const DeleteTaskStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type DeleteTaskStatusCode400 = ClosedEnum<
+  typeof DeleteTaskStatusCode400
+>;
+
+export const DeleteTaskStatusCode400$zodSchema = z.literal(400);
+
+export const DeleteTaskBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type DeleteTaskBadRequestType = ClosedEnum<
+  typeof DeleteTaskBadRequestType
+>;
+
+export const DeleteTaskBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export const DeleteTaskCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type DeleteTaskCodeMissingClientID = ClosedEnum<
+  typeof DeleteTaskCodeMissingClientID
+>;
+
+export const DeleteTaskCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
+
 export type DeleteTaskRequest = { id: string; xClientId: string };
 
 export const DeleteTaskRequest$zodSchema: z.ZodType<DeleteTaskRequest> = z
@@ -61,37 +123,6 @@ export const DeleteTaskUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("Invalid id error");
 
-export const DeleteTaskForbiddenStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type DeleteTaskForbiddenStatusCode = ClosedEnum<
-  typeof DeleteTaskForbiddenStatusCode
->;
-
-export const DeleteTaskForbiddenStatusCode$zodSchema = z.literal(403);
-
-export const DeleteTaskForbiddenType = {
-  AuthError: "auth_error",
-} as const;
-export type DeleteTaskForbiddenType = ClosedEnum<
-  typeof DeleteTaskForbiddenType
->;
-
-export const DeleteTaskForbiddenType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const DeleteTaskForbiddenCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type DeleteTaskForbiddenCode = ClosedEnum<
-  typeof DeleteTaskForbiddenCode
->;
-
-export const DeleteTaskForbiddenCode$zodSchema = z.enum([
-  "missing_scope",
-]);
-
 /**
  * Missing scope
  */
@@ -110,37 +141,6 @@ export const DeleteTaskForbiddenResponseBody$zodSchema: z.ZodType<
   status_code: DeleteTaskForbiddenStatusCode$zodSchema,
   type: DeleteTaskForbiddenType$zodSchema,
 }).describe("Missing scope");
-
-export const DeleteTaskStatusCode400 = {
-  FourHundred: 400,
-} as const;
-export type DeleteTaskStatusCode400 = ClosedEnum<
-  typeof DeleteTaskStatusCode400
->;
-
-export const DeleteTaskStatusCode400$zodSchema = z.literal(400);
-
-export const DeleteTaskBadRequestType = {
-  BadRequest: "bad_request",
-} as const;
-export type DeleteTaskBadRequestType = ClosedEnum<
-  typeof DeleteTaskBadRequestType
->;
-
-export const DeleteTaskBadRequestType$zodSchema = z.enum([
-  "bad_request",
-]);
-
-export const DeleteTaskCodeMissingClientID = {
-  MissingClientId: "missing_client_id",
-} as const;
-export type DeleteTaskCodeMissingClientID = ClosedEnum<
-  typeof DeleteTaskCodeMissingClientID
->;
-
-export const DeleteTaskCodeMissingClientID$zodSchema = z.enum([
-  "missing_client_id",
-]);
 
 /**
  * Missing client ID

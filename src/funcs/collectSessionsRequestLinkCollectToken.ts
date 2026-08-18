@@ -3,7 +3,7 @@
  */
 
 import { SteuerboardCore } from "../core.js";
-import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -31,7 +31,7 @@ import { Result } from "../types/fp.js";
  * Request a new collect session link
  *
  * @remarks
- * Sends the current active link when possible, or creates a new session for an expired token. Always returns 202 to prevent enumeration.
+ * Sends the current active link when possible, or creates a new session for an expired token. The recipient comes from the session itself, so no body is needed. Always returns 202 to prevent enumeration.
  */
 export function collectSessionsRequestLinkCollectToken(
   client$: SteuerboardCore,
@@ -84,7 +84,7 @@ async function $do(
     return [parsed$, { status: "invalid" }];
   }
   const payload$ = parsed$.value;
-  const body$ = encodeJSON("body", payload$.RequestLinkBody, { explode: true });
+  const body$ = null;
 
   const pathParams$ = {
     token: encodeSimple("token", payload$.token, {
@@ -97,7 +97,6 @@ async function $do(
   );
 
   const headers$ = new Headers(compactMap({
-    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 
@@ -162,7 +161,7 @@ async function $do(
     M.json(202, RequestLinkCollectTokenResponse$zodSchema, {
       key: "RequestLinkResponse",
     }),
-    M.json(422, RequestLinkCollectTokenResponse$zodSchema, { key: "oneOf" }),
+    M.json(422, RequestLinkCollectTokenResponse$zodSchema, { key: "object" }),
     M.json(429, RequestLinkCollectTokenResponse$zodSchema, {
       key: "rate_limit",
     }),

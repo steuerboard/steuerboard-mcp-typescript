@@ -33,24 +33,6 @@ export const Channel$zodSchema = z.enum([
   "collectUi",
 ]);
 
-export type ChannelConfig = {
-  channel: Channel;
-  brandingColor?: string | undefined;
-  logoUrl?: string | undefined;
-  pinProtected?: boolean | undefined;
-  submitButtonLabel?: string | undefined;
-  locale?: string | undefined;
-};
-
-export const ChannelConfig$zodSchema: z.ZodType<ChannelConfig> = z.object({
-  brandingColor: z.string().optional(),
-  channel: Channel$zodSchema,
-  locale: z.string().default("de"),
-  logoUrl: z.string().optional(),
-  pinProtected: z.boolean().default(false),
-  submitButtonLabel: z.string().default("Submit"),
-});
-
 export const EvaluationMode = {
   Individual: "individual",
   Batch: "batch",
@@ -105,19 +87,6 @@ export const TypeConfirmation$zodSchema = z.enum([
   "confirmation",
 ]);
 
-export type ConfigConfirmation = {
-  type: TypeConfirmation;
-  confirmationText: string;
-  requiresExplicitConsent?: boolean | undefined;
-};
-
-export const ConfigConfirmation$zodSchema: z.ZodType<ConfigConfirmation> = z
-  .object({
-    confirmationText: z.string(),
-    requiresExplicitConsent: z.boolean().default(true),
-    type: TypeConfirmation$zodSchema,
-  });
-
 export const TypeSignature = {
   Signature: "signature",
 } as const;
@@ -127,20 +96,6 @@ export const TypeSignature$zodSchema = z.enum([
   "signature",
 ]);
 
-export type ConfigSignature = {
-  type: TypeSignature;
-  signerName: string;
-  signerEmail?: string | undefined;
-  documentRef?: string | undefined;
-};
-
-export const ConfigSignature$zodSchema: z.ZodType<ConfigSignature> = z.object({
-  documentRef: z.string().optional(),
-  signerEmail: z.string().optional(),
-  signerName: z.string(),
-  type: TypeSignature$zodSchema,
-});
-
 export const TypeFileUpload = {
   FileUpload: "fileUpload",
 } as const;
@@ -149,44 +104,6 @@ export type TypeFileUpload = ClosedEnum<typeof TypeFileUpload>;
 export const TypeFileUpload$zodSchema = z.enum([
   "fileUpload",
 ]);
-
-export type FileCount = { min?: number | undefined; max?: number | undefined };
-
-export const FileCount$zodSchema: z.ZodType<FileCount> = z.object({
-  max: z.int().optional(),
-  min: z.int().default(1),
-});
-
-export type MatchingHints = string | number;
-
-export const MatchingHints$zodSchema: z.ZodType<MatchingHints> = z.union([
-  z.string(),
-  z.number(),
-]);
-
-export type ConfigFileUpload = {
-  type: TypeFileUpload;
-  acceptedFileTypes?: Array<string> | undefined;
-  maxFileSizeMb?: number | undefined;
-  fileCount?: FileCount | undefined;
-  matchingHints?: { [k: string]: string | number } | undefined;
-};
-
-export const ConfigFileUpload$zodSchema: z.ZodType<ConfigFileUpload> = z.object(
-  {
-    acceptedFileTypes: z.array(z.string()).optional(),
-    fileCount: z.lazy(() => FileCount$zodSchema).optional(),
-    matchingHints: z.record(
-      z.string(),
-      z.union([
-        z.string(),
-        z.number(),
-      ]),
-    ).optional(),
-    maxFileSizeMb: z.number().default(25),
-    type: TypeFileUpload$zodSchema,
-  },
-);
 
 export const TypeFormField = {
   FormField: "formField",
@@ -243,6 +160,87 @@ export const FieldValidationType$zodSchema = z.enum([
   "custom",
 ]);
 
+export const Condition = {
+  Equals: "equals",
+  NotEmpty: "notEmpty",
+  NotEquals: "notEquals",
+} as const;
+export type Condition = ClosedEnum<typeof Condition>;
+
+export const Condition$zodSchema = z.enum([
+  "equals",
+  "notEmpty",
+  "notEquals",
+]);
+
+export type ChannelConfig = {
+  channel: Channel;
+  brandingColor?: string | undefined;
+  logoUrl?: string | undefined;
+  pinProtected?: boolean | undefined;
+  submitButtonLabel?: string | undefined;
+  locale?: string | undefined;
+};
+
+export const ChannelConfig$zodSchema: z.ZodType<ChannelConfig> = z.object({
+  brandingColor: z.string().optional(),
+  channel: Channel$zodSchema,
+  locale: z.string().default("de"),
+  logoUrl: z.string().optional(),
+  pinProtected: z.boolean().default(false),
+  submitButtonLabel: z.string().default("Submit"),
+});
+
+export type ConfigConfirmation = {
+  type: TypeConfirmation;
+  confirmationText: string;
+  requiresExplicitConsent?: boolean | undefined;
+};
+
+export const ConfigConfirmation$zodSchema: z.ZodType<ConfigConfirmation> = z
+  .object({
+    confirmationText: z.string(),
+    requiresExplicitConsent: z.boolean().default(true),
+    type: TypeConfirmation$zodSchema,
+  });
+
+export type ConfigSignature = {
+  type: TypeSignature;
+  signerName: string;
+  signerEmail?: string | undefined;
+  documentRef?: string | undefined;
+};
+
+export const ConfigSignature$zodSchema: z.ZodType<ConfigSignature> = z.object({
+  documentRef: z.string().optional(),
+  signerEmail: z.string().optional(),
+  signerName: z.string(),
+  type: TypeSignature$zodSchema,
+});
+
+export type FileCount = { min?: number | undefined; max?: number | undefined };
+
+export const FileCount$zodSchema: z.ZodType<FileCount> = z.object({
+  max: z.int().optional(),
+  min: z.int().default(1),
+});
+
+export type ConfigFileUpload = {
+  type: TypeFileUpload;
+  acceptedFileTypes?: Array<string> | undefined;
+  maxFileSizeMb?: number | undefined;
+  fileCount?: FileCount | undefined;
+};
+
+export const ConfigFileUpload$zodSchema: z.ZodType<ConfigFileUpload> = z.object(
+  {
+    acceptedFileTypes: z.array(z.string()).optional(),
+    fileCount: z.lazy(() => FileCount$zodSchema).optional(),
+    maxFileSizeMb: z.number().default(25),
+    type: TypeFileUpload$zodSchema,
+  },
+);
+
 export type Value = string | number;
 
 export const Value$zodSchema: z.ZodType<Value> = z.union([
@@ -264,19 +262,6 @@ export const FieldValidation$zodSchema: z.ZodType<FieldValidation> = z.object({
     z.number(),
   ]),
 });
-
-export const Condition = {
-  Equals: "equals",
-  NotEmpty: "notEmpty",
-  NotEquals: "notEquals",
-} as const;
-export type Condition = ClosedEnum<typeof Condition>;
-
-export const Condition$zodSchema = z.enum([
-  "equals",
-  "notEmpty",
-  "notEquals",
-]);
 
 export type FieldDependsOn = {
   collectItemId: string;

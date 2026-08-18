@@ -9,6 +9,31 @@ import { Client, Client$zodSchema } from "./client.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
+export const GetClientStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type GetClientStatusCode = ClosedEnum<typeof GetClientStatusCode>;
+
+export const GetClientStatusCode$zodSchema = z.literal(403);
+
+export const GetClientType = {
+  AuthError: "auth_error",
+} as const;
+export type GetClientType = ClosedEnum<typeof GetClientType>;
+
+export const GetClientType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const GetClientCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type GetClientCode = ClosedEnum<typeof GetClientCode>;
+
+export const GetClientCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
 export type GetClientRequest = { id: string };
 
 export const GetClientRequest$zodSchema: z.ZodType<GetClientRequest> = z.object(
@@ -60,31 +85,6 @@ export const GetClientUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   error: z.lazy(() => GetClientError$zodSchema),
   success: z.boolean(),
 }).describe("Invalid id error");
-
-export const GetClientStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type GetClientStatusCode = ClosedEnum<typeof GetClientStatusCode>;
-
-export const GetClientStatusCode$zodSchema = z.literal(403);
-
-export const GetClientType = {
-  AuthError: "auth_error",
-} as const;
-export type GetClientType = ClosedEnum<typeof GetClientType>;
-
-export const GetClientType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const GetClientCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type GetClientCode = ClosedEnum<typeof GetClientCode>;
-
-export const GetClientCode$zodSchema = z.enum([
-  "missing_scope",
-]);
 
 /**
  * Missing scope

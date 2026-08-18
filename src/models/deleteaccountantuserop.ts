@@ -10,14 +10,6 @@ import { DeleteResponse, DeleteResponse$zodSchema } from "./deleteresponse.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
-export type DeleteAccountantUserRequest = { id: string };
-
-export const DeleteAccountantUserRequest$zodSchema: z.ZodType<
-  DeleteAccountantUserRequest
-> = z.object({
-  id: z.string(),
-});
-
 export const DeleteAccountantUserStatusCode = {
   FourHundredAndThree: 403,
 } as const;
@@ -48,6 +40,14 @@ export type DeleteAccountantUserCode = ClosedEnum<
 export const DeleteAccountantUserCode$zodSchema = z.enum([
   "missing_scope",
 ]);
+
+export type DeleteAccountantUserRequest = { id: string };
+
+export const DeleteAccountantUserRequest$zodSchema: z.ZodType<
+  DeleteAccountantUserRequest
+> = z.object({
+  id: z.string(),
+});
 
 /**
  * Missing scope

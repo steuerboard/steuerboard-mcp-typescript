@@ -15,20 +15,6 @@ import {
 } from "./completesessionresponse.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
-export type CompleteCollectSessionRequest = {
-  token: string;
-  CompleteSessionBody?: CompleteSessionBody | undefined;
-};
-
-export const CompleteCollectSessionRequest$zodSchema: z.ZodType<
-  CompleteCollectSessionRequest
-> = z.object({
-  CompleteSessionBody: CompleteSessionBody$zodSchema.optional().describe(
-    "Completion details",
-  ),
-  token: z.string(),
-});
-
 export const CompleteCollectSessionStatusCode = {
   FourHundredAndFour: 404,
 } as const;
@@ -59,6 +45,20 @@ export type CompleteCollectSessionCode = ClosedEnum<
 export const CompleteCollectSessionCode$zodSchema = z.enum([
   "collect_token_not_found",
 ]);
+
+export type CompleteCollectSessionRequest = {
+  token: string;
+  CompleteSessionBody?: CompleteSessionBody | undefined;
+};
+
+export const CompleteCollectSessionRequest$zodSchema: z.ZodType<
+  CompleteCollectSessionRequest
+> = z.object({
+  CompleteSessionBody: CompleteSessionBody$zodSchema.optional().describe(
+    "Completion details",
+  ),
+  token: z.string(),
+});
 
 /**
  * Collect session not found. The token may be invalid or revoked.

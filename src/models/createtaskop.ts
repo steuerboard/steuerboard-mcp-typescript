@@ -9,6 +9,68 @@ import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 import { Task, Task$zodSchema } from "./task.js";
 import { TaskCreate, TaskCreate$zodSchema } from "./taskcreate.js";
 
+export const CreateTaskForbiddenStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type CreateTaskForbiddenStatusCode = ClosedEnum<
+  typeof CreateTaskForbiddenStatusCode
+>;
+
+export const CreateTaskForbiddenStatusCode$zodSchema = z.literal(403);
+
+export const CreateTaskForbiddenType = {
+  AuthError: "auth_error",
+} as const;
+export type CreateTaskForbiddenType = ClosedEnum<
+  typeof CreateTaskForbiddenType
+>;
+
+export const CreateTaskForbiddenType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const CreateTaskForbiddenCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type CreateTaskForbiddenCode = ClosedEnum<
+  typeof CreateTaskForbiddenCode
+>;
+
+export const CreateTaskForbiddenCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
+export const CreateTaskStatusCode400 = {
+  FourHundred: 400,
+} as const;
+export type CreateTaskStatusCode400 = ClosedEnum<
+  typeof CreateTaskStatusCode400
+>;
+
+export const CreateTaskStatusCode400$zodSchema = z.literal(400);
+
+export const CreateTaskBadRequestType = {
+  BadRequest: "bad_request",
+} as const;
+export type CreateTaskBadRequestType = ClosedEnum<
+  typeof CreateTaskBadRequestType
+>;
+
+export const CreateTaskBadRequestType$zodSchema = z.enum([
+  "bad_request",
+]);
+
+export const CreateTaskCodeMissingClientID = {
+  MissingClientId: "missing_client_id",
+} as const;
+export type CreateTaskCodeMissingClientID = ClosedEnum<
+  typeof CreateTaskCodeMissingClientID
+>;
+
+export const CreateTaskCodeMissingClientID$zodSchema = z.enum([
+  "missing_client_id",
+]);
+
 export type CreateTaskRequest = { xClientId: string; TaskCreate: TaskCreate };
 
 export const CreateTaskRequest$zodSchema: z.ZodType<CreateTaskRequest> = z
@@ -61,37 +123,6 @@ export const CreateTaskUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   success: z.boolean(),
 }).describe("The validation error(s)");
 
-export const CreateTaskForbiddenStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type CreateTaskForbiddenStatusCode = ClosedEnum<
-  typeof CreateTaskForbiddenStatusCode
->;
-
-export const CreateTaskForbiddenStatusCode$zodSchema = z.literal(403);
-
-export const CreateTaskForbiddenType = {
-  AuthError: "auth_error",
-} as const;
-export type CreateTaskForbiddenType = ClosedEnum<
-  typeof CreateTaskForbiddenType
->;
-
-export const CreateTaskForbiddenType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const CreateTaskForbiddenCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type CreateTaskForbiddenCode = ClosedEnum<
-  typeof CreateTaskForbiddenCode
->;
-
-export const CreateTaskForbiddenCode$zodSchema = z.enum([
-  "missing_scope",
-]);
-
 /**
  * Missing scope
  */
@@ -110,37 +141,6 @@ export const CreateTaskForbiddenResponseBody$zodSchema: z.ZodType<
   status_code: CreateTaskForbiddenStatusCode$zodSchema,
   type: CreateTaskForbiddenType$zodSchema,
 }).describe("Missing scope");
-
-export const CreateTaskStatusCode400 = {
-  FourHundred: 400,
-} as const;
-export type CreateTaskStatusCode400 = ClosedEnum<
-  typeof CreateTaskStatusCode400
->;
-
-export const CreateTaskStatusCode400$zodSchema = z.literal(400);
-
-export const CreateTaskBadRequestType = {
-  BadRequest: "bad_request",
-} as const;
-export type CreateTaskBadRequestType = ClosedEnum<
-  typeof CreateTaskBadRequestType
->;
-
-export const CreateTaskBadRequestType$zodSchema = z.enum([
-  "bad_request",
-]);
-
-export const CreateTaskCodeMissingClientID = {
-  MissingClientId: "missing_client_id",
-} as const;
-export type CreateTaskCodeMissingClientID = ClosedEnum<
-  typeof CreateTaskCodeMissingClientID
->;
-
-export const CreateTaskCodeMissingClientID$zodSchema = z.enum([
-  "missing_client_id",
-]);
 
 /**
  * Missing client ID

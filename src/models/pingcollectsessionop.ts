@@ -11,14 +11,6 @@ import {
 } from "./pingsessionresponse.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
-export type PingCollectSessionRequest = { token: string };
-
-export const PingCollectSessionRequest$zodSchema: z.ZodType<
-  PingCollectSessionRequest
-> = z.object({
-  token: z.string(),
-});
-
 export const PingCollectSessionStatusCode = {
   FourHundredAndFour: 404,
 } as const;
@@ -45,6 +37,14 @@ export type PingCollectSessionCode = ClosedEnum<typeof PingCollectSessionCode>;
 export const PingCollectSessionCode$zodSchema = z.enum([
   "collect_token_not_found",
 ]);
+
+export type PingCollectSessionRequest = { token: string };
+
+export const PingCollectSessionRequest$zodSchema: z.ZodType<
+  PingCollectSessionRequest
+> = z.object({
+  token: z.string(),
+});
 
 /**
  * Collect session not found. The token may be invalid or revoked.

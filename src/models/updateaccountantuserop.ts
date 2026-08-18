@@ -13,6 +13,37 @@ import {
   UpdateAccountantUser$zodSchema,
 } from "./updateaccountantuser.js";
 
+export const UpdateAccountantUserStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type UpdateAccountantUserStatusCode = ClosedEnum<
+  typeof UpdateAccountantUserStatusCode
+>;
+
+export const UpdateAccountantUserStatusCode$zodSchema = z.literal(403);
+
+export const UpdateAccountantUserType = {
+  AuthError: "auth_error",
+} as const;
+export type UpdateAccountantUserType = ClosedEnum<
+  typeof UpdateAccountantUserType
+>;
+
+export const UpdateAccountantUserType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const UpdateAccountantUserCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type UpdateAccountantUserCode = ClosedEnum<
+  typeof UpdateAccountantUserCode
+>;
+
+export const UpdateAccountantUserCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
 export type UpdateAccountantUserRequest = {
   id: string;
   UpdateAccountantUser: UpdateAccountantUser;
@@ -140,37 +171,6 @@ export const UpdateAccountantUserResponseBody$zodSchema: z.ZodType<
   z.lazy(() => UpdateAccountantUserResponseBody1$zodSchema),
   z.lazy(() => UpdateAccountantUserResponseBody2$zodSchema),
 ]).describe("The validation error(s)");
-
-export const UpdateAccountantUserStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type UpdateAccountantUserStatusCode = ClosedEnum<
-  typeof UpdateAccountantUserStatusCode
->;
-
-export const UpdateAccountantUserStatusCode$zodSchema = z.literal(403);
-
-export const UpdateAccountantUserType = {
-  AuthError: "auth_error",
-} as const;
-export type UpdateAccountantUserType = ClosedEnum<
-  typeof UpdateAccountantUserType
->;
-
-export const UpdateAccountantUserType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const UpdateAccountantUserCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type UpdateAccountantUserCode = ClosedEnum<
-  typeof UpdateAccountantUserCode
->;
-
-export const UpdateAccountantUserCode$zodSchema = z.enum([
-  "missing_scope",
-]);
 
 /**
  * Missing scope

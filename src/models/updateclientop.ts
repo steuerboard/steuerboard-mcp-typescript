@@ -10,6 +10,31 @@ import { ClientUpdate, ClientUpdate$zodSchema } from "./clientupdate.js";
 import { NotFound, NotFound$zodSchema } from "./notfound.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
+export const UpdateClientStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type UpdateClientStatusCode = ClosedEnum<typeof UpdateClientStatusCode>;
+
+export const UpdateClientStatusCode$zodSchema = z.literal(403);
+
+export const UpdateClientType = {
+  AuthError: "auth_error",
+} as const;
+export type UpdateClientType = ClosedEnum<typeof UpdateClientType>;
+
+export const UpdateClientType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const UpdateClientCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type UpdateClientCode = ClosedEnum<typeof UpdateClientCode>;
+
+export const UpdateClientCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
 export type UpdateClientRequest = { id: string; ClientUpdate: ClientUpdate };
 
 export const UpdateClientRequest$zodSchema: z.ZodType<UpdateClientRequest> = z
@@ -125,31 +150,6 @@ export const UpdateClientResponseBody$zodSchema: z.ZodType<
   z.lazy(() => UpdateClientResponseBody1$zodSchema),
   z.lazy(() => UpdateClientResponseBody2$zodSchema),
 ]).describe("The validation error(s)");
-
-export const UpdateClientStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type UpdateClientStatusCode = ClosedEnum<typeof UpdateClientStatusCode>;
-
-export const UpdateClientStatusCode$zodSchema = z.literal(403);
-
-export const UpdateClientType = {
-  AuthError: "auth_error",
-} as const;
-export type UpdateClientType = ClosedEnum<typeof UpdateClientType>;
-
-export const UpdateClientType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const UpdateClientCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type UpdateClientCode = ClosedEnum<typeof UpdateClientCode>;
-
-export const UpdateClientCode$zodSchema = z.enum([
-  "missing_scope",
-]);
 
 /**
  * Missing scope

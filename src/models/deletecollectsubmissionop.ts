@@ -11,18 +11,6 @@ import {
 } from "./deletecollectsubmissionresponse.js";
 import { RateLimit, RateLimit$zodSchema } from "./ratelimit.js";
 
-export type DeleteCollectSubmissionRequest = {
-  token: string;
-  submissionId: string;
-};
-
-export const DeleteCollectSubmissionRequest$zodSchema: z.ZodType<
-  DeleteCollectSubmissionRequest
-> = z.object({
-  submissionId: z.string(),
-  token: z.string(),
-});
-
 export const DeleteCollectSubmissionNotFoundStatusCode = {
   FourHundredAndFour: 404,
 } as const;
@@ -56,25 +44,6 @@ export const DeleteCollectSubmissionNotFoundCode$zodSchema = z.enum([
   "collect_token_not_found",
 ]);
 
-/**
- * Collect session not found. The token may be invalid or revoked.
- */
-export type DeleteCollectSubmissionNotFoundResponseBody = {
-  status_code: DeleteCollectSubmissionNotFoundStatusCode;
-  type: DeleteCollectSubmissionNotFoundType;
-  code: DeleteCollectSubmissionNotFoundCode;
-  message: string;
-};
-
-export const DeleteCollectSubmissionNotFoundResponseBody$zodSchema: z.ZodType<
-  DeleteCollectSubmissionNotFoundResponseBody
-> = z.object({
-  code: DeleteCollectSubmissionNotFoundCode$zodSchema,
-  message: z.string(),
-  status_code: DeleteCollectSubmissionNotFoundStatusCode$zodSchema,
-  type: DeleteCollectSubmissionNotFoundType$zodSchema,
-}).describe("Collect session not found. The token may be invalid or revoked.");
-
 export const DeleteCollectSubmissionStatusCode400 = {
   FourHundred: 400,
 } as const;
@@ -103,6 +72,37 @@ export type CodeInvalidInput = ClosedEnum<typeof CodeInvalidInput>;
 export const CodeInvalidInput$zodSchema = z.enum([
   "invalid_input",
 ]);
+
+export type DeleteCollectSubmissionRequest = {
+  token: string;
+  submissionId: string;
+};
+
+export const DeleteCollectSubmissionRequest$zodSchema: z.ZodType<
+  DeleteCollectSubmissionRequest
+> = z.object({
+  submissionId: z.string(),
+  token: z.string(),
+});
+
+/**
+ * Collect session not found. The token may be invalid or revoked.
+ */
+export type DeleteCollectSubmissionNotFoundResponseBody = {
+  status_code: DeleteCollectSubmissionNotFoundStatusCode;
+  type: DeleteCollectSubmissionNotFoundType;
+  code: DeleteCollectSubmissionNotFoundCode;
+  message: string;
+};
+
+export const DeleteCollectSubmissionNotFoundResponseBody$zodSchema: z.ZodType<
+  DeleteCollectSubmissionNotFoundResponseBody
+> = z.object({
+  code: DeleteCollectSubmissionNotFoundCode$zodSchema,
+  message: z.string(),
+  status_code: DeleteCollectSubmissionNotFoundStatusCode$zodSchema,
+  type: DeleteCollectSubmissionNotFoundType$zodSchema,
+}).describe("Collect session not found. The token may be invalid or revoked.");
 
 /**
  * Cannot delete a non-pending submission

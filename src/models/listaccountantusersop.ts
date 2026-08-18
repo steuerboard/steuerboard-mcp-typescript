@@ -53,6 +53,37 @@ export const ListAccountantUsersOrder$zodSchema = z.enum([
   "desc",
 ]).describe("The order of the results based on the sort field");
 
+export const ListAccountantUsersStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type ListAccountantUsersStatusCode = ClosedEnum<
+  typeof ListAccountantUsersStatusCode
+>;
+
+export const ListAccountantUsersStatusCode$zodSchema = z.literal(403);
+
+export const ListAccountantUsersType = {
+  AuthError: "auth_error",
+} as const;
+export type ListAccountantUsersType = ClosedEnum<
+  typeof ListAccountantUsersType
+>;
+
+export const ListAccountantUsersType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const ListAccountantUsersCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type ListAccountantUsersCode = ClosedEnum<
+  typeof ListAccountantUsersCode
+>;
+
+export const ListAccountantUsersCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
 export type ListAccountantUsersRequest = {
   limit?: number | undefined;
   cursor?: string | undefined;
@@ -124,37 +155,6 @@ export const ListAccountantUsersUnprocessableEntityResponseBody$zodSchema:
     error: z.lazy(() => ListAccountantUsersError$zodSchema),
     success: z.boolean(),
   }).describe("The validation error(s)");
-
-export const ListAccountantUsersStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type ListAccountantUsersStatusCode = ClosedEnum<
-  typeof ListAccountantUsersStatusCode
->;
-
-export const ListAccountantUsersStatusCode$zodSchema = z.literal(403);
-
-export const ListAccountantUsersType = {
-  AuthError: "auth_error",
-} as const;
-export type ListAccountantUsersType = ClosedEnum<
-  typeof ListAccountantUsersType
->;
-
-export const ListAccountantUsersType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const ListAccountantUsersCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type ListAccountantUsersCode = ClosedEnum<
-  typeof ListAccountantUsersCode
->;
-
-export const ListAccountantUsersCode$zodSchema = z.enum([
-  "missing_scope",
-]);
 
 /**
  * Missing scope

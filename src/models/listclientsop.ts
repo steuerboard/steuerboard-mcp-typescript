@@ -89,6 +89,31 @@ export const ListClientsOrder$zodSchema = z.enum([
   "desc",
 ]).describe("The order of the results based on the sort field");
 
+export const ListClientsStatusCode = {
+  FourHundredAndThree: 403,
+} as const;
+export type ListClientsStatusCode = ClosedEnum<typeof ListClientsStatusCode>;
+
+export const ListClientsStatusCode$zodSchema = z.literal(403);
+
+export const ListClientsType = {
+  AuthError: "auth_error",
+} as const;
+export type ListClientsType = ClosedEnum<typeof ListClientsType>;
+
+export const ListClientsType$zodSchema = z.enum([
+  "auth_error",
+]);
+
+export const ListClientsCode = {
+  MissingScope: "missing_scope",
+} as const;
+export type ListClientsCode = ClosedEnum<typeof ListClientsCode>;
+
+export const ListClientsCode$zodSchema = z.enum([
+  "missing_scope",
+]);
+
 export type ListClientsRequest = {
   limit?: number | undefined;
   cursor?: string | undefined;
@@ -170,31 +195,6 @@ export const ListClientsUnprocessableEntityResponseBody$zodSchema: z.ZodType<
   error: z.lazy(() => ListClientsError$zodSchema),
   success: z.boolean(),
 }).describe("The validation error(s)");
-
-export const ListClientsStatusCode = {
-  FourHundredAndThree: 403,
-} as const;
-export type ListClientsStatusCode = ClosedEnum<typeof ListClientsStatusCode>;
-
-export const ListClientsStatusCode$zodSchema = z.literal(403);
-
-export const ListClientsType = {
-  AuthError: "auth_error",
-} as const;
-export type ListClientsType = ClosedEnum<typeof ListClientsType>;
-
-export const ListClientsType$zodSchema = z.enum([
-  "auth_error",
-]);
-
-export const ListClientsCode = {
-  MissingScope: "missing_scope",
-} as const;
-export type ListClientsCode = ClosedEnum<typeof ListClientsCode>;
-
-export const ListClientsCode$zodSchema = z.enum([
-  "missing_scope",
-]);
 
 /**
  * Missing scope
