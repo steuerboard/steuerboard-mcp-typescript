@@ -1,24 +1,24 @@
 lockVersion: 2.0.0
 id: 188da4b7-9881-4ae0-a213-c32e68b13c57
 management:
-  docChecksum: e7e76d40e9d5ef465b8eabf6bd9dcf86
+  docChecksum: 705a5241e9d4aae7d45b2631f629a570
   docVersion: 0.1.0
-  speakeasyVersion: 1.795.0
-  generationVersion: 2.931.0
-  releaseVersion: 0.4.1
-  configChecksum: f7a0c8ecac8e4b7a69e6f903113c4eb4
+  speakeasyVersion: 1.798.0
+  generationVersion: 2.938.0
+  releaseVersion: 0.4.2
+  configChecksum: 666e1a8cd4cfb471b0b24a9cf6666ae9
   repoURL: https://github.com/steuerboard/steuerboard-mcp-typescript.git
   installationURL: https://github.com/steuerboard/steuerboard-mcp-typescript
   published: true
 persistentEdits:
-  generation_id: 8b18fdb6-a710-45ef-a4ba-48e9b7136c48
-  pristine_commit_hash: 0d5f872ad82cf65ff9356ca16e9eec3f803a11b2
-  pristine_tree_hash: 339b819d67fca1a6e64788dcffb3ebb883e245da
+  generation_id: 6f53dd90-e8c1-47f1-bc78-e2d12565e01e
+  pristine_commit_hash: c1eb465a705a2a8e53bce0738c32bc7daa169b09
+  pristine_tree_hash: a287c48097edcf983afe09a8207167e5b923c3b6
 features:
   mcp-typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.2
-    core: 1.3.10
+    core: 1.3.11
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     globalSecurity: 0.1.3
@@ -26,7 +26,7 @@ features:
     globalServerURLs: 0.1.2
     nullables: 0.1.0
     responseFormat: 0.1.1
-    retries: 0.1.1
+    retries: 0.1.2
     sdkHooks: 0.3.0
     unions: 0.2.1
 trackedFiles:
@@ -48,12 +48,12 @@ trackedFiles:
     pristine_git_object: 4f9e60a9462fc4def738d60c3aaadf8232ef185f
   manifest.json:
     id: ca642a226869
-    last_write_checksum: sha1:31fe2781f934ed3d48f471a00c43598fc6dad836
-    pristine_git_object: c148e513f8b6e22be0bedce346450cb2410a8217
+    last_write_checksum: sha1:b9edac318b62d14d466202b7fdb5fea187e123e2
+    pristine_git_object: 24f56ba332fd3fabca084ef808da44f7391a8dd1
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:646fefcde2507a9974e78fc5b1dcc7da2c9a054b
-    pristine_git_object: fa2c160d0f38f98ab20980a9619dcc71dc36ee0e
+    last_write_checksum: sha1:e4adda80332bbbc7f2d64c882fca4081779910cc
+    pristine_git_object: b041b035db8704c5a20f7c1e6682045fe90498ca
   src/cloudflare-worker/cloudflare-worker.ts:
     id: b90556be8673
     last_write_checksum: sha1:cb80bd61bf1d7fb116dfd955d8a5987247b487cb
@@ -248,16 +248,16 @@ trackedFiles:
     pristine_git_object: 9c36bf01332084f735909a71036c3544cc4c7e3a
   src/landing-page.ts:
     id: ef64a6ee46d7
-    last_write_checksum: sha1:aa496d2548a4de704340c6d98c96ec9b7685c281
-    pristine_git_object: 7433134dd4e3ee42465648baa86f840dca9de68f
+    last_write_checksum: sha1:906c6aca609a64a19634775dbab1a4ed914ed3c5
+    pristine_git_object: ec96392ae6da9a311de449449a7be08223cbe8c2
   src/lib/base64.ts:
     id: "598522066688"
     last_write_checksum: sha1:e9f04a037018040361043104960982f7c22db52d
     pristine_git_object: d4bd8b341290e7a828a171d840bd0b0fff7c7cd7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:a83331a7869e3ed7bda04b2ab833ce06f66a5dae
-    pristine_git_object: e89a284993ea17fd7925c20d5c5d11ad42a44c3a
+    last_write_checksum: sha1:20f73f1fad5bf32ac4a366ce3fcafec2477ffb13
+    pristine_git_object: 488a7a98bda00ffa5550280b5a80669162e7c310
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:9b859366c917d31f7ee533176f71631872fb05fa
@@ -348,8 +348,8 @@ trackedFiles:
     pristine_git_object: 9952a16d048bb228a6a7eac422f6fdc629f9dee1
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:626b61a61de5891c2487d597ab992c38ef72b1ca
-    pristine_git_object: 5f5ba9a370e2aac68f46447c490035bec9597c95
+    last_write_checksum: sha1:ab87539b98e3565ff5326c4cc308b2d5d649f19c
+    pristine_git_object: b128807e21ee19e7dc4ae799d97b51463f6bdaec
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:b5db7820d4a2782a49c031f6692cfdb6a126f394
@@ -364,8 +364,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:081782f4b63f9185b5c164470a6342968a1e756e
-    pristine_git_object: 50cd7ecfd0f3eab3c6a8f3d680ff259e8f0415a9
+    last_write_checksum: sha1:88c28dc912290eee3408d919ccd248f6f99c2b66
+    pristine_git_object: 3687410558e2aa3bbb8f8b29d735d5c0e61c73f0
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:19c9034032819a14f15c430de4350c8aba99d725
@@ -614,10 +614,14 @@ trackedFiles:
     id: c44cb7a09884
     last_write_checksum: sha1:2110cdca7bf807acd35c080bd898583a29ecd00f
     pristine_git_object: 90fa0e0776e2eba4e6be57dc0e2063e06b8b3694
+  src/models/collectsessionbranding.ts:
+    id: 690c4b7828fa
+    last_write_checksum: sha1:1704f5955f2b0a7772943d76aa3c08f208996279
+    pristine_git_object: 1d13654d657f64cc66d83dcd6d452b1a0f90f9d0
   src/models/collectsessionbytoken.ts:
     id: 113b73410fcc
-    last_write_checksum: sha1:e7778884737c34b26ba272976239aa8c9f97ef8a
-    pristine_git_object: 5309d72da39f4ec8bc02c1f308c40c56883b48bb
+    last_write_checksum: sha1:3e08db2d4abc1d6d8fbe7ca51472e642162e29f6
+    pristine_git_object: 90067f08d9fb74a2008f61fa38821b335b6aa5ed
   src/models/completecollectsessionop.ts:
     id: 534e02fc8621
     last_write_checksum: sha1:0657a08f611cd4c3c82a8ae8a89671eb5c80f281
@@ -1218,7 +1222,7 @@ examples:
           token: "cs_live_cmll8jh7b00013b6tlu7lvntw"
       responses:
         "200":
-          application/json: {"id": "3b37bb4e-4fe5-49d4-bd85-16b2301dfc73", "description": "hypothesize trolley bobble forceful indeed hippodrome phew oh ack", "status": "active", "channelConfig": {"channel": "collectUi", "pinProtected": false, "submitButtonLabel": "Submit", "locale": "de"}, "groups": [{"id": "7165d6ba-8b60-4db8-af30-ecac5c4b3f1e", "label": "<value>", "description": "oddly reflecting cripple mozzarella beside for attest acknowledge gah solidly", "sortOrder": 28189, "evaluationMode": "batch", "repeatable": true, "minInstances": 776519, "maxInstances": 269842, "items": [{"id": "a8f6bdd5-740e-45f5-8324-d4999351661a", "type": "confirmation", "description": "if peaceful diligently verbally", "status": "pending", "sortOrder": 694287, "config": {"type": "fileUpload", "maxFileSizeMb": 25}, "groupId": "cbb3c3e8-b894-480c-83f0-a6c8558efd2e", "submissions": []}]}]}
+          application/json: {"id": "3b37bb4e-4fe5-49d4-bd85-16b2301dfc73", "description": "hypothesize trolley bobble forceful indeed hippodrome phew oh ack", "status": "active", "channelConfig": {"channel": "collectUi", "pinProtected": false, "submitButtonLabel": "Submit", "locale": "de"}, "branding": {"organizationName": "<value>", "logoUrl": "https://excellent-injunction.net"}, "groups": [{"id": "7165d6ba-8b60-4db8-af30-ecac5c4b3f1e", "label": "<value>", "description": "oddly reflecting cripple mozzarella beside for attest acknowledge gah solidly", "sortOrder": 28189, "evaluationMode": "batch", "repeatable": true, "minInstances": 776519, "maxInstances": 269842, "items": [{"id": "a8f6bdd5-740e-45f5-8324-d4999351661a", "type": "confirmation", "description": "if peaceful diligently verbally", "status": "pending", "sortOrder": 694287, "config": {"type": "fileUpload", "maxFileSizeMb": 25}, "groupId": "cbb3c3e8-b894-480c-83f0-a6c8558efd2e", "submissions": []}]}]}
         "404":
           application/json: {"status_code": 404, "type": "not_found", "code": "collect_token_not_found", "message": "<value>"}
         "410":
@@ -1921,50 +1925,7 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Mcp-typescript SDK Changes:
-  * `Steuerboard.health.index()`:  `response.status[500]` **Added**
-  * `Steuerboard.health.health()`:  `response.status[500]` **Added**
-  * `Steuerboard.health.ping()`:  `response.status[500]` **Added**
-  * `Steuerboard.auth.me()`:  `response.status[500]` **Added**
-  * `Steuerboard.admin.clients.listClients()`:  `response.status[500]` **Added**
-  * `Steuerboard.admin.clients.createClient()`:  `response.status[500]` **Added**
-  * `Steuerboard.admin.clients.getClient()`:  `response.status[500]` **Added**
-  * `Steuerboard.admin.clients.updateClient()`:  `response.status[500]` **Added**
-  * `Steuerboard.admin.users.listAccountantUsers()`:  `response.status[500]` **Added**
-  * `Steuerboard.admin.users.inviteAccountantUser()`:  `response.status[500]` **Added**
-  * `Steuerboard.admin.users.getAccountantUser()`:  `response.status[500]` **Added**
-  * `Steuerboard.admin.users.deleteAccountantUser()`:  `response.status[500]` **Added**
-  * `Steuerboard.admin.users.updateAccountantUser()`:  `response.status[500]` **Added**
-  * `Steuerboard.collect.sessions.getcollectSessionByToken()`:  `response.status[500]` **Added**
-  * `Steuerboard.collect.sessions.pingCollectSession()`:  `response.status[500]` **Added**
-  * `Steuerboard.collect.sessions.completeCollectSession()`:  `response.status[500]` **Added**
-  * `Steuerboard.collect.sessions.requestLinkCollectToken()`:  `response.status[500]` **Added**
-  * `Steuerboard.collect.sessions.submitCollectFile()`:  `response.status[500]` **Added**
-  * `Steuerboard.collect.sessions.submitCollectFormData()`:  `response.status[500]` **Added**
-  * `Steuerboard.collect.sessions.submitCollectBulk()`:  `response.status[500]` **Added**
-  * `Steuerboard.collect.sessions.deleteCollectSubmission()`:  `response.status[500]` **Added**
-  * `Steuerboard.workspaces.listWorkspaces()`:  `response.status[500]` **Added**
-  * `Steuerboard.workspaces.createWorkspace()`:  `response.status[500]` **Added**
-  * `Steuerboard.workspaces.getWorkspace()`:  `response.status[500]` **Added**
-  * `Steuerboard.workspaces.updateWorkspace()`:  `response.status[500]` **Added**
-  * `Steuerboard.workspace.members.listWorkspaceMembers()`:  `response.status[500]` **Added**
-  * `Steuerboard.workspace.members.createWorkspaceMember()`:  `response.status[500]` **Added**
-  * `Steuerboard.workspace.members.removeWorkspaceMember()`:  `response.status[500]` **Added**
-  * `Steuerboard.files.listFiles()`:  `response.status[500]` **Added**
-  * `Steuerboard.files.createFile()`:  `response.status[500]` **Added**
-  * `Steuerboard.files.getFile()`:  `response.status[500]` **Added**
-  * `Steuerboard.files.deleteFile()`:  `response.status[500]` **Added**
-  * `Steuerboard.files.updateFile()`:  `response.status[500]` **Added**
-  * `Steuerboard.files.downloadFileContent()`:  `response.status[500]` **Added**
-  * `Steuerboard.tasks.listTasks()`:  `response.status[500]` **Added**
-  * `Steuerboard.tasks.createTask()`:  `response.status[500]` **Added**
-  * `Steuerboard.tasks.getTask()`:  `response.status[500]` **Added**
-  * `Steuerboard.tasks.deleteTask()`:  `response.status[500]` **Added**
-  * `Steuerboard.tasks.updateTask()`:  `response.status[500]` **Added**
-  * `Steuerboard.users.listUsers()`:  `response.status[500]` **Added**
-  * `Steuerboard.users.inviteUser()`:  `response.status[500]` **Added**
-  * `Steuerboard.users.getUser()`:  `response.status[500]` **Added**
-  * `Steuerboard.users.deleteUser()`:  `response.status[500]` **Added**
-  * `Steuerboard.users.updateUser()`:  `response.status[500]` **Added**
+  * `Steuerboard.collect.sessions.getcollectSessionByToken()`:  `response.branding` **Added**
 generatedFiles:
   - .dxtignore
   - .gitattributes
