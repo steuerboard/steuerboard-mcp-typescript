@@ -4,6 +4,10 @@
 
 import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
+import {
+  CollectSessionBranding,
+  CollectSessionBranding$zodSchema,
+} from "./collectsessionbranding.js";
 
 export const CollectSessionByTokenStatus = {
   Created: "created",
@@ -424,11 +428,13 @@ export type CollectSessionByToken = {
   description: string;
   status: CollectSessionByTokenStatus;
   channelConfig: ChannelConfig;
+  branding: CollectSessionBranding;
   groups: Array<Group>;
 };
 
 export const CollectSessionByToken$zodSchema: z.ZodType<CollectSessionByToken> =
   z.object({
+    branding: CollectSessionBranding$zodSchema,
     channelConfig: z.lazy(() => ChannelConfig$zodSchema),
     description: z.string(),
     groups: z.array(z.lazy(() => Group$zodSchema)),

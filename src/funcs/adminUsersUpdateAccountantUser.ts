@@ -171,6 +171,7 @@ async function $do(
     M.json(401, UpdateAccountantUserResponse$zodSchema, { key: "auth_error" }),
     M.json(403, UpdateAccountantUserResponse$zodSchema, { key: "object" }),
     M.json(404, UpdateAccountantUserResponse$zodSchema, { key: "not_found" }),
+    M.json(409, UpdateAccountantUserResponse$zodSchema, { key: "conflict" }),
     M.json(422, UpdateAccountantUserResponse$zodSchema, { key: "oneOf" }),
     M.json(429, UpdateAccountantUserResponse$zodSchema, { key: "rate_limit" }),
     M.json(500, UpdateAccountantUserResponse$zodSchema, {
