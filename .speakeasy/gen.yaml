@@ -31,7 +31,7 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 mcp-typescript:
-  version: 0.4.1
+  version: 0.4.2
   additionalDependencies:
     dependencies:
       ai: ^6.0.225
@@ -52,6 +52,7 @@ mcp-typescript:
   inputModelSuffix: input
   maxMethodParams: 0
   multipartArrayFormat: legacy
+  numericEnumMemberNames: legacy
   outputModelSuffix: output
   packageName: '@steuerboard/mcp'
   responseFormat: flat
