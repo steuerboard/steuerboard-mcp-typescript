@@ -27,7 +27,7 @@ Updates a task by ID.`,
     const [result, apiCall] = await tasksUpdateTask(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

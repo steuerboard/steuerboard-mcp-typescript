@@ -27,7 +27,7 @@ Returns a paginated list of accountant users.`,
     const [result, apiCall] = await adminUsersListAccountantUsers(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

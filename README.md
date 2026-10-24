@@ -31,13 +31,15 @@ For more information about the API: [Find out more about Steuerboard API](https:
 <!-- Start Installation [installation] -->
 ## Installation
 
+The MCP server requires Node.js 20.19.0 or later.
+
 Deployed at https://mcp.steuerboard.com
 <details>
 <summary>Claude Desktop</summary>
 
-Install the MCP server as a Desktop Extension using the pre-built [`mcp-server.mcpb`](https://github.com/steuerboard/steuerboard-mcp-typescript/releases/download/v0.4.1/mcp-server.mcpb) file:
+Install the MCP server as a Desktop Extension using the pre-built [`mcp-server.mcpb`](https://github.com/steuerboard/steuerboard-mcp-typescript/releases/download/v0.5.0/mcp-server.mcpb) file:
 
-Simply drag and drop the [`mcp-server.mcpb`](https://github.com/steuerboard/steuerboard-mcp-typescript/releases/download/v0.4.1/mcp-server.mcpb) file onto Claude Desktop to install the extension.
+Simply drag and drop the [`mcp-server.mcpb`](https://github.com/steuerboard/steuerboard-mcp-typescript/releases/download/v0.5.0/mcp-server.mcpb) file onto Claude Desktop to install the extension.
 
 The MCP bundle package includes the MCP server and all necessary configuration. Once installed, the server will be available without additional setup.
 
@@ -49,7 +51,7 @@ The MCP bundle package includes the MCP server and all necessary configuration. 
 <details>
 <summary>Cursor</summary>
 
-[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=Steuerboard&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIm1jcC1yZW1vdGVAMC4xLjI1IiwiaHR0cHM6Ly9tY3Auc3RldWVyYm9hcmQuY29tL3NzZSIsIi0taGVhZGVyIiwiYmVhcmVyLWF1dGg6JHtCRUFSRVJfQVVUSH0iXX0=)
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=Steuerboard&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIm1jcC1yZW1vdGVAMC4xLjI1IiwiaHR0cHM6Ly9tY3Auc3RldWVyYm9hcmQuY29tL21jcCIsIi0taGVhZGVyIiwiYXV0aG9yaXphdGlvbjoke0JFQVJFUl9BVVRIfSJdfQ==)
 
 Or manually:
 
@@ -114,7 +116,7 @@ Refer to [Official Windsurf documentation](https://docs.windsurf.com/windsurf/ca
 <details>
 <summary>VS Code</summary>
 
-[![Install in VS Code](https://img.shields.io/badge/VS_Code-VS_Code?style=flat-square&label=Install%20Steuerboard%20MCP&color=0098FF)](vscode://ms-vscode.vscode-mcp/install?name=Steuerboard&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIm1jcC1yZW1vdGVAMC4xLjI1IiwiaHR0cHM6Ly9tY3Auc3RldWVyYm9hcmQuY29tL3NzZSIsIi0taGVhZGVyIiwiYmVhcmVyLWF1dGg6JHtCRUFSRVJfQVVUSH0iXX0=)
+[![Install in VS Code](https://img.shields.io/badge/VS_Code-VS_Code?style=flat-square&label=Install%20Steuerboard%20MCP&color=0098FF)](vscode://ms-vscode.vscode-mcp/install?name=Steuerboard&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIm1jcC1yZW1vdGVAMC4xLjI1IiwiaHR0cHM6Ly9tY3Auc3RldWVyYm9hcmQuY29tL21jcCIsIi0taGVhZGVyIiwiYXV0aG9yaXphdGlvbjoke0JFQVJFUl9BVVRIfSJdfQ==)
 
 Or manually:
 

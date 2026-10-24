@@ -29,7 +29,7 @@ Creates a new workspace member.`,
     const [result, apiCall] = await workspaceMembersCreateWorkspaceMember(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
