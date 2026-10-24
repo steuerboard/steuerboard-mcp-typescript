@@ -27,7 +27,7 @@ Returns a single task by ID.`,
     const [result, apiCall] = await tasksGetTask(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

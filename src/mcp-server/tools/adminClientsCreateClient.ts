@@ -27,7 +27,7 @@ Creates a new client for the accountant and returns the created client.`,
     const [result, apiCall] = await adminClientsCreateClient(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

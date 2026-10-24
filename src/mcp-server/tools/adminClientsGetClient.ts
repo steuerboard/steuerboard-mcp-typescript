@@ -27,7 +27,7 @@ Returns a single client by ID.`,
     const [result, apiCall] = await adminClientsGetClient(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

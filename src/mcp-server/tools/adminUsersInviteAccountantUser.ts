@@ -28,7 +28,7 @@ Invites a new accountant user and returns the created record.`,
       const [result, apiCall] = await adminUsersInviteAccountantUser(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {
