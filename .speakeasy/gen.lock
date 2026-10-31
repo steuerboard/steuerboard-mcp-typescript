@@ -1,24 +1,24 @@
 lockVersion: 2.0.0
 id: 188da4b7-9881-4ae0-a213-c32e68b13c57
 management:
-  docChecksum: e7e76d40e9d5ef465b8eabf6bd9dcf86
+  docChecksum: 31b5b30dabae08bc6993b90f308623d1
   docVersion: 0.1.0
-  speakeasyVersion: 1.795.0
-  generationVersion: 2.931.0
-  releaseVersion: 0.4.1
-  configChecksum: f7a0c8ecac8e4b7a69e6f903113c4eb4
+  speakeasyVersion: 1.805.0
+  generationVersion: 2.954.8
+  releaseVersion: 0.5.0
+  configChecksum: 3b13b1951a193b9556aceac441e9983e
   repoURL: https://github.com/steuerboard/steuerboard-mcp-typescript.git
   installationURL: https://github.com/steuerboard/steuerboard-mcp-typescript
   published: true
 persistentEdits:
-  generation_id: 8b18fdb6-a710-45ef-a4ba-48e9b7136c48
-  pristine_commit_hash: 0d5f872ad82cf65ff9356ca16e9eec3f803a11b2
-  pristine_tree_hash: 339b819d67fca1a6e64788dcffb3ebb883e245da
+  generation_id: 627b4193-3953-4b5a-876b-7c2d545b39c4
+  pristine_commit_hash: 56085c359ddf3adcd61dc1c15f83d2f7da0ada22
+  pristine_tree_hash: 7c9cbf82f02f64b40249a58c7544b939079285d7
 features:
   mcp-typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.2
-    core: 1.3.10
+    core: 2.0.3
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     globalSecurity: 0.1.3
@@ -26,9 +26,9 @@ features:
     globalServerURLs: 0.1.2
     nullables: 0.1.0
     responseFormat: 0.1.1
-    retries: 0.1.1
+    retries: 0.1.2
     sdkHooks: 0.3.0
-    unions: 0.2.1
+    unions: 0.2.3
 trackedFiles:
   .dxtignore:
     id: 0ee1c4f92736
@@ -48,16 +48,16 @@ trackedFiles:
     pristine_git_object: 4f9e60a9462fc4def738d60c3aaadf8232ef185f
   manifest.json:
     id: ca642a226869
-    last_write_checksum: sha1:31fe2781f934ed3d48f471a00c43598fc6dad836
-    pristine_git_object: c148e513f8b6e22be0bedce346450cb2410a8217
+    last_write_checksum: sha1:5aac2f9b72d2f051ca61e0d9921a0ae8e76f5648
+    pristine_git_object: 29d0ad82ab56b1a25a8ccce97b05d546dd222a75
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:646fefcde2507a9974e78fc5b1dcc7da2c9a054b
-    pristine_git_object: fa2c160d0f38f98ab20980a9619dcc71dc36ee0e
+    last_write_checksum: sha1:3e5a6bf3b317c8bae1e8ba372bb312bc2b67d6fb
+    pristine_git_object: 2244bdb134e5e96c8932fa16ab9a56f56133faa4
   src/cloudflare-worker/cloudflare-worker.ts:
     id: b90556be8673
-    last_write_checksum: sha1:cb80bd61bf1d7fb116dfd955d8a5987247b487cb
-    pristine_git_object: 5df7ec59d2802e409d7d2f4bae4486b2343de640
+    last_write_checksum: sha1:2629196fef4022fd237066db5e611f1d1c32e2eb
+    pristine_git_object: 10608e47356cd4ff8a6f5d88973c9285015f9c04
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:c5c00965f6963f05230e18c2c94c86a8ca77c9e0
@@ -96,8 +96,8 @@ trackedFiles:
     pristine_git_object: 8ae932ca35ef5413ea34d9328a1fef1e15d91348
   src/funcs/adminUsersUpdateAccountantUser.ts:
     id: 1e68dd0da1c0
-    last_write_checksum: sha1:15fdbce12177878af58904721d349b9a565b6f2f
-    pristine_git_object: 6b5ec346c7e751847fe8e8696ac989a1ef3ceb93
+    last_write_checksum: sha1:f1f20562142ea8c8fbe32844380ded2ce33e3e69
+    pristine_git_object: 8be6bd8386592e6edc22c0ccfbb5ef29fa5a8576
   src/funcs/authMe.ts:
     id: 7c1878afa486
     last_write_checksum: sha1:a8cd5bc38afef568cab51f5a3ac525e115a5e09a
@@ -248,16 +248,16 @@ trackedFiles:
     pristine_git_object: 9c36bf01332084f735909a71036c3544cc4c7e3a
   src/landing-page.ts:
     id: ef64a6ee46d7
-    last_write_checksum: sha1:aa496d2548a4de704340c6d98c96ec9b7685c281
-    pristine_git_object: 7433134dd4e3ee42465648baa86f840dca9de68f
+    last_write_checksum: sha1:ccd3cc6ec99aa27bda939718309a64de94fa6d3c
+    pristine_git_object: 84fed338686c927f26ae5686b64d6bb2f653c8af
   src/lib/base64.ts:
     id: "598522066688"
     last_write_checksum: sha1:e9f04a037018040361043104960982f7c22db52d
     pristine_git_object: d4bd8b341290e7a828a171d840bd0b0fff7c7cd7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:a83331a7869e3ed7bda04b2ab833ce06f66a5dae
-    pristine_git_object: e89a284993ea17fd7925c20d5c5d11ad42a44c3a
+    last_write_checksum: sha1:a1cc2de66845b8022f24d873a28d65e66e9982d0
+    pristine_git_object: 327a6a198904611791f80923472a6c8b02b1ab5a
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:9b859366c917d31f7ee533176f71631872fb05fa
@@ -324,232 +324,232 @@ trackedFiles:
     pristine_git_object: de1804c5c507b36d73ea19d0005ca6686ef3d31d
   src/mcp-server/cli/serve/impl.ts:
     id: 03e83f226068
-    last_write_checksum: sha1:1aa78864674638e3d08f4279de19046d4ad33f41
-    pristine_git_object: d5b414e2d98331e156e237db3d0d7953d3b79f3e
+    last_write_checksum: sha1:d6cc3d8c726b4eb3b68baaaaac52fd6d6c32b9f9
+    pristine_git_object: f54d08972e57d613beea6ad099232433857b9836
   src/mcp-server/cli/start/command.ts:
     id: b3e53408ccb4
     last_write_checksum: sha1:87b82db632ce174364f453306d6daae4a4152a9b
     pristine_git_object: b054b2f6a1db41ecffc52a17fdae9eb0afd345a0
   src/mcp-server/cli/start/impl.ts:
     id: 37494f674015
-    last_write_checksum: sha1:a08f4928fac56132dba688efd212becf046f8ff6
-    pristine_git_object: 986502fd77ab5e239b7fe0ce34918641af3737fa
+    last_write_checksum: sha1:bec3d1b275b87bff54fb30d54570318e3a3c8d29
+    pristine_git_object: 8a5c4f4c718e85a401a97b7428ca7ee66f488097
   src/mcp-server/console-logger.ts:
     id: 57aff4ff2e15
     last_write_checksum: sha1:0c4b9b7c79ad0a81359210cb31b9ee4d887d5de1
     pristine_git_object: 640bca96dc5acf142b0a25dedad7ffb5d55c6375
   src/mcp-server/extensions.ts:
     id: 3d9d20ff158f
-    last_write_checksum: sha1:27de1e2b8aaedc8965d1d4c4d4c500df1f28b483
-    pristine_git_object: 78394e413ea070824f370b829eaf1416883e6680
+    last_write_checksum: sha1:2198b49e3178b217db6d044a2884d71eaf92521f
+    pristine_git_object: 61db0f1b8063c00691f3e74f36a45c6fd8fb553a
   src/mcp-server/flags.ts:
     id: 0167e624a516
     last_write_checksum: sha1:3cf39d945e5689f320088ebdef7b3204758c1bfe
     pristine_git_object: 9952a16d048bb228a6a7eac422f6fdc629f9dee1
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:626b61a61de5891c2487d597ab992c38ef72b1ca
-    pristine_git_object: 5f5ba9a370e2aac68f46447c490035bec9597c95
+    last_write_checksum: sha1:e39022de05b5a9abe737a429cdc9c1b4b5352c1e
+    pristine_git_object: d4af9d46cc8782e68b775591fe1d7aa7a6df84b6
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
-    last_write_checksum: sha1:b5db7820d4a2782a49c031f6692cfdb6a126f394
-    pristine_git_object: 6c44670656087a58b523ecce094708019fa4ec67
+    last_write_checksum: sha1:f2c2ff31160eff7dacfd17ae1ba87e9195237378
+    pristine_git_object: ae7258d9a05d32ebf5883325eecfa7309a5d202a
   src/mcp-server/resources.ts:
     id: cb0c57ebeaea
-    last_write_checksum: sha1:3b2776b8ce52a1b295484d2cf96c8997af841357
-    pristine_git_object: 358c9fd84aff845c2de0edd02049e618e4637fdc
+    last_write_checksum: sha1:4343ed5120e5a29aa665dc53befb5fc3f749e471
+    pristine_git_object: d22fa013e917727605c4f9cccb82d824fb724401
   src/mcp-server/scopes.ts:
     id: 8966d24256b2
     last_write_checksum: sha1:77d0eb95785e84f9fd0b27c4612f8c6470489fe4
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:081782f4b63f9185b5c164470a6342968a1e756e
-    pristine_git_object: 50cd7ecfd0f3eab3c6a8f3d680ff259e8f0415a9
+    last_write_checksum: sha1:42f889b8500d1276eec5550b4e370c7b2acbbe11
+    pristine_git_object: 6c4e0bcc37f5cf435de74a170add2293697e7c83
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
-    last_write_checksum: sha1:19c9034032819a14f15c430de4350c8aba99d725
-    pristine_git_object: bb74a74788ebd7d11262f5f63b8fdd29ab817f48
+    last_write_checksum: sha1:1832c294677c567750b516748fca219a05da582f
+    pristine_git_object: 9867264b5609d23629b3027fdeeb55851b4d7d09
   src/mcp-server/tools.ts:
     id: 654d5d1f2062
-    last_write_checksum: sha1:67a803ebf7f0f80658044842433bc743738da5d9
-    pristine_git_object: 0b94c7eabc70bff9214115260f9d292c8cd33758
+    last_write_checksum: sha1:15ec1cafaaa8a9217d245b471d69416533056048
+    pristine_git_object: 50b2d0a041cf0450761e0dbcd818e5215908eb41
   src/mcp-server/tools/adminClientsCreateClient.ts:
     id: d3789e2634ec
-    last_write_checksum: sha1:9b188d8c722cf34590e9cacdeadce5b7be3e9b2c
-    pristine_git_object: cf290b123aebcb8df3f45aa3bec77598c98872f7
+    last_write_checksum: sha1:b8b5569a3ca54f9af858575e80ee2c49972cc321
+    pristine_git_object: 56af861a3de3789717eca7808c8a15dc21adf21b
   src/mcp-server/tools/adminClientsGetClient.ts:
     id: dbe2f397834b
-    last_write_checksum: sha1:8f4abf4517c30ebac2d5f6c526a5418d94a05fb5
-    pristine_git_object: 33ba6bc4c4670e787b14f7ccff1ec25185f03449
+    last_write_checksum: sha1:9c52e0e3ea3302b934407d34af7738e6a5e25f62
+    pristine_git_object: 0ec79e9970044330d999fe8aea29291ba58d3001
   src/mcp-server/tools/adminClientsListClients.ts:
     id: 5af00d644f54
-    last_write_checksum: sha1:898fc04ed4e4cc5d646c597e123d037b6111db2f
-    pristine_git_object: 4231fe0f5faacfa080a98326760ca12222867d44
+    last_write_checksum: sha1:00ebb2da40cc9bdd9d20440b384728b3161f50e3
+    pristine_git_object: cb09f59a27aabcaf31f501956f386b6970aa44fb
   src/mcp-server/tools/adminClientsUpdateClient.ts:
     id: a5b6ff4b6d10
-    last_write_checksum: sha1:7d69afa5eeee0f354aaf1eb83045da1534b10ca9
-    pristine_git_object: fdcf0021126cb726a9c59d419d5a0b4f0ed08593
+    last_write_checksum: sha1:689fdfd3750650f0804087864b217fd739bf0897
+    pristine_git_object: 06a93a998e8bf370e5e8f4ec195df0958c7e5d1d
   src/mcp-server/tools/adminUsersDeleteAccountantUser.ts:
     id: 7e2e93b28071
-    last_write_checksum: sha1:6e350f3174468db74b408047bdf8f368c2bc3573
-    pristine_git_object: 24f057c04b54d233faf655a05b559c2306935657
+    last_write_checksum: sha1:90642ae241b3becbf349a37beb31f052257414cf
+    pristine_git_object: 3a3a85aa183bf3a3f9e32812374afa18781eaa2e
   src/mcp-server/tools/adminUsersGetAccountantUser.ts:
     id: 156dd9a3b659
-    last_write_checksum: sha1:4948c4c65918c786ef6786c75cabe8ee722c5c33
-    pristine_git_object: 3e23a566686d3b206b2dc2be0b2ea48c2389b246
+    last_write_checksum: sha1:202cf62b03d35f98186c786930599072b3b514c1
+    pristine_git_object: a5a6f8cc119c8e331755f9da0fd56e127b5d0c5f
   src/mcp-server/tools/adminUsersInviteAccountantUser.ts:
     id: 8325aef7b422
-    last_write_checksum: sha1:6770d23781cdde0054f712da1fe9f90b92fcc480
-    pristine_git_object: 6eca980ebda57c5fa88761eb0e3b7c07c6e15a50
+    last_write_checksum: sha1:3039f94aeb7b5eeaf4011903365c035772ed54ae
+    pristine_git_object: 0449782ba3b8833682ba588036d5feca9d91d8dd
   src/mcp-server/tools/adminUsersListAccountantUsers.ts:
     id: d571d6aded5d
-    last_write_checksum: sha1:1e3b2900daae8625b44769a2e388c0b6472d6e88
-    pristine_git_object: e177d839d7f1ac769f33789c1a1c8e7d923afcad
+    last_write_checksum: sha1:5fd3f5a92fd0aba810f94d9976d6e26c3cca0fe2
+    pristine_git_object: c3fa3e14ccda62d05e8056576cab686953bc9bdc
   src/mcp-server/tools/adminUsersUpdateAccountantUser.ts:
     id: 05a9023f661b
-    last_write_checksum: sha1:8a156f6173108b1fa1a746453896cbab87339cef
-    pristine_git_object: 872730587d63f594e628a9edb05803a6b76e0698
+    last_write_checksum: sha1:4697e10acc6f4863bdf0def4081b9ee975fcad37
+    pristine_git_object: 0288dd851f907f01bbc0859334dcc0a9e5a15f6b
   src/mcp-server/tools/authMe.ts:
     id: e38e3c06283d
-    last_write_checksum: sha1:06029b2830cbb6f11a7b06ef62e5cad7b36feba0
-    pristine_git_object: 625642db266a89e3504cf8b7cbff410276cb1c78
+    last_write_checksum: sha1:32b492fbcea0b212ce86fdd6dd7337556f2a481f
+    pristine_git_object: 816f475bac872a25d93498cab5b83961ffea4fea
   src/mcp-server/tools/collectSessionsCompleteCollectSession.ts:
     id: 755ba5df7b5b
-    last_write_checksum: sha1:b8721dfe8d50f6e40a08933087d8b7f74aa91f9a
-    pristine_git_object: 58e83383b1ef286ad06325935c0382fd26bbc97e
+    last_write_checksum: sha1:5f81207196a2aedb735d3585e0a7642b379e65f7
+    pristine_git_object: 69c3a43db099a3404b837e49ad31553fbb73fec7
   src/mcp-server/tools/collectSessionsDeleteCollectSubmission.ts:
     id: 592d93fb2fe4
-    last_write_checksum: sha1:577265ebec0d022362a719ff6c75743e4b85ccec
-    pristine_git_object: 0453e95fd7e2d8b4dcaf8f38369615d7097033be
+    last_write_checksum: sha1:c946bb6071ea25418d949a61bc742a97ad8da4d7
+    pristine_git_object: e53708963f1a8b071aab9a2f55243848d9e736ac
   src/mcp-server/tools/collectSessionsGetcollectSessionByToken.ts:
     id: 52b844518455
-    last_write_checksum: sha1:134a5cb56801eec8500eb67d8535c6640aa2d721
-    pristine_git_object: 488adf78da7205e2f0e71296cce37ef41b708c1d
+    last_write_checksum: sha1:31faf103a28702ea76b2467e0982e59bb835943d
+    pristine_git_object: 24fee91b53ea6fe9b00fdbbe94199dbcf156bb2b
   src/mcp-server/tools/collectSessionsPingCollectSession.ts:
     id: d2f93b5ed118
-    last_write_checksum: sha1:31e1c00db13eb7c00b6fbb8a7e1b178bceafe9c0
-    pristine_git_object: 1828ad991f0b4b0c0c73a1964a10eb46393da26b
+    last_write_checksum: sha1:23c717ea6e4d98f14e6cc78d3527a6fe55be88ef
+    pristine_git_object: ec0995162d4a21dd2e46b914d8cd3df8997f59fd
   src/mcp-server/tools/collectSessionsRequestLinkCollectToken.ts:
     id: d543e2460566
-    last_write_checksum: sha1:f04224079000a07c9a6ef2be2aced8e7f913dbfc
-    pristine_git_object: 1e9e8d935432e4890475e42ba64124f5e9512da8
+    last_write_checksum: sha1:97392c0b021894605bab6afe16379f038f240e9d
+    pristine_git_object: ede30562f15dbd1ac5ea57d712facd7093e207ba
   src/mcp-server/tools/collectSessionsSubmitCollectBulk.ts:
     id: 6b6adf6440c1
-    last_write_checksum: sha1:b5950ac2e854e91c7e6459a35b27bcba3725f1f2
-    pristine_git_object: 89191ea456b181dd690c3193746bc20ac879cf9c
+    last_write_checksum: sha1:cc9938cbb262d123e69730f4f2c9c11877df1339
+    pristine_git_object: 37aa4be2a9de0c5a98b9093a0dbf8d3dde932211
   src/mcp-server/tools/collectSessionsSubmitCollectFile.ts:
     id: c97d9f81c280
-    last_write_checksum: sha1:d3dd15c16adac2390172361c1b2761f44523d02a
-    pristine_git_object: e6a668e436a302c0525a7c7178775150581ea119
+    last_write_checksum: sha1:b652cc0e216c7f021353c2b2a92d954a8bdacc4e
+    pristine_git_object: ab5d1156d50f4755ad3ca3a9465ce41fc7b9b96d
   src/mcp-server/tools/collectSessionsSubmitCollectFormData.ts:
     id: 888a17df4e35
-    last_write_checksum: sha1:3f397b0679fd14053809010a98e05b7ef237f79f
-    pristine_git_object: a2bbddca0608dddc2e04fb67f97fe6abeabdb414
+    last_write_checksum: sha1:602f8172b6ac08b62cc61ee26f405f1957b9db3e
+    pristine_git_object: 07f307f2c3111b3602cff038330abe1fbda01f9c
   src/mcp-server/tools/filesCreateFile.ts:
     id: f75bdcb9a9d6
-    last_write_checksum: sha1:ced088be89ebdd8623c263c2f592bec2d47133a6
-    pristine_git_object: ee44f6f3ed07e69be544f0f59523de07d85386ee
+    last_write_checksum: sha1:772501e5f9158e695f49fa04ac414aedec0f5fda
+    pristine_git_object: 504621f1b40e4c7690d349514f847fe2088f24ca
   src/mcp-server/tools/filesDeleteFile.ts:
     id: 10f0f033981d
-    last_write_checksum: sha1:e4a9b3b7c8b32ae2acb482836ac39abc477e1be2
-    pristine_git_object: df45d8685bbafeea63d0027db78fc46d815a8e77
+    last_write_checksum: sha1:99a39722b7c7e2d3cbac48e922152a70dfbca0e9
+    pristine_git_object: f1a8bb964d5d7685a7ddf7af4c75276f9ddf5a05
   src/mcp-server/tools/filesDownloadFileContent.ts:
     id: 78e2aa072a52
-    last_write_checksum: sha1:e3c04f0a028c295a3ac79df6d82d2ad108dbd8e1
-    pristine_git_object: 615b8e4e7a8c9b8534ea961db126ef83c494a885
+    last_write_checksum: sha1:38807eb4fd66e7052f14fb045938a748e38ba961
+    pristine_git_object: fd49ec8e99fab0a81e4a5b8e03813fa93767d9af
   src/mcp-server/tools/filesGetFile.ts:
     id: d03a00837792
-    last_write_checksum: sha1:2761db4bf1f6f23246307002dae8c796373b43b9
-    pristine_git_object: c3b201301c8e990637c336cdedb84cda8aa8270a
+    last_write_checksum: sha1:40f41a5686a85b02da4672451dce794b63604652
+    pristine_git_object: 40edc998b0cc8472cc76a1c1bb9764ada58e8b6a
   src/mcp-server/tools/filesListFiles.ts:
     id: 3899eb0d4480
-    last_write_checksum: sha1:553b746bc04428229129244fcedbc432cbc2bc93
-    pristine_git_object: 1e0adddfb5249d3f833238da01b38c80a1626511
+    last_write_checksum: sha1:9735ed9177b6f8db0324db9f4d8db8f6244608e0
+    pristine_git_object: 8ebdfe546d28d9ba72881850b243dece42b4e979
   src/mcp-server/tools/filesUpdateFile.ts:
     id: 6a6e2d5a00e5
-    last_write_checksum: sha1:c44defac345011861c382109f7b4939a05c6c53d
-    pristine_git_object: 3a1975a63675740efba179bb3f017b8cdac7923f
+    last_write_checksum: sha1:ce3f28a2519bff35bc3af376bc7c2416b6dc6b34
+    pristine_git_object: dd37377def40e4ea85618b2d9678f603a3c19f1e
   src/mcp-server/tools/healthHealth.ts:
     id: 18f675babf50
-    last_write_checksum: sha1:81a8e74ccd3e870606034e403c1a9b1333459fb2
-    pristine_git_object: 7374cd5aae3084b14c68b7200466fe39378629e7
+    last_write_checksum: sha1:a792ec8a5081e7142b56dffc914b51e886f657cb
+    pristine_git_object: c47d4f8b34f6a1393ea244a1938ceb7ce3f2364e
   src/mcp-server/tools/healthIndex.ts:
     id: f5dd5f021e91
-    last_write_checksum: sha1:2aeb9bcc7b3ffc48b51e5540ad44a2a73887fc10
-    pristine_git_object: 0d749f6a38a646d454e452140117977877e3136d
+    last_write_checksum: sha1:4392e013638b88afcb999fd063eb40e5c39ba9a9
+    pristine_git_object: 37a62d4bbd98718f3f94502e5d737bf22923a3c9
   src/mcp-server/tools/healthPing.ts:
     id: f78504b3e442
-    last_write_checksum: sha1:21d9f18548527593816e980e51c68e84cdf01f67
-    pristine_git_object: 364bd07ddc83beddb49160827a344c75aa8abc2d
+    last_write_checksum: sha1:9eb47bf62a05fb82c8d7572ef6578daba49f21c8
+    pristine_git_object: bda9f1775ed03426f5d86bf0e8bf855274d1bcbe
   src/mcp-server/tools/tasksCreateTask.ts:
     id: aad38e1b301b
-    last_write_checksum: sha1:69624a9e9e3b14afd02b59176ada50494e490b04
-    pristine_git_object: d2ab86263434f8695fadf0f5c3e4892447183c8b
+    last_write_checksum: sha1:b70408568811ab7fb5ff8d30c33b01ab4aff58d1
+    pristine_git_object: 4f212f373a921e8d9d87204a06ec2e0d073ca6ca
   src/mcp-server/tools/tasksDeleteTask.ts:
     id: c9002845ceb4
-    last_write_checksum: sha1:5f0fdaee56f22cf0fbe1bfd314fe8378371f4aae
-    pristine_git_object: b75285a271544a6a0f623b8350f0fdd55bd381bd
+    last_write_checksum: sha1:fb0b547ed6872446fe96427390227ff83178b98c
+    pristine_git_object: 4a600a7333c48769a7a328776058221e4ae3ceeb
   src/mcp-server/tools/tasksGetTask.ts:
     id: c6e9e62ed1fa
-    last_write_checksum: sha1:d46af270931fcfbdbd75120a863b723b73668640
-    pristine_git_object: 66609865591660169812891c98724ac2d1f30309
+    last_write_checksum: sha1:98310df012f1aebf51d92bb5e191002368fca985
+    pristine_git_object: 87a4dc66085b2a5d17c3ff77b5d68780970007e2
   src/mcp-server/tools/tasksListTasks.ts:
     id: 2488c60cd429
-    last_write_checksum: sha1:a73b7b200dc8409da08f5393fecb4e8a5632e7a2
-    pristine_git_object: 1a96a5168559ac4c60bc654481f9356c9a13df67
+    last_write_checksum: sha1:fcbab9377c67f8607a212a8cba541455435741df
+    pristine_git_object: 9058b049d41a3125667f48f402e4f7ee39ce7c6a
   src/mcp-server/tools/tasksUpdateTask.ts:
     id: 085c9fe72933
-    last_write_checksum: sha1:e34a509f47bacb39e479ce086ac90020eca98815
-    pristine_git_object: da28aeedb3d8f2f8879290bc21132063e5b6b56b
+    last_write_checksum: sha1:3378520a7ac71f75be00fc0ea0a93c615328ec14
+    pristine_git_object: 3f27720a1afdb1c39833fb86d9d7f06c01903cb4
   src/mcp-server/tools/usersDeleteUser.ts:
     id: e191122b06a6
-    last_write_checksum: sha1:642d4090c26d5babc52e6dc91f765624fa558161
-    pristine_git_object: 5345870e9064db6e29d891df5b1f230e865cd322
+    last_write_checksum: sha1:7c4f74387dd3892871c1701280c457f8a87f0cdf
+    pristine_git_object: 2e58366c10b72b18f5c8c6b7af3b2a5f50c15a35
   src/mcp-server/tools/usersGetUser.ts:
     id: 2e704109381f
-    last_write_checksum: sha1:005b888b042499927a135ee9ae4f5117116c1c1f
-    pristine_git_object: cf5180f75044a1c47f72d6cfde7ea54d2a891593
+    last_write_checksum: sha1:ca492db884974dce429f476062036c45e2ae6ad8
+    pristine_git_object: 6ae92434ac088587883af4b51783094e82507755
   src/mcp-server/tools/usersInviteUser.ts:
     id: 8463ee2ee62d
-    last_write_checksum: sha1:5240e9be0e0f41e4314f5ce9533d4d9cf195b848
-    pristine_git_object: 8f5bf8ec90480a4360c0b06eab9f0651f47b07d5
+    last_write_checksum: sha1:b5a9501937c19d06716701643d3218e7458df2ba
+    pristine_git_object: 161d290683f16600b4d9047a5eeecc7b3c32860c
   src/mcp-server/tools/usersListUsers.ts:
     id: c3bf85668faa
-    last_write_checksum: sha1:e08eb364aab65508209c4f46b4a6d65adb2693f8
-    pristine_git_object: 831601b1ed09c6c0c302422039c1504af70c549b
+    last_write_checksum: sha1:2f833a2c27364dac943495aeec04c8e2cbe7c8f5
+    pristine_git_object: 6c783870d719023d7d78d90ab332b719ad2fdf98
   src/mcp-server/tools/usersUpdateUser.ts:
     id: 2123e3fe80e8
-    last_write_checksum: sha1:7f9c3d2992139cd7bfac605577a360e7b28289e6
-    pristine_git_object: 412f997f9ac553168b0fca011a2b1e0f4427b917
+    last_write_checksum: sha1:fd35cf8f1b19a57a4789fbbf79e695843bfab249
+    pristine_git_object: 876769986e83e2a3fc2b66956743aa20290ff4cb
   src/mcp-server/tools/workspaceMembersCreateWorkspaceMember.ts:
     id: d68b93bb1922
-    last_write_checksum: sha1:6b0ca343074c1fddfb19ba49041b6619e238a675
-    pristine_git_object: 0c7248393219b0cbaff9df1a9d4c2e6f46799623
+    last_write_checksum: sha1:791c4b4aa3fa68122a285903a6837837dd4ae54d
+    pristine_git_object: f5ba8b3db0a7a201bf51e99e42ae23411e2d8020
   src/mcp-server/tools/workspaceMembersListWorkspaceMembers.ts:
     id: 1031b9777108
-    last_write_checksum: sha1:19f5dee5d096ded21c64ee7a57466ae3230c9f2e
-    pristine_git_object: c635b39255ab32ff1276d04318455d48f3d447ec
+    last_write_checksum: sha1:af9f1450ea82a2d2bcf16741f3c9097f0c25a4a7
+    pristine_git_object: 562ee8aeffb253d485d1d613f775ca85da373729
   src/mcp-server/tools/workspaceMembersRemoveWorkspaceMember.ts:
     id: 747dc88a78ff
-    last_write_checksum: sha1:79603f2368c690cb5f2ed6bf4b496a50ef234d7c
-    pristine_git_object: b1569750c864c793585f897809cade93728be8f5
+    last_write_checksum: sha1:c5c16a2962b8fb1067d59826272b60305c8dbfa5
+    pristine_git_object: a989c69408fd64df147b0e146fe0b40dd5178a01
   src/mcp-server/tools/workspacesCreateWorkspace.ts:
     id: 87d5d7d6a51a
-    last_write_checksum: sha1:d62fcc7ccfc83af31378d65c0e0753d88e663260
-    pristine_git_object: c4b930bb7f66b1f37a69637b49ad4f1a0c59374a
+    last_write_checksum: sha1:997d6bfaf6c8bea62aed6ef0f468bbe06f6a4ce1
+    pristine_git_object: a4b609a82f5221216aebe6faa5ec2a229ec621b0
   src/mcp-server/tools/workspacesGetWorkspace.ts:
     id: 4fa0ac4d21d7
-    last_write_checksum: sha1:02e1b325976b0e9e5493f1838d2c1838294077ef
-    pristine_git_object: 0f5bdad5bf43dfd9a6b7478a1bc86a8731cecd1d
+    last_write_checksum: sha1:4e675ab0345827306627af97b716fa41c73ad3d7
+    pristine_git_object: 62f18c7c9e6416479b6d856b5f4ec79f76e2057e
   src/mcp-server/tools/workspacesListWorkspaces.ts:
     id: bb4080ab2436
-    last_write_checksum: sha1:37487db6ecc486fd11d5b8521e17e0d95ea9bd9c
-    pristine_git_object: 7927d61fcc0179f47415493987a2cccc4ed6ad3e
+    last_write_checksum: sha1:aa6d4d3ef6b1c6e0ef5653c507e61a4b74924380
+    pristine_git_object: bd2e2c09998a7c058b22fa47dc52ce85877cb6c4
   src/mcp-server/tools/workspacesUpdateWorkspace.ts:
     id: 4ed3c7ec4724
-    last_write_checksum: sha1:58b61cce212cf1b0595ca95a0b4c222cbc651caf
-    pristine_git_object: cb1776f7bd4c6b02bd4b739607cd3b11330cf3c0
+    last_write_checksum: sha1:f47ce74f68f20ebc3c4a6525736b4a8cc67698b9
+    pristine_git_object: ee19b623997667f89874f11bcf961641ea0f9ee6
   src/models/accountantuser.ts:
     id: 5b2bf26ca996
     last_write_checksum: sha1:b11c1db1fa567a2344828584e227b76fef7ae62d
@@ -614,10 +614,14 @@ trackedFiles:
     id: c44cb7a09884
     last_write_checksum: sha1:2110cdca7bf807acd35c080bd898583a29ecd00f
     pristine_git_object: 90fa0e0776e2eba4e6be57dc0e2063e06b8b3694
+  src/models/collectsessionbranding.ts:
+    id: 690c4b7828fa
+    last_write_checksum: sha1:1704f5955f2b0a7772943d76aa3c08f208996279
+    pristine_git_object: 1d13654d657f64cc66d83dcd6d452b1a0f90f9d0
   src/models/collectsessionbytoken.ts:
     id: 113b73410fcc
-    last_write_checksum: sha1:e7778884737c34b26ba272976239aa8c9f97ef8a
-    pristine_git_object: 5309d72da39f4ec8bc02c1f308c40c56883b48bb
+    last_write_checksum: sha1:3e08db2d4abc1d6d8fbe7ca51472e642162e29f6
+    pristine_git_object: 90067f08d9fb74a2008f61fa38821b335b6aa5ed
   src/models/completecollectsessionop.ts:
     id: 534e02fc8621
     last_write_checksum: sha1:0657a08f611cd4c3c82a8ae8a89671eb5c80f281
@@ -888,8 +892,8 @@ trackedFiles:
     pristine_git_object: fe1989466339a07403d3e3176453e8533a9941bb
   src/models/updateaccountantuserop.ts:
     id: 2cf003e1c549
-    last_write_checksum: sha1:ed38d7760bade9f36c1aa76f68cf8e7bf6384d55
-    pristine_git_object: cbafa47d01d663922b03283092d12a3ca23d30fb
+    last_write_checksum: sha1:4ca0e4851c0ff27494b9164b3a9e9ff892204462
+    pristine_git_object: 74c20c7e78781517264d265fe15a9f3c2b53bbe9
   src/models/updateclientop.ts:
     id: a220ddbd0301
     last_write_checksum: sha1:3eb7504332c477061888ee866738c08a585d263e
@@ -972,16 +976,16 @@ trackedFiles:
     pristine_git_object: 03c7b3cecfedd01fd1351de78bd735e67ced4689
   worker-configuration.d.ts:
     id: 661c4bbd7c72
-    last_write_checksum: sha1:311a979e7b7a6853fb8bb606f76b87da4b082088
-    pristine_git_object: e23279e30ab5a887ab02b33c7f3d53a47482d827
+    last_write_checksum: sha1:6420c7ec47377b906ffd9ceece450882fb4022c3
+    pristine_git_object: 4ecc73ca16358b7bdf00ca1130509c1cafd61d3e
   worker-configuration.ts:
     id: 28fa85c9eb63
     last_write_checksum: sha1:c624f1f2276c118b8860d7cd94160cbead4e6c9e
     pristine_git_object: 696c4ae0440dc6bf19e7d96874b2c36f9c55876b
   wrangler.toml:
     id: af29b74740cd
-    last_write_checksum: sha1:ef22507c75260bc774fdec5584285851b4c25c7c
-    pristine_git_object: d292f5c4775971933dded05a322160e1748d7653
+    last_write_checksum: sha1:9395e9faf527dc30440b0af419ac82d5c1367b7a
+    pristine_git_object: 092635a22056c75a7b148952c3c8aaa7d6f11a32
 examples:
   index:
     speakeasy-default-index:
@@ -1211,6 +1215,8 @@ examples:
           application/json: {"status_code": 429, "type": "rate_limit", "code": "too_many_requests", "message": "<value>"}
         "500":
           application/json: {"status_code": 500, "type": "internal_error", "code": "unexpected_exception", "message": "<value>"}
+        "409":
+          application/json: {"status_code": 409, "type": "conflict", "code": "conflict", "message": "<value>"}
   getcollectSessionByToken:
     speakeasy-default-getcollect-session-by-token:
       parameters:
@@ -1218,7 +1224,7 @@ examples:
           token: "cs_live_cmll8jh7b00013b6tlu7lvntw"
       responses:
         "200":
-          application/json: {"id": "3b37bb4e-4fe5-49d4-bd85-16b2301dfc73", "description": "hypothesize trolley bobble forceful indeed hippodrome phew oh ack", "status": "active", "channelConfig": {"channel": "collectUi", "pinProtected": false, "submitButtonLabel": "Submit", "locale": "de"}, "groups": [{"id": "7165d6ba-8b60-4db8-af30-ecac5c4b3f1e", "label": "<value>", "description": "oddly reflecting cripple mozzarella beside for attest acknowledge gah solidly", "sortOrder": 28189, "evaluationMode": "batch", "repeatable": true, "minInstances": 776519, "maxInstances": 269842, "items": [{"id": "a8f6bdd5-740e-45f5-8324-d4999351661a", "type": "confirmation", "description": "if peaceful diligently verbally", "status": "pending", "sortOrder": 694287, "config": {"type": "fileUpload", "maxFileSizeMb": 25}, "groupId": "cbb3c3e8-b894-480c-83f0-a6c8558efd2e", "submissions": []}]}]}
+          application/json: {"id": "3b37bb4e-4fe5-49d4-bd85-16b2301dfc73", "description": "hypothesize trolley bobble forceful indeed hippodrome phew oh ack", "status": "active", "channelConfig": {"channel": "collectUi", "pinProtected": false, "submitButtonLabel": "Submit", "locale": "de"}, "branding": {"organizationName": "<value>", "logoUrl": "https://excellent-injunction.net"}, "groups": [{"id": "7165d6ba-8b60-4db8-af30-ecac5c4b3f1e", "label": "<value>", "description": "oddly reflecting cripple mozzarella beside for attest acknowledge gah solidly", "sortOrder": 28189, "evaluationMode": "batch", "repeatable": true, "minInstances": 776519, "maxInstances": 269842, "items": [{"id": "a8f6bdd5-740e-45f5-8324-d4999351661a", "type": "confirmation", "description": "if peaceful diligently verbally", "status": "pending", "sortOrder": 694287, "config": {"type": "fileUpload", "maxFileSizeMb": 25}, "groupId": "cbb3c3e8-b894-480c-83f0-a6c8558efd2e", "submissions": []}]}]}
         "404":
           application/json: {"status_code": 404, "type": "not_found", "code": "collect_token_not_found", "message": "<value>"}
         "410":
@@ -1921,50 +1927,8 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Mcp-typescript SDK Changes:
-  * `Steuerboard.health.index()`:  `response.status[500]` **Added**
-  * `Steuerboard.health.health()`:  `response.status[500]` **Added**
-  * `Steuerboard.health.ping()`:  `response.status[500]` **Added**
-  * `Steuerboard.auth.me()`:  `response.status[500]` **Added**
-  * `Steuerboard.admin.clients.listClients()`:  `response.status[500]` **Added**
-  * `Steuerboard.admin.clients.createClient()`:  `response.status[500]` **Added**
-  * `Steuerboard.admin.clients.getClient()`:  `response.status[500]` **Added**
-  * `Steuerboard.admin.clients.updateClient()`:  `response.status[500]` **Added**
-  * `Steuerboard.admin.users.listAccountantUsers()`:  `response.status[500]` **Added**
-  * `Steuerboard.admin.users.inviteAccountantUser()`:  `response.status[500]` **Added**
-  * `Steuerboard.admin.users.getAccountantUser()`:  `response.status[500]` **Added**
-  * `Steuerboard.admin.users.deleteAccountantUser()`:  `response.status[500]` **Added**
-  * `Steuerboard.admin.users.updateAccountantUser()`:  `response.status[500]` **Added**
-  * `Steuerboard.collect.sessions.getcollectSessionByToken()`:  `response.status[500]` **Added**
-  * `Steuerboard.collect.sessions.pingCollectSession()`:  `response.status[500]` **Added**
-  * `Steuerboard.collect.sessions.completeCollectSession()`:  `response.status[500]` **Added**
-  * `Steuerboard.collect.sessions.requestLinkCollectToken()`:  `response.status[500]` **Added**
-  * `Steuerboard.collect.sessions.submitCollectFile()`:  `response.status[500]` **Added**
-  * `Steuerboard.collect.sessions.submitCollectFormData()`:  `response.status[500]` **Added**
-  * `Steuerboard.collect.sessions.submitCollectBulk()`:  `response.status[500]` **Added**
-  * `Steuerboard.collect.sessions.deleteCollectSubmission()`:  `response.status[500]` **Added**
-  * `Steuerboard.workspaces.listWorkspaces()`:  `response.status[500]` **Added**
-  * `Steuerboard.workspaces.createWorkspace()`:  `response.status[500]` **Added**
-  * `Steuerboard.workspaces.getWorkspace()`:  `response.status[500]` **Added**
-  * `Steuerboard.workspaces.updateWorkspace()`:  `response.status[500]` **Added**
-  * `Steuerboard.workspace.members.listWorkspaceMembers()`:  `response.status[500]` **Added**
-  * `Steuerboard.workspace.members.createWorkspaceMember()`:  `response.status[500]` **Added**
-  * `Steuerboard.workspace.members.removeWorkspaceMember()`:  `response.status[500]` **Added**
-  * `Steuerboard.files.listFiles()`:  `response.status[500]` **Added**
-  * `Steuerboard.files.createFile()`:  `response.status[500]` **Added**
-  * `Steuerboard.files.getFile()`:  `response.status[500]` **Added**
-  * `Steuerboard.files.deleteFile()`:  `response.status[500]` **Added**
-  * `Steuerboard.files.updateFile()`:  `response.status[500]` **Added**
-  * `Steuerboard.files.downloadFileContent()`:  `response.status[500]` **Added**
-  * `Steuerboard.tasks.listTasks()`:  `response.status[500]` **Added**
-  * `Steuerboard.tasks.createTask()`:  `response.status[500]` **Added**
-  * `Steuerboard.tasks.getTask()`:  `response.status[500]` **Added**
-  * `Steuerboard.tasks.deleteTask()`:  `response.status[500]` **Added**
-  * `Steuerboard.tasks.updateTask()`:  `response.status[500]` **Added**
-  * `Steuerboard.users.listUsers()`:  `response.status[500]` **Added**
-  * `Steuerboard.users.inviteUser()`:  `response.status[500]` **Added**
-  * `Steuerboard.users.getUser()`:  `response.status[500]` **Added**
-  * `Steuerboard.users.deleteUser()`:  `response.status[500]` **Added**
-  * `Steuerboard.users.updateUser()`:  `response.status[500]` **Added**
+  * `Steuerboard.admin.users.updateAccountantUser()`:  `response.status[409]` **Added** (Breaking ⚠️)
+  * `Steuerboard.collect.sessions.getcollectSessionByToken()`:  `response.branding` **Added**
 generatedFiles:
   - .dxtignore
   - .gitattributes

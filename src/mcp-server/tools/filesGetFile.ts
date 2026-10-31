@@ -27,7 +27,7 @@ Returns a single file by ID.`,
     const [result, apiCall] = await filesGetFile(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -29,7 +29,7 @@ Fires a session-opened tracking event. Thin, fire-and-forget.`,
     const [result, apiCall] = await collectSessionsPingCollectSession(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

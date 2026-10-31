@@ -29,7 +29,7 @@ Validates the token and returns the Collect-UI session payload if valid.`,
     const [result, apiCall] = await collectSessionsGetcollectSessionByToken(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

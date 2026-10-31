@@ -27,7 +27,7 @@ Returns a temporary presigned URL to download the file. The URL expires after 10
     const [result, apiCall] = await filesDownloadFileContent(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
