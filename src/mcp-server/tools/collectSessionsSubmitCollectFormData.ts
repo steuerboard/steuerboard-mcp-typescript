@@ -29,7 +29,7 @@ Submits a form field value for a collect item via a public token.`,
     const [result, apiCall] = await collectSessionsSubmitCollectFormData(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

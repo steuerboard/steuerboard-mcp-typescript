@@ -27,7 +27,7 @@ Returns a paginated list of tasks with optional client and workspace filters.`,
     const [result, apiCall] = await tasksListTasks(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

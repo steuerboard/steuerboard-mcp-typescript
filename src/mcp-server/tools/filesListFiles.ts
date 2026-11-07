@@ -27,7 +27,7 @@ Returns a paginated list of files with optional workspace filters.`,
     const [result, apiCall] = await filesListFiles(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
