@@ -27,7 +27,7 @@ Updates a file by ID.`,
     const [result, apiCall] = await filesUpdateFile(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
