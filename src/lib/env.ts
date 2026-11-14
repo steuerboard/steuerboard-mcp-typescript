@@ -13,8 +13,14 @@ export interface Env {
 export const envSchema: z.ZodType<Env> = z.object({
   STEUERBOARD_BEARER_AUTH: z.string().optional(),
 
-  STEUERBOARD_DEBUG: z.coerce.boolean().optional(),
+  STEUERBOARD_DEBUG: z.unknown().transform(parseEnvFlag).optional(),
 });
+
+function parseEnvFlag(value: unknown): boolean {
+  return ["true", "1", "yes", "on"].includes(
+    String(value).trim().toLowerCase(),
+  );
+}
 
 let envMemo: Env | undefined = undefined;
 /**

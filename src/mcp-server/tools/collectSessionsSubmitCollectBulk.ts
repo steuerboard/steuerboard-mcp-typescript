@@ -29,7 +29,7 @@ Uploads multiple files for a BULK_MATCH group. Files are stored without item ass
     const [result, apiCall] = await collectSessionsSubmitCollectBulk(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

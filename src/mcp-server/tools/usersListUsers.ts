@@ -27,7 +27,7 @@ Returns a paginated list of client users.`,
     const [result, apiCall] = await usersListUsers(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
