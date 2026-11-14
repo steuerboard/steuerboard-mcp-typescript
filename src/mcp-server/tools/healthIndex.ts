@@ -20,7 +20,7 @@ Returns API information.`,
   tool: async (client, ctx) => {
     const [result, apiCall] = await healthIndex(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

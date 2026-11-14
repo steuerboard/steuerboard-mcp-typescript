@@ -29,7 +29,7 @@ Returns workspace members for a workspace.`,
     const [result, apiCall] = await workspaceMembersListWorkspaceMembers(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -28,7 +28,7 @@ Deletes an accountant user by ID.`,
       const [result, apiCall] = await adminUsersDeleteAccountantUser(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {
