@@ -12,8 +12,7 @@ import {
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
-import { RequestOptions } from "../lib/sdks.js";
-import { pathToFunc } from "../lib/url.js";
+import { encodePath, RequestOptions } from "../lib/sdks.js";
 import { APIError } from "../models/errors/apierror.js";
 import {
   ConnectionError,
@@ -133,9 +132,14 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path$ = pathToFunc("/collect/sessions/{token}/submit/file")(
+  const pathResult$ = encodePath(
+    "/collect/sessions/{token}/submit/file",
     pathParams$,
   );
+  if (!pathResult$.ok) {
+    return [pathResult$, { status: "invalid" }];
+  }
+  const path$ = pathResult$.value;
 
   const headers$ = new Headers(compactMap({
     Accept: "application/json",

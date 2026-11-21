@@ -27,7 +27,7 @@ Returns a paginated list of workspaces.`,
     const [result, apiCall] = await workspacesListWorkspaces(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

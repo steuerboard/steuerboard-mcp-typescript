@@ -27,7 +27,7 @@ Creates a new task and returns the created task.`,
     const [result, apiCall] = await tasksCreateTask(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
