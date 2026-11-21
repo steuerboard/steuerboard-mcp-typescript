@@ -27,7 +27,7 @@ Returns a paginated list of clients.`,
     const [result, apiCall] = await adminClientsListClients(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

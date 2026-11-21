@@ -29,7 +29,7 @@ Uploads a file submission for a collect item via a public token.`,
     const [result, apiCall] = await collectSessionsSubmitCollectFile(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
