@@ -79,7 +79,9 @@ export const Task$zodSchema: z.ZodType<Task> = z.object({
   id: z.string().describe("The ID of the task"),
   parentId: z.string().nullable().describe("The ID of the parent task"),
   status: TaskStatus$zodSchema.describe("The status of the task"),
-  text: z.string().nullable().describe("The text of the task"),
+  text: z.string().nullable().describe(
+    "The task's description as HTML, as the portal's rich-text editor writes it: paragraphs, line breaks, headings, bold, italic, underline, strikethrough, code, quotes, lists, links and mentions (a `<span>` whose class includes `mention`, with `data-type`, `data-id` and `data-label`; a mention of a task or file sits in a link to it). A description written before the editor, or sent through the API as plain text, is plain text. Null when the task has no description.",
+  ),
   title: z.string().describe("The title of the task"),
   updatedAt: z.iso.datetime({ offset: true }).describe(
     "The date and time of the last update for the task. ISO-8601 format (YYYY-MM-DDTHH:MM:SSZ).",

@@ -7,9 +7,8 @@ import { encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
-import { RequestOptions } from "../lib/sdks.js";
+import { encodePath, RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
-import { pathToFunc } from "../lib/url.js";
 import {
   DeleteFileRequest,
   DeleteFileRequest$zodSchema,
@@ -93,9 +92,11 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path$ = pathToFunc("/files/{id}")(
-    pathParams$,
-  );
+  const pathResult$ = encodePath("/files/{id}", pathParams$);
+  if (!pathResult$.ok) {
+    return [pathResult$, { status: "invalid" }];
+  }
+  const path$ = pathResult$.value;
 
   const headers$ = new Headers(compactMap({
     Accept: "application/json",

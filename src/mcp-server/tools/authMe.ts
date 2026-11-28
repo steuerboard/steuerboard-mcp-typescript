@@ -20,7 +20,7 @@ Returns information about the authenticated principal.`,
   tool: async (client, ctx) => {
     const [result, apiCall] = await authMe(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -17,7 +17,9 @@ export const TaskCreate$zodSchema: z.ZodType<TaskCreate> = z.object({
     "The due date of a task. ISO-8601 format (YYYY-MM-DDTHH:MM:SSZ).",
   ),
   parentId: z.string().optional().describe("The ID of the parent task"),
-  text: z.string().optional().describe("The text of the task"),
+  text: z.string().optional().describe(
+    "The task's description. HTML is shown formatted in the portal, as its rich-text editor writes it: paragraphs, line breaks, headings, bold, italic, underline, strikethrough, code, quotes, lists and links; other tags and attributes are left out when it is shown. Plain text is shown as written, with its line breaks.",
+  ),
   title: z.string().describe("The title of the task"),
   workspaceId: z.string().describe("The ID of the workspace"),
 });

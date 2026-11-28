@@ -27,7 +27,7 @@ Creates a new workspace and returns the created workspace.`,
     const [result, apiCall] = await workspacesCreateWorkspace(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

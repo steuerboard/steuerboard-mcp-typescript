@@ -52,6 +52,8 @@ export const TaskUpdate$zodSchema: z.ZodType<TaskUpdate> = z.object({
   status: TaskUpdateStatus$zodSchema.optional().describe(
     "The status of the task",
   ),
-  text: z.string().optional().describe("The text of the task"),
+  text: z.string().optional().describe(
+    "The task's description. HTML is shown formatted in the portal, as its rich-text editor writes it: paragraphs, line breaks, headings, bold, italic, underline, strikethrough, code, quotes, lists and links; other tags and attributes are left out when it is shown. Plain text is shown as written, with its line breaks.",
+  ),
   title: z.string().optional().describe("The title of the task"),
 });

@@ -20,7 +20,7 @@ Returns a pong response for health checks.`,
   tool: async (client, ctx) => {
     const [result, apiCall] = await healthPing(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

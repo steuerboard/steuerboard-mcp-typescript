@@ -29,7 +29,7 @@ Marks the session as completed by the client, optionally with a note about missi
     const [result, apiCall] = await collectSessionsCompleteCollectSession(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
