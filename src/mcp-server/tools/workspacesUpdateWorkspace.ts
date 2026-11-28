@@ -27,7 +27,7 @@ Updates a workspace by ID.`,
     const [result, apiCall] = await workspacesUpdateWorkspace(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -29,7 +29,7 @@ Sends the current active link when possible, or creates a new session for an exp
     const [result, apiCall] = await collectSessionsRequestLinkCollectToken(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

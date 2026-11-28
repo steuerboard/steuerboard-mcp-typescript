@@ -27,7 +27,7 @@ Uploads a new file. Maximum file size is 500MB.`,
     const [result, apiCall] = await filesCreateFile(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

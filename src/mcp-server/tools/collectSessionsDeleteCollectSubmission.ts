@@ -29,7 +29,7 @@ Deletes a pending submission and its associated file from storage.`,
     const [result, apiCall] = await collectSessionsDeleteCollectSubmission(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
